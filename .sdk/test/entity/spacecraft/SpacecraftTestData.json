@@ -1,0 +1,77 @@
+{
+  "existing": {
+    "spacecraft": {
+      "SPACECRAFT00": {
+        "agency": {},
+        "capability": "s97",
+        "crew_capacity": "s98",
+        "detail": "s99",
+        "diameter": 154,
+        "height": 155,
+        "history": "s9c",
+        "human_rated": false,
+        "id": "SPACECRAFT00",
+        "image_url": "s9f",
+        "in_use": true,
+        "maiden_flight": "sa1",
+        "name": "sa2",
+        "type": {},
+        "url": "sa4"
+      },
+      "SPACECRAFT01": {
+        "agency": {},
+        "capability": "s12d",
+        "crew_capacity": "s12e",
+        "detail": "s12f",
+        "diameter": 304,
+        "height": 305,
+        "history": "s132",
+        "human_rated": false,
+        "id": "SPACECRAFT01",
+        "image_url": "s135",
+        "in_use": true,
+        "maiden_flight": "s137",
+        "name": "s138",
+        "type": {},
+        "url": "s13a"
+      },
+      "SPACECRAFT02": {
+        "agency": {},
+        "capability": "s1c3",
+        "crew_capacity": "s1c4",
+        "detail": "s1c5",
+        "diameter": 454,
+        "height": 455,
+        "history": "s1c8",
+        "human_rated": false,
+        "id": "SPACECRAFT02",
+        "image_url": "s1cb",
+        "in_use": true,
+        "maiden_flight": "s1cd",
+        "name": "s1ce",
+        "type": {},
+        "url": "s1d0"
+      }
+    }
+  },
+  "new": {
+    "spacecraft": {
+      "spacecraft_ref01": {
+        "agency": {},
+        "capability": "s259",
+        "crew_capacity": "s25a",
+        "detail": "s25b",
+        "diameter": 604,
+        "height": 605,
+        "history": "s25e",
+        "human_rated": false,
+        "image_url": "s261",
+        "in_use": true,
+        "maiden_flight": "s263",
+        "name": "s264",
+        "type": {},
+        "url": "s266"
+      }
+    }
+  }
+}

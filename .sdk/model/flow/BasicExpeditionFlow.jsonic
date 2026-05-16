@@ -1,0 +1,44 @@
+# BasicExpeditionFlow
+
+main: kit: flow: BasicExpeditionFlow:
+{
+  entity: "expedition",
+  kind: "basic",
+  name: "BasicExpeditionFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "expedition_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "expedition_ref01",
+        srcdatavar: "expedition_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "expedition01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-expedition_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicExpeditionFlow"
+}

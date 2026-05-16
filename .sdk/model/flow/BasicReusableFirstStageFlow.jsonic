@@ -1,0 +1,9 @@
+# BasicReusableFirstStageFlow
+
+main: kit: flow: BasicReusableFirstStageFlow:
+{
+  entity: "reusable_first_stage",
+  kind: "basic",
+  name: "BasicReusableFirstStageFlow",
+  "key$": "BasicReusableFirstStageFlow"
+}

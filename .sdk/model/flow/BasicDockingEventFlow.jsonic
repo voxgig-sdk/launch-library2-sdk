@@ -1,0 +1,44 @@
+# BasicDockingEventFlow
+
+main: kit: flow: BasicDockingEventFlow:
+{
+  entity: "docking_event",
+  kind: "basic",
+  name: "BasicDockingEventFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "docking_event_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "docking_event_ref01",
+        srcdatavar: "docking_event_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "docking_event01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-docking_event_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDockingEventFlow"
+}

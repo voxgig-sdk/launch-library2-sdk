@@ -1,0 +1,10 @@
+# Entity: reusable_first_stage
+
+main: kit: entity: reusable_first_stage: {
+
+  alias: field: {}
+
+  name: "reusable_first_stage"
+
+
+}

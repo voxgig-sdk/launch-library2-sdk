@@ -1,0 +1,125 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 15
+  metrics: count: path: 24
+  metrics: count: method: 24
+
+  entity: agency: {
+    path: "/agencies": {
+      op: list: method: *GET
+    }
+    path: "/agencies/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: astronaut: {
+    path: "/astronaut": {
+      op: list: method: *GET
+    }
+    path: "/astronaut/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: docking: {
+  }
+
+  entity: docking_event: {
+    path: "/docking_event": {
+      op: list: method: *GET
+    }
+    path: "/docking_event/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: event: {
+    path: "/event": {
+      op: list: method: *GET
+    }
+    path: "/event/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: expedition: {
+    path: "/expedition": {
+      op: list: method: *GET
+    }
+    path: "/expedition/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: first_stage: {
+    path: "/firststage": {
+      op: list: method: *GET
+    }
+    path: "/firststage/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: launch: {
+    path: "/launch": {
+      op: list: method: *GET
+    }
+    path: "/launch/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: launch_vehicle: {
+    path: "/config/launcher": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: launcher: {
+    path: "/config/launcher/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: location: {
+    path: "/location": {
+      op: list: method: *GET
+    }
+    path: "/location/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: pad: {
+    path: "/pad": {
+      op: list: method: *GET
+    }
+    path: "/pad/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: reusable_first_stage: {
+  }
+
+  entity: space_station: {
+    path: "/spacestation": {
+      op: list: method: *GET
+    }
+    path: "/spacestation/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: spacecraft: {
+    path: "/config/spacecraft": {
+      op: list: method: *GET
+    }
+    path: "/config/spacecraft/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+}

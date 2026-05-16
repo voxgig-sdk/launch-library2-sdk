@@ -1,0 +1,73 @@
+{
+  "existing": {
+    "launch": {
+      "LAUNCH00": {
+        "id": "LAUNCH00",
+        "image": "s8d",
+        "launch_service_provider": {},
+        "mission": {},
+        "name": "s90",
+        "net": "s91",
+        "pad": {},
+        "probability": "s93",
+        "rocket": {},
+        "status": {},
+        "url": "s96",
+        "webcast_live": false,
+        "window_end": "s98",
+        "window_start": "s99"
+      },
+      "LAUNCH01": {
+        "id": "LAUNCH01",
+        "image": "s119",
+        "launch_service_provider": {},
+        "mission": {},
+        "name": "s11c",
+        "net": "s11d",
+        "pad": {},
+        "probability": "s11f",
+        "rocket": {},
+        "status": {},
+        "url": "s122",
+        "webcast_live": false,
+        "window_end": "s124",
+        "window_start": "s125"
+      },
+      "LAUNCH02": {
+        "id": "LAUNCH02",
+        "image": "s1a5",
+        "launch_service_provider": {},
+        "mission": {},
+        "name": "s1a8",
+        "net": "s1a9",
+        "pad": {},
+        "probability": "s1ab",
+        "rocket": {},
+        "status": {},
+        "url": "s1ae",
+        "webcast_live": false,
+        "window_end": "s1b0",
+        "window_start": "s1b1"
+      }
+    }
+  },
+  "new": {
+    "launch": {
+      "launch_ref01": {
+        "image": "s231",
+        "launch_service_provider": {},
+        "mission": {},
+        "name": "s234",
+        "net": "s235",
+        "pad": {},
+        "probability": "s237",
+        "rocket": {},
+        "status": {},
+        "url": "s23a",
+        "webcast_live": false,
+        "window_end": "s23c",
+        "window_start": "s23d"
+      }
+    }
+  }
+}

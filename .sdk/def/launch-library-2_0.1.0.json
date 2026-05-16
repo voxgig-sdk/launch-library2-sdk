@@ -1,0 +1,2297 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Launch Library 2",
+    "description": "The Launch Library 2 API provides access to a comprehensive database of rocket launches, space events, and astronauts. It serves both orbital and suborbital launches, offering data on launch service providers, events, agencies, and more, all accessible for free within certain request limits. Free tier allows up to 15 requests per hour.",
+    "version": "2.0.0",
+    "contact": {
+      "email": "support@thespacedevs.com"
+    },
+    "termsOfService": "https://thespacedevs.com/privacy"
+  },
+  "servers": [
+    {
+      "url": "https://ll.thespacedevs.com/2.2.0",
+      "description": "Launch Library 2 API Server"
+    }
+  ],
+  "paths": {
+    "/launch": {
+      "get": {
+        "summary": "Get Launches",
+        "description": "Retrieve all orbital launches and popular suborbital launches. Generally tracks all suborbital launches which aim to reach space or the Karman line and are live streamed.",
+        "operationId": "getLaunches",
+        "tags": [
+          "Launches"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search term to filter launches",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lsp__id",
+            "in": "query",
+            "description": "Filter by Launch Service Provider ID",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "lsp__name",
+            "in": "query",
+            "description": "Filter by Launch Service Provider name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rocket__configuration__id",
+            "in": "query",
+            "description": "Filter by Launcher Configuration ID",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "spacecraft__id",
+            "in": "query",
+            "description": "Filter by Spacecraft ID",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by launch status",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "description": "Total number of launches"
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true,
+                      "description": "URL to next page of results"
+                    },
+                    "previous": {
+                      "type": "string",
+                      "nullable": true,
+                      "description": "URL to previous page of results"
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Launch"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded (15 requests per hour for free tier)"
+          }
+        }
+      }
+    },
+    "/launch/{id}": {
+      "get": {
+        "summary": "Get Launch by ID",
+        "description": "Retrieve detailed information about a specific launch",
+        "operationId": "getLaunchById",
+        "tags": [
+          "Launches"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "UUID of the launch",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Launch"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Launch not found"
+          }
+        }
+      }
+    },
+    "/event": {
+      "get": {
+        "summary": "Get Events",
+        "description": "Retrieve space events which aren't covered by standard launches, such as spacecraft landings, engine tests or spacewalks",
+        "operationId": "getEvents",
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search term to filter events",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "previous": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Event"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/event/{id}": {
+      "get": {
+        "summary": "Get Event by ID",
+        "description": "Retrieve detailed information about a specific event",
+        "operationId": "getEventById",
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the event",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Event not found"
+          }
+        }
+      }
+    },
+    "/agencies": {
+      "get": {
+        "summary": "Get Agencies",
+        "description": "Retrieve agencies involved in spaceflight, including launch service providers, space agencies or rocket manufacturers",
+        "operationId": "getAgencies",
+        "tags": [
+          "Agencies"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search term to filter agencies",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agency_type",
+            "in": "query",
+            "description": "Filter by agency type",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "country_code",
+            "in": "query",
+            "description": "Filter by country code",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "previous": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Agency"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/agencies/{id}": {
+      "get": {
+        "summary": "Get Agency by ID",
+        "description": "Retrieve detailed information about a specific agency",
+        "operationId": "getAgencyById",
+        "tags": [
+          "Agencies"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the agency",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Agency"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Agency not found"
+          }
+        }
+      }
+    },
+    "/astronaut": {
+      "get": {
+        "summary": "Get Astronauts",
+        "description": "Retrieve every known astronaut past, present and future",
+        "operationId": "getAstronauts",
+        "tags": [
+          "Astronauts"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search by astronaut name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by astronaut status",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nationality",
+            "in": "query",
+            "description": "Filter by nationality",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "previous": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Astronaut"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/astronaut/{id}": {
+      "get": {
+        "summary": "Get Astronaut by ID",
+        "description": "Retrieve detailed information about a specific astronaut",
+        "operationId": "getAstronautById",
+        "tags": [
+          "Astronauts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the astronaut",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Astronaut"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Astronaut not found"
+          }
+        }
+      }
+    },
+    "/spacestation": {
+      "get": {
+        "summary": "Get Space Stations",
+        "description": "Retrieve every known space station past, present and future",
+        "operationId": "getSpaceStations",
+        "tags": [
+          "Space Stations"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search by space station name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by status",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "owners",
+            "in": "query",
+            "description": "Filter by owners",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "previous": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SpaceStation"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/spacestation/{id}": {
+      "get": {
+        "summary": "Get Space Station by ID",
+        "description": "Retrieve detailed information about a specific space station",
+        "operationId": "getSpaceStationById",
+        "tags": [
+          "Space Stations"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the space station",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpaceStation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Space station not found"
+          }
+        }
+      }
+    },
+    "/expedition": {
+      "get": {
+        "summary": "Get Expeditions",
+        "description": "Retrieve expeditions that have been made to space stations",
+        "operationId": "getExpeditions",
+        "tags": [
+          "Expeditions"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search by expedition name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "spacestation",
+            "in": "query",
+            "description": "Filter by space station",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "previous": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Expedition"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/expedition/{id}": {
+      "get": {
+        "summary": "Get Expedition by ID",
+        "description": "Retrieve detailed information about a specific expedition",
+        "operationId": "getExpeditionById",
+        "tags": [
+          "Expeditions"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the expedition",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Expedition"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Expedition not found"
+          }
+        }
+      }
+    },
+    "/docking_event": {
+      "get": {
+        "summary": "Get Docking Events",
+        "description": "Retrieve docking events between spacecraft and space stations, tracking both crewed and uncrewed visiting vehicles",
+        "operationId": "getDockingEvents",
+        "tags": [
+          "Dockings"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "spacestation",
+            "in": "query",
+            "description": "Filter by space station",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "docking_location",
+            "in": "query",
+            "description": "Filter by docking location",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "previous": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DockingEvent"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/docking_event/{id}": {
+      "get": {
+        "summary": "Get Docking Event by ID",
+        "description": "Retrieve detailed information about a specific docking event",
+        "operationId": "getDockingEventById",
+        "tags": [
+          "Dockings"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the docking event",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DockingEvent"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Docking event not found"
+          }
+        }
+      }
+    },
+    "/config/launcher": {
+      "get": {
+        "summary": "Get Launch Vehicle Configurations",
+        "description": "Retrieve rocket configurations such as 'Falcon 9 Block 5'. Only includes launch vehicles used by tracked launches",
+        "operationId": "getLauncherConfigs",
+        "tags": [
+          "Launch Vehicles"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search by launcher name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "family",
+            "in": "query",
+            "description": "Filter by launcher family",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "manufacturer",
+            "in": "query",
+            "description": "Filter by manufacturer agency ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "previous": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/LauncherConfig"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/config/launcher/{id}": {
+      "get": {
+        "summary": "Get Launch Vehicle Configuration by ID",
+        "description": "Retrieve detailed information about a specific launch vehicle configuration",
+        "operationId": "getLauncherConfigById",
+        "tags": [
+          "Launch Vehicles"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the launcher configuration",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LauncherConfig"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Launcher configuration not found"
+          }
+        }
+      }
+    },
+    "/firststage": {
+      "get": {
+        "summary": "Get Reusable First Stages",
+        "description": "Retrieve first rocket stages that can be used more than once, such as Falcon 9 cores used by SpaceX",
+        "operationId": "getFirstStages",
+        "tags": [
+          "Reusable First Stages"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "serial_number",
+            "in": "query",
+            "description": "Filter by serial number",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "flight_number",
+            "in": "query",
+            "description": "Filter by flight number",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "previous": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/FirstStage"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/firststage/{id}": {
+      "get": {
+        "summary": "Get Reusable First Stage by ID",
+        "description": "Retrieve detailed information about a specific reusable first stage",
+        "operationId": "getFirstStageById",
+        "tags": [
+          "Reusable First Stages"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the first stage",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FirstStage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "First stage not found"
+          }
+        }
+      }
+    },
+    "/config/spacecraft": {
+      "get": {
+        "summary": "Get Spacecraft Configurations",
+        "description": "Retrieve spacecraft configurations past, present and future, such as Mercury or Dragon capsules",
+        "operationId": "getSpacecraftConfigs",
+        "tags": [
+          "Spacecraft"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search by spacecraft name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by status",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "previous": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SpacecraftConfig"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/config/spacecraft/{id}": {
+      "get": {
+        "summary": "Get Spacecraft Configuration by ID",
+        "description": "Retrieve detailed information about a specific spacecraft configuration",
+        "operationId": "getSpacecraftConfigById",
+        "tags": [
+          "Spacecraft"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the spacecraft configuration",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpacecraftConfig"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Spacecraft configuration not found"
+          }
+        }
+      }
+    },
+    "/location": {
+      "get": {
+        "summary": "Get Locations",
+        "description": "Retrieve all locations where launch vehicles have flown from, such as Cape Canaveral or Kourou",
+        "operationId": "getLocations",
+        "tags": [
+          "Locations"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search by location name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "country_code",
+            "in": "query",
+            "description": "Filter by country code",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "previous": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Location"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/location/{id}": {
+      "get": {
+        "summary": "Get Location by ID",
+        "description": "Retrieve detailed information about a specific location",
+        "operationId": "getLocationById",
+        "tags": [
+          "Locations"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the location",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Location not found"
+          }
+        }
+      }
+    },
+    "/pad": {
+      "get": {
+        "summary": "Get Pads",
+        "description": "Retrieve all pads where launch vehicles have flown from, such as 'Space Launch Complex 40' at Cape Canaveral",
+        "operationId": "getPads",
+        "tags": [
+          "Pads"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of results to return per page",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The initial index from which to return the results",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Search by pad name",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "description": "Filter by location ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "previous": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Pad"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/pad/{id}": {
+      "get": {
+        "summary": "Get Pad by ID",
+        "description": "Retrieve detailed information about a specific launch pad",
+        "operationId": "getPadById",
+        "tags": [
+          "Pads"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the pad",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pad"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Pad not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Launch": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "UUID of the launch"
+          },
+          "url": {
+            "type": "string",
+            "description": "API URL for this launch"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the launch"
+          },
+          "status": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "net": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Net Earliest Time (NET) for launch"
+          },
+          "window_end": {
+            "type": "string",
+            "format": "date-time",
+            "description": "End of launch window"
+          },
+          "window_start": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Start of launch window"
+          },
+          "mission": {
+            "type": "object",
+            "nullable": true,
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "orbit": {
+                "type": "object",
+                "nullable": true
+              }
+            }
+          },
+          "pad": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "location": {
+                "type": "object"
+              }
+            }
+          },
+          "rocket": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "configuration": {
+                "type": "object"
+              }
+            }
+          },
+          "launch_service_provider": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            }
+          },
+          "image": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to launch image"
+          },
+          "webcast_live": {
+            "type": "boolean",
+            "description": "Whether the webcast is currently live"
+          },
+          "probability": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Launch probability percentage"
+          }
+        }
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Event ID"
+          },
+          "url": {
+            "type": "string",
+            "description": "API URL for this event"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the event"
+          },
+          "type": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the event"
+          },
+          "location": {
+            "type": "string",
+            "nullable": true,
+            "description": "Event location"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Event date and time"
+          },
+          "news_url": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to news article"
+          },
+          "video_url": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to video"
+          },
+          "feature_image": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to feature image"
+          }
+        }
+      },
+      "Agency": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Agency ID"
+          },
+          "url": {
+            "type": "string",
+            "description": "API URL for this agency"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the agency"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of agency"
+          },
+          "country_code": {
+            "type": "string",
+            "description": "ISO country code"
+          },
+          "abbrev": {
+            "type": "string",
+            "description": "Agency abbreviation"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true,
+            "description": "Agency description"
+          },
+          "administrator": {
+            "type": "string",
+            "nullable": true,
+            "description": "Agency administrator"
+          },
+          "founding_year": {
+            "type": "string",
+            "nullable": true,
+            "description": "Year agency was founded"
+          },
+          "logo_url": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to agency logo"
+          }
+        }
+      },
+      "Astronaut": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Astronaut ID"
+          },
+          "url": {
+            "type": "string",
+            "description": "API URL for this astronaut"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the astronaut"
+          },
+          "status": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "type": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "date_of_birth": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of birth"
+          },
+          "date_of_death": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "description": "Date of death if applicable"
+          },
+          "nationality": {
+            "type": "string",
+            "description": "Astronaut nationality"
+          },
+          "bio": {
+            "type": "string",
+            "description": "Biographical information"
+          },
+          "profile_image": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to profile image"
+          },
+          "flights_count": {
+            "type": "integer",
+            "description": "Number of flights"
+          },
+          "spacewalks_count": {
+            "type": "integer",
+            "description": "Number of spacewalks"
+          }
+        }
+      },
+      "SpaceStation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Space station ID"
+          },
+          "url": {
+            "type": "string",
+            "description": "API URL for this space station"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the space station"
+          },
+          "status": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "type": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "founded": {
+            "type": "string",
+            "format": "date",
+            "description": "Date the space station was founded"
+          },
+          "deorbited": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "description": "Date the space station was deorbited"
+          },
+          "orbit": {
+            "type": "string",
+            "description": "Orbital information"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the space station"
+          },
+          "image_url": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to space station image"
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Agency"
+            }
+          }
+        }
+      },
+      "Expedition": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Expedition ID"
+          },
+          "url": {
+            "type": "string",
+            "description": "API URL for this expedition"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the expedition"
+          },
+          "start": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Start date of the expedition"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "End date of the expedition"
+          },
+          "spacestation": {
+            "$ref": "#/components/schemas/SpaceStation"
+          },
+          "crew": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "astronaut": {
+                  "$ref": "#/components/schemas/Astronaut"
+                },
+                "role": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "DockingEvent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Docking event ID"
+          },
+          "url": {
+            "type": "string",
+            "description": "API URL for this docking event"
+          },
+          "docking": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Docking time"
+          },
+          "departure": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Departure time"
+          },
+          "flight_vehicle": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "spacecraft": {
+                "type": "object"
+              }
+            }
+          },
+          "docking_location": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "spacestation": {
+                "$ref": "#/components/schemas/SpaceStation"
+              }
+            }
+          }
+        }
+      },
+      "LauncherConfig": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Configuration ID"
+          },
+          "url": {
+            "type": "string",
+            "description": "API URL for this configuration"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the launcher configuration"
+          },
+          "family": {
+            "type": "string",
+            "description": "Launcher family"
+          },
+          "full_name": {
+            "type": "string",
+            "description": "Full name of the launcher"
+          },
+          "variant": {
+            "type": "string",
+            "description": "Variant of the launcher"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the launcher"
+          },
+          "manufacturer": {
+            "$ref": "#/components/schemas/Agency"
+          },
+          "min_stage": {
+            "type": "integer",
+            "description": "Minimum number of stages"
+          },
+          "max_stage": {
+            "type": "integer",
+            "description": "Maximum number of stages"
+          },
+          "length": {
+            "type": "number",
+            "nullable": true,
+            "description": "Length in meters"
+          },
+          "diameter": {
+            "type": "number",
+            "nullable": true,
+            "description": "Diameter in meters"
+          },
+          "maiden_flight": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "description": "Date of maiden flight"
+          },
+          "launch_mass": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Launch mass in kg"
+          },
+          "leo_capacity": {
+            "type": "integer",
+            "nullable": true,
+            "description": "LEO capacity in kg"
+          },
+          "gto_capacity": {
+            "type": "integer",
+            "nullable": true,
+            "description": "GTO capacity in kg"
+          },
+          "to_thrust": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Takeoff thrust in kN"
+          },
+          "apogee": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Apogee in km"
+          },
+          "successful_launches": {
+            "type": "integer",
+            "description": "Number of successful launches"
+          },
+          "consecutive_successful_launches": {
+            "type": "integer",
+            "description": "Number of consecutive successful launches"
+          },
+          "failed_launches": {
+            "type": "integer",
+            "description": "Number of failed launches"
+          },
+          "pending_launches": {
+            "type": "integer",
+            "description": "Number of pending launches"
+          }
+        }
+      },
+      "FirstStage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "First stage ID"
+          },
+          "url": {
+            "type": "string",
+            "description": "API URL for this first stage"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of first stage"
+          },
+          "serial_number": {
+            "type": "string",
+            "description": "Serial number of the first stage"
+          },
+          "launcher_config": {
+            "$ref": "#/components/schemas/LauncherConfig"
+          },
+          "flights": {
+            "type": "integer",
+            "description": "Number of flights"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status"
+          }
+        }
+      },
+      "SpacecraftConfig": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Spacecraft configuration ID"
+          },
+          "url": {
+            "type": "string",
+            "description": "API URL for this configuration"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the spacecraft"
+          },
+          "type": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "agency": {
+            "$ref": "#/components/schemas/Agency"
+          },
+          "in_use": {
+            "type": "boolean",
+            "description": "Whether the spacecraft is currently in use"
+          },
+          "capability": {
+            "type": "string",
+            "description": "Spacecraft capability"
+          },
+          "history": {
+            "type": "string",
+            "description": "Historical information"
+          },
+          "details": {
+            "type": "string",
+            "description": "Detailed information"
+          },
+          "maiden_flight": {
+            "type": "string",
+            "format": "date",
+            "nullable": true,
+            "description": "Date of maiden flight"
+          },
+          "height": {
+            "type": "number",
+            "nullable": true,
+            "description": "Height in meters"
+          },
+          "diameter": {
+            "type": "number",
+            "nullable": true,
+            "description": "Diameter in meters"
+          },
+          "human_rated": {
+            "type": "boolean",
+            "description": "Whether the spacecraft is human-rated"
+          },
+          "crew_capacity": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Crew capacity"
+          },
+          "image_url": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to spacecraft image"
+          }
+        }
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Location ID"
+          },
+          "url": {
+            "type": "string",
+            "description": "API URL for this location"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the location"
+          },
+          "country_code": {
+            "type": "string",
+            "description": "ISO country code"
+          },
+          "map_image": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to map image"
+          },
+          "total_launch_count": {
+            "type": "integer",
+            "description": "Total number of launches from this location"
+          },
+          "total_landing_count": {
+            "type": "integer",
+            "description": "Total number of landings at this location"
+          }
+        }
+      },
+      "Pad": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Pad ID"
+          },
+          "url": {
+            "type": "string",
+            "description": "API URL for this pad"
+          },
+          "agency_id": {
+            "type": "integer",
+            "nullable": true,
+            "description": "ID of the agency that operates this pad"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the pad"
+          },
+          "info_url": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to more information"
+          },
+          "wiki_url": {
+            "type": "string",
+            "nullable": true,
+            "description": "Wikipedia URL"
+          },
+          "map_url": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to map"
+          },
+          "latitude": {
+            "type": "string",
+            "description": "Latitude coordinate"
+          },
+          "longitude": {
+            "type": "string",
+            "description": "Longitude coordinate"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "map_image": {
+            "type": "string",
+            "nullable": true,
+            "description": "URL to map image"
+          },
+          "total_launch_count": {
+            "type": "integer",
+            "description": "Total number of launches from this pad"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Launches",
+      "description": "Operations related to rocket launches"
+    },
+    {
+      "name": "Events",
+      "description": "Operations related to space events"
+    },
+    {
+      "name": "Agencies",
+      "description": "Operations related to space agencies and organizations"
+    },
+    {
+      "name": "Astronauts",
+      "description": "Operations related to astronauts"
+    },
+    {
+      "name": "Space Stations",
+      "description": "Operations related to space stations"
+    },
+    {
+      "name": "Expeditions",
+      "description": "Operations related to space station expeditions"
+    },
+    {
+      "name": "Dockings",
+      "description": "Operations related to spacecraft docking events"
+    },
+    {
+      "name": "Launch Vehicles",
+      "description": "Operations related to launch vehicle configurations"
+    },
+    {
+      "name": "Reusable First Stages",
+      "description": "Operations related to reusable rocket first stages"
+    },
+    {
+      "name": "Spacecraft",
+      "description": "Operations related to spacecraft configurations"
+    },
+    {
+      "name": "Locations",
+      "description": "Operations related to launch locations"
+    },
+    {
+      "name": "Pads",
+      "description": "Operations related to launch pads"
+    }
+  ],
+  "externalDocs": {
+    "description": "Full API Documentation",
+    "url": "https://thespacedevs.com/llapi"
+  }
+}

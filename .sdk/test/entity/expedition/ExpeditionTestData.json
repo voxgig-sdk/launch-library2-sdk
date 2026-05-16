@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "expedition": {
+      "EXPEDITION00": {
+        "crew": [],
+        "end": "s47",
+        "id": "EXPEDITION00",
+        "name": "s49",
+        "spacestation": {},
+        "start": "s4b",
+        "url": "s4c"
+      },
+      "EXPEDITION01": {
+        "crew": [],
+        "end": "s8d",
+        "id": "EXPEDITION01",
+        "name": "s8f",
+        "spacestation": {},
+        "start": "s91",
+        "url": "s92"
+      },
+      "EXPEDITION02": {
+        "crew": [],
+        "end": "sd3",
+        "id": "EXPEDITION02",
+        "name": "sd5",
+        "spacestation": {},
+        "start": "sd7",
+        "url": "sd8"
+      }
+    }
+  },
+  "new": {
+    "expedition": {
+      "expedition_ref01": {
+        "crew": [],
+        "end": "s119",
+        "name": "s11b",
+        "spacestation": {},
+        "start": "s11d",
+        "url": "s11e"
+      }
+    }
+  }
+}

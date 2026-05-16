@@ -1,0 +1,65 @@
+{
+  "existing": {
+    "pad": {
+      "PAD00": {
+        "agency_id": "AGENCY01",
+        "id": "PAD00",
+        "info_url": "s7a",
+        "latitude": "s7b",
+        "location": {},
+        "longitude": "s7d",
+        "map_image": "s7e",
+        "map_url": "s7f",
+        "name": "s80",
+        "total_launch_count": "s81",
+        "url": "s82",
+        "wiki_url": "s83"
+      },
+      "PAD01": {
+        "agency_id": "AGENCY01",
+        "id": "PAD01",
+        "info_url": "sf2",
+        "latitude": "sf3",
+        "location": {},
+        "longitude": "sf5",
+        "map_image": "sf6",
+        "map_url": "sf7",
+        "name": "sf8",
+        "total_launch_count": "sf9",
+        "url": "sfa",
+        "wiki_url": "sfb"
+      },
+      "PAD02": {
+        "agency_id": "AGENCY01",
+        "id": "PAD02",
+        "info_url": "s16a",
+        "latitude": "s16b",
+        "location": {},
+        "longitude": "s16d",
+        "map_image": "s16e",
+        "map_url": "s16f",
+        "name": "s170",
+        "total_launch_count": "s171",
+        "url": "s172",
+        "wiki_url": "s173"
+      }
+    }
+  },
+  "new": {
+    "pad": {
+      "pad_ref01": {
+        "agency_id": "AGENCY01",
+        "info_url": "s1e2",
+        "latitude": "s1e3",
+        "location": {},
+        "longitude": "s1e5",
+        "map_image": "s1e6",
+        "map_url": "s1e7",
+        "name": "s1e8",
+        "total_launch_count": "s1e9",
+        "url": "s1ea",
+        "wiki_url": "s1eb"
+      }
+    }
+  }
+}

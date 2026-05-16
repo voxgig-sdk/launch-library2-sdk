@@ -1,0 +1,44 @@
+# BasicFirstStageFlow
+
+main: kit: flow: BasicFirstStageFlow:
+{
+  entity: "first_stage",
+  kind: "basic",
+  name: "BasicFirstStageFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "first_stage_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "first_stage_ref01",
+        srcdatavar: "first_stage_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "first_stage01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-first_stage_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicFirstStageFlow"
+}

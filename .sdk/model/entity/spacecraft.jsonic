@@ -1,0 +1,189 @@
+# Entity: spacecraft
+
+main: kit: entity: spacecraft: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "agency"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "capability"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "crew_capacity"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "detail"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "diameter"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "height"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "history"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "human_rated"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "image_url"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "in_use"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "maiden_flight"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "type"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "url"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "spacecraft"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: 10
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 0
+                kind: "query"
+                name: "offset"
+                orig: "offset"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "search"
+                orig: "search"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "status"
+                orig: "status"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/config/spacecraft"
+          parts: [
+            "config"
+            "spacecraft"
+          ]
+          select: {
+            exist: [
+              "limit"
+              "offset"
+              "search"
+              "status"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/config/spacecraft/{id}"
+          parts: [
+            "config"
+            "spacecraft"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

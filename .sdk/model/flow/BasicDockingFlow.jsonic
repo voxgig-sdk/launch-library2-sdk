@@ -1,0 +1,9 @@
+# BasicDockingFlow
+
+main: kit: flow: BasicDockingFlow:
+{
+  entity: "docking",
+  kind: "basic",
+  name: "BasicDockingFlow",
+  "key$": "BasicDockingFlow"
+}

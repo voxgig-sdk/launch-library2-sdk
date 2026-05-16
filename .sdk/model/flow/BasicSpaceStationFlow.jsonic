@@ -1,0 +1,44 @@
+# BasicSpaceStationFlow
+
+main: kit: flow: BasicSpaceStationFlow:
+{
+  entity: "space_station",
+  kind: "basic",
+  name: "BasicSpaceStationFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "space_station_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "space_station_ref01",
+        srcdatavar: "space_station_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "space_station01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-space_station_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSpaceStationFlow"
+}

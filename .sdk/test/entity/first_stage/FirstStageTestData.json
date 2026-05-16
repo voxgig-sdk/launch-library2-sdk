@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "first_stage": {
+      "FIRST_STAGE00": {
+        "flight": "s46",
+        "id": "FIRST_STAGE00",
+        "launcher_config": {},
+        "serial_number": "s49",
+        "status": "s4a",
+        "type": "s4b",
+        "url": "s4c"
+      },
+      "FIRST_STAGE01": {
+        "flight": "s8c",
+        "id": "FIRST_STAGE01",
+        "launcher_config": {},
+        "serial_number": "s8f",
+        "status": "s90",
+        "type": "s91",
+        "url": "s92"
+      },
+      "FIRST_STAGE02": {
+        "flight": "sd2",
+        "id": "FIRST_STAGE02",
+        "launcher_config": {},
+        "serial_number": "sd5",
+        "status": "sd6",
+        "type": "sd7",
+        "url": "sd8"
+      }
+    }
+  },
+  "new": {
+    "first_stage": {
+      "first_stage_ref01": {
+        "flight": "s118",
+        "launcher_config": {},
+        "serial_number": "s11b",
+        "status": "s11c",
+        "type": "s11d",
+        "url": "s11e"
+      }
+    }
+  }
+}

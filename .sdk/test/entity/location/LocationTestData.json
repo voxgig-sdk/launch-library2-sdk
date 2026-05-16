@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "location": {
+      "LOCATION00": {
+        "country_code": "s46",
+        "id": "LOCATION00",
+        "map_image": "s48",
+        "name": "s49",
+        "total_landing_count": "s4a",
+        "total_launch_count": "s4b",
+        "url": "s4c"
+      },
+      "LOCATION01": {
+        "country_code": "s8c",
+        "id": "LOCATION01",
+        "map_image": "s8e",
+        "name": "s8f",
+        "total_landing_count": "s90",
+        "total_launch_count": "s91",
+        "url": "s92"
+      },
+      "LOCATION02": {
+        "country_code": "sd2",
+        "id": "LOCATION02",
+        "map_image": "sd4",
+        "name": "sd5",
+        "total_landing_count": "sd6",
+        "total_launch_count": "sd7",
+        "url": "sd8"
+      }
+    }
+  },
+  "new": {
+    "location": {
+      "location_ref01": {
+        "country_code": "s118",
+        "map_image": "s11a",
+        "name": "s11b",
+        "total_landing_count": "s11c",
+        "total_launch_count": "s11d",
+        "url": "s11e"
+      }
+    }
+  }
+}

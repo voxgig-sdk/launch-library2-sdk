@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "agency": {
+      "AGENCY00": {
+        "abbrev": "s64",
+        "administrator": "s65",
+        "country_code": "s66",
+        "description": "s67",
+        "founding_year": "s68",
+        "id": "AGENCY00",
+        "logo_url": "s6a",
+        "name": "s6b",
+        "type": "s6c",
+        "url": "s6d"
+      },
+      "AGENCY01": {
+        "abbrev": "sc8",
+        "administrator": "sc9",
+        "country_code": "sca",
+        "description": "scb",
+        "founding_year": "scc",
+        "id": "AGENCY01",
+        "logo_url": "sce",
+        "name": "scf",
+        "type": "sd0",
+        "url": "sd1"
+      },
+      "AGENCY02": {
+        "abbrev": "s12c",
+        "administrator": "s12d",
+        "country_code": "s12e",
+        "description": "s12f",
+        "founding_year": "s130",
+        "id": "AGENCY02",
+        "logo_url": "s132",
+        "name": "s133",
+        "type": "s134",
+        "url": "s135"
+      }
+    }
+  },
+  "new": {
+    "agency": {
+      "agency_ref01": {
+        "abbrev": "s190",
+        "administrator": "s191",
+        "country_code": "s192",
+        "description": "s193",
+        "founding_year": "s194",
+        "logo_url": "s196",
+        "name": "s197",
+        "type": "s198",
+        "url": "s199"
+      }
+    }
+  }
+}

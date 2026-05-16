@@ -1,0 +1,142 @@
+# Entity: docking_event
+
+main: kit: entity: docking_event: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "departure"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "docking"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "docking_location"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "flight_vehicle"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "url"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "docking_event"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "docking_location"
+                orig: "docking_location"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 10
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 0
+                kind: "query"
+                name: "offset"
+                orig: "offset"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "spacestation"
+                orig: "spacestation"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/docking_event"
+          parts: [
+            "docking_event"
+          ]
+          select: {
+            exist: [
+              "docking_location"
+              "limit"
+              "offset"
+              "spacestation"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/docking_event/{id}"
+          parts: [
+            "docking_event"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,10 @@
+# Entity: docking
+
+main: kit: entity: docking: {
+
+  alias: field: {}
+
+  name: "docking"
+
+
+}

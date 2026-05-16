@@ -1,0 +1,22 @@
+# BasicLaunchVehicleFlow
+
+main: kit: flow: BasicLaunchVehicleFlow:
+{
+  entity: "launch_vehicle",
+  kind: "basic",
+  name: "BasicLaunchVehicleFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "launch_vehicle_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLaunchVehicleFlow"
+}

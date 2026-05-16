@@ -1,0 +1,44 @@
+# BasicAstronautFlow
+
+main: kit: flow: BasicAstronautFlow:
+{
+  entity: "astronaut",
+  kind: "basic",
+  name: "BasicAstronautFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "astronaut_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "astronaut_ref01",
+        srcdatavar: "astronaut_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "astronaut01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-astronaut_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAstronautFlow"
+}

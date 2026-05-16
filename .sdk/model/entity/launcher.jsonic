@@ -1,0 +1,165 @@
+# Entity: launcher
+
+main: kit: entity: launcher: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "apogee"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "consecutive_successful_launch"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "description"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "diameter"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "failed_launch"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "family"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "full_name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "gto_capacity"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "launch_mass"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "length"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "leo_capacity"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "maiden_flight"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "manufacturer"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "max_stage"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "min_stage"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "pending_launch"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "successful_launch"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "to_thrust"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "url"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "variant"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "launcher"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/config/launcher/{id}"
+          parts: [
+            "config"
+            "launcher"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

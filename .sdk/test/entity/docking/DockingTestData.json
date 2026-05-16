@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "docking": {
+      "DOCKING00": {},
+      "DOCKING01": {},
+      "DOCKING02": {}
+    }
+  },
+  "new": {
+    "docking": {
+      "docking_ref01": {}
+    }
+  }
+}

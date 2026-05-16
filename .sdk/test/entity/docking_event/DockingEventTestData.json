@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "docking_event": {
+      "DOCKING_EVENT00": {
+        "departure": "s3c",
+        "docking": "s3d",
+        "docking_location": {},
+        "flight_vehicle": {},
+        "id": "DOCKING_EVENT00",
+        "url": "s41"
+      },
+      "DOCKING_EVENT01": {
+        "departure": "s78",
+        "docking": "s79",
+        "docking_location": {},
+        "flight_vehicle": {},
+        "id": "DOCKING_EVENT01",
+        "url": "s7d"
+      },
+      "DOCKING_EVENT02": {
+        "departure": "sb4",
+        "docking": "sb5",
+        "docking_location": {},
+        "flight_vehicle": {},
+        "id": "DOCKING_EVENT02",
+        "url": "sb9"
+      }
+    }
+  },
+  "new": {
+    "docking_event": {
+      "docking_event_ref01": {
+        "departure": "sf0",
+        "docking": "sf1",
+        "docking_location": {},
+        "flight_vehicle": {},
+        "url": "sf5"
+      }
+    }
+  }
+}

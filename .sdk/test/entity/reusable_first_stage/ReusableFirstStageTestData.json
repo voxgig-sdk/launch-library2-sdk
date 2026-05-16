@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "reusable_first_stage": {
+      "REUSABLE_FIRST_STAGE00": {},
+      "REUSABLE_FIRST_STAGE01": {},
+      "REUSABLE_FIRST_STAGE02": {}
+    }
+  },
+  "new": {
+    "reusable_first_stage": {
+      "reusable_first_stage_ref01": {}
+    }
+  }
+}

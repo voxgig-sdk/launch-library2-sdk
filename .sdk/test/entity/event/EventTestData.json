@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "event": {
+      "EVENT00": {
+        "date": "s64",
+        "description": "s65",
+        "feature_image": "s66",
+        "id": "EVENT00",
+        "location": "s68",
+        "name": "s69",
+        "news_url": "s6a",
+        "type": {},
+        "url": "s6c",
+        "video_url": "s6d"
+      },
+      "EVENT01": {
+        "date": "sc8",
+        "description": "sc9",
+        "feature_image": "sca",
+        "id": "EVENT01",
+        "location": "scc",
+        "name": "scd",
+        "news_url": "sce",
+        "type": {},
+        "url": "sd0",
+        "video_url": "sd1"
+      },
+      "EVENT02": {
+        "date": "s12c",
+        "description": "s12d",
+        "feature_image": "s12e",
+        "id": "EVENT02",
+        "location": "s130",
+        "name": "s131",
+        "news_url": "s132",
+        "type": {},
+        "url": "s134",
+        "video_url": "s135"
+      }
+    }
+  },
+  "new": {
+    "event": {
+      "event_ref01": {
+        "date": "s190",
+        "description": "s191",
+        "feature_image": "s192",
+        "location": "s194",
+        "name": "s195",
+        "news_url": "s196",
+        "type": {},
+        "url": "s198",
+        "video_url": "s199"
+      }
+    }
+  }
+}

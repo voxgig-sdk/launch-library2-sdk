@@ -1,0 +1,65 @@
+{
+  "existing": {
+    "astronaut": {
+      "ASTRONAUT00": {
+        "bio": "s78",
+        "date_of_birth": "s79",
+        "date_of_death": "s7a",
+        "flights_count": "s7b",
+        "id": "ASTRONAUT00",
+        "name": "s7d",
+        "nationality": "s7e",
+        "profile_image": "s7f",
+        "spacewalks_count": "s80",
+        "status": {},
+        "type": {},
+        "url": "s83"
+      },
+      "ASTRONAUT01": {
+        "bio": "sf0",
+        "date_of_birth": "sf1",
+        "date_of_death": "sf2",
+        "flights_count": "sf3",
+        "id": "ASTRONAUT01",
+        "name": "sf5",
+        "nationality": "sf6",
+        "profile_image": "sf7",
+        "spacewalks_count": "sf8",
+        "status": {},
+        "type": {},
+        "url": "sfb"
+      },
+      "ASTRONAUT02": {
+        "bio": "s168",
+        "date_of_birth": "s169",
+        "date_of_death": "s16a",
+        "flights_count": "s16b",
+        "id": "ASTRONAUT02",
+        "name": "s16d",
+        "nationality": "s16e",
+        "profile_image": "s16f",
+        "spacewalks_count": "s170",
+        "status": {},
+        "type": {},
+        "url": "s173"
+      }
+    }
+  },
+  "new": {
+    "astronaut": {
+      "astronaut_ref01": {
+        "bio": "s1e0",
+        "date_of_birth": "s1e1",
+        "date_of_death": "s1e2",
+        "flights_count": "s1e3",
+        "name": "s1e5",
+        "nationality": "s1e6",
+        "profile_image": "s1e7",
+        "spacewalks_count": "s1e8",
+        "status": {},
+        "type": {},
+        "url": "s1eb"
+      }
+    }
+  }
+}
