@@ -1,10 +1,10 @@
 package voxgiglaunchlibrary2sdk
 
 import (
-	"github.com/voxgig-sdk/launch-library2-sdk/core"
-	"github.com/voxgig-sdk/launch-library2-sdk/entity"
-	"github.com/voxgig-sdk/launch-library2-sdk/feature"
-	_ "github.com/voxgig-sdk/launch-library2-sdk/utility"
+	"github.com/voxgig-sdk/launch-library2-sdk/go/core"
+	"github.com/voxgig-sdk/launch-library2-sdk/go/entity"
+	"github.com/voxgig-sdk/launch-library2-sdk/go/feature"
+	_ "github.com/voxgig-sdk/launch-library2-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

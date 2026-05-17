@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/launch-library2-sdk/core"
+	"github.com/voxgig-sdk/launch-library2-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/launch-library2-sdk/go/utility/struct"
 )
 
 type ReusableFirstStageEntity struct {

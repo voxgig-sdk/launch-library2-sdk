@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/launch-library2-sdk"
-	"github.com/voxgig-sdk/launch-library2-sdk/core"
+	sdk "github.com/voxgig-sdk/launch-library2-sdk/go"
+	"github.com/voxgig-sdk/launch-library2-sdk/go/core"
 )
 
 func TestPadDirect(t *testing.T) {

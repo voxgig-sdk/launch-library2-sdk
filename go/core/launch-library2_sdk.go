@@ -3,7 +3,7 @@ package core
 import (
 	"fmt"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/launch-library2-sdk/go/utility/struct"
 )
 
 type LaunchLibrary2SDK struct {

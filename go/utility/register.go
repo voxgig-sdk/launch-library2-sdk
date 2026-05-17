@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/launch-library2-sdk/core"
+import "github.com/voxgig-sdk/launch-library2-sdk/go/core"
 
 func init() {
 	core.UtilityRegistrar = registerAll
