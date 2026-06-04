@@ -95,7 +95,6 @@ def _launcher_basic_setup(extra):
         "LAUNCHLIBRARY__TEST_LAUNCHER_ENTID": idmap,
         "LAUNCHLIBRARY__TEST_LIVE": "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN": "FALSE",
-        "LAUNCHLIBRARY__APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -106,7 +105,6 @@ def _launcher_basic_setup(extra):
     if env.get("LAUNCHLIBRARY__TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LAUNCHLIBRARY__APIKEY"),
             },
             extra or {},
         ])

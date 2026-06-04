@@ -17,8 +17,42 @@ main: {
       termsOfService: "https://thespacedevs.com/privacy"
       title: "Launch Library 2"
       version: "2.0.0"
+      tagline: "Browse rocket launches, space events, astronauts, spacecraft and stations from TheSpaceDevs"
+      homepage: "https://thespacedevs.com/llapi"
+      docs_url: "https://ll.thespacedevs.com/2.2.0/swagger"
+      license_short: "Free tier capped at 15 requests/hour; higher rates via Patreon"
+      license_md: `- Operated by TheSpaceDevs, a community project covering the space industry
+- Free tier is rate-limited to 15 requests per hour
+- Higher quotas are available to Patreon supporters
+- Consult TheSpaceDevs site for current terms of use and attribution expectations`
+      about_md: `Launch Library 2 is a REST API published by [TheSpaceDevs](https://thespacedevs.com/), a community project that catalogues the global space industry. The dataset powers a number of third-party launch trackers and dashboards.
+
+What you get from the API:
+- Upcoming and previous rocket **launches** with vehicles, pads, mission details and status
+- **Agencies** (national space agencies and commercial operators)
+- **Astronauts**, **expeditions**, **space stations** and **dockings**
+- **Spacecraft** and **launchers**, including reusable first stages
+- Space-related **events**, **locations** and launch **pads**
+
+The server is \`https://ll.thespacedevs.com/2.2.0\` and responses are JSON. The free tier is limited to roughly 15 requests per hour; sustained or higher-throughput use is intended for Patreon supporters.`
+      entity_desc: {
+        agency: "Space agencies and commercial operators that fund, build or operate missions."
+        astronaut: "Human spaceflight participants with biographical details and mission history."
+        docking: "Docking ports or interfaces between spacecraft and stations."
+        docking_event: "Records of a spacecraft docking with or undocking from a space station."
+        event: "Space-related events such as launches, landings, EVAs and mission milestones."
+        expedition: "Long-duration crewed expeditions to space stations."
+        first_stage: "Individual first-stage boosters used in launches."
+        launch: "Upcoming and previous rocket launches with vehicle, pad and status."
+        launch_vehicle: "Specific launch vehicle instances used for a flight."
+        launcher: "Launcher (rocket) families and their configurations."
+        location: "Geographic locations that contain launch pads."
+        pad: "Individual launch pads at a location."
+        reusable_first_stage: "Reusable booster cores tracked across multiple flights."
+        space_station: "Crewed orbital stations and their operating status."
+        spacecraft: "Crew- or cargo-carrying spacecraft and their flight history."
+      }
+      auth: false
     }
   }
-}
-
 }

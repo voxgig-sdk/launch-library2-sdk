@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://ll.thespacedevs.com/2.2.0',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },

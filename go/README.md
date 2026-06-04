@@ -28,16 +28,13 @@ package main
 
 import (
     "fmt"
-    "os"
 
     sdk "github.com/voxgig-sdk/launch-library2-sdk/go"
     "github.com/voxgig-sdk/launch-library2-sdk/go/core"
 )
 
 func main() {
-    client := sdk.NewLaunchLibrary2SDK(map[string]any{
-        "apikey": os.Getenv("LAUNCH-LIBRARY2_APIKEY"),
-    })
+    client := sdk.NewLaunchLibrary2SDK(map[string]any{})
 ```
 
 ### 2. List agencys
@@ -157,7 +154,6 @@ Create a `.env.local` file at the project root:
 
 ```
 LAUNCH-LIBRARY2_TEST_LIVE=TRUE
-LAUNCH-LIBRARY2_APIKEY=<your-key>
 ```
 
 Then run:
@@ -179,7 +175,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `"apikey"` | `string` | API key for authentication. |
 | `"base"` | `string` | Base URL of the API server. |
 | `"prefix"` | `string` | URL path prefix prepended to all requests. |
 | `"suffix"` | `string` | URL path suffix appended to all requests. |

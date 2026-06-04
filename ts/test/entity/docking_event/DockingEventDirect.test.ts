@@ -136,14 +136,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'LAUNCHLIBRARY__TEST_DOCKING_EVENT_ENTID': {},
     'LAUNCHLIBRARY__TEST_LIVE': 'FALSE',
-    'LAUNCHLIBRARY__APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.LAUNCHLIBRARY__TEST_LIVE
 
   if (live) {
     const client = new LaunchLibrary2SDK({
-      apikey: env.LAUNCHLIBRARY__APIKEY,
     })
 
     let idmap: any = env['LAUNCHLIBRARY__TEST_DOCKING_EVENT_ENTID']

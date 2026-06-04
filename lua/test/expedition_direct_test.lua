@@ -117,14 +117,12 @@ function expedition_direct_setup(mockres)
   local env = runner.env_override({
     ["LAUNCHLIBRARY__TEST_EXPEDITION_ENTID"] = {},
     ["LAUNCHLIBRARY__TEST_LIVE"] = "FALSE",
-    ["LAUNCHLIBRARY__APIKEY"] = "NONE",
   })
 
   local live = env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["LAUNCHLIBRARY__APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

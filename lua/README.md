@@ -26,9 +26,7 @@ loading a specific record.
 ```lua
 local sdk = require("launch-library2_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("LAUNCH-LIBRARY2_APIKEY"),
-})
+local client = sdk.new({})
 ```
 
 ### 2. List agencys
@@ -132,7 +130,6 @@ Create a `.env.local` file at the project root:
 
 ```
 LAUNCH-LIBRARY2_TEST_LIVE=TRUE
-LAUNCH-LIBRARY2_APIKEY=<your-key>
 ```
 
 Then run:
@@ -155,7 +152,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

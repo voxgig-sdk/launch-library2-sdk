@@ -119,7 +119,6 @@ func launch_vehicleBasicSetup(extra map[string]any) *entityTestSetup {
 		"LAUNCHLIBRARY__TEST_LAUNCH_VEHICLE_ENTID": idmap,
 		"LAUNCHLIBRARY__TEST_LIVE":      "FALSE",
 		"LAUNCHLIBRARY__TEST_EXPLAIN":   "FALSE",
-		"LAUNCHLIBRARY__APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["LAUNCHLIBRARY__TEST_LAUNCH_VEHICLE_ENTID"])
@@ -130,7 +129,6 @@ func launch_vehicleBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["LAUNCHLIBRARY__APIKEY"],
 			},
 			extra,
 		})
