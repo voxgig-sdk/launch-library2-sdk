@@ -10,13 +10,13 @@ The Ruby SDK for the LaunchLibrary2 API — an entity-oriented client using idio
 
 ## Install
 ```bash
-gem install launch-library2-sdk
+gem install voxgig-sdk-launch-library2
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "launch-library2-sdk"
+gem "voxgig-sdk-launch-library2"
 ```
 
 Then run:

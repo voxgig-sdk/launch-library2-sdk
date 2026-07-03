@@ -10,7 +10,7 @@ The Lua SDK for the LaunchLibrary2 API — an entity-oriented client using Lua c
 
 ## Install
 ```bash
-luarocks install launch-library2-sdk
+luarocks install voxgig-sdk-launch-library2
 ```
 
 If the module is not yet published, add the source directory to

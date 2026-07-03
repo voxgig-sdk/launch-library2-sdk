@@ -10,7 +10,7 @@ The PHP SDK for the LaunchLibrary2 API — an entity-oriented client using PHP c
 
 ## Install
 ```bash
-composer require voxgig/launch-library2-sdk
+composer require voxgig-sdk/launch-library2
 ```
 
 

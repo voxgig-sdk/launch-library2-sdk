@@ -8,12 +8,14 @@ source = {
   dir = "launch-library2-sdk/lua"
 }
 description = {
-  summary = "LaunchLibrary2 SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the Launch Library 2 public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/launch-library2-sdk",
+  issues_url = "https://github.com/voxgig-sdk/launch-library2-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "launch-library2" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {

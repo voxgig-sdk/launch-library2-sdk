@@ -10,7 +10,7 @@ The TypeScript SDK for the LaunchLibrary2 API — a type-safe, entity-oriented c
 
 ## Install
 ```bash
-npm install launch-library2
+npm install @voxgig-sdk/launch-library2
 ```
 ## Tutorial: your first API call
 

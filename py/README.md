@@ -10,7 +10,7 @@ The Python SDK for the LaunchLibrary2 API — an entity-oriented client followin
 
 ## Install
 ```bash
-pip install launch-library2-sdk
+pip install voxgig-sdk-launch-library2
 ```
 
 Or install from source:
