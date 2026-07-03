@@ -1,21 +1,8 @@
 # LaunchLibrary2 SDK
 
-Browse rocket launches, space events, astronauts, spacecraft and stations from TheSpaceDevs
+Launch Library 2 client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Launch Library 2
-
-Launch Library 2 is a REST API published by [TheSpaceDevs](https://thespacedevs.com/), a community project that catalogues the global space industry. The dataset powers a number of third-party launch trackers and dashboards.
-
-What you get from the API:
-- Upcoming and previous rocket **launches** with vehicles, pads, mission details and status
-- **Agencies** (national space agencies and commercial operators)
-- **Astronauts**, **expeditions**, **space stations** and **dockings**
-- **Spacecraft** and **launchers**, including reusable first stages
-- Space-related **events**, **locations** and launch **pads**
-
-The server is `https://ll.thespacedevs.com/2.2.0` and responses are JSON. The free tier is limited to roughly 15 requests per hour; sustained or higher-throughput use is intended for Patreon supporters.
 
 ## Try it
 
@@ -49,29 +36,31 @@ gem install launch-library2-sdk
 luarocks install launch-library2-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { LaunchLibrary2SDK } from 'launch-library2'
 
-const client = new LaunchLibrary2SDK({})
+const client = new LaunchLibrary2SDK({
+  apikey: process.env.LAUNCH-LIBRARY2_APIKEY,
+})
 
 // List all agencys
 const agencys = await client.Agency().list()
+console.log(agencys.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -101,21 +90,21 @@ The API exposes 15 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Agency** | Space agencies and commercial operators that fund, build or operate missions. | `/agencies` |
-| **Astronaut** | Human spaceflight participants with biographical details and mission history. | `/astronaut` |
-| **Docking** | Docking ports or interfaces between spacecraft and stations. | `` |
-| **DockingEvent** | Records of a spacecraft docking with or undocking from a space station. | `/docking_event` |
-| **Event** | Space-related events such as launches, landings, EVAs and mission milestones. | `/event` |
-| **Expedition** | Long-duration crewed expeditions to space stations. | `/expedition` |
-| **FirstStage** | Individual first-stage boosters used in launches. | `/firststage` |
-| **Launch** | Upcoming and previous rocket launches with vehicle, pad and status. | `/launch` |
-| **LaunchVehicle** | Specific launch vehicle instances used for a flight. | `/config/launcher` |
-| **Launcher** | Launcher (rocket) families and their configurations. | `/config/launcher/{id}` |
-| **Location** | Geographic locations that contain launch pads. | `/location` |
-| **Pad** | Individual launch pads at a location. | `/pad` |
-| **ReusableFirstStage** | Reusable booster cores tracked across multiple flights. | `` |
-| **SpaceStation** | Crewed orbital stations and their operating status. | `/spacestation` |
-| **Spacecraft** | Crew- or cargo-carrying spacecraft and their flight history. | `/config/spacecraft` |
+| **Agency** |  | `/agencies` |
+| **Astronaut** |  | `/astronaut` |
+| **Docking** |  | `` |
+| **DockingEvent** |  | `/docking_event` |
+| **Event** |  | `/event` |
+| **Expedition** |  | `/expedition` |
+| **FirstStage** |  | `/firststage` |
+| **Launch** |  | `/launch` |
+| **LaunchVehicle** |  | `/config/launcher` |
+| **Launcher** |  | `/config/launcher/{id}` |
+| **Location** |  | `/location` |
+| **Pad** |  | `/pad` |
+| **ReusableFirstStage** |  | `` |
+| **SpaceStation** |  | `/spacestation` |
+| **Spacecraft** |  | `/config/spacecraft` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -125,17 +114,20 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from launchlibrary2_sdk import LaunchLibrary2SDK
 
-client = LaunchLibrary2SDK({})
+client = LaunchLibrary2SDK({
+    "apikey": os.environ.get("LAUNCH-LIBRARY2_APIKEY"),
+})
 
 # List all agencys
-agencys, err = client.Agency(None).list(None, None)
+agencys, err = client.Agency().list()
+print(agencys)
 
 # Load a specific agency
-agency, err = client.Agency(None).load(
-    {"id": "example_id"}, None
-)
+agency, err = client.Agency().load({"id": "example_id"})
+print(agency)
 ```
 
 ### PHP
@@ -144,15 +136,17 @@ agency, err = client.Agency(None).load(
 <?php
 require_once 'launchlibrary2_sdk.php';
 
-$client = new LaunchLibrary2SDK([]);
+$client = new LaunchLibrary2SDK([
+    "apikey" => getenv("LAUNCH-LIBRARY2_APIKEY"),
+]);
 
 // List all agencys
-[$agencys, $err] = $client->Agency(null)->list(null, null);
+[$agencys, $err] = $client->Agency()->list();
+print_r($agencys);
 
 // Load a specific agency
-[$agency, $err] = $client->Agency(null)->load(
-    ["id" => "example_id"], null
-);
+[$agency, $err] = $client->Agency()->load(["id" => "example_id"]);
+print_r($agency);
 ```
 
 ### Golang
@@ -160,10 +154,13 @@ $client = new LaunchLibrary2SDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/launch-library2-sdk/go"
 
-client := sdk.NewLaunchLibrary2SDK(map[string]any{})
+client := sdk.NewLaunchLibrary2SDK(map[string]any{
+    "apikey": os.Getenv("LAUNCH-LIBRARY2_APIKEY"),
+})
 
 // List all agencys
 agencys, err := client.Agency(nil).List(nil, nil)
+fmt.Println(agencys)
 ```
 
 ### Ruby
@@ -171,15 +168,17 @@ agencys, err := client.Agency(nil).List(nil, nil)
 ```ruby
 require_relative "LaunchLibrary2_sdk"
 
-client = LaunchLibrary2SDK.new({})
+client = LaunchLibrary2SDK.new({
+  "apikey" => ENV["LAUNCH-LIBRARY2_APIKEY"],
+})
 
 # List all agencys
-agencys, err = client.Agency(nil).list(nil, nil)
+agencys, err = client.Agency().list
+puts agencys
 
 # Load a specific agency
-agency, err = client.Agency(nil).load(
-  { "id" => "example_id" }, nil
-)
+agency, err = client.Agency().load({ "id" => "example_id" })
+puts agency
 ```
 
 ### Lua
@@ -187,15 +186,17 @@ agency, err = client.Agency(nil).load(
 ```lua
 local sdk = require("launch-library2_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("LAUNCH-LIBRARY2_APIKEY"),
+})
 
 -- List all agencys
-local agencys, err = client:Agency(nil):list(nil, nil)
+local agencys, err = client:Agency():list()
+print(agencys)
 
 -- Load a specific agency
-local agency, err = client:Agency(nil):load(
-  { id = "example_id" }, nil
-)
+local agency, err = client:Agency():load({ id = "example_id" })
+print(agency)
 ```
 
 ## Unit testing in offline mode
@@ -214,25 +215,21 @@ const result = await client.Agency().load({ id: 'test01' })
 ### Python
 
 ```python
-client = LaunchLibrary2SDK.test(None, None)
-result, err = client.Agency(None).load(
-    {"id": "test01"}, None
-)
+client = LaunchLibrary2SDK.test()
+result, err = client.Agency().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = LaunchLibrary2SDK::test(null, null);
-[$result, $err] = $client->Agency(null)->load(
-    ["id" => "test01"], null
-);
+$client = LaunchLibrary2SDK::test();
+[$result, $err] = $client->Agency()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Agency(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -241,19 +238,15 @@ result, err := client.Agency(nil).Load(
 ### Ruby
 
 ```ruby
-client = LaunchLibrary2SDK.test(nil, nil)
-result, err = client.Agency(nil).load(
-  { "id" => "test01" }, nil
-)
+client = LaunchLibrary2SDK.test
+result, err = client.Agency().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Agency(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Agency():load({ id = "test01" })
 ```
 
 ## How it works
@@ -357,16 +350,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Launch Library 2
-
-- Upstream: [https://thespacedevs.com/llapi](https://thespacedevs.com/llapi)
-- API docs: [https://ll.thespacedevs.com/2.2.0/swagger](https://ll.thespacedevs.com/2.2.0/swagger)
-
-- Operated by TheSpaceDevs, a community project covering the space industry
-- Free tier is rate-limited to 15 requests per hour
-- Higher quotas are available to Patreon supporters
-- Consult TheSpaceDevs site for current terms of use and attribution expectations
 
 ---
 

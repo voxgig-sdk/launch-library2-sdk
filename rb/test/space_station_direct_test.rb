@@ -116,12 +116,14 @@ def space_station_direct_setup(mockres)
   env = Runner.env_override({
     "LAUNCHLIBRARY__TEST_SPACE_STATION_ENTID" => {},
     "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
+    "LAUNCHLIBRARY__APIKEY" => "NONE",
   })
 
   live = env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
+      "apikey" => env["LAUNCHLIBRARY__APIKEY"],
     }
     client = LaunchLibrary2SDK.new(merged_opts)
     return {

@@ -109,12 +109,14 @@ def _location_direct_setup(mockres):
     env = runner.env_override({
         "LAUNCHLIBRARY__TEST_LOCATION_ENTID": {},
         "LAUNCHLIBRARY__TEST_LIVE": "FALSE",
+        "LAUNCHLIBRARY__APIKEY": "NONE",
     })
 
     live = env.get("LAUNCHLIBRARY__TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("LAUNCHLIBRARY__APIKEY"),
         }
         client = LaunchLibrary2SDK(merged_opts)
         return {

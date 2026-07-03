@@ -102,6 +102,7 @@ function agency_basic_setup(extra)
     ["LAUNCHLIBRARY__TEST_AGENCY_ENTID"] = idmap,
     ["LAUNCHLIBRARY__TEST_LIVE"] = "FALSE",
     ["LAUNCHLIBRARY__TEST_EXPLAIN"] = "FALSE",
+    ["LAUNCHLIBRARY__APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -113,6 +114,7 @@ function agency_basic_setup(extra)
   if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["LAUNCHLIBRARY__APIKEY"],
       },
       extra or {},
     })

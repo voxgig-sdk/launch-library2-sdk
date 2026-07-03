@@ -1,6 +1,11 @@
 # LaunchLibrary2 Python SDK
 
-The Python SDK for the LaunchLibrary2 API. Provides an entity-oriented interface following Pythonic conventions.
+
+
+The Python SDK for the LaunchLibrary2 API — an entity-oriented client following Pythonic conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -23,15 +28,18 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
+import os
 from launchlibrary2_sdk import LaunchLibrary2SDK
 
-client = LaunchLibrary2SDK({})
+client = LaunchLibrary2SDK({
+    "apikey": os.environ.get("LAUNCH-LIBRARY2_APIKEY"),
+})
 ```
 
 ### 2. List agencys
 
 ```python
-result, err = client.Agency(None).list(None, None)
+result, err = client.Agency().list()
 if err:
     raise Exception(err)
 
@@ -44,7 +52,7 @@ if isinstance(result, list):
 ### 3. Load a agency
 
 ```python
-result, err = client.Agency(None).load({"id": "example_id"}, None)
+result, err = client.Agency().load({"id": "example_id"})
 if err:
     raise Exception(err)
 print(result)
@@ -92,11 +100,9 @@ print(fetchdef["headers"])
 Create a mock client for unit testing — no server required:
 
 ```python
-client = LaunchLibrary2SDK.test(None, None)
+client = LaunchLibrary2SDK.test()
 
-result, err = client.LaunchLibrary2(None).load(
-    {"id": "test01"}, None
-)
+result, err = client.LaunchLibrary2().load({"id": "test01"})
 # result contains mock response data
 ```
 
@@ -127,6 +133,7 @@ Create a `.env.local` file at the project root:
 
 ```
 LAUNCH-LIBRARY2_TEST_LIVE=TRUE
+LAUNCH-LIBRARY2_APIKEY=<your-key>
 ```
 
 Then run:
@@ -150,6 +157,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |

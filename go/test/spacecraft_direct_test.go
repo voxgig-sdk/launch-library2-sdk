@@ -194,12 +194,14 @@ func spacecraftDirectSetup(mockres any) *spacecraftDirectSetupResult {
 	env := envOverride(map[string]any{
 		"LAUNCHLIBRARY__TEST_SPACECRAFT_ENTID": map[string]any{},
 		"LAUNCHLIBRARY__TEST_LIVE":    "FALSE",
+		"LAUNCHLIBRARY__APIKEY":       "NONE",
 	})
 
 	live := env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["LAUNCHLIBRARY__APIKEY"],
 		}
 		client := sdk.NewLaunchLibrary2SDK(mergedOpts)
 
