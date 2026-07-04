@@ -85,6 +85,27 @@ func (e *DockingEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Docking; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *DockingEntity) DataTyped(data ...Docking) Docking {
+	if len(data) > 0 {
+		return typedFrom[Docking](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Docking](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Docking (all fields
+// optional at the wire level).
+func (e *DockingEntity) MatchTyped(match ...Docking) Docking {
+	if len(match) > 0 {
+		return typedFrom[Docking](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Docking](e.Match())
+}
+
 func (e *DockingEntity) Load(_ map[string]any, _ map[string]any) (any, error) {
 	return core.UnsupportedOp("load", e.name)
 }

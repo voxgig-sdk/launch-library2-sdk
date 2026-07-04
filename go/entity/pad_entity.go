@@ -85,6 +85,27 @@ func (e *PadEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Pad; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *PadEntity) DataTyped(data ...Pad) Pad {
+	if len(data) > 0 {
+		return typedFrom[Pad](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Pad](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Pad (all fields
+// optional at the wire level).
+func (e *PadEntity) MatchTyped(match ...Pad) Pad {
+	if len(match) > 0 {
+		return typedFrom[Pad](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Pad](e.Match())
+}
+
 
 func (e *PadEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -111,6 +132,17 @@ func (e *PadEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, err
 	})
 }
 
+// LoadTyped is the statically-typed variant of Load: it takes an
+// PadLoadMatch and returns an Pad. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *PadEntity) LoadTyped(reqmatch PadLoadMatch, ctrl map[string]any) (Pad, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Pad{}, err
+	}
+	return typedFrom[Pad](res), nil
+}
+
 
 
 
@@ -131,6 +163,17 @@ func (e *PadEntity) List(reqmatch map[string]any, ctrl map[string]any) (any, err
 			}
 		}
 	})
+}
+
+// ListTyped is the statically-typed variant of List: it takes an
+// PadListMatch and returns []Pad. It delegates to the untyped
+// List (identical runtime) and converts at the typed boundary.
+func (e *PadEntity) ListTyped(reqmatch PadListMatch, ctrl map[string]any) ([]Pad, error) {
+	res, err := e.List(asMap(reqmatch), ctrl)
+	if err != nil {
+		return nil, err
+	}
+	return typedSliceFrom[Pad](res), nil
 }
 
 

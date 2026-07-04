@@ -43,16 +43,14 @@ class PadEntityTest < Minitest::Test
     pad_ref01_ent = client.Pad(nil)
     pad_ref01_match = {}
 
-    pad_ref01_list_result, err = pad_ref01_ent.list(pad_ref01_match, nil)
-    assert_nil err
+    pad_ref01_list_result = pad_ref01_ent.list(pad_ref01_match, nil)
     assert pad_ref01_list_result.is_a?(Array)
 
     # LOAD
     pad_ref01_match_dt0 = {
       "id" => pad_ref01_data["id"],
     }
-    pad_ref01_data_dt0_loaded, err = pad_ref01_ent.load(pad_ref01_match_dt0, nil)
-    assert_nil err
+    pad_ref01_data_dt0_loaded = pad_ref01_ent.load(pad_ref01_match_dt0, nil)
     pad_ref01_data_dt0_load_result = Helpers.to_map(pad_ref01_data_dt0_loaded)
     assert !pad_ref01_data_dt0_load_result.nil?
     assert_equal pad_ref01_data_dt0_load_result["id"], pad_ref01_data["id"]
@@ -93,7 +91,6 @@ def pad_basic_setup(extra)
     "LAUNCHLIBRARY__TEST_PAD_ENTID" => idmap,
     "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
     "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-    "LAUNCHLIBRARY__APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def pad_basic_setup(extra)
   if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LAUNCHLIBRARY__APIKEY"],
       },
       extra || {},
     ])

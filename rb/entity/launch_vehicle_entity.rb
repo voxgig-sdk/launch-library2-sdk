@@ -45,6 +45,7 @@ class LaunchVehicleEntity
     end
   end
 
+  # @return [LaunchVehicle, Hash] the current LaunchVehicle data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class LaunchVehicleEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of LaunchVehicle fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class LaunchVehicleEntity
   
 
   
+  # List LaunchVehicle items matching the given filter.
+  #
+  # @param reqmatch [LaunchVehicleListMatch, Hash, nil] match filter (any subset of LaunchVehicle fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<LaunchVehicle>, Array] the matching LaunchVehicle items; raises LaunchLibrary2Error on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

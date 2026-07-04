@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch FirstStageLoadMatch
+---@param ctrl? table
+---@return FirstStage
+---@return string? err
 function FirstStageEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch FirstStageListMatch
+---@param ctrl? table
+---@return FirstStage[]
+---@return string? err
 function FirstStageEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

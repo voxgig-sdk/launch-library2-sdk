@@ -43,16 +43,14 @@ class ExpeditionEntityTest < Minitest::Test
     expedition_ref01_ent = client.Expedition(nil)
     expedition_ref01_match = {}
 
-    expedition_ref01_list_result, err = expedition_ref01_ent.list(expedition_ref01_match, nil)
-    assert_nil err
+    expedition_ref01_list_result = expedition_ref01_ent.list(expedition_ref01_match, nil)
     assert expedition_ref01_list_result.is_a?(Array)
 
     # LOAD
     expedition_ref01_match_dt0 = {
       "id" => expedition_ref01_data["id"],
     }
-    expedition_ref01_data_dt0_loaded, err = expedition_ref01_ent.load(expedition_ref01_match_dt0, nil)
-    assert_nil err
+    expedition_ref01_data_dt0_loaded = expedition_ref01_ent.load(expedition_ref01_match_dt0, nil)
     expedition_ref01_data_dt0_load_result = Helpers.to_map(expedition_ref01_data_dt0_loaded)
     assert !expedition_ref01_data_dt0_load_result.nil?
     assert_equal expedition_ref01_data_dt0_load_result["id"], expedition_ref01_data["id"]
@@ -93,7 +91,6 @@ def expedition_basic_setup(extra)
     "LAUNCHLIBRARY__TEST_EXPEDITION_ENTID" => idmap,
     "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
     "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-    "LAUNCHLIBRARY__APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def expedition_basic_setup(extra)
   if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LAUNCHLIBRARY__APIKEY"],
       },
       extra || {},
     ])

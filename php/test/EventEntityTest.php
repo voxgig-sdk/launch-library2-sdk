@@ -50,16 +50,14 @@ class EventEntityTest extends TestCase
         $event_ref01_ent = $client->Event(null);
         $event_ref01_match = [];
 
-        [$event_ref01_list_result, $err] = $event_ref01_ent->list($event_ref01_match, null);
-        $this->assertNull($err);
+        $event_ref01_list_result = $event_ref01_ent->list($event_ref01_match, null);
         $this->assertIsArray($event_ref01_list_result);
 
         // LOAD
         $event_ref01_match_dt0 = [
             "id" => $event_ref01_data["id"],
         ];
-        [$event_ref01_data_dt0_loaded, $err] = $event_ref01_ent->load($event_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $event_ref01_data_dt0_loaded = $event_ref01_ent->load($event_ref01_match_dt0, null);
         $event_ref01_data_dt0_load_result = Helpers::to_map($event_ref01_data_dt0_loaded);
         $this->assertNotNull($event_ref01_data_dt0_load_result);
         $this->assertEquals($event_ref01_data_dt0_load_result["id"], $event_ref01_data["id"]);
@@ -96,7 +94,6 @@ function event_basic_setup($extra)
         "LAUNCHLIBRARY__TEST_EVENT_ENTID" => $idmap,
         "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-        "LAUNCHLIBRARY__APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function event_basic_setup($extra)
     if ($env["LAUNCHLIBRARY__TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["LAUNCHLIBRARY__APIKEY"],
             ],
             $extra ?? [],
         ]);

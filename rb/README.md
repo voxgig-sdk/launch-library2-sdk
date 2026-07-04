@@ -9,21 +9,10 @@ The Ruby SDK for the LaunchLibrary2 API — an entity-oriented client using idio
 
 
 ## Install
-```bash
-gem install voxgig-sdk-launch-library2
-```
+This package is not yet published to RubyGems. Install it from the
+GitHub release tag (`rb/vX.Y.Z`):
 
-Or add to your `Gemfile`:
-
-```ruby
-gem "voxgig-sdk-launch-library2"
-```
-
-Then run:
-
-```bash
-bundle install
-```
+- Releases: [https://github.com/voxgig-sdk/launch-library2-sdk/releases](https://github.com/voxgig-sdk/launch-library2-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -36,31 +25,34 @@ loading a specific record.
 ```ruby
 require_relative "LaunchLibrary2_sdk"
 
-client = LaunchLibrary2SDK.new({
-  "apikey" => ENV["LAUNCH-LIBRARY2_APIKEY"],
-})
+client = LaunchLibrary2SDK.new
 ```
 
 ### 2. List agencys
 
 ```ruby
-result, err = client.Agency().list
-raise err if err
-
-if result.is_a?(Array)
-  result.each do |item|
-    d = item.data_get
-    puts "#{d["id"]} #{d["name"]}"
+begin
+  result = client.agency.list
+  if result.is_a?(Array)
+    result.each do |item|
+      d = item.data_get
+      puts "#{d["id"]} #{d["name"]}"
+    end
   end
+rescue => err
+  warn "list failed: #{err}"
 end
 ```
 
-### 3. Load a agency
+### 3. Load an agency
 
 ```ruby
-result, err = client.Agency().load({ "id" => "example_id" })
-raise err if err
-puts result
+begin
+  result = client.agency.load({ "id" => "example_id" })
+  puts result
+rescue => err
+  warn "load failed: #{err}"
+end
 ```
 
 
@@ -71,32 +63,35 @@ puts result
 For endpoints not covered by entity methods:
 
 ```ruby
-result, err = client.direct({
+result = client.direct({
   "path" => "/api/resource/{id}",
   "method" => "GET",
   "params" => { "id" => "example" },
 })
-raise err if err
 
 if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
+else
+  warn result["err"]
 end
 ```
 
 ### Prepare a request without sending it
 
 ```ruby
-fetchdef, err = client.prepare({
-  "path" => "/api/resource/{id}",
-  "method" => "DELETE",
-  "params" => { "id" => "example" },
-})
-raise err if err
-
-puts fetchdef["url"]
-puts fetchdef["method"]
-puts fetchdef["headers"]
+begin
+  fetchdef = client.prepare({
+    "path" => "/api/resource/{id}",
+    "method" => "DELETE",
+    "params" => { "id" => "example" },
+  })
+  puts fetchdef["url"]
+  puts fetchdef["method"]
+  puts fetchdef["headers"]
+rescue => err
+  warn "prepare failed: #{err}"
+end
 ```
 
 ### Use test mode
@@ -106,7 +101,7 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = LaunchLibrary2SDK.test
 
-result, err = client.LaunchLibrary2().load({ "id" => "test01" })
+result = client.agency.load({ "id" => "test01" })
 # result contains mock response data
 ```
 
@@ -137,8 +132,7 @@ client = LaunchLibrary2SDK.new({
 Create a `.env.local` file at the project root:
 
 ```
-LAUNCH-LIBRARY2_TEST_LIVE=TRUE
-LAUNCH-LIBRARY2_APIKEY=<your-key>
+LAUNCH_LIBRARY2_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -161,7 +155,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |
@@ -183,8 +176,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | --- | --- | --- |
 | `options_map` | `() -> Hash` | Deep copy of current SDK options. |
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
-| `prepare` | `(fetchargs) -> [Hash, err]` | Build an HTTP request definition without sending. |
-| `direct` | `(fetchargs) -> [Hash, err]` | Build and send an HTTP request. |
+| `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
+| `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
 | `Agency` | `(data) -> AgencyEntity` | Create a Agency entity instance. |
 | `Astronaut` | `(data) -> AstronautEntity` | Create a Astronaut entity instance. |
 | `Docking` | `(data) -> DockingEntity` | Create a Docking entity instance. |
@@ -207,11 +200,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> [any, err]` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> [any, err]` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> [any, err]` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> [any, err]` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> [any, err]` | Remove an entity. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -221,8 +214,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[any, err]`. The first value is a
-`Hash` with these keys:
+Entity operations return the result data directly. On failure they
+raise a `LaunchLibrary2Error` (a `StandardError` subclass), so wrap
+calls in `begin`/`rescue` where you need to handle errors.
+
+The `direct` escape hatch is the exception: it never raises and instead
+returns a result `Hash` with these keys:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -230,8 +227,7 @@ Entity operations return `[any, err]`. The first value is a
 | `status` | `Integer` | HTTP status code. |
 | `headers` | `Hash` | Response headers. |
 | `data` | `any` | Parsed JSON response body. |
-
-On error, `ok` is `false` and `err` contains the error value.
+| `err` | `Error` | Present when `ok` is `false`. |
 
 ### Entities
 
@@ -532,7 +528,7 @@ API path: `/config/spacecraft`
 
 ### Agency
 
-Create an instance: `const agency = client.Agency()`
+Create an instance: `const agency = client.agency`
 
 #### Operations
 
@@ -559,19 +555,19 @@ Create an instance: `const agency = client.Agency()`
 #### Example: Load
 
 ```ts
-const agency = await client.Agency().load({ id: 'agency_id' })
+const agency = await client.agency.load({ id: 'agency_id' })
 ```
 
 #### Example: List
 
 ```ts
-const agencys = await client.Agency().list()
+const agencys = await client.agency.list()
 ```
 
 
 ### Astronaut
 
-Create an instance: `const astronaut = client.Astronaut()`
+Create an instance: `const astronaut = client.astronaut`
 
 #### Operations
 
@@ -600,24 +596,24 @@ Create an instance: `const astronaut = client.Astronaut()`
 #### Example: Load
 
 ```ts
-const astronaut = await client.Astronaut().load({ id: 'astronaut_id' })
+const astronaut = await client.astronaut.load({ id: 'astronaut_id' })
 ```
 
 #### Example: List
 
 ```ts
-const astronauts = await client.Astronaut().list()
+const astronauts = await client.astronaut.list()
 ```
 
 
 ### Docking
 
-Create an instance: `const docking = client.Docking()`
+Create an instance: `const docking = client.docking`
 
 
 ### DockingEvent
 
-Create an instance: `const docking_event = client.DockingEvent()`
+Create an instance: `const docking_event = client.docking_event`
 
 #### Operations
 
@@ -640,19 +636,19 @@ Create an instance: `const docking_event = client.DockingEvent()`
 #### Example: Load
 
 ```ts
-const docking_event = await client.DockingEvent().load({ id: 'docking_event_id' })
+const docking_event = await client.docking_event.load({ id: 'docking_event_id' })
 ```
 
 #### Example: List
 
 ```ts
-const docking_events = await client.DockingEvent().list()
+const docking_events = await client.docking_event.list()
 ```
 
 
 ### Event
 
-Create an instance: `const event = client.Event()`
+Create an instance: `const event = client.event`
 
 #### Operations
 
@@ -679,19 +675,19 @@ Create an instance: `const event = client.Event()`
 #### Example: Load
 
 ```ts
-const event = await client.Event().load({ id: 'event_id' })
+const event = await client.event.load({ id: 'event_id' })
 ```
 
 #### Example: List
 
 ```ts
-const events = await client.Event().list()
+const events = await client.event.list()
 ```
 
 
 ### Expedition
 
-Create an instance: `const expedition = client.Expedition()`
+Create an instance: `const expedition = client.expedition`
 
 #### Operations
 
@@ -715,19 +711,19 @@ Create an instance: `const expedition = client.Expedition()`
 #### Example: Load
 
 ```ts
-const expedition = await client.Expedition().load({ id: 'expedition_id' })
+const expedition = await client.expedition.load({ id: 'expedition_id' })
 ```
 
 #### Example: List
 
 ```ts
-const expeditions = await client.Expedition().list()
+const expeditions = await client.expedition.list()
 ```
 
 
 ### FirstStage
 
-Create an instance: `const first_stage = client.FirstStage()`
+Create an instance: `const first_stage = client.first_stage`
 
 #### Operations
 
@@ -751,19 +747,19 @@ Create an instance: `const first_stage = client.FirstStage()`
 #### Example: Load
 
 ```ts
-const first_stage = await client.FirstStage().load({ id: 'first_stage_id' })
+const first_stage = await client.first_stage.load({ id: 'first_stage_id' })
 ```
 
 #### Example: List
 
 ```ts
-const first_stages = await client.FirstStage().list()
+const first_stages = await client.first_stage.list()
 ```
 
 
 ### Launch
 
-Create an instance: `const launch = client.Launch()`
+Create an instance: `const launch = client.launch`
 
 #### Operations
 
@@ -794,19 +790,19 @@ Create an instance: `const launch = client.Launch()`
 #### Example: Load
 
 ```ts
-const launch = await client.Launch().load({ id: 'launch_id' })
+const launch = await client.launch.load({ id: 'launch_id' })
 ```
 
 #### Example: List
 
 ```ts
-const launchs = await client.Launch().list()
+const launchs = await client.launch.list()
 ```
 
 
 ### LaunchVehicle
 
-Create an instance: `const launch_vehicle = client.LaunchVehicle()`
+Create an instance: `const launch_vehicle = client.launch_vehicle`
 
 #### Operations
 
@@ -844,13 +840,13 @@ Create an instance: `const launch_vehicle = client.LaunchVehicle()`
 #### Example: List
 
 ```ts
-const launch_vehicles = await client.LaunchVehicle().list()
+const launch_vehicles = await client.launch_vehicle.list()
 ```
 
 
 ### Launcher
 
-Create an instance: `const launcher = client.Launcher()`
+Create an instance: `const launcher = client.launcher`
 
 #### Operations
 
@@ -888,13 +884,13 @@ Create an instance: `const launcher = client.Launcher()`
 #### Example: Load
 
 ```ts
-const launcher = await client.Launcher().load({ id: 'launcher_id' })
+const launcher = await client.launcher.load({ id: 'launcher_id' })
 ```
 
 
 ### Location
 
-Create an instance: `const location = client.Location()`
+Create an instance: `const location = client.location`
 
 #### Operations
 
@@ -918,19 +914,19 @@ Create an instance: `const location = client.Location()`
 #### Example: Load
 
 ```ts
-const location = await client.Location().load({ id: 'location_id' })
+const location = await client.location.load({ id: 'location_id' })
 ```
 
 #### Example: List
 
 ```ts
-const locations = await client.Location().list()
+const locations = await client.location.list()
 ```
 
 
 ### Pad
 
-Create an instance: `const pad = client.Pad()`
+Create an instance: `const pad = client.pad`
 
 #### Operations
 
@@ -959,24 +955,24 @@ Create an instance: `const pad = client.Pad()`
 #### Example: Load
 
 ```ts
-const pad = await client.Pad().load({ id: 'pad_id' })
+const pad = await client.pad.load({ id: 'pad_id' })
 ```
 
 #### Example: List
 
 ```ts
-const pads = await client.Pad().list()
+const pads = await client.pad.list()
 ```
 
 
 ### ReusableFirstStage
 
-Create an instance: `const reusable_first_stage = client.ReusableFirstStage()`
+Create an instance: `const reusable_first_stage = client.reusable_first_stage`
 
 
 ### SpaceStation
 
-Create an instance: `const space_station = client.SpaceStation()`
+Create an instance: `const space_station = client.space_station`
 
 #### Operations
 
@@ -1004,19 +1000,19 @@ Create an instance: `const space_station = client.SpaceStation()`
 #### Example: Load
 
 ```ts
-const space_station = await client.SpaceStation().load({ id: 'space_station_id' })
+const space_station = await client.space_station.load({ id: 'space_station_id' })
 ```
 
 #### Example: List
 
 ```ts
-const space_stations = await client.SpaceStation().list()
+const space_stations = await client.space_station.list()
 ```
 
 
 ### Spacecraft
 
-Create an instance: `const spacecraft = client.Spacecraft()`
+Create an instance: `const spacecraft = client.spacecraft`
 
 #### Operations
 
@@ -1048,13 +1044,13 @@ Create an instance: `const spacecraft = client.Spacecraft()`
 #### Example: Load
 
 ```ts
-const spacecraft = await client.Spacecraft().load({ id: 'spacecraft_id' })
+const spacecraft = await client.spacecraft.load({ id: 'spacecraft_id' })
 ```
 
 #### Example: List
 
 ```ts
-const spacecrafts = await client.Spacecraft().list()
+const spacecrafts = await client.spacecraft.list()
 ```
 
 
@@ -1129,11 +1125,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-moon = client.Moon
-moon.load({ "planet_id" => "earth", "id" => "luna" })
+agency = client.agency
+agency.load({ "id" => "example_id" })
 
-# moon.data_get now returns the loaded moon data
-# moon.match_get returns the last match criteria
+# agency.data_get now returns the loaded agency data
+# agency.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

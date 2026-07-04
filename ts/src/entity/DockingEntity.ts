@@ -14,9 +14,12 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Docking,
+} from '../LaunchLibrary2Types'
 
 // TODO: needs Entity superclass
-class DockingEntity extends LaunchLibrary2EntityBase {
+class DockingEntity extends LaunchLibrary2EntityBase<Docking> {
 
   constructor(client: LaunchLibrary2SDK, entopts: any) {
     super(client, entopts)

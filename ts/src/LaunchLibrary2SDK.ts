@@ -16,6 +16,8 @@ import { ReusableFirstStageEntity } from './entity/ReusableFirstStageEntity'
 import { SpaceStationEntity } from './entity/SpaceStationEntity'
 import { SpacecraftEntity } from './entity/SpacecraftEntity'
 
+export type * from './LaunchLibrary2Types'
+
 
 import { inspect } from 'node:util'
 
@@ -216,90 +218,210 @@ class LaunchLibrary2SDK {
 
 
 
+  _agency?: AgencyEntity
+
+  // Idiomatic facade: `client.agency.list()` / `client.agency.load({ id })`.
+  get agency(): AgencyEntity {
+    return (this._agency ??= new AgencyEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.agency` instead. */
   Agency(data?: any) {
     const self = this
     return new AgencyEntity(self,data)
   }
 
 
+  _astronaut?: AstronautEntity
+
+  // Idiomatic facade: `client.astronaut.list()` / `client.astronaut.load({ id })`.
+  get astronaut(): AstronautEntity {
+    return (this._astronaut ??= new AstronautEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.astronaut` instead. */
   Astronaut(data?: any) {
     const self = this
     return new AstronautEntity(self,data)
   }
 
 
+  _docking?: DockingEntity
+
+  // Idiomatic facade: `client.docking.list()` / `client.docking.load({ id })`.
+  get docking(): DockingEntity {
+    return (this._docking ??= new DockingEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.docking` instead. */
   Docking(data?: any) {
     const self = this
     return new DockingEntity(self,data)
   }
 
 
+  _docking_event?: DockingEventEntity
+
+  // Idiomatic facade: `client.docking_event.list()` / `client.docking_event.load({ id })`.
+  get docking_event(): DockingEventEntity {
+    return (this._docking_event ??= new DockingEventEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.docking_event` instead. */
   DockingEvent(data?: any) {
     const self = this
     return new DockingEventEntity(self,data)
   }
 
 
+  _event?: EventEntity
+
+  // Idiomatic facade: `client.event.list()` / `client.event.load({ id })`.
+  get event(): EventEntity {
+    return (this._event ??= new EventEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.event` instead. */
   Event(data?: any) {
     const self = this
     return new EventEntity(self,data)
   }
 
 
+  _expedition?: ExpeditionEntity
+
+  // Idiomatic facade: `client.expedition.list()` / `client.expedition.load({ id })`.
+  get expedition(): ExpeditionEntity {
+    return (this._expedition ??= new ExpeditionEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.expedition` instead. */
   Expedition(data?: any) {
     const self = this
     return new ExpeditionEntity(self,data)
   }
 
 
+  _first_stage?: FirstStageEntity
+
+  // Idiomatic facade: `client.first_stage.list()` / `client.first_stage.load({ id })`.
+  get first_stage(): FirstStageEntity {
+    return (this._first_stage ??= new FirstStageEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.first_stage` instead. */
   FirstStage(data?: any) {
     const self = this
     return new FirstStageEntity(self,data)
   }
 
 
+  _launch?: LaunchEntity
+
+  // Idiomatic facade: `client.launch.list()` / `client.launch.load({ id })`.
+  get launch(): LaunchEntity {
+    return (this._launch ??= new LaunchEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.launch` instead. */
   Launch(data?: any) {
     const self = this
     return new LaunchEntity(self,data)
   }
 
 
+  _launch_vehicle?: LaunchVehicleEntity
+
+  // Idiomatic facade: `client.launch_vehicle.list()` / `client.launch_vehicle.load({ id })`.
+  get launch_vehicle(): LaunchVehicleEntity {
+    return (this._launch_vehicle ??= new LaunchVehicleEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.launch_vehicle` instead. */
   LaunchVehicle(data?: any) {
     const self = this
     return new LaunchVehicleEntity(self,data)
   }
 
 
+  _launcher?: LauncherEntity
+
+  // Idiomatic facade: `client.launcher.list()` / `client.launcher.load({ id })`.
+  get launcher(): LauncherEntity {
+    return (this._launcher ??= new LauncherEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.launcher` instead. */
   Launcher(data?: any) {
     const self = this
     return new LauncherEntity(self,data)
   }
 
 
+  _location?: LocationEntity
+
+  // Idiomatic facade: `client.location.list()` / `client.location.load({ id })`.
+  get location(): LocationEntity {
+    return (this._location ??= new LocationEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.location` instead. */
   Location(data?: any) {
     const self = this
     return new LocationEntity(self,data)
   }
 
 
+  _pad?: PadEntity
+
+  // Idiomatic facade: `client.pad.list()` / `client.pad.load({ id })`.
+  get pad(): PadEntity {
+    return (this._pad ??= new PadEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.pad` instead. */
   Pad(data?: any) {
     const self = this
     return new PadEntity(self,data)
   }
 
 
+  _reusable_first_stage?: ReusableFirstStageEntity
+
+  // Idiomatic facade: `client.reusable_first_stage.list()` / `client.reusable_first_stage.load({ id })`.
+  get reusable_first_stage(): ReusableFirstStageEntity {
+    return (this._reusable_first_stage ??= new ReusableFirstStageEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.reusable_first_stage` instead. */
   ReusableFirstStage(data?: any) {
     const self = this
     return new ReusableFirstStageEntity(self,data)
   }
 
 
+  _space_station?: SpaceStationEntity
+
+  // Idiomatic facade: `client.space_station.list()` / `client.space_station.load({ id })`.
+  get space_station(): SpaceStationEntity {
+    return (this._space_station ??= new SpaceStationEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.space_station` instead. */
   SpaceStation(data?: any) {
     const self = this
     return new SpaceStationEntity(self,data)
   }
 
 
+  _spacecraft?: SpacecraftEntity
+
+  // Idiomatic facade: `client.spacecraft.list()` / `client.spacecraft.load({ id })`.
+  get spacecraft(): SpacecraftEntity {
+    return (this._spacecraft ??= new SpacecraftEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.spacecraft` instead. */
   Spacecraft(data?: any) {
     const self = this
     return new SpacecraftEntity(self,data)

@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch SpacecraftLoadMatch
+---@param ctrl? table
+---@return Spacecraft
+---@return string? err
 function SpacecraftEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch SpacecraftListMatch
+---@param ctrl? table
+---@return Spacecraft[]
+---@return string? err
 function SpacecraftEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

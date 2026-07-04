@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Astronaut,
+  AstronautLoadMatch,
+  AstronautListMatch,
+} from '../LaunchLibrary2Types'
 
 // TODO: needs Entity superclass
-class AstronautEntity extends LaunchLibrary2EntityBase {
+class AstronautEntity extends LaunchLibrary2EntityBase<Astronaut> {
 
   constructor(client: LaunchLibrary2SDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class AstronautEntity extends LaunchLibrary2EntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: AstronautLoadMatch, ctrl?: Control): Promise<Astronaut> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class AstronautEntity extends LaunchLibrary2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Astronaut> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: AstronautListMatch, ctrl?: Control): Promise<Astronaut[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class AstronautEntity extends LaunchLibrary2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Astronaut[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

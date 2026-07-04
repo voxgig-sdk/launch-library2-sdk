@@ -43,16 +43,14 @@ class DockingEventEntityTest < Minitest::Test
     docking_event_ref01_ent = client.DockingEvent(nil)
     docking_event_ref01_match = {}
 
-    docking_event_ref01_list_result, err = docking_event_ref01_ent.list(docking_event_ref01_match, nil)
-    assert_nil err
+    docking_event_ref01_list_result = docking_event_ref01_ent.list(docking_event_ref01_match, nil)
     assert docking_event_ref01_list_result.is_a?(Array)
 
     # LOAD
     docking_event_ref01_match_dt0 = {
       "id" => docking_event_ref01_data["id"],
     }
-    docking_event_ref01_data_dt0_loaded, err = docking_event_ref01_ent.load(docking_event_ref01_match_dt0, nil)
-    assert_nil err
+    docking_event_ref01_data_dt0_loaded = docking_event_ref01_ent.load(docking_event_ref01_match_dt0, nil)
     docking_event_ref01_data_dt0_load_result = Helpers.to_map(docking_event_ref01_data_dt0_loaded)
     assert !docking_event_ref01_data_dt0_load_result.nil?
     assert_equal docking_event_ref01_data_dt0_load_result["id"], docking_event_ref01_data["id"]
@@ -93,7 +91,6 @@ def docking_event_basic_setup(extra)
     "LAUNCHLIBRARY__TEST_DOCKING_EVENT_ENTID" => idmap,
     "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
     "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-    "LAUNCHLIBRARY__APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def docking_event_basic_setup(extra)
   if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LAUNCHLIBRARY__APIKEY"],
       },
       extra || {},
     ])

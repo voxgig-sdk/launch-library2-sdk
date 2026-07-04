@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch LaunchVehicleListMatch
+---@param ctrl? table
+---@return LaunchVehicle[]
+---@return string? err
 function LaunchVehicleEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

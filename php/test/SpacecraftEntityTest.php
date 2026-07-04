@@ -50,16 +50,14 @@ class SpacecraftEntityTest extends TestCase
         $spacecraft_ref01_ent = $client->Spacecraft(null);
         $spacecraft_ref01_match = [];
 
-        [$spacecraft_ref01_list_result, $err] = $spacecraft_ref01_ent->list($spacecraft_ref01_match, null);
-        $this->assertNull($err);
+        $spacecraft_ref01_list_result = $spacecraft_ref01_ent->list($spacecraft_ref01_match, null);
         $this->assertIsArray($spacecraft_ref01_list_result);
 
         // LOAD
         $spacecraft_ref01_match_dt0 = [
             "id" => $spacecraft_ref01_data["id"],
         ];
-        [$spacecraft_ref01_data_dt0_loaded, $err] = $spacecraft_ref01_ent->load($spacecraft_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $spacecraft_ref01_data_dt0_loaded = $spacecraft_ref01_ent->load($spacecraft_ref01_match_dt0, null);
         $spacecraft_ref01_data_dt0_load_result = Helpers::to_map($spacecraft_ref01_data_dt0_loaded);
         $this->assertNotNull($spacecraft_ref01_data_dt0_load_result);
         $this->assertEquals($spacecraft_ref01_data_dt0_load_result["id"], $spacecraft_ref01_data["id"]);
@@ -96,7 +94,6 @@ function spacecraft_basic_setup($extra)
         "LAUNCHLIBRARY__TEST_SPACECRAFT_ENTID" => $idmap,
         "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-        "LAUNCHLIBRARY__APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function spacecraft_basic_setup($extra)
     if ($env["LAUNCHLIBRARY__TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["LAUNCHLIBRARY__APIKEY"],
             ],
             $extra ?? [],
         ]);

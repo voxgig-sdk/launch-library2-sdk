@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Agency,
+  AgencyLoadMatch,
+  AgencyListMatch,
+} from '../LaunchLibrary2Types'
 
 // TODO: needs Entity superclass
-class AgencyEntity extends LaunchLibrary2EntityBase {
+class AgencyEntity extends LaunchLibrary2EntityBase<Agency> {
 
   constructor(client: LaunchLibrary2SDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class AgencyEntity extends LaunchLibrary2EntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: AgencyLoadMatch, ctrl?: Control): Promise<Agency> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class AgencyEntity extends LaunchLibrary2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Agency> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: AgencyListMatch, ctrl?: Control): Promise<Agency[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class AgencyEntity extends LaunchLibrary2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Agency[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

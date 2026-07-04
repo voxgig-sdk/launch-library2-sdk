@@ -14,9 +14,12 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  ReusableFirstStage,
+} from '../LaunchLibrary2Types'
 
 // TODO: needs Entity superclass
-class ReusableFirstStageEntity extends LaunchLibrary2EntityBase {
+class ReusableFirstStageEntity extends LaunchLibrary2EntityBase<ReusableFirstStage> {
 
   constructor(client: LaunchLibrary2SDK, entopts: any) {
     super(client, entopts)

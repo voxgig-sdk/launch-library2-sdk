@@ -50,16 +50,14 @@ class TestPadEntity:
         pad_ref01_ent = client.Pad(None)
         pad_ref01_match = {}
 
-        pad_ref01_list_result, err = pad_ref01_ent.list(pad_ref01_match, None)
-        assert err is None
+        pad_ref01_list_result = pad_ref01_ent.list(pad_ref01_match, None)
         assert isinstance(pad_ref01_list_result, list)
 
         # LOAD
         pad_ref01_match_dt0 = {
             "id": pad_ref01_data["id"],
         }
-        pad_ref01_data_dt0_loaded, err = pad_ref01_ent.load(pad_ref01_match_dt0, None)
-        assert err is None
+        pad_ref01_data_dt0_loaded = pad_ref01_ent.load(pad_ref01_match_dt0, None)
         pad_ref01_data_dt0_load_result = helpers.to_map(pad_ref01_data_dt0_loaded)
         assert pad_ref01_data_dt0_load_result is not None
         assert pad_ref01_data_dt0_load_result["id"] == pad_ref01_data["id"]
@@ -102,7 +100,6 @@ def _pad_basic_setup(extra):
         "LAUNCHLIBRARY__TEST_PAD_ENTID": idmap,
         "LAUNCHLIBRARY__TEST_LIVE": "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN": "FALSE",
-        "LAUNCHLIBRARY__APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _pad_basic_setup(extra):
     if env.get("LAUNCHLIBRARY__TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LAUNCHLIBRARY__APIKEY"),
             },
             extra or {},
         ])

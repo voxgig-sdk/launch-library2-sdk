@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch SpaceStationLoadMatch
+---@param ctrl? table
+---@return SpaceStation
+---@return string? err
 function SpaceStationEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch SpaceStationListMatch
+---@param ctrl? table
+---@return SpaceStation[]
+---@return string? err
 function SpaceStationEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Launcher,
+  LauncherLoadMatch,
+} from '../LaunchLibrary2Types'
 
 // TODO: needs Entity superclass
-class LauncherEntity extends LaunchLibrary2EntityBase {
+class LauncherEntity extends LaunchLibrary2EntityBase<Launcher> {
 
   constructor(client: LaunchLibrary2SDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class LauncherEntity extends LaunchLibrary2EntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: LauncherLoadMatch, ctrl?: Control): Promise<Launcher> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class LauncherEntity extends LaunchLibrary2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Launcher> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

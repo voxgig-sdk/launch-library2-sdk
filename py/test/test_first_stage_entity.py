@@ -50,16 +50,14 @@ class TestFirstStageEntity:
         first_stage_ref01_ent = client.FirstStage(None)
         first_stage_ref01_match = {}
 
-        first_stage_ref01_list_result, err = first_stage_ref01_ent.list(first_stage_ref01_match, None)
-        assert err is None
+        first_stage_ref01_list_result = first_stage_ref01_ent.list(first_stage_ref01_match, None)
         assert isinstance(first_stage_ref01_list_result, list)
 
         # LOAD
         first_stage_ref01_match_dt0 = {
             "id": first_stage_ref01_data["id"],
         }
-        first_stage_ref01_data_dt0_loaded, err = first_stage_ref01_ent.load(first_stage_ref01_match_dt0, None)
-        assert err is None
+        first_stage_ref01_data_dt0_loaded = first_stage_ref01_ent.load(first_stage_ref01_match_dt0, None)
         first_stage_ref01_data_dt0_load_result = helpers.to_map(first_stage_ref01_data_dt0_loaded)
         assert first_stage_ref01_data_dt0_load_result is not None
         assert first_stage_ref01_data_dt0_load_result["id"] == first_stage_ref01_data["id"]
@@ -102,7 +100,6 @@ def _first_stage_basic_setup(extra):
         "LAUNCHLIBRARY__TEST_FIRST_STAGE_ENTID": idmap,
         "LAUNCHLIBRARY__TEST_LIVE": "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN": "FALSE",
-        "LAUNCHLIBRARY__APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _first_stage_basic_setup(extra):
     if env.get("LAUNCHLIBRARY__TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LAUNCHLIBRARY__APIKEY"),
             },
             extra or {},
         ])

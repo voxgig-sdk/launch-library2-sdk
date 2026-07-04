@@ -43,16 +43,14 @@ class SpacecraftEntityTest < Minitest::Test
     spacecraft_ref01_ent = client.Spacecraft(nil)
     spacecraft_ref01_match = {}
 
-    spacecraft_ref01_list_result, err = spacecraft_ref01_ent.list(spacecraft_ref01_match, nil)
-    assert_nil err
+    spacecraft_ref01_list_result = spacecraft_ref01_ent.list(spacecraft_ref01_match, nil)
     assert spacecraft_ref01_list_result.is_a?(Array)
 
     # LOAD
     spacecraft_ref01_match_dt0 = {
       "id" => spacecraft_ref01_data["id"],
     }
-    spacecraft_ref01_data_dt0_loaded, err = spacecraft_ref01_ent.load(spacecraft_ref01_match_dt0, nil)
-    assert_nil err
+    spacecraft_ref01_data_dt0_loaded = spacecraft_ref01_ent.load(spacecraft_ref01_match_dt0, nil)
     spacecraft_ref01_data_dt0_load_result = Helpers.to_map(spacecraft_ref01_data_dt0_loaded)
     assert !spacecraft_ref01_data_dt0_load_result.nil?
     assert_equal spacecraft_ref01_data_dt0_load_result["id"], spacecraft_ref01_data["id"]
@@ -93,7 +91,6 @@ def spacecraft_basic_setup(extra)
     "LAUNCHLIBRARY__TEST_SPACECRAFT_ENTID" => idmap,
     "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
     "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-    "LAUNCHLIBRARY__APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def spacecraft_basic_setup(extra)
   if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LAUNCHLIBRARY__APIKEY"],
       },
       extra || {},
     ])

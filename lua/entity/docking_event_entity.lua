@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch DockingEventLoadMatch
+---@param ctrl? table
+---@return DockingEvent
+---@return string? err
 function DockingEventEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch DockingEventListMatch
+---@param ctrl? table
+---@return DockingEvent[]
+---@return string? err
 function DockingEventEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

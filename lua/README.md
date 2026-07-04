@@ -9,12 +9,9 @@ The Lua SDK for the LaunchLibrary2 API — an entity-oriented client using Lua c
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-launch-library2
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/launch-library2-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("launch-library2_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("LAUNCH-LIBRARY2_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 2. List agencys
 
 ```lua
-local result, err = client:Agency():list()
+local result, err = client:agency():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -50,10 +45,10 @@ if type(result) == "table" then
 end
 ```
 
-### 3. Load a agency
+### 3. Load an agency
 
 ```lua
-local result, err = client:Agency():load({ id = "example_id" })
+local result, err = client:agency():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -101,7 +96,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:LaunchLibrary2():load({ id = "test01" })
+local result, err = client:agency():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -134,8 +129,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-LAUNCH-LIBRARY2_TEST_LIVE=TRUE
-LAUNCH-LIBRARY2_APIKEY=<your-key>
+LAUNCH_LIBRARY2_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -158,7 +152,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -529,7 +522,7 @@ API path: `/config/spacecraft`
 
 ### Agency
 
-Create an instance: `const agency = client.Agency()`
+Create an instance: `const agency = client.agency`
 
 #### Operations
 
@@ -556,19 +549,19 @@ Create an instance: `const agency = client.Agency()`
 #### Example: Load
 
 ```ts
-const agency = await client.Agency().load({ id: 'agency_id' })
+const agency = await client.agency.load({ id: 'agency_id' })
 ```
 
 #### Example: List
 
 ```ts
-const agencys = await client.Agency().list()
+const agencys = await client.agency.list()
 ```
 
 
 ### Astronaut
 
-Create an instance: `const astronaut = client.Astronaut()`
+Create an instance: `const astronaut = client.astronaut`
 
 #### Operations
 
@@ -597,24 +590,24 @@ Create an instance: `const astronaut = client.Astronaut()`
 #### Example: Load
 
 ```ts
-const astronaut = await client.Astronaut().load({ id: 'astronaut_id' })
+const astronaut = await client.astronaut.load({ id: 'astronaut_id' })
 ```
 
 #### Example: List
 
 ```ts
-const astronauts = await client.Astronaut().list()
+const astronauts = await client.astronaut.list()
 ```
 
 
 ### Docking
 
-Create an instance: `const docking = client.Docking()`
+Create an instance: `const docking = client.docking`
 
 
 ### DockingEvent
 
-Create an instance: `const docking_event = client.DockingEvent()`
+Create an instance: `const docking_event = client.docking_event`
 
 #### Operations
 
@@ -637,19 +630,19 @@ Create an instance: `const docking_event = client.DockingEvent()`
 #### Example: Load
 
 ```ts
-const docking_event = await client.DockingEvent().load({ id: 'docking_event_id' })
+const docking_event = await client.docking_event.load({ id: 'docking_event_id' })
 ```
 
 #### Example: List
 
 ```ts
-const docking_events = await client.DockingEvent().list()
+const docking_events = await client.docking_event.list()
 ```
 
 
 ### Event
 
-Create an instance: `const event = client.Event()`
+Create an instance: `const event = client.event`
 
 #### Operations
 
@@ -676,19 +669,19 @@ Create an instance: `const event = client.Event()`
 #### Example: Load
 
 ```ts
-const event = await client.Event().load({ id: 'event_id' })
+const event = await client.event.load({ id: 'event_id' })
 ```
 
 #### Example: List
 
 ```ts
-const events = await client.Event().list()
+const events = await client.event.list()
 ```
 
 
 ### Expedition
 
-Create an instance: `const expedition = client.Expedition()`
+Create an instance: `const expedition = client.expedition`
 
 #### Operations
 
@@ -712,19 +705,19 @@ Create an instance: `const expedition = client.Expedition()`
 #### Example: Load
 
 ```ts
-const expedition = await client.Expedition().load({ id: 'expedition_id' })
+const expedition = await client.expedition.load({ id: 'expedition_id' })
 ```
 
 #### Example: List
 
 ```ts
-const expeditions = await client.Expedition().list()
+const expeditions = await client.expedition.list()
 ```
 
 
 ### FirstStage
 
-Create an instance: `const first_stage = client.FirstStage()`
+Create an instance: `const first_stage = client.first_stage`
 
 #### Operations
 
@@ -748,19 +741,19 @@ Create an instance: `const first_stage = client.FirstStage()`
 #### Example: Load
 
 ```ts
-const first_stage = await client.FirstStage().load({ id: 'first_stage_id' })
+const first_stage = await client.first_stage.load({ id: 'first_stage_id' })
 ```
 
 #### Example: List
 
 ```ts
-const first_stages = await client.FirstStage().list()
+const first_stages = await client.first_stage.list()
 ```
 
 
 ### Launch
 
-Create an instance: `const launch = client.Launch()`
+Create an instance: `const launch = client.launch`
 
 #### Operations
 
@@ -791,19 +784,19 @@ Create an instance: `const launch = client.Launch()`
 #### Example: Load
 
 ```ts
-const launch = await client.Launch().load({ id: 'launch_id' })
+const launch = await client.launch.load({ id: 'launch_id' })
 ```
 
 #### Example: List
 
 ```ts
-const launchs = await client.Launch().list()
+const launchs = await client.launch.list()
 ```
 
 
 ### LaunchVehicle
 
-Create an instance: `const launch_vehicle = client.LaunchVehicle()`
+Create an instance: `const launch_vehicle = client.launch_vehicle`
 
 #### Operations
 
@@ -841,13 +834,13 @@ Create an instance: `const launch_vehicle = client.LaunchVehicle()`
 #### Example: List
 
 ```ts
-const launch_vehicles = await client.LaunchVehicle().list()
+const launch_vehicles = await client.launch_vehicle.list()
 ```
 
 
 ### Launcher
 
-Create an instance: `const launcher = client.Launcher()`
+Create an instance: `const launcher = client.launcher`
 
 #### Operations
 
@@ -885,13 +878,13 @@ Create an instance: `const launcher = client.Launcher()`
 #### Example: Load
 
 ```ts
-const launcher = await client.Launcher().load({ id: 'launcher_id' })
+const launcher = await client.launcher.load({ id: 'launcher_id' })
 ```
 
 
 ### Location
 
-Create an instance: `const location = client.Location()`
+Create an instance: `const location = client.location`
 
 #### Operations
 
@@ -915,19 +908,19 @@ Create an instance: `const location = client.Location()`
 #### Example: Load
 
 ```ts
-const location = await client.Location().load({ id: 'location_id' })
+const location = await client.location.load({ id: 'location_id' })
 ```
 
 #### Example: List
 
 ```ts
-const locations = await client.Location().list()
+const locations = await client.location.list()
 ```
 
 
 ### Pad
 
-Create an instance: `const pad = client.Pad()`
+Create an instance: `const pad = client.pad`
 
 #### Operations
 
@@ -956,24 +949,24 @@ Create an instance: `const pad = client.Pad()`
 #### Example: Load
 
 ```ts
-const pad = await client.Pad().load({ id: 'pad_id' })
+const pad = await client.pad.load({ id: 'pad_id' })
 ```
 
 #### Example: List
 
 ```ts
-const pads = await client.Pad().list()
+const pads = await client.pad.list()
 ```
 
 
 ### ReusableFirstStage
 
-Create an instance: `const reusable_first_stage = client.ReusableFirstStage()`
+Create an instance: `const reusable_first_stage = client.reusable_first_stage`
 
 
 ### SpaceStation
 
-Create an instance: `const space_station = client.SpaceStation()`
+Create an instance: `const space_station = client.space_station`
 
 #### Operations
 
@@ -1001,19 +994,19 @@ Create an instance: `const space_station = client.SpaceStation()`
 #### Example: Load
 
 ```ts
-const space_station = await client.SpaceStation().load({ id: 'space_station_id' })
+const space_station = await client.space_station.load({ id: 'space_station_id' })
 ```
 
 #### Example: List
 
 ```ts
-const space_stations = await client.SpaceStation().list()
+const space_stations = await client.space_station.list()
 ```
 
 
 ### Spacecraft
 
-Create an instance: `const spacecraft = client.Spacecraft()`
+Create an instance: `const spacecraft = client.spacecraft`
 
 #### Operations
 
@@ -1045,13 +1038,13 @@ Create an instance: `const spacecraft = client.Spacecraft()`
 #### Example: Load
 
 ```ts
-const spacecraft = await client.Spacecraft().load({ id: 'spacecraft_id' })
+const spacecraft = await client.spacecraft.load({ id: 'spacecraft_id' })
 ```
 
 #### Example: List
 
 ```ts
-const spacecrafts = await client.Spacecraft().list()
+const spacecrafts = await client.spacecraft.list()
 ```
 
 
@@ -1126,11 +1119,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local agency = client:agency()
+agency:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- agency:data_get() now returns the loaded agency data
+-- agency:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

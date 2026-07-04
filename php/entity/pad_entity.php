@@ -55,6 +55,9 @@ class PadEntity
         return new PadEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Pad|array $args Pad data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class PadEntity
         }
     }
 
+    /**
+     * @return Pad|array The current Pad data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Pad fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class PadEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Pad fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class PadEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single Pad.
+     *
+     * @param PadLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed PadLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Pad|array The loaded Pad as an assoc-array at the
+     *   SDK boundary; throws LaunchLibrary2Error on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -110,7 +131,16 @@ class PadEntity
 
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List Pad items matching the given filter.
+     *
+     * @param PadListMatch|array|null $reqmatch Match filter (any subset
+     *   of Pad fields) as an assoc-array; PadListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Pad[]|array A list of Pad items as assoc-arrays at
+     *   the SDK boundary; throws LaunchLibrary2Error on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -138,7 +168,7 @@ class PadEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

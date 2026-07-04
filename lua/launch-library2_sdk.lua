@@ -244,90 +244,285 @@ end
 
 
 
+-- Idiomatic facade: client:agency():list() / client:agency():load({ id = ... })
+function LaunchLibrary2SDK:agency(data)
+  local EntityMod = require("entity.agency_entity")
+  if data == nil then
+    if self._agency == nil then
+      self._agency = EntityMod.new(self, nil)
+    end
+    return self._agency
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:agency() instead.
 function LaunchLibrary2SDK:Agency(data)
   local EntityMod = require("entity.agency_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:astronaut():list() / client:astronaut():load({ id = ... })
+function LaunchLibrary2SDK:astronaut(data)
+  local EntityMod = require("entity.astronaut_entity")
+  if data == nil then
+    if self._astronaut == nil then
+      self._astronaut = EntityMod.new(self, nil)
+    end
+    return self._astronaut
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:astronaut() instead.
 function LaunchLibrary2SDK:Astronaut(data)
   local EntityMod = require("entity.astronaut_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:docking():list() / client:docking():load({ id = ... })
+function LaunchLibrary2SDK:docking(data)
+  local EntityMod = require("entity.docking_entity")
+  if data == nil then
+    if self._docking == nil then
+      self._docking = EntityMod.new(self, nil)
+    end
+    return self._docking
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:docking() instead.
 function LaunchLibrary2SDK:Docking(data)
   local EntityMod = require("entity.docking_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:docking_event():list() / client:docking_event():load({ id = ... })
+function LaunchLibrary2SDK:docking_event(data)
+  local EntityMod = require("entity.docking_event_entity")
+  if data == nil then
+    if self._docking_event == nil then
+      self._docking_event = EntityMod.new(self, nil)
+    end
+    return self._docking_event
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:docking_event() instead.
 function LaunchLibrary2SDK:DockingEvent(data)
   local EntityMod = require("entity.docking_event_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:event():list() / client:event():load({ id = ... })
+function LaunchLibrary2SDK:event(data)
+  local EntityMod = require("entity.event_entity")
+  if data == nil then
+    if self._event == nil then
+      self._event = EntityMod.new(self, nil)
+    end
+    return self._event
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:event() instead.
 function LaunchLibrary2SDK:Event(data)
   local EntityMod = require("entity.event_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:expedition():list() / client:expedition():load({ id = ... })
+function LaunchLibrary2SDK:expedition(data)
+  local EntityMod = require("entity.expedition_entity")
+  if data == nil then
+    if self._expedition == nil then
+      self._expedition = EntityMod.new(self, nil)
+    end
+    return self._expedition
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:expedition() instead.
 function LaunchLibrary2SDK:Expedition(data)
   local EntityMod = require("entity.expedition_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:first_stage():list() / client:first_stage():load({ id = ... })
+function LaunchLibrary2SDK:first_stage(data)
+  local EntityMod = require("entity.first_stage_entity")
+  if data == nil then
+    if self._first_stage == nil then
+      self._first_stage = EntityMod.new(self, nil)
+    end
+    return self._first_stage
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:first_stage() instead.
 function LaunchLibrary2SDK:FirstStage(data)
   local EntityMod = require("entity.first_stage_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:launch():list() / client:launch():load({ id = ... })
+function LaunchLibrary2SDK:launch(data)
+  local EntityMod = require("entity.launch_entity")
+  if data == nil then
+    if self._launch == nil then
+      self._launch = EntityMod.new(self, nil)
+    end
+    return self._launch
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:launch() instead.
 function LaunchLibrary2SDK:Launch(data)
   local EntityMod = require("entity.launch_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:launch_vehicle():list() / client:launch_vehicle():load({ id = ... })
+function LaunchLibrary2SDK:launch_vehicle(data)
+  local EntityMod = require("entity.launch_vehicle_entity")
+  if data == nil then
+    if self._launch_vehicle == nil then
+      self._launch_vehicle = EntityMod.new(self, nil)
+    end
+    return self._launch_vehicle
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:launch_vehicle() instead.
 function LaunchLibrary2SDK:LaunchVehicle(data)
   local EntityMod = require("entity.launch_vehicle_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:launcher():list() / client:launcher():load({ id = ... })
+function LaunchLibrary2SDK:launcher(data)
+  local EntityMod = require("entity.launcher_entity")
+  if data == nil then
+    if self._launcher == nil then
+      self._launcher = EntityMod.new(self, nil)
+    end
+    return self._launcher
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:launcher() instead.
 function LaunchLibrary2SDK:Launcher(data)
   local EntityMod = require("entity.launcher_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:location():list() / client:location():load({ id = ... })
+function LaunchLibrary2SDK:location(data)
+  local EntityMod = require("entity.location_entity")
+  if data == nil then
+    if self._location == nil then
+      self._location = EntityMod.new(self, nil)
+    end
+    return self._location
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:location() instead.
 function LaunchLibrary2SDK:Location(data)
   local EntityMod = require("entity.location_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:pad():list() / client:pad():load({ id = ... })
+function LaunchLibrary2SDK:pad(data)
+  local EntityMod = require("entity.pad_entity")
+  if data == nil then
+    if self._pad == nil then
+      self._pad = EntityMod.new(self, nil)
+    end
+    return self._pad
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:pad() instead.
 function LaunchLibrary2SDK:Pad(data)
   local EntityMod = require("entity.pad_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:reusable_first_stage():list() / client:reusable_first_stage():load({ id = ... })
+function LaunchLibrary2SDK:reusable_first_stage(data)
+  local EntityMod = require("entity.reusable_first_stage_entity")
+  if data == nil then
+    if self._reusable_first_stage == nil then
+      self._reusable_first_stage = EntityMod.new(self, nil)
+    end
+    return self._reusable_first_stage
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:reusable_first_stage() instead.
 function LaunchLibrary2SDK:ReusableFirstStage(data)
   local EntityMod = require("entity.reusable_first_stage_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:space_station():list() / client:space_station():load({ id = ... })
+function LaunchLibrary2SDK:space_station(data)
+  local EntityMod = require("entity.space_station_entity")
+  if data == nil then
+    if self._space_station == nil then
+      self._space_station = EntityMod.new(self, nil)
+    end
+    return self._space_station
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:space_station() instead.
 function LaunchLibrary2SDK:SpaceStation(data)
   local EntityMod = require("entity.space_station_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:spacecraft():list() / client:spacecraft():load({ id = ... })
+function LaunchLibrary2SDK:spacecraft(data)
+  local EntityMod = require("entity.spacecraft_entity")
+  if data == nil then
+    if self._spacecraft == nil then
+      self._spacecraft = EntityMod.new(self, nil)
+    end
+    return self._spacecraft
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:spacecraft() instead.
 function LaunchLibrary2SDK:Spacecraft(data)
   local EntityMod = require("entity.spacecraft_entity")
   return EntityMod.new(self, data)

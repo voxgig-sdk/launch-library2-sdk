@@ -245,76 +245,121 @@ func (sdk *LaunchLibrary2SDK) Direct(fetchargs map[string]any) (map[string]any, 
 }
 
 
+// Agency returns a Agency entity bound to this client.
+// Idiomatic usage: client.Agency(nil).List(nil, nil) or
+// client.Agency(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) Agency(data map[string]any) LaunchLibrary2Entity {
 	return NewAgencyEntityFunc(sdk, data)
 }
 
 
+// Astronaut returns a Astronaut entity bound to this client.
+// Idiomatic usage: client.Astronaut(nil).List(nil, nil) or
+// client.Astronaut(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) Astronaut(data map[string]any) LaunchLibrary2Entity {
 	return NewAstronautEntityFunc(sdk, data)
 }
 
 
+// Docking returns a Docking entity bound to this client.
+// Idiomatic usage: client.Docking(nil).List(nil, nil) or
+// client.Docking(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) Docking(data map[string]any) LaunchLibrary2Entity {
 	return NewDockingEntityFunc(sdk, data)
 }
 
 
+// DockingEvent returns a DockingEvent entity bound to this client.
+// Idiomatic usage: client.DockingEvent(nil).List(nil, nil) or
+// client.DockingEvent(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) DockingEvent(data map[string]any) LaunchLibrary2Entity {
 	return NewDockingEventEntityFunc(sdk, data)
 }
 
 
+// Event returns a Event entity bound to this client.
+// Idiomatic usage: client.Event(nil).List(nil, nil) or
+// client.Event(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) Event(data map[string]any) LaunchLibrary2Entity {
 	return NewEventEntityFunc(sdk, data)
 }
 
 
+// Expedition returns a Expedition entity bound to this client.
+// Idiomatic usage: client.Expedition(nil).List(nil, nil) or
+// client.Expedition(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) Expedition(data map[string]any) LaunchLibrary2Entity {
 	return NewExpeditionEntityFunc(sdk, data)
 }
 
 
+// FirstStage returns a FirstStage entity bound to this client.
+// Idiomatic usage: client.FirstStage(nil).List(nil, nil) or
+// client.FirstStage(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) FirstStage(data map[string]any) LaunchLibrary2Entity {
 	return NewFirstStageEntityFunc(sdk, data)
 }
 
 
+// Launch returns a Launch entity bound to this client.
+// Idiomatic usage: client.Launch(nil).List(nil, nil) or
+// client.Launch(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) Launch(data map[string]any) LaunchLibrary2Entity {
 	return NewLaunchEntityFunc(sdk, data)
 }
 
 
+// LaunchVehicle returns a LaunchVehicle entity bound to this client.
+// Idiomatic usage: client.LaunchVehicle(nil).List(nil, nil) or
+// client.LaunchVehicle(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) LaunchVehicle(data map[string]any) LaunchLibrary2Entity {
 	return NewLaunchVehicleEntityFunc(sdk, data)
 }
 
 
+// Launcher returns a Launcher entity bound to this client.
+// Idiomatic usage: client.Launcher(nil).List(nil, nil) or
+// client.Launcher(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) Launcher(data map[string]any) LaunchLibrary2Entity {
 	return NewLauncherEntityFunc(sdk, data)
 }
 
 
+// Location returns a Location entity bound to this client.
+// Idiomatic usage: client.Location(nil).List(nil, nil) or
+// client.Location(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) Location(data map[string]any) LaunchLibrary2Entity {
 	return NewLocationEntityFunc(sdk, data)
 }
 
 
+// Pad returns a Pad entity bound to this client.
+// Idiomatic usage: client.Pad(nil).List(nil, nil) or
+// client.Pad(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) Pad(data map[string]any) LaunchLibrary2Entity {
 	return NewPadEntityFunc(sdk, data)
 }
 
 
+// ReusableFirstStage returns a ReusableFirstStage entity bound to this client.
+// Idiomatic usage: client.ReusableFirstStage(nil).List(nil, nil) or
+// client.ReusableFirstStage(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) ReusableFirstStage(data map[string]any) LaunchLibrary2Entity {
 	return NewReusableFirstStageEntityFunc(sdk, data)
 }
 
 
+// SpaceStation returns a SpaceStation entity bound to this client.
+// Idiomatic usage: client.SpaceStation(nil).List(nil, nil) or
+// client.SpaceStation(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) SpaceStation(data map[string]any) LaunchLibrary2Entity {
 	return NewSpaceStationEntityFunc(sdk, data)
 }
 
 
+// Spacecraft returns a Spacecraft entity bound to this client.
+// Idiomatic usage: client.Spacecraft(nil).List(nil, nil) or
+// client.Spacecraft(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) Spacecraft(data map[string]any) LaunchLibrary2Entity {
 	return NewSpacecraftEntityFunc(sdk, data)
 }

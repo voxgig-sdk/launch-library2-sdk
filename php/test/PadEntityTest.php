@@ -50,16 +50,14 @@ class PadEntityTest extends TestCase
         $pad_ref01_ent = $client->Pad(null);
         $pad_ref01_match = [];
 
-        [$pad_ref01_list_result, $err] = $pad_ref01_ent->list($pad_ref01_match, null);
-        $this->assertNull($err);
+        $pad_ref01_list_result = $pad_ref01_ent->list($pad_ref01_match, null);
         $this->assertIsArray($pad_ref01_list_result);
 
         // LOAD
         $pad_ref01_match_dt0 = [
             "id" => $pad_ref01_data["id"],
         ];
-        [$pad_ref01_data_dt0_loaded, $err] = $pad_ref01_ent->load($pad_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $pad_ref01_data_dt0_loaded = $pad_ref01_ent->load($pad_ref01_match_dt0, null);
         $pad_ref01_data_dt0_load_result = Helpers::to_map($pad_ref01_data_dt0_loaded);
         $this->assertNotNull($pad_ref01_data_dt0_load_result);
         $this->assertEquals($pad_ref01_data_dt0_load_result["id"], $pad_ref01_data["id"]);
@@ -96,7 +94,6 @@ function pad_basic_setup($extra)
         "LAUNCHLIBRARY__TEST_PAD_ENTID" => $idmap,
         "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-        "LAUNCHLIBRARY__APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function pad_basic_setup($extra)
     if ($env["LAUNCHLIBRARY__TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["LAUNCHLIBRARY__APIKEY"],
             ],
             $extra ?? [],
         ]);

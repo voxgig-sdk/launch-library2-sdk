@@ -50,16 +50,14 @@ class AgencyEntityTest extends TestCase
         $agency_ref01_ent = $client->Agency(null);
         $agency_ref01_match = [];
 
-        [$agency_ref01_list_result, $err] = $agency_ref01_ent->list($agency_ref01_match, null);
-        $this->assertNull($err);
+        $agency_ref01_list_result = $agency_ref01_ent->list($agency_ref01_match, null);
         $this->assertIsArray($agency_ref01_list_result);
 
         // LOAD
         $agency_ref01_match_dt0 = [
             "id" => $agency_ref01_data["id"],
         ];
-        [$agency_ref01_data_dt0_loaded, $err] = $agency_ref01_ent->load($agency_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $agency_ref01_data_dt0_loaded = $agency_ref01_ent->load($agency_ref01_match_dt0, null);
         $agency_ref01_data_dt0_load_result = Helpers::to_map($agency_ref01_data_dt0_loaded);
         $this->assertNotNull($agency_ref01_data_dt0_load_result);
         $this->assertEquals($agency_ref01_data_dt0_load_result["id"], $agency_ref01_data["id"]);
@@ -96,7 +94,6 @@ function agency_basic_setup($extra)
         "LAUNCHLIBRARY__TEST_AGENCY_ENTID" => $idmap,
         "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-        "LAUNCHLIBRARY__APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function agency_basic_setup($extra)
     if ($env["LAUNCHLIBRARY__TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["LAUNCHLIBRARY__APIKEY"],
             ],
             $extra ?? [],
         ]);

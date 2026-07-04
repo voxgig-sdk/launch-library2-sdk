@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  SpaceStation,
+  SpaceStationLoadMatch,
+  SpaceStationListMatch,
+} from '../LaunchLibrary2Types'
 
 // TODO: needs Entity superclass
-class SpaceStationEntity extends LaunchLibrary2EntityBase {
+class SpaceStationEntity extends LaunchLibrary2EntityBase<SpaceStation> {
 
   constructor(client: LaunchLibrary2SDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class SpaceStationEntity extends LaunchLibrary2EntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: SpaceStationLoadMatch, ctrl?: Control): Promise<SpaceStation> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class SpaceStationEntity extends LaunchLibrary2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<SpaceStation> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: SpaceStationListMatch, ctrl?: Control): Promise<SpaceStation[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class SpaceStationEntity extends LaunchLibrary2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<SpaceStation[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

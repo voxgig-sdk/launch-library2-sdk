@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  LaunchVehicle,
+  LaunchVehicleListMatch,
+} from '../LaunchLibrary2Types'
 
 // TODO: needs Entity superclass
-class LaunchVehicleEntity extends LaunchLibrary2EntityBase {
+class LaunchVehicleEntity extends LaunchLibrary2EntityBase<LaunchVehicle> {
 
   constructor(client: LaunchLibrary2SDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class LaunchVehicleEntity extends LaunchLibrary2EntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: LaunchVehicleListMatch, ctrl?: Control): Promise<LaunchVehicle[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class LaunchVehicleEntity extends LaunchLibrary2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<LaunchVehicle[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

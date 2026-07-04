@@ -50,16 +50,14 @@ class FirstStageEntityTest extends TestCase
         $first_stage_ref01_ent = $client->FirstStage(null);
         $first_stage_ref01_match = [];
 
-        [$first_stage_ref01_list_result, $err] = $first_stage_ref01_ent->list($first_stage_ref01_match, null);
-        $this->assertNull($err);
+        $first_stage_ref01_list_result = $first_stage_ref01_ent->list($first_stage_ref01_match, null);
         $this->assertIsArray($first_stage_ref01_list_result);
 
         // LOAD
         $first_stage_ref01_match_dt0 = [
             "id" => $first_stage_ref01_data["id"],
         ];
-        [$first_stage_ref01_data_dt0_loaded, $err] = $first_stage_ref01_ent->load($first_stage_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $first_stage_ref01_data_dt0_loaded = $first_stage_ref01_ent->load($first_stage_ref01_match_dt0, null);
         $first_stage_ref01_data_dt0_load_result = Helpers::to_map($first_stage_ref01_data_dt0_loaded);
         $this->assertNotNull($first_stage_ref01_data_dt0_load_result);
         $this->assertEquals($first_stage_ref01_data_dt0_load_result["id"], $first_stage_ref01_data["id"]);
@@ -96,7 +94,6 @@ function first_stage_basic_setup($extra)
         "LAUNCHLIBRARY__TEST_FIRST_STAGE_ENTID" => $idmap,
         "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-        "LAUNCHLIBRARY__APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function first_stage_basic_setup($extra)
     if ($env["LAUNCHLIBRARY__TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["LAUNCHLIBRARY__APIKEY"],
             ],
             $extra ?? [],
         ]);

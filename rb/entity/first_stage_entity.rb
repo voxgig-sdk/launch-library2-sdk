@@ -45,6 +45,7 @@ class FirstStageEntity
     end
   end
 
+  # @return [FirstStage, Hash] the current FirstStage data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class FirstStageEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of FirstStage fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single FirstStage.
+  #
+  # @param reqmatch [FirstStageLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [FirstStage, Hash] the loaded FirstStage; raises LaunchLibrary2Error on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class FirstStageEntity
 
 
   
+  # List FirstStage items matching the given filter.
+  #
+  # @param reqmatch [FirstStageListMatch, Hash, nil] match filter (any subset of FirstStage fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<FirstStage>, Array] the matching FirstStage items; raises LaunchLibrary2Error on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

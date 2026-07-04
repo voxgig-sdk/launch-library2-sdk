@@ -50,16 +50,14 @@ class TestAstronautEntity:
         astronaut_ref01_ent = client.Astronaut(None)
         astronaut_ref01_match = {}
 
-        astronaut_ref01_list_result, err = astronaut_ref01_ent.list(astronaut_ref01_match, None)
-        assert err is None
+        astronaut_ref01_list_result = astronaut_ref01_ent.list(astronaut_ref01_match, None)
         assert isinstance(astronaut_ref01_list_result, list)
 
         # LOAD
         astronaut_ref01_match_dt0 = {
             "id": astronaut_ref01_data["id"],
         }
-        astronaut_ref01_data_dt0_loaded, err = astronaut_ref01_ent.load(astronaut_ref01_match_dt0, None)
-        assert err is None
+        astronaut_ref01_data_dt0_loaded = astronaut_ref01_ent.load(astronaut_ref01_match_dt0, None)
         astronaut_ref01_data_dt0_load_result = helpers.to_map(astronaut_ref01_data_dt0_loaded)
         assert astronaut_ref01_data_dt0_load_result is not None
         assert astronaut_ref01_data_dt0_load_result["id"] == astronaut_ref01_data["id"]
@@ -102,7 +100,6 @@ def _astronaut_basic_setup(extra):
         "LAUNCHLIBRARY__TEST_ASTRONAUT_ENTID": idmap,
         "LAUNCHLIBRARY__TEST_LIVE": "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN": "FALSE",
-        "LAUNCHLIBRARY__APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _astronaut_basic_setup(extra):
     if env.get("LAUNCHLIBRARY__TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LAUNCHLIBRARY__APIKEY"),
             },
             extra or {},
         ])

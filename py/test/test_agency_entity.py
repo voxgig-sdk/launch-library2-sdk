@@ -50,16 +50,14 @@ class TestAgencyEntity:
         agency_ref01_ent = client.Agency(None)
         agency_ref01_match = {}
 
-        agency_ref01_list_result, err = agency_ref01_ent.list(agency_ref01_match, None)
-        assert err is None
+        agency_ref01_list_result = agency_ref01_ent.list(agency_ref01_match, None)
         assert isinstance(agency_ref01_list_result, list)
 
         # LOAD
         agency_ref01_match_dt0 = {
             "id": agency_ref01_data["id"],
         }
-        agency_ref01_data_dt0_loaded, err = agency_ref01_ent.load(agency_ref01_match_dt0, None)
-        assert err is None
+        agency_ref01_data_dt0_loaded = agency_ref01_ent.load(agency_ref01_match_dt0, None)
         agency_ref01_data_dt0_load_result = helpers.to_map(agency_ref01_data_dt0_loaded)
         assert agency_ref01_data_dt0_load_result is not None
         assert agency_ref01_data_dt0_load_result["id"] == agency_ref01_data["id"]
@@ -102,7 +100,6 @@ def _agency_basic_setup(extra):
         "LAUNCHLIBRARY__TEST_AGENCY_ENTID": idmap,
         "LAUNCHLIBRARY__TEST_LIVE": "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN": "FALSE",
-        "LAUNCHLIBRARY__APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _agency_basic_setup(extra):
     if env.get("LAUNCHLIBRARY__TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LAUNCHLIBRARY__APIKEY"),
             },
             extra or {},
         ])

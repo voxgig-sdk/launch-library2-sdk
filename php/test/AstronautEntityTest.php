@@ -50,16 +50,14 @@ class AstronautEntityTest extends TestCase
         $astronaut_ref01_ent = $client->Astronaut(null);
         $astronaut_ref01_match = [];
 
-        [$astronaut_ref01_list_result, $err] = $astronaut_ref01_ent->list($astronaut_ref01_match, null);
-        $this->assertNull($err);
+        $astronaut_ref01_list_result = $astronaut_ref01_ent->list($astronaut_ref01_match, null);
         $this->assertIsArray($astronaut_ref01_list_result);
 
         // LOAD
         $astronaut_ref01_match_dt0 = [
             "id" => $astronaut_ref01_data["id"],
         ];
-        [$astronaut_ref01_data_dt0_loaded, $err] = $astronaut_ref01_ent->load($astronaut_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $astronaut_ref01_data_dt0_loaded = $astronaut_ref01_ent->load($astronaut_ref01_match_dt0, null);
         $astronaut_ref01_data_dt0_load_result = Helpers::to_map($astronaut_ref01_data_dt0_loaded);
         $this->assertNotNull($astronaut_ref01_data_dt0_load_result);
         $this->assertEquals($astronaut_ref01_data_dt0_load_result["id"], $astronaut_ref01_data["id"]);
@@ -96,7 +94,6 @@ function astronaut_basic_setup($extra)
         "LAUNCHLIBRARY__TEST_ASTRONAUT_ENTID" => $idmap,
         "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-        "LAUNCHLIBRARY__APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function astronaut_basic_setup($extra)
     if ($env["LAUNCHLIBRARY__TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["LAUNCHLIBRARY__APIKEY"],
             ],
             $extra ?? [],
         ]);

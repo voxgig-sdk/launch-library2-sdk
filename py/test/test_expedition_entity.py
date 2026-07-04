@@ -50,16 +50,14 @@ class TestExpeditionEntity:
         expedition_ref01_ent = client.Expedition(None)
         expedition_ref01_match = {}
 
-        expedition_ref01_list_result, err = expedition_ref01_ent.list(expedition_ref01_match, None)
-        assert err is None
+        expedition_ref01_list_result = expedition_ref01_ent.list(expedition_ref01_match, None)
         assert isinstance(expedition_ref01_list_result, list)
 
         # LOAD
         expedition_ref01_match_dt0 = {
             "id": expedition_ref01_data["id"],
         }
-        expedition_ref01_data_dt0_loaded, err = expedition_ref01_ent.load(expedition_ref01_match_dt0, None)
-        assert err is None
+        expedition_ref01_data_dt0_loaded = expedition_ref01_ent.load(expedition_ref01_match_dt0, None)
         expedition_ref01_data_dt0_load_result = helpers.to_map(expedition_ref01_data_dt0_loaded)
         assert expedition_ref01_data_dt0_load_result is not None
         assert expedition_ref01_data_dt0_load_result["id"] == expedition_ref01_data["id"]
@@ -102,7 +100,6 @@ def _expedition_basic_setup(extra):
         "LAUNCHLIBRARY__TEST_EXPEDITION_ENTID": idmap,
         "LAUNCHLIBRARY__TEST_LIVE": "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN": "FALSE",
-        "LAUNCHLIBRARY__APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _expedition_basic_setup(extra):
     if env.get("LAUNCHLIBRARY__TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LAUNCHLIBRARY__APIKEY"),
             },
             extra or {},
         ])

@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch PadLoadMatch
+---@param ctrl? table
+---@return Pad
+---@return string? err
 function PadEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch PadListMatch
+---@param ctrl? table
+---@return Pad[]
+---@return string? err
 function PadEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

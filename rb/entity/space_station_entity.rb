@@ -45,6 +45,7 @@ class SpaceStationEntity
     end
   end
 
+  # @return [SpaceStation, Hash] the current SpaceStation data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class SpaceStationEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of SpaceStation fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single SpaceStation.
+  #
+  # @param reqmatch [SpaceStationLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [SpaceStation, Hash] the loaded SpaceStation; raises LaunchLibrary2Error on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class SpaceStationEntity
 
 
   
+  # List SpaceStation items matching the given filter.
+  #
+  # @param reqmatch [SpaceStationListMatch, Hash, nil] match filter (any subset of SpaceStation fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<SpaceStation>, Array] the matching SpaceStation items; raises LaunchLibrary2Error on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

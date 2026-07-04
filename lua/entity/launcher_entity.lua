@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch LauncherLoadMatch
+---@param ctrl? table
+---@return Launcher
+---@return string? err
 function LauncherEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

@@ -51,8 +51,7 @@ class TestLauncherEntity:
         launcher_ref01_match_dt0 = {
             "id": launcher_ref01_data["id"],
         }
-        launcher_ref01_data_dt0_loaded, err = launcher_ref01_ent.load(launcher_ref01_match_dt0, None)
-        assert err is None
+        launcher_ref01_data_dt0_loaded = launcher_ref01_ent.load(launcher_ref01_match_dt0, None)
         launcher_ref01_data_dt0_load_result = helpers.to_map(launcher_ref01_data_dt0_loaded)
         assert launcher_ref01_data_dt0_load_result is not None
         assert launcher_ref01_data_dt0_load_result["id"] == launcher_ref01_data["id"]
@@ -95,7 +94,6 @@ def _launcher_basic_setup(extra):
         "LAUNCHLIBRARY__TEST_LAUNCHER_ENTID": idmap,
         "LAUNCHLIBRARY__TEST_LIVE": "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN": "FALSE",
-        "LAUNCHLIBRARY__APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -106,7 +104,6 @@ def _launcher_basic_setup(extra):
     if env.get("LAUNCHLIBRARY__TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LAUNCHLIBRARY__APIKEY"),
             },
             extra or {},
         ])

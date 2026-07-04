@@ -103,7 +103,7 @@ class LaunchLibrary2SDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class LaunchLibrary2SDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class LaunchLibrary2SDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,122 +216,287 @@ class LaunchLibrary2SDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Agency($data = null)
+    private $_agency = null;
+
+    // Idiomatic facade: $client->agency()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Agency() (PHP method
+    // names are case-insensitive).
+    public function agency($data = null)
     {
         require_once __DIR__ . '/entity/agency_entity.php';
+        if ($data === null) {
+            if ($this->_agency === null) {
+                $this->_agency = new AgencyEntity($this, null);
+            }
+            return $this->_agency;
+        }
         return new AgencyEntity($this, $data);
     }
 
 
-    public function Astronaut($data = null)
+    private $_astronaut = null;
+
+    // Idiomatic facade: $client->astronaut()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Astronaut() (PHP method
+    // names are case-insensitive).
+    public function astronaut($data = null)
     {
         require_once __DIR__ . '/entity/astronaut_entity.php';
+        if ($data === null) {
+            if ($this->_astronaut === null) {
+                $this->_astronaut = new AstronautEntity($this, null);
+            }
+            return $this->_astronaut;
+        }
         return new AstronautEntity($this, $data);
     }
 
 
-    public function Docking($data = null)
+    private $_docking = null;
+
+    // Idiomatic facade: $client->docking()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Docking() (PHP method
+    // names are case-insensitive).
+    public function docking($data = null)
     {
         require_once __DIR__ . '/entity/docking_entity.php';
+        if ($data === null) {
+            if ($this->_docking === null) {
+                $this->_docking = new DockingEntity($this, null);
+            }
+            return $this->_docking;
+        }
         return new DockingEntity($this, $data);
     }
 
 
-    public function DockingEvent($data = null)
+    private $_docking_event = null;
+
+    // Idiomatic facade: $client->docking_event()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias DockingEvent() (PHP method
+    // names are case-insensitive).
+    public function docking_event($data = null)
     {
         require_once __DIR__ . '/entity/docking_event_entity.php';
+        if ($data === null) {
+            if ($this->_docking_event === null) {
+                $this->_docking_event = new DockingEventEntity($this, null);
+            }
+            return $this->_docking_event;
+        }
         return new DockingEventEntity($this, $data);
     }
 
 
-    public function Event($data = null)
+    private $_event = null;
+
+    // Idiomatic facade: $client->event()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Event() (PHP method
+    // names are case-insensitive).
+    public function event($data = null)
     {
         require_once __DIR__ . '/entity/event_entity.php';
+        if ($data === null) {
+            if ($this->_event === null) {
+                $this->_event = new EventEntity($this, null);
+            }
+            return $this->_event;
+        }
         return new EventEntity($this, $data);
     }
 
 
-    public function Expedition($data = null)
+    private $_expedition = null;
+
+    // Idiomatic facade: $client->expedition()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Expedition() (PHP method
+    // names are case-insensitive).
+    public function expedition($data = null)
     {
         require_once __DIR__ . '/entity/expedition_entity.php';
+        if ($data === null) {
+            if ($this->_expedition === null) {
+                $this->_expedition = new ExpeditionEntity($this, null);
+            }
+            return $this->_expedition;
+        }
         return new ExpeditionEntity($this, $data);
     }
 
 
-    public function FirstStage($data = null)
+    private $_first_stage = null;
+
+    // Idiomatic facade: $client->first_stage()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias FirstStage() (PHP method
+    // names are case-insensitive).
+    public function first_stage($data = null)
     {
         require_once __DIR__ . '/entity/first_stage_entity.php';
+        if ($data === null) {
+            if ($this->_first_stage === null) {
+                $this->_first_stage = new FirstStageEntity($this, null);
+            }
+            return $this->_first_stage;
+        }
         return new FirstStageEntity($this, $data);
     }
 
 
-    public function Launch($data = null)
+    private $_launch = null;
+
+    // Idiomatic facade: $client->launch()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Launch() (PHP method
+    // names are case-insensitive).
+    public function launch($data = null)
     {
         require_once __DIR__ . '/entity/launch_entity.php';
+        if ($data === null) {
+            if ($this->_launch === null) {
+                $this->_launch = new LaunchEntity($this, null);
+            }
+            return $this->_launch;
+        }
         return new LaunchEntity($this, $data);
     }
 
 
-    public function LaunchVehicle($data = null)
+    private $_launch_vehicle = null;
+
+    // Idiomatic facade: $client->launch_vehicle()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias LaunchVehicle() (PHP method
+    // names are case-insensitive).
+    public function launch_vehicle($data = null)
     {
         require_once __DIR__ . '/entity/launch_vehicle_entity.php';
+        if ($data === null) {
+            if ($this->_launch_vehicle === null) {
+                $this->_launch_vehicle = new LaunchVehicleEntity($this, null);
+            }
+            return $this->_launch_vehicle;
+        }
         return new LaunchVehicleEntity($this, $data);
     }
 
 
-    public function Launcher($data = null)
+    private $_launcher = null;
+
+    // Idiomatic facade: $client->launcher()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Launcher() (PHP method
+    // names are case-insensitive).
+    public function launcher($data = null)
     {
         require_once __DIR__ . '/entity/launcher_entity.php';
+        if ($data === null) {
+            if ($this->_launcher === null) {
+                $this->_launcher = new LauncherEntity($this, null);
+            }
+            return $this->_launcher;
+        }
         return new LauncherEntity($this, $data);
     }
 
 
-    public function Location($data = null)
+    private $_location = null;
+
+    // Idiomatic facade: $client->location()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Location() (PHP method
+    // names are case-insensitive).
+    public function location($data = null)
     {
         require_once __DIR__ . '/entity/location_entity.php';
+        if ($data === null) {
+            if ($this->_location === null) {
+                $this->_location = new LocationEntity($this, null);
+            }
+            return $this->_location;
+        }
         return new LocationEntity($this, $data);
     }
 
 
-    public function Pad($data = null)
+    private $_pad = null;
+
+    // Idiomatic facade: $client->pad()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Pad() (PHP method
+    // names are case-insensitive).
+    public function pad($data = null)
     {
         require_once __DIR__ . '/entity/pad_entity.php';
+        if ($data === null) {
+            if ($this->_pad === null) {
+                $this->_pad = new PadEntity($this, null);
+            }
+            return $this->_pad;
+        }
         return new PadEntity($this, $data);
     }
 
 
-    public function ReusableFirstStage($data = null)
+    private $_reusable_first_stage = null;
+
+    // Idiomatic facade: $client->reusable_first_stage()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ReusableFirstStage() (PHP method
+    // names are case-insensitive).
+    public function reusable_first_stage($data = null)
     {
         require_once __DIR__ . '/entity/reusable_first_stage_entity.php';
+        if ($data === null) {
+            if ($this->_reusable_first_stage === null) {
+                $this->_reusable_first_stage = new ReusableFirstStageEntity($this, null);
+            }
+            return $this->_reusable_first_stage;
+        }
         return new ReusableFirstStageEntity($this, $data);
     }
 
 
-    public function SpaceStation($data = null)
+    private $_space_station = null;
+
+    // Idiomatic facade: $client->space_station()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias SpaceStation() (PHP method
+    // names are case-insensitive).
+    public function space_station($data = null)
     {
         require_once __DIR__ . '/entity/space_station_entity.php';
+        if ($data === null) {
+            if ($this->_space_station === null) {
+                $this->_space_station = new SpaceStationEntity($this, null);
+            }
+            return $this->_space_station;
+        }
         return new SpaceStationEntity($this, $data);
     }
 
 
-    public function Spacecraft($data = null)
+    private $_spacecraft = null;
+
+    // Idiomatic facade: $client->spacecraft()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Spacecraft() (PHP method
+    // names are case-insensitive).
+    public function spacecraft($data = null)
     {
         require_once __DIR__ . '/entity/spacecraft_entity.php';
+        if ($data === null) {
+            if ($this->_spacecraft === null) {
+                $this->_spacecraft = new SpacecraftEntity($this, null);
+            }
+            return $this->_spacecraft;
+        }
         return new SpacecraftEntity($this, $data);
     }
 

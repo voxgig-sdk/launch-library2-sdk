@@ -45,6 +45,7 @@ class DockingEntity
     end
   end
 
+  # @return [Docking, Hash] the current Docking data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class DockingEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Docking fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)

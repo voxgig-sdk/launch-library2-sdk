@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Pad,
+  PadLoadMatch,
+  PadListMatch,
+} from '../LaunchLibrary2Types'
 
 // TODO: needs Entity superclass
-class PadEntity extends LaunchLibrary2EntityBase {
+class PadEntity extends LaunchLibrary2EntityBase<Pad> {
 
   constructor(client: LaunchLibrary2SDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class PadEntity extends LaunchLibrary2EntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: PadLoadMatch, ctrl?: Control): Promise<Pad> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class PadEntity extends LaunchLibrary2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Pad> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: PadListMatch, ctrl?: Control): Promise<Pad[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class PadEntity extends LaunchLibrary2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Pad[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

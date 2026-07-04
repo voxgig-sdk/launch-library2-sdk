@@ -43,16 +43,14 @@ class AstronautEntityTest < Minitest::Test
     astronaut_ref01_ent = client.Astronaut(nil)
     astronaut_ref01_match = {}
 
-    astronaut_ref01_list_result, err = astronaut_ref01_ent.list(astronaut_ref01_match, nil)
-    assert_nil err
+    astronaut_ref01_list_result = astronaut_ref01_ent.list(astronaut_ref01_match, nil)
     assert astronaut_ref01_list_result.is_a?(Array)
 
     # LOAD
     astronaut_ref01_match_dt0 = {
       "id" => astronaut_ref01_data["id"],
     }
-    astronaut_ref01_data_dt0_loaded, err = astronaut_ref01_ent.load(astronaut_ref01_match_dt0, nil)
-    assert_nil err
+    astronaut_ref01_data_dt0_loaded = astronaut_ref01_ent.load(astronaut_ref01_match_dt0, nil)
     astronaut_ref01_data_dt0_load_result = Helpers.to_map(astronaut_ref01_data_dt0_loaded)
     assert !astronaut_ref01_data_dt0_load_result.nil?
     assert_equal astronaut_ref01_data_dt0_load_result["id"], astronaut_ref01_data["id"]
@@ -93,7 +91,6 @@ def astronaut_basic_setup(extra)
     "LAUNCHLIBRARY__TEST_ASTRONAUT_ENTID" => idmap,
     "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
     "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-    "LAUNCHLIBRARY__APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def astronaut_basic_setup(extra)
   if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LAUNCHLIBRARY__APIKEY"],
       },
       extra || {},
     ])

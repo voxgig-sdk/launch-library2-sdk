@@ -50,16 +50,14 @@ class LocationEntityTest extends TestCase
         $location_ref01_ent = $client->Location(null);
         $location_ref01_match = [];
 
-        [$location_ref01_list_result, $err] = $location_ref01_ent->list($location_ref01_match, null);
-        $this->assertNull($err);
+        $location_ref01_list_result = $location_ref01_ent->list($location_ref01_match, null);
         $this->assertIsArray($location_ref01_list_result);
 
         // LOAD
         $location_ref01_match_dt0 = [
             "id" => $location_ref01_data["id"],
         ];
-        [$location_ref01_data_dt0_loaded, $err] = $location_ref01_ent->load($location_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $location_ref01_data_dt0_loaded = $location_ref01_ent->load($location_ref01_match_dt0, null);
         $location_ref01_data_dt0_load_result = Helpers::to_map($location_ref01_data_dt0_loaded);
         $this->assertNotNull($location_ref01_data_dt0_load_result);
         $this->assertEquals($location_ref01_data_dt0_load_result["id"], $location_ref01_data["id"]);
@@ -96,7 +94,6 @@ function location_basic_setup($extra)
         "LAUNCHLIBRARY__TEST_LOCATION_ENTID" => $idmap,
         "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-        "LAUNCHLIBRARY__APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function location_basic_setup($extra)
     if ($env["LAUNCHLIBRARY__TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["LAUNCHLIBRARY__APIKEY"],
             ],
             $extra ?? [],
         ]);

@@ -44,8 +44,7 @@ class LauncherEntityTest < Minitest::Test
     launcher_ref01_match_dt0 = {
       "id" => launcher_ref01_data["id"],
     }
-    launcher_ref01_data_dt0_loaded, err = launcher_ref01_ent.load(launcher_ref01_match_dt0, nil)
-    assert_nil err
+    launcher_ref01_data_dt0_loaded = launcher_ref01_ent.load(launcher_ref01_match_dt0, nil)
     launcher_ref01_data_dt0_load_result = Helpers.to_map(launcher_ref01_data_dt0_loaded)
     assert !launcher_ref01_data_dt0_load_result.nil?
     assert_equal launcher_ref01_data_dt0_load_result["id"], launcher_ref01_data["id"]
@@ -86,7 +85,6 @@ def launcher_basic_setup(extra)
     "LAUNCHLIBRARY__TEST_LAUNCHER_ENTID" => idmap,
     "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
     "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-    "LAUNCHLIBRARY__APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -98,7 +96,6 @@ def launcher_basic_setup(extra)
   if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LAUNCHLIBRARY__APIKEY"],
       },
       extra || {},
     ])

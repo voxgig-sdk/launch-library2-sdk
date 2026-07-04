@@ -50,16 +50,14 @@ class TestSpaceStationEntity:
         space_station_ref01_ent = client.SpaceStation(None)
         space_station_ref01_match = {}
 
-        space_station_ref01_list_result, err = space_station_ref01_ent.list(space_station_ref01_match, None)
-        assert err is None
+        space_station_ref01_list_result = space_station_ref01_ent.list(space_station_ref01_match, None)
         assert isinstance(space_station_ref01_list_result, list)
 
         # LOAD
         space_station_ref01_match_dt0 = {
             "id": space_station_ref01_data["id"],
         }
-        space_station_ref01_data_dt0_loaded, err = space_station_ref01_ent.load(space_station_ref01_match_dt0, None)
-        assert err is None
+        space_station_ref01_data_dt0_loaded = space_station_ref01_ent.load(space_station_ref01_match_dt0, None)
         space_station_ref01_data_dt0_load_result = helpers.to_map(space_station_ref01_data_dt0_loaded)
         assert space_station_ref01_data_dt0_load_result is not None
         assert space_station_ref01_data_dt0_load_result["id"] == space_station_ref01_data["id"]
@@ -102,7 +100,6 @@ def _space_station_basic_setup(extra):
         "LAUNCHLIBRARY__TEST_SPACE_STATION_ENTID": idmap,
         "LAUNCHLIBRARY__TEST_LIVE": "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN": "FALSE",
-        "LAUNCHLIBRARY__APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _space_station_basic_setup(extra):
     if env.get("LAUNCHLIBRARY__TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LAUNCHLIBRARY__APIKEY"),
             },
             extra or {},
         ])

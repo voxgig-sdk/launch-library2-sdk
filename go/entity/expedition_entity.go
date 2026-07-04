@@ -85,6 +85,27 @@ func (e *ExpeditionEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Expedition; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *ExpeditionEntity) DataTyped(data ...Expedition) Expedition {
+	if len(data) > 0 {
+		return typedFrom[Expedition](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Expedition](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Expedition (all fields
+// optional at the wire level).
+func (e *ExpeditionEntity) MatchTyped(match ...Expedition) Expedition {
+	if len(match) > 0 {
+		return typedFrom[Expedition](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Expedition](e.Match())
+}
+
 
 func (e *ExpeditionEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -111,6 +132,17 @@ func (e *ExpeditionEntity) Load(reqmatch map[string]any, ctrl map[string]any) (a
 	})
 }
 
+// LoadTyped is the statically-typed variant of Load: it takes an
+// ExpeditionLoadMatch and returns an Expedition. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *ExpeditionEntity) LoadTyped(reqmatch ExpeditionLoadMatch, ctrl map[string]any) (Expedition, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Expedition{}, err
+	}
+	return typedFrom[Expedition](res), nil
+}
+
 
 
 
@@ -131,6 +163,17 @@ func (e *ExpeditionEntity) List(reqmatch map[string]any, ctrl map[string]any) (a
 			}
 		}
 	})
+}
+
+// ListTyped is the statically-typed variant of List: it takes an
+// ExpeditionListMatch and returns []Expedition. It delegates to the untyped
+// List (identical runtime) and converts at the typed boundary.
+func (e *ExpeditionEntity) ListTyped(reqmatch ExpeditionListMatch, ctrl map[string]any) ([]Expedition, error) {
+	res, err := e.List(asMap(reqmatch), ctrl)
+	if err != nil {
+		return nil, err
+	}
+	return typedSliceFrom[Expedition](res), nil
 }
 
 

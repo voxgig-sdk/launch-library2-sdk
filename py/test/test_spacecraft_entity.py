@@ -50,16 +50,14 @@ class TestSpacecraftEntity:
         spacecraft_ref01_ent = client.Spacecraft(None)
         spacecraft_ref01_match = {}
 
-        spacecraft_ref01_list_result, err = spacecraft_ref01_ent.list(spacecraft_ref01_match, None)
-        assert err is None
+        spacecraft_ref01_list_result = spacecraft_ref01_ent.list(spacecraft_ref01_match, None)
         assert isinstance(spacecraft_ref01_list_result, list)
 
         # LOAD
         spacecraft_ref01_match_dt0 = {
             "id": spacecraft_ref01_data["id"],
         }
-        spacecraft_ref01_data_dt0_loaded, err = spacecraft_ref01_ent.load(spacecraft_ref01_match_dt0, None)
-        assert err is None
+        spacecraft_ref01_data_dt0_loaded = spacecraft_ref01_ent.load(spacecraft_ref01_match_dt0, None)
         spacecraft_ref01_data_dt0_load_result = helpers.to_map(spacecraft_ref01_data_dt0_loaded)
         assert spacecraft_ref01_data_dt0_load_result is not None
         assert spacecraft_ref01_data_dt0_load_result["id"] == spacecraft_ref01_data["id"]
@@ -102,7 +100,6 @@ def _spacecraft_basic_setup(extra):
         "LAUNCHLIBRARY__TEST_SPACECRAFT_ENTID": idmap,
         "LAUNCHLIBRARY__TEST_LIVE": "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN": "FALSE",
-        "LAUNCHLIBRARY__APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _spacecraft_basic_setup(extra):
     if env.get("LAUNCHLIBRARY__TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LAUNCHLIBRARY__APIKEY"),
             },
             extra or {},
         ])

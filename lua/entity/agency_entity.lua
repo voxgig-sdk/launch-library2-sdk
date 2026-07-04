@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch AgencyLoadMatch
+---@param ctrl? table
+---@return Agency
+---@return string? err
 function AgencyEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch AgencyListMatch
+---@param ctrl? table
+---@return Agency[]
+---@return string? err
 function AgencyEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

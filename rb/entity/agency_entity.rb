@@ -45,6 +45,7 @@ class AgencyEntity
     end
   end
 
+  # @return [Agency, Hash] the current Agency data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class AgencyEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Agency fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Agency.
+  #
+  # @param reqmatch [AgencyLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Agency, Hash] the loaded Agency; raises LaunchLibrary2Error on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class AgencyEntity
 
 
   
+  # List Agency items matching the given filter.
+  #
+  # @param reqmatch [AgencyListMatch, Hash, nil] match filter (any subset of Agency fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Agency>, Array] the matching Agency items; raises LaunchLibrary2Error on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

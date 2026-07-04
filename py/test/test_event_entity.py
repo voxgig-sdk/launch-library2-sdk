@@ -50,16 +50,14 @@ class TestEventEntity:
         event_ref01_ent = client.Event(None)
         event_ref01_match = {}
 
-        event_ref01_list_result, err = event_ref01_ent.list(event_ref01_match, None)
-        assert err is None
+        event_ref01_list_result = event_ref01_ent.list(event_ref01_match, None)
         assert isinstance(event_ref01_list_result, list)
 
         # LOAD
         event_ref01_match_dt0 = {
             "id": event_ref01_data["id"],
         }
-        event_ref01_data_dt0_loaded, err = event_ref01_ent.load(event_ref01_match_dt0, None)
-        assert err is None
+        event_ref01_data_dt0_loaded = event_ref01_ent.load(event_ref01_match_dt0, None)
         event_ref01_data_dt0_load_result = helpers.to_map(event_ref01_data_dt0_loaded)
         assert event_ref01_data_dt0_load_result is not None
         assert event_ref01_data_dt0_load_result["id"] == event_ref01_data["id"]
@@ -102,7 +100,6 @@ def _event_basic_setup(extra):
         "LAUNCHLIBRARY__TEST_EVENT_ENTID": idmap,
         "LAUNCHLIBRARY__TEST_LIVE": "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN": "FALSE",
-        "LAUNCHLIBRARY__APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -113,7 +110,6 @@ def _event_basic_setup(extra):
     if env.get("LAUNCHLIBRARY__TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("LAUNCHLIBRARY__APIKEY"),
             },
             extra or {},
         ])

@@ -43,16 +43,14 @@ class SpaceStationEntityTest < Minitest::Test
     space_station_ref01_ent = client.SpaceStation(nil)
     space_station_ref01_match = {}
 
-    space_station_ref01_list_result, err = space_station_ref01_ent.list(space_station_ref01_match, nil)
-    assert_nil err
+    space_station_ref01_list_result = space_station_ref01_ent.list(space_station_ref01_match, nil)
     assert space_station_ref01_list_result.is_a?(Array)
 
     # LOAD
     space_station_ref01_match_dt0 = {
       "id" => space_station_ref01_data["id"],
     }
-    space_station_ref01_data_dt0_loaded, err = space_station_ref01_ent.load(space_station_ref01_match_dt0, nil)
-    assert_nil err
+    space_station_ref01_data_dt0_loaded = space_station_ref01_ent.load(space_station_ref01_match_dt0, nil)
     space_station_ref01_data_dt0_load_result = Helpers.to_map(space_station_ref01_data_dt0_loaded)
     assert !space_station_ref01_data_dt0_load_result.nil?
     assert_equal space_station_ref01_data_dt0_load_result["id"], space_station_ref01_data["id"]
@@ -93,7 +91,6 @@ def space_station_basic_setup(extra)
     "LAUNCHLIBRARY__TEST_SPACE_STATION_ENTID" => idmap,
     "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
     "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-    "LAUNCHLIBRARY__APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def space_station_basic_setup(extra)
   if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LAUNCHLIBRARY__APIKEY"],
       },
       extra || {},
     ])

@@ -45,6 +45,7 @@ class ExpeditionEntity
     end
   end
 
+  # @return [Expedition, Hash] the current Expedition data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class ExpeditionEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Expedition fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Expedition.
+  #
+  # @param reqmatch [ExpeditionLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Expedition, Hash] the loaded Expedition; raises LaunchLibrary2Error on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class ExpeditionEntity
 
 
   
+  # List Expedition items matching the given filter.
+  #
+  # @param reqmatch [ExpeditionListMatch, Hash, nil] match filter (any subset of Expedition fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Expedition>, Array] the matching Expedition items; raises LaunchLibrary2Error on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

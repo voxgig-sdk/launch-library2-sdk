@@ -55,6 +55,9 @@ class ReusableFirstStageEntity
         return new ReusableFirstStageEntity($this->_client, $opts);
     }
 
+    /**
+     * @param ReusableFirstStage|array $args ReusableFirstStage data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class ReusableFirstStageEntity
         }
     }
 
+    /**
+     * @return ReusableFirstStage|array The current ReusableFirstStage data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of ReusableFirstStage fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class ReusableFirstStageEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of ReusableFirstStage fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -93,7 +105,7 @@ class ReusableFirstStageEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

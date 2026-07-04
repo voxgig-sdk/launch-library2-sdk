@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch AstronautLoadMatch
+---@param ctrl? table
+---@return Astronaut
+---@return string? err
 function AstronautEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch AstronautListMatch
+---@param ctrl? table
+---@return Astronaut[]
+---@return string? err
 function AstronautEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

@@ -45,6 +45,7 @@ class AstronautEntity
     end
   end
 
+  # @return [Astronaut, Hash] the current Astronaut data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class AstronautEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Astronaut fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Astronaut.
+  #
+  # @param reqmatch [AstronautLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Astronaut, Hash] the loaded Astronaut; raises LaunchLibrary2Error on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class AstronautEntity
 
 
   
+  # List Astronaut items matching the given filter.
+  #
+  # @param reqmatch [AstronautListMatch, Hash, nil] match filter (any subset of Astronaut fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Astronaut>, Array] the matching Astronaut items; raises LaunchLibrary2Error on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

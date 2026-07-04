@@ -43,16 +43,14 @@ class AgencyEntityTest < Minitest::Test
     agency_ref01_ent = client.Agency(nil)
     agency_ref01_match = {}
 
-    agency_ref01_list_result, err = agency_ref01_ent.list(agency_ref01_match, nil)
-    assert_nil err
+    agency_ref01_list_result = agency_ref01_ent.list(agency_ref01_match, nil)
     assert agency_ref01_list_result.is_a?(Array)
 
     # LOAD
     agency_ref01_match_dt0 = {
       "id" => agency_ref01_data["id"],
     }
-    agency_ref01_data_dt0_loaded, err = agency_ref01_ent.load(agency_ref01_match_dt0, nil)
-    assert_nil err
+    agency_ref01_data_dt0_loaded = agency_ref01_ent.load(agency_ref01_match_dt0, nil)
     agency_ref01_data_dt0_load_result = Helpers.to_map(agency_ref01_data_dt0_loaded)
     assert !agency_ref01_data_dt0_load_result.nil?
     assert_equal agency_ref01_data_dt0_load_result["id"], agency_ref01_data["id"]
@@ -93,7 +91,6 @@ def agency_basic_setup(extra)
     "LAUNCHLIBRARY__TEST_AGENCY_ENTID" => idmap,
     "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
     "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-    "LAUNCHLIBRARY__APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def agency_basic_setup(extra)
   if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LAUNCHLIBRARY__APIKEY"],
       },
       extra || {},
     ])

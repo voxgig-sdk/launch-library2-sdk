@@ -43,8 +43,7 @@ class LaunchVehicleEntityTest < Minitest::Test
     launch_vehicle_ref01_ent = client.LaunchVehicle(nil)
     launch_vehicle_ref01_match = {}
 
-    launch_vehicle_ref01_list_result, err = launch_vehicle_ref01_ent.list(launch_vehicle_ref01_match, nil)
-    assert_nil err
+    launch_vehicle_ref01_list_result = launch_vehicle_ref01_ent.list(launch_vehicle_ref01_match, nil)
     assert launch_vehicle_ref01_list_result.is_a?(Array)
 
   end
@@ -83,7 +82,6 @@ def launch_vehicle_basic_setup(extra)
     "LAUNCHLIBRARY__TEST_LAUNCH_VEHICLE_ENTID" => idmap,
     "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
     "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-    "LAUNCHLIBRARY__APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +93,6 @@ def launch_vehicle_basic_setup(extra)
   if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["LAUNCHLIBRARY__APIKEY"],
       },
       extra || {},
     ])

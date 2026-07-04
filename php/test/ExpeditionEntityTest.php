@@ -50,16 +50,14 @@ class ExpeditionEntityTest extends TestCase
         $expedition_ref01_ent = $client->Expedition(null);
         $expedition_ref01_match = [];
 
-        [$expedition_ref01_list_result, $err] = $expedition_ref01_ent->list($expedition_ref01_match, null);
-        $this->assertNull($err);
+        $expedition_ref01_list_result = $expedition_ref01_ent->list($expedition_ref01_match, null);
         $this->assertIsArray($expedition_ref01_list_result);
 
         // LOAD
         $expedition_ref01_match_dt0 = [
             "id" => $expedition_ref01_data["id"],
         ];
-        [$expedition_ref01_data_dt0_loaded, $err] = $expedition_ref01_ent->load($expedition_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $expedition_ref01_data_dt0_loaded = $expedition_ref01_ent->load($expedition_ref01_match_dt0, null);
         $expedition_ref01_data_dt0_load_result = Helpers::to_map($expedition_ref01_data_dt0_loaded);
         $this->assertNotNull($expedition_ref01_data_dt0_load_result);
         $this->assertEquals($expedition_ref01_data_dt0_load_result["id"], $expedition_ref01_data["id"]);
@@ -96,7 +94,6 @@ function expedition_basic_setup($extra)
         "LAUNCHLIBRARY__TEST_EXPEDITION_ENTID" => $idmap,
         "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
         "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
-        "LAUNCHLIBRARY__APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -108,7 +105,6 @@ function expedition_basic_setup($extra)
     if ($env["LAUNCHLIBRARY__TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["LAUNCHLIBRARY__APIKEY"],
             ],
             $extra ?? [],
         ]);

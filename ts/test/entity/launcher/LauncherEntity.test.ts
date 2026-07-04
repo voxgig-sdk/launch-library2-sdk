@@ -114,7 +114,6 @@ function basicSetup(extra?: any) {
     'LAUNCH_LIBRARY__TEST_LAUNCHER_ENTID': idmap,
     'LAUNCH_LIBRARY__TEST_LIVE': 'FALSE',
     'LAUNCH_LIBRARY__TEST_EXPLAIN': 'FALSE',
-    'LAUNCH_LIBRARY__APIKEY': 'NONE',
   })
 
   idmap = env['LAUNCH_LIBRARY__TEST_LAUNCHER_ENTID']
@@ -124,7 +123,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new LaunchLibrary2SDK(merge([
       {
-        apikey: env.LAUNCH_LIBRARY__APIKEY,
       },
       extra
     ]))

@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Expedition,
+  ExpeditionLoadMatch,
+  ExpeditionListMatch,
+} from '../LaunchLibrary2Types'
 
 // TODO: needs Entity superclass
-class ExpeditionEntity extends LaunchLibrary2EntityBase {
+class ExpeditionEntity extends LaunchLibrary2EntityBase<Expedition> {
 
   constructor(client: LaunchLibrary2SDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class ExpeditionEntity extends LaunchLibrary2EntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: ExpeditionLoadMatch, ctrl?: Control): Promise<Expedition> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class ExpeditionEntity extends LaunchLibrary2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Expedition> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: ExpeditionListMatch, ctrl?: Control): Promise<Expedition[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class ExpeditionEntity extends LaunchLibrary2EntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Expedition[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ExpeditionLoadMatch
+---@param ctrl? table
+---@return Expedition
+---@return string? err
 function ExpeditionEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch ExpeditionListMatch
+---@param ctrl? table
+---@return Expedition[]
+---@return string? err
 function ExpeditionEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
