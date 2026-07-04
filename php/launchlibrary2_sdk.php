@@ -233,10 +233,10 @@ class LaunchLibrary2SDK
 
     private $_agency = null;
 
-    // Idiomatic facade: $client->agency()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Agency() (PHP method
-    // names are case-insensitive).
-    public function agency($data = null)
+    // Canonical facade: $client->Agency()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->agency()
+    // resolves here too.
+    public function Agency($data = null)
     {
         require_once __DIR__ . '/entity/agency_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class LaunchLibrary2SDK
 
     private $_astronaut = null;
 
-    // Idiomatic facade: $client->astronaut()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Astronaut() (PHP method
-    // names are case-insensitive).
-    public function astronaut($data = null)
+    // Canonical facade: $client->Astronaut()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->astronaut()
+    // resolves here too.
+    public function Astronaut($data = null)
     {
         require_once __DIR__ . '/entity/astronaut_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class LaunchLibrary2SDK
 
     private $_docking = null;
 
-    // Idiomatic facade: $client->docking()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Docking() (PHP method
-    // names are case-insensitive).
-    public function docking($data = null)
+    // Canonical facade: $client->Docking()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->docking()
+    // resolves here too.
+    public function Docking($data = null)
     {
         require_once __DIR__ . '/entity/docking_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class LaunchLibrary2SDK
 
     private $_docking_event = null;
 
-    // Idiomatic facade: $client->docking_event()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias DockingEvent() (PHP method
-    // names are case-insensitive).
-    public function docking_event($data = null)
+    // Canonical facade: $client->DockingEvent()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->docking_event()
+    // resolves here too.
+    public function DockingEvent($data = null)
     {
         require_once __DIR__ . '/entity/docking_event_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class LaunchLibrary2SDK
 
     private $_event = null;
 
-    // Idiomatic facade: $client->event()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Event() (PHP method
-    // names are case-insensitive).
-    public function event($data = null)
+    // Canonical facade: $client->Event()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->event()
+    // resolves here too.
+    public function Event($data = null)
     {
         require_once __DIR__ . '/entity/event_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class LaunchLibrary2SDK
 
     private $_expedition = null;
 
-    // Idiomatic facade: $client->expedition()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Expedition() (PHP method
-    // names are case-insensitive).
-    public function expedition($data = null)
+    // Canonical facade: $client->Expedition()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->expedition()
+    // resolves here too.
+    public function Expedition($data = null)
     {
         require_once __DIR__ . '/entity/expedition_entity.php';
         if ($data === null) {
@@ -341,10 +341,10 @@ class LaunchLibrary2SDK
 
     private $_first_stage = null;
 
-    // Idiomatic facade: $client->first_stage()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias FirstStage() (PHP method
-    // names are case-insensitive).
-    public function first_stage($data = null)
+    // Canonical facade: $client->FirstStage()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->first_stage()
+    // resolves here too.
+    public function FirstStage($data = null)
     {
         require_once __DIR__ . '/entity/first_stage_entity.php';
         if ($data === null) {
@@ -359,10 +359,10 @@ class LaunchLibrary2SDK
 
     private $_launch = null;
 
-    // Idiomatic facade: $client->launch()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Launch() (PHP method
-    // names are case-insensitive).
-    public function launch($data = null)
+    // Canonical facade: $client->Launch()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->launch()
+    // resolves here too.
+    public function Launch($data = null)
     {
         require_once __DIR__ . '/entity/launch_entity.php';
         if ($data === null) {
@@ -377,10 +377,10 @@ class LaunchLibrary2SDK
 
     private $_launch_vehicle = null;
 
-    // Idiomatic facade: $client->launch_vehicle()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias LaunchVehicle() (PHP method
-    // names are case-insensitive).
-    public function launch_vehicle($data = null)
+    // Canonical facade: $client->LaunchVehicle()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->launch_vehicle()
+    // resolves here too.
+    public function LaunchVehicle($data = null)
     {
         require_once __DIR__ . '/entity/launch_vehicle_entity.php';
         if ($data === null) {
@@ -395,10 +395,10 @@ class LaunchLibrary2SDK
 
     private $_launcher = null;
 
-    // Idiomatic facade: $client->launcher()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Launcher() (PHP method
-    // names are case-insensitive).
-    public function launcher($data = null)
+    // Canonical facade: $client->Launcher()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->launcher()
+    // resolves here too.
+    public function Launcher($data = null)
     {
         require_once __DIR__ . '/entity/launcher_entity.php';
         if ($data === null) {
@@ -413,10 +413,10 @@ class LaunchLibrary2SDK
 
     private $_location = null;
 
-    // Idiomatic facade: $client->location()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Location() (PHP method
-    // names are case-insensitive).
-    public function location($data = null)
+    // Canonical facade: $client->Location()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->location()
+    // resolves here too.
+    public function Location($data = null)
     {
         require_once __DIR__ . '/entity/location_entity.php';
         if ($data === null) {
@@ -431,10 +431,10 @@ class LaunchLibrary2SDK
 
     private $_pad = null;
 
-    // Idiomatic facade: $client->pad()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Pad() (PHP method
-    // names are case-insensitive).
-    public function pad($data = null)
+    // Canonical facade: $client->Pad()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->pad()
+    // resolves here too.
+    public function Pad($data = null)
     {
         require_once __DIR__ . '/entity/pad_entity.php';
         if ($data === null) {
@@ -449,10 +449,10 @@ class LaunchLibrary2SDK
 
     private $_reusable_first_stage = null;
 
-    // Idiomatic facade: $client->reusable_first_stage()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ReusableFirstStage() (PHP method
-    // names are case-insensitive).
-    public function reusable_first_stage($data = null)
+    // Canonical facade: $client->ReusableFirstStage()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->reusable_first_stage()
+    // resolves here too.
+    public function ReusableFirstStage($data = null)
     {
         require_once __DIR__ . '/entity/reusable_first_stage_entity.php';
         if ($data === null) {
@@ -467,10 +467,10 @@ class LaunchLibrary2SDK
 
     private $_space_station = null;
 
-    // Idiomatic facade: $client->space_station()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias SpaceStation() (PHP method
-    // names are case-insensitive).
-    public function space_station($data = null)
+    // Canonical facade: $client->SpaceStation()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->space_station()
+    // resolves here too.
+    public function SpaceStation($data = null)
     {
         require_once __DIR__ . '/entity/space_station_entity.php';
         if ($data === null) {
@@ -485,10 +485,10 @@ class LaunchLibrary2SDK
 
     private $_spacecraft = null;
 
-    // Idiomatic facade: $client->spacecraft()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Spacecraft() (PHP method
-    // names are case-insensitive).
-    public function spacecraft($data = null)
+    // Canonical facade: $client->Spacecraft()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->spacecraft()
+    // resolves here too.
+    public function Spacecraft($data = null)
     {
         require_once __DIR__ . '/entity/spacecraft_entity.php';
         if ($data === null) {

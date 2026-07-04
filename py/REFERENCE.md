@@ -136,7 +136,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## AgencyEntity
 
 ```python
-agency = client.agency
+agency = client.Agency()
 ```
 
 ### Fields
@@ -161,7 +161,9 @@ agency = client.agency
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.agency.list({})
+results = client.Agency().list({})
+for agency in results:
+    print(agency)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -169,7 +171,7 @@ results = client.agency.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.agency.load({"id": "agency_id"})
+result = client.Agency().load({"id": "agency_id"})
 ```
 
 ### Common Methods
@@ -204,7 +206,7 @@ Return the entity name.
 ## AstronautEntity
 
 ```python
-astronaut = client.astronaut
+astronaut = client.Astronaut()
 ```
 
 ### Fields
@@ -231,7 +233,9 @@ astronaut = client.astronaut
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.astronaut.list({})
+results = client.Astronaut().list({})
+for astronaut in results:
+    print(astronaut)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -239,7 +243,7 @@ results = client.astronaut.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.astronaut.load({"id": "astronaut_id"})
+result = client.Astronaut().load({"id": "astronaut_id"})
 ```
 
 ### Common Methods
@@ -274,7 +278,7 @@ Return the entity name.
 ## DockingEntity
 
 ```python
-docking = client.docking
+docking = client.Docking()
 ```
 
 ### Common Methods
@@ -309,7 +313,7 @@ Return the entity name.
 ## DockingEventEntity
 
 ```python
-docking_event = client.docking_event
+docking_event = client.DockingEvent()
 ```
 
 ### Fields
@@ -330,7 +334,9 @@ docking_event = client.docking_event
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.docking_event.list({})
+results = client.DockingEvent().list({})
+for docking_event in results:
+    print(docking_event)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -338,7 +344,7 @@ results = client.docking_event.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.docking_event.load({"id": "docking_event_id"})
+result = client.DockingEvent().load({"id": "docking_event_id"})
 ```
 
 ### Common Methods
@@ -373,7 +379,7 @@ Return the entity name.
 ## EventEntity
 
 ```python
-event = client.event
+event = client.Event()
 ```
 
 ### Fields
@@ -398,7 +404,9 @@ event = client.event
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.event.list({})
+results = client.Event().list({})
+for event in results:
+    print(event)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -406,7 +414,7 @@ results = client.event.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.event.load({"id": "event_id"})
+result = client.Event().load({"id": "event_id"})
 ```
 
 ### Common Methods
@@ -441,7 +449,7 @@ Return the entity name.
 ## ExpeditionEntity
 
 ```python
-expedition = client.expedition
+expedition = client.Expedition()
 ```
 
 ### Fields
@@ -463,7 +471,9 @@ expedition = client.expedition
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.expedition.list({})
+results = client.Expedition().list({})
+for expedition in results:
+    print(expedition)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -471,7 +481,7 @@ results = client.expedition.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.expedition.load({"id": "expedition_id"})
+result = client.Expedition().load({"id": "expedition_id"})
 ```
 
 ### Common Methods
@@ -506,7 +516,7 @@ Return the entity name.
 ## FirstStageEntity
 
 ```python
-first_stage = client.first_stage
+first_stage = client.FirstStage()
 ```
 
 ### Fields
@@ -528,7 +538,9 @@ first_stage = client.first_stage
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.first_stage.list({})
+results = client.FirstStage().list({})
+for first_stage in results:
+    print(first_stage)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -536,7 +548,7 @@ results = client.first_stage.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.first_stage.load({"id": "first_stage_id"})
+result = client.FirstStage().load({"id": "first_stage_id"})
 ```
 
 ### Common Methods
@@ -571,7 +583,7 @@ Return the entity name.
 ## LaunchEntity
 
 ```python
-launch = client.launch
+launch = client.Launch()
 ```
 
 ### Fields
@@ -600,7 +612,9 @@ launch = client.launch
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.launch.list({})
+results = client.Launch().list({})
+for launch in results:
+    print(launch)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -608,7 +622,7 @@ results = client.launch.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.launch.load({"id": "launch_id"})
+result = client.Launch().load({"id": "launch_id"})
 ```
 
 ### Common Methods
@@ -643,7 +657,7 @@ Return the entity name.
 ## LaunchVehicleEntity
 
 ```python
-launch_vehicle = client.launch_vehicle
+launch_vehicle = client.LaunchVehicle()
 ```
 
 ### Fields
@@ -680,7 +694,9 @@ launch_vehicle = client.launch_vehicle
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.launch_vehicle.list({})
+results = client.LaunchVehicle().list({})
+for launch_vehicle in results:
+    print(launch_vehicle)
 ```
 
 ### Common Methods
@@ -715,7 +731,7 @@ Return the entity name.
 ## LauncherEntity
 
 ```python
-launcher = client.launcher
+launcher = client.Launcher()
 ```
 
 ### Fields
@@ -752,7 +768,7 @@ launcher = client.launcher
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.launcher.load({"id": "launcher_id"})
+result = client.Launcher().load({"id": "launcher_id"})
 ```
 
 ### Common Methods
@@ -787,7 +803,7 @@ Return the entity name.
 ## LocationEntity
 
 ```python
-location = client.location
+location = client.Location()
 ```
 
 ### Fields
@@ -809,7 +825,9 @@ location = client.location
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.location.list({})
+results = client.Location().list({})
+for location in results:
+    print(location)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -817,7 +835,7 @@ results = client.location.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.location.load({"id": "location_id"})
+result = client.Location().load({"id": "location_id"})
 ```
 
 ### Common Methods
@@ -852,7 +870,7 @@ Return the entity name.
 ## PadEntity
 
 ```python
-pad = client.pad
+pad = client.Pad()
 ```
 
 ### Fields
@@ -879,7 +897,9 @@ pad = client.pad
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.pad.list({})
+results = client.Pad().list({})
+for pad in results:
+    print(pad)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -887,7 +907,7 @@ results = client.pad.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.pad.load({"id": "pad_id"})
+result = client.Pad().load({"id": "pad_id"})
 ```
 
 ### Common Methods
@@ -922,7 +942,7 @@ Return the entity name.
 ## ReusableFirstStageEntity
 
 ```python
-reusable_first_stage = client.reusable_first_stage
+reusable_first_stage = client.ReusableFirstStage()
 ```
 
 ### Common Methods
@@ -957,7 +977,7 @@ Return the entity name.
 ## SpaceStationEntity
 
 ```python
-space_station = client.space_station
+space_station = client.SpaceStation()
 ```
 
 ### Fields
@@ -983,7 +1003,9 @@ space_station = client.space_station
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.space_station.list({})
+results = client.SpaceStation().list({})
+for space_station in results:
+    print(space_station)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -991,7 +1013,7 @@ results = client.space_station.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.space_station.load({"id": "space_station_id"})
+result = client.SpaceStation().load({"id": "space_station_id"})
 ```
 
 ### Common Methods
@@ -1026,7 +1048,7 @@ Return the entity name.
 ## SpacecraftEntity
 
 ```python
-spacecraft = client.spacecraft
+spacecraft = client.Spacecraft()
 ```
 
 ### Fields
@@ -1056,7 +1078,9 @@ spacecraft = client.spacecraft
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.spacecraft.list({})
+results = client.Spacecraft().list({})
+for spacecraft in results:
+    print(spacecraft)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -1064,7 +1088,7 @@ results = client.spacecraft.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.spacecraft.load({"id": "spacecraft_id"})
+result = client.Spacecraft().load({"id": "spacecraft_id"})
 ```
 
 ### Common Methods

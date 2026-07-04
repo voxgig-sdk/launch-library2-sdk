@@ -28,25 +28,28 @@ import { LaunchLibrary2SDK } from '@voxgig-sdk/launch-library2'
 const client = new LaunchLibrary2SDK()
 ```
 
-### 2. List agencys
+### 2. List agency records
+
+`list()` resolves to an array of Agency objects — iterate it directly:
 
 ```ts
-const result = await client.agency.list()
+const agencys = await client.Agency().list()
 
-if (result.ok) {
-  for (const item of result.data) {
-    console.log(item.id, item.name)
-  }
+for (const agency of agencys) {
+  console.log(agency)
 }
 ```
 
 ### 3. Load an agency
 
-```ts
-const result = await client.agency.load({ id: 'example_id' })
+`load()` returns the entity directly and throws on failure:
 
-if (result.ok) {
-  console.log(result.data)
+```ts
+try {
+  const agency = await client.Agency().load({ id: 'example_id' })
+  console.log(agency)
+} catch (err) {
+  console.error('load failed:', err)
 }
 ```
 
@@ -64,6 +67,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -92,9 +98,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = LaunchLibrary2SDK.test()
 
-const result = await client.agency.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const agency = await client.Agency().load({ id: 'test01' })
+// agency is a bare entity populated with mock response data
+console.log(agency)
 ```
 
 You can also use the instance method:
@@ -109,7 +115,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.agency
+const entity = client.Agency()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -187,12 +193,12 @@ new LaunchLibrary2SDK(options?: {
 | `utility()` | `Utility` | Deep copy of the SDK utility object. |
 | `prepare(fetchargs?)` | `Promise<FetchDef>` | Build an HTTP request definition without sending it. |
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
-| `Agency(data?)` | `AgencyEntity` | Create a Agency entity instance. |
-| `Astronaut(data?)` | `AstronautEntity` | Create a Astronaut entity instance. |
+| `Agency(data?)` | `AgencyEntity` | Create an Agency entity instance. |
+| `Astronaut(data?)` | `AstronautEntity` | Create an Astronaut entity instance. |
 | `Docking(data?)` | `DockingEntity` | Create a Docking entity instance. |
 | `DockingEvent(data?)` | `DockingEventEntity` | Create a DockingEvent entity instance. |
-| `Event(data?)` | `EventEntity` | Create a Event entity instance. |
-| `Expedition(data?)` | `ExpeditionEntity` | Create a Expedition entity instance. |
+| `Event(data?)` | `EventEntity` | Create an Event entity instance. |
+| `Expedition(data?)` | `ExpeditionEntity` | Create an Expedition entity instance. |
 | `FirstStage(data?)` | `FirstStageEntity` | Create a FirstStage entity instance. |
 | `Launch(data?)` | `LaunchEntity` | Create a Launch entity instance. |
 | `LaunchVehicle(data?)` | `LaunchVehicleEntity` | Create a LaunchVehicle entity instance. |
@@ -218,29 +224,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): LaunchLibrary2SDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -569,7 +576,7 @@ API path: `/config/spacecraft`
 
 ### Agency
 
-Create an instance: `const agency = client.agency`
+Create an instance: `const agency = client.Agency()`
 
 #### Operations
 
@@ -596,19 +603,19 @@ Create an instance: `const agency = client.agency`
 #### Example: Load
 
 ```ts
-const agency = await client.agency.load({ id: 'agency_id' })
+const agency = await client.Agency().load({ id: 'agency_id' })
 ```
 
 #### Example: List
 
 ```ts
-const agencys = await client.agency.list()
+const agencys = await client.Agency().list()
 ```
 
 
 ### Astronaut
 
-Create an instance: `const astronaut = client.astronaut`
+Create an instance: `const astronaut = client.Astronaut()`
 
 #### Operations
 
@@ -637,24 +644,24 @@ Create an instance: `const astronaut = client.astronaut`
 #### Example: Load
 
 ```ts
-const astronaut = await client.astronaut.load({ id: 'astronaut_id' })
+const astronaut = await client.Astronaut().load({ id: 'astronaut_id' })
 ```
 
 #### Example: List
 
 ```ts
-const astronauts = await client.astronaut.list()
+const astronauts = await client.Astronaut().list()
 ```
 
 
 ### Docking
 
-Create an instance: `const docking = client.docking`
+Create an instance: `const docking = client.Docking()`
 
 
 ### DockingEvent
 
-Create an instance: `const docking_event = client.docking_event`
+Create an instance: `const docking_event = client.DockingEvent()`
 
 #### Operations
 
@@ -677,19 +684,19 @@ Create an instance: `const docking_event = client.docking_event`
 #### Example: Load
 
 ```ts
-const docking_event = await client.docking_event.load({ id: 'docking_event_id' })
+const docking_event = await client.DockingEvent().load({ id: 'docking_event_id' })
 ```
 
 #### Example: List
 
 ```ts
-const docking_events = await client.docking_event.list()
+const docking_events = await client.DockingEvent().list()
 ```
 
 
 ### Event
 
-Create an instance: `const event = client.event`
+Create an instance: `const event = client.Event()`
 
 #### Operations
 
@@ -716,19 +723,19 @@ Create an instance: `const event = client.event`
 #### Example: Load
 
 ```ts
-const event = await client.event.load({ id: 'event_id' })
+const event = await client.Event().load({ id: 'event_id' })
 ```
 
 #### Example: List
 
 ```ts
-const events = await client.event.list()
+const events = await client.Event().list()
 ```
 
 
 ### Expedition
 
-Create an instance: `const expedition = client.expedition`
+Create an instance: `const expedition = client.Expedition()`
 
 #### Operations
 
@@ -752,19 +759,19 @@ Create an instance: `const expedition = client.expedition`
 #### Example: Load
 
 ```ts
-const expedition = await client.expedition.load({ id: 'expedition_id' })
+const expedition = await client.Expedition().load({ id: 'expedition_id' })
 ```
 
 #### Example: List
 
 ```ts
-const expeditions = await client.expedition.list()
+const expeditions = await client.Expedition().list()
 ```
 
 
 ### FirstStage
 
-Create an instance: `const first_stage = client.first_stage`
+Create an instance: `const first_stage = client.FirstStage()`
 
 #### Operations
 
@@ -788,19 +795,19 @@ Create an instance: `const first_stage = client.first_stage`
 #### Example: Load
 
 ```ts
-const first_stage = await client.first_stage.load({ id: 'first_stage_id' })
+const first_stage = await client.FirstStage().load({ id: 'first_stage_id' })
 ```
 
 #### Example: List
 
 ```ts
-const first_stages = await client.first_stage.list()
+const first_stages = await client.FirstStage().list()
 ```
 
 
 ### Launch
 
-Create an instance: `const launch = client.launch`
+Create an instance: `const launch = client.Launch()`
 
 #### Operations
 
@@ -831,19 +838,19 @@ Create an instance: `const launch = client.launch`
 #### Example: Load
 
 ```ts
-const launch = await client.launch.load({ id: 'launch_id' })
+const launch = await client.Launch().load({ id: 'launch_id' })
 ```
 
 #### Example: List
 
 ```ts
-const launchs = await client.launch.list()
+const launchs = await client.Launch().list()
 ```
 
 
 ### LaunchVehicle
 
-Create an instance: `const launch_vehicle = client.launch_vehicle`
+Create an instance: `const launch_vehicle = client.LaunchVehicle()`
 
 #### Operations
 
@@ -881,13 +888,13 @@ Create an instance: `const launch_vehicle = client.launch_vehicle`
 #### Example: List
 
 ```ts
-const launch_vehicles = await client.launch_vehicle.list()
+const launch_vehicles = await client.LaunchVehicle().list()
 ```
 
 
 ### Launcher
 
-Create an instance: `const launcher = client.launcher`
+Create an instance: `const launcher = client.Launcher()`
 
 #### Operations
 
@@ -925,13 +932,13 @@ Create an instance: `const launcher = client.launcher`
 #### Example: Load
 
 ```ts
-const launcher = await client.launcher.load({ id: 'launcher_id' })
+const launcher = await client.Launcher().load({ id: 'launcher_id' })
 ```
 
 
 ### Location
 
-Create an instance: `const location = client.location`
+Create an instance: `const location = client.Location()`
 
 #### Operations
 
@@ -955,19 +962,19 @@ Create an instance: `const location = client.location`
 #### Example: Load
 
 ```ts
-const location = await client.location.load({ id: 'location_id' })
+const location = await client.Location().load({ id: 'location_id' })
 ```
 
 #### Example: List
 
 ```ts
-const locations = await client.location.list()
+const locations = await client.Location().list()
 ```
 
 
 ### Pad
 
-Create an instance: `const pad = client.pad`
+Create an instance: `const pad = client.Pad()`
 
 #### Operations
 
@@ -996,24 +1003,24 @@ Create an instance: `const pad = client.pad`
 #### Example: Load
 
 ```ts
-const pad = await client.pad.load({ id: 'pad_id' })
+const pad = await client.Pad().load({ id: 'pad_id' })
 ```
 
 #### Example: List
 
 ```ts
-const pads = await client.pad.list()
+const pads = await client.Pad().list()
 ```
 
 
 ### ReusableFirstStage
 
-Create an instance: `const reusable_first_stage = client.reusable_first_stage`
+Create an instance: `const reusable_first_stage = client.ReusableFirstStage()`
 
 
 ### SpaceStation
 
-Create an instance: `const space_station = client.space_station`
+Create an instance: `const space_station = client.SpaceStation()`
 
 #### Operations
 
@@ -1041,19 +1048,19 @@ Create an instance: `const space_station = client.space_station`
 #### Example: Load
 
 ```ts
-const space_station = await client.space_station.load({ id: 'space_station_id' })
+const space_station = await client.SpaceStation().load({ id: 'space_station_id' })
 ```
 
 #### Example: List
 
 ```ts
-const space_stations = await client.space_station.list()
+const space_stations = await client.SpaceStation().list()
 ```
 
 
 ### Spacecraft
 
-Create an instance: `const spacecraft = client.spacecraft`
+Create an instance: `const spacecraft = client.Spacecraft()`
 
 #### Operations
 
@@ -1085,13 +1092,13 @@ Create an instance: `const spacecraft = client.spacecraft`
 #### Example: Load
 
 ```ts
-const spacecraft = await client.spacecraft.load({ id: 'spacecraft_id' })
+const spacecraft = await client.Spacecraft().load({ id: 'spacecraft_id' })
 ```
 
 #### Example: List
 
 ```ts
-const spacecrafts = await client.spacecraft.list()
+const spacecrafts = await client.Spacecraft().list()
 ```
 
 
@@ -1162,7 +1169,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const agency = client.agency
+const agency = client.Agency()
 await agency.load({ id: "example_id" })
 
 // agency.data() now returns the loaded agency data

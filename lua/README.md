@@ -31,26 +31,26 @@ local sdk = require("launch-library2_sdk")
 local client = sdk.new()
 ```
 
-### 2. List agencys
+### 2. List agency records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:agency():list()
+local agencys, err = client:Agency():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(agencys) do
+  print(item["id"], item["name"])
 end
 ```
 
 ### 3. Load an agency
 
 ```lua
-local result, err = client:agency():load({ id = "example_id" })
+local agency, err = client:Agency():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(agency)
 ```
 
 
@@ -96,8 +96,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:agency():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Agency():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -175,12 +175,12 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> table, err` | Build an HTTP request definition without sending. |
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
-| `Agency` | `(data) -> AgencyEntity` | Create a Agency entity instance. |
-| `Astronaut` | `(data) -> AstronautEntity` | Create a Astronaut entity instance. |
+| `Agency` | `(data) -> AgencyEntity` | Create an Agency entity instance. |
+| `Astronaut` | `(data) -> AstronautEntity` | Create an Astronaut entity instance. |
 | `Docking` | `(data) -> DockingEntity` | Create a Docking entity instance. |
 | `DockingEvent` | `(data) -> DockingEventEntity` | Create a DockingEvent entity instance. |
-| `Event` | `(data) -> EventEntity` | Create a Event entity instance. |
-| `Expedition` | `(data) -> ExpeditionEntity` | Create a Expedition entity instance. |
+| `Event` | `(data) -> EventEntity` | Create an Event entity instance. |
+| `Expedition` | `(data) -> ExpeditionEntity` | Create an Expedition entity instance. |
 | `FirstStage` | `(data) -> FirstStageEntity` | Create a FirstStage entity instance. |
 | `Launch` | `(data) -> LaunchEntity` | Create a Launch entity instance. |
 | `LaunchVehicle` | `(data) -> LaunchVehicleEntity` | Create a LaunchVehicle entity instance. |
@@ -211,17 +211,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local agency, err = client:Agency():load({ id = "example_id" })
+    if err then error(err) end
+    -- agency is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -522,7 +527,7 @@ API path: `/config/spacecraft`
 
 ### Agency
 
-Create an instance: `const agency = client.agency`
+Create an instance: `local agency = client:Agency(nil)`
 
 #### Operations
 
@@ -548,20 +553,20 @@ Create an instance: `const agency = client.agency`
 
 #### Example: Load
 
-```ts
-const agency = await client.agency.load({ id: 'agency_id' })
+```lua
+local agency, err = client:Agency():load({ id = "agency_id" })
 ```
 
 #### Example: List
 
-```ts
-const agencys = await client.agency.list()
+```lua
+local agencys, err = client:Agency():list()
 ```
 
 
 ### Astronaut
 
-Create an instance: `const astronaut = client.astronaut`
+Create an instance: `local astronaut = client:Astronaut(nil)`
 
 #### Operations
 
@@ -589,25 +594,25 @@ Create an instance: `const astronaut = client.astronaut`
 
 #### Example: Load
 
-```ts
-const astronaut = await client.astronaut.load({ id: 'astronaut_id' })
+```lua
+local astronaut, err = client:Astronaut():load({ id = "astronaut_id" })
 ```
 
 #### Example: List
 
-```ts
-const astronauts = await client.astronaut.list()
+```lua
+local astronauts, err = client:Astronaut():list()
 ```
 
 
 ### Docking
 
-Create an instance: `const docking = client.docking`
+Create an instance: `local docking = client:Docking(nil)`
 
 
 ### DockingEvent
 
-Create an instance: `const docking_event = client.docking_event`
+Create an instance: `local docking_event = client:DockingEvent(nil)`
 
 #### Operations
 
@@ -629,20 +634,20 @@ Create an instance: `const docking_event = client.docking_event`
 
 #### Example: Load
 
-```ts
-const docking_event = await client.docking_event.load({ id: 'docking_event_id' })
+```lua
+local docking_event, err = client:DockingEvent():load({ id = "docking_event_id" })
 ```
 
 #### Example: List
 
-```ts
-const docking_events = await client.docking_event.list()
+```lua
+local docking_events, err = client:DockingEvent():list()
 ```
 
 
 ### Event
 
-Create an instance: `const event = client.event`
+Create an instance: `local event = client:Event(nil)`
 
 #### Operations
 
@@ -668,20 +673,20 @@ Create an instance: `const event = client.event`
 
 #### Example: Load
 
-```ts
-const event = await client.event.load({ id: 'event_id' })
+```lua
+local event, err = client:Event():load({ id = "event_id" })
 ```
 
 #### Example: List
 
-```ts
-const events = await client.event.list()
+```lua
+local events, err = client:Event():list()
 ```
 
 
 ### Expedition
 
-Create an instance: `const expedition = client.expedition`
+Create an instance: `local expedition = client:Expedition(nil)`
 
 #### Operations
 
@@ -704,20 +709,20 @@ Create an instance: `const expedition = client.expedition`
 
 #### Example: Load
 
-```ts
-const expedition = await client.expedition.load({ id: 'expedition_id' })
+```lua
+local expedition, err = client:Expedition():load({ id = "expedition_id" })
 ```
 
 #### Example: List
 
-```ts
-const expeditions = await client.expedition.list()
+```lua
+local expeditions, err = client:Expedition():list()
 ```
 
 
 ### FirstStage
 
-Create an instance: `const first_stage = client.first_stage`
+Create an instance: `local first_stage = client:FirstStage(nil)`
 
 #### Operations
 
@@ -740,20 +745,20 @@ Create an instance: `const first_stage = client.first_stage`
 
 #### Example: Load
 
-```ts
-const first_stage = await client.first_stage.load({ id: 'first_stage_id' })
+```lua
+local first_stage, err = client:FirstStage():load({ id = "first_stage_id" })
 ```
 
 #### Example: List
 
-```ts
-const first_stages = await client.first_stage.list()
+```lua
+local first_stages, err = client:FirstStage():list()
 ```
 
 
 ### Launch
 
-Create an instance: `const launch = client.launch`
+Create an instance: `local launch = client:Launch(nil)`
 
 #### Operations
 
@@ -783,20 +788,20 @@ Create an instance: `const launch = client.launch`
 
 #### Example: Load
 
-```ts
-const launch = await client.launch.load({ id: 'launch_id' })
+```lua
+local launch, err = client:Launch():load({ id = "launch_id" })
 ```
 
 #### Example: List
 
-```ts
-const launchs = await client.launch.list()
+```lua
+local launchs, err = client:Launch():list()
 ```
 
 
 ### LaunchVehicle
 
-Create an instance: `const launch_vehicle = client.launch_vehicle`
+Create an instance: `local launch_vehicle = client:LaunchVehicle(nil)`
 
 #### Operations
 
@@ -833,14 +838,14 @@ Create an instance: `const launch_vehicle = client.launch_vehicle`
 
 #### Example: List
 
-```ts
-const launch_vehicles = await client.launch_vehicle.list()
+```lua
+local launch_vehicles, err = client:LaunchVehicle():list()
 ```
 
 
 ### Launcher
 
-Create an instance: `const launcher = client.launcher`
+Create an instance: `local launcher = client:Launcher(nil)`
 
 #### Operations
 
@@ -877,14 +882,14 @@ Create an instance: `const launcher = client.launcher`
 
 #### Example: Load
 
-```ts
-const launcher = await client.launcher.load({ id: 'launcher_id' })
+```lua
+local launcher, err = client:Launcher():load({ id = "launcher_id" })
 ```
 
 
 ### Location
 
-Create an instance: `const location = client.location`
+Create an instance: `local location = client:Location(nil)`
 
 #### Operations
 
@@ -907,20 +912,20 @@ Create an instance: `const location = client.location`
 
 #### Example: Load
 
-```ts
-const location = await client.location.load({ id: 'location_id' })
+```lua
+local location, err = client:Location():load({ id = "location_id" })
 ```
 
 #### Example: List
 
-```ts
-const locations = await client.location.list()
+```lua
+local locations, err = client:Location():list()
 ```
 
 
 ### Pad
 
-Create an instance: `const pad = client.pad`
+Create an instance: `local pad = client:Pad(nil)`
 
 #### Operations
 
@@ -948,25 +953,25 @@ Create an instance: `const pad = client.pad`
 
 #### Example: Load
 
-```ts
-const pad = await client.pad.load({ id: 'pad_id' })
+```lua
+local pad, err = client:Pad():load({ id = "pad_id" })
 ```
 
 #### Example: List
 
-```ts
-const pads = await client.pad.list()
+```lua
+local pads, err = client:Pad():list()
 ```
 
 
 ### ReusableFirstStage
 
-Create an instance: `const reusable_first_stage = client.reusable_first_stage`
+Create an instance: `local reusable_first_stage = client:ReusableFirstStage(nil)`
 
 
 ### SpaceStation
 
-Create an instance: `const space_station = client.space_station`
+Create an instance: `local space_station = client:SpaceStation(nil)`
 
 #### Operations
 
@@ -993,20 +998,20 @@ Create an instance: `const space_station = client.space_station`
 
 #### Example: Load
 
-```ts
-const space_station = await client.space_station.load({ id: 'space_station_id' })
+```lua
+local space_station, err = client:SpaceStation():load({ id = "space_station_id" })
 ```
 
 #### Example: List
 
-```ts
-const space_stations = await client.space_station.list()
+```lua
+local space_stations, err = client:SpaceStation():list()
 ```
 
 
 ### Spacecraft
 
-Create an instance: `const spacecraft = client.spacecraft`
+Create an instance: `local spacecraft = client:Spacecraft(nil)`
 
 #### Operations
 
@@ -1037,14 +1042,14 @@ Create an instance: `const spacecraft = client.spacecraft`
 
 #### Example: Load
 
-```ts
-const spacecraft = await client.spacecraft.load({ id: 'spacecraft_id' })
+```lua
+local spacecraft, err = client:Spacecraft():load({ id = "spacecraft_id" })
 ```
 
 #### Example: List
 
-```ts
-const spacecrafts = await client.spacecraft.list()
+```lua
+local spacecrafts, err = client:Spacecraft():list()
 ```
 
 
@@ -1119,7 +1124,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local agency = client:agency()
+local agency = client:Agency()
 agency:load({ id = "example_id" })
 
 -- agency:data_get() now returns the loaded agency data

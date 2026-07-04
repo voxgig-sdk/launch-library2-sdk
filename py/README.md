@@ -31,24 +31,28 @@ from launchlibrary2_sdk import LaunchLibrary2SDK
 client = LaunchLibrary2SDK()
 ```
 
-### 2. List agencys
+### 2. List agency records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.agency.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    agencys = client.Agency().list({})
+    for agency in agencys:
+        print(agency)
 except Exception as err:
     print(f"list failed: {err}")
 ```
 
 ### 3. Load an agency
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.agency.load({"id": "example_id"})
-    print(result)
+    agency = client.Agency().load({"id": "example_id"})
+    print(agency)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -96,8 +100,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = LaunchLibrary2SDK.test()
 
-result = client.agency.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+agency = client.Agency().load({"id": "test01"})
+# agency contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -173,12 +178,12 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `Agency` | `(data) -> AgencyEntity` | Create a Agency entity instance. |
-| `Astronaut` | `(data) -> AstronautEntity` | Create a Astronaut entity instance. |
+| `Agency` | `(data) -> AgencyEntity` | Create an Agency entity instance. |
+| `Astronaut` | `(data) -> AstronautEntity` | Create an Astronaut entity instance. |
 | `Docking` | `(data) -> DockingEntity` | Create a Docking entity instance. |
 | `DockingEvent` | `(data) -> DockingEventEntity` | Create a DockingEvent entity instance. |
-| `Event` | `(data) -> EventEntity` | Create a Event entity instance. |
-| `Expedition` | `(data) -> ExpeditionEntity` | Create a Expedition entity instance. |
+| `Event` | `(data) -> EventEntity` | Create an Event entity instance. |
+| `Expedition` | `(data) -> ExpeditionEntity` | Create an Expedition entity instance. |
 | `FirstStage` | `(data) -> FirstStageEntity` | Create a FirstStage entity instance. |
 | `Launch` | `(data) -> LaunchEntity` | Create a Launch entity instance. |
 | `LaunchVehicle` | `(data) -> LaunchVehicleEntity` | Create a LaunchVehicle entity instance. |
@@ -524,7 +529,7 @@ API path: `/config/spacecraft`
 
 ### Agency
 
-Create an instance: `const agency = client.agency`
+Create an instance: `agency = client.Agency()`
 
 #### Operations
 
@@ -550,20 +555,20 @@ Create an instance: `const agency = client.agency`
 
 #### Example: Load
 
-```ts
-const agency = await client.agency.load({ id: 'agency_id' })
+```python
+agency = client.Agency().load({"id": "agency_id"})
 ```
 
 #### Example: List
 
-```ts
-const agencys = await client.agency.list()
+```python
+agencys = client.Agency().list({})
 ```
 
 
 ### Astronaut
 
-Create an instance: `const astronaut = client.astronaut`
+Create an instance: `astronaut = client.Astronaut()`
 
 #### Operations
 
@@ -591,25 +596,25 @@ Create an instance: `const astronaut = client.astronaut`
 
 #### Example: Load
 
-```ts
-const astronaut = await client.astronaut.load({ id: 'astronaut_id' })
+```python
+astronaut = client.Astronaut().load({"id": "astronaut_id"})
 ```
 
 #### Example: List
 
-```ts
-const astronauts = await client.astronaut.list()
+```python
+astronauts = client.Astronaut().list({})
 ```
 
 
 ### Docking
 
-Create an instance: `const docking = client.docking`
+Create an instance: `docking = client.Docking()`
 
 
 ### DockingEvent
 
-Create an instance: `const docking_event = client.docking_event`
+Create an instance: `docking_event = client.DockingEvent()`
 
 #### Operations
 
@@ -631,20 +636,20 @@ Create an instance: `const docking_event = client.docking_event`
 
 #### Example: Load
 
-```ts
-const docking_event = await client.docking_event.load({ id: 'docking_event_id' })
+```python
+docking_event = client.DockingEvent().load({"id": "docking_event_id"})
 ```
 
 #### Example: List
 
-```ts
-const docking_events = await client.docking_event.list()
+```python
+docking_events = client.DockingEvent().list({})
 ```
 
 
 ### Event
 
-Create an instance: `const event = client.event`
+Create an instance: `event = client.Event()`
 
 #### Operations
 
@@ -670,20 +675,20 @@ Create an instance: `const event = client.event`
 
 #### Example: Load
 
-```ts
-const event = await client.event.load({ id: 'event_id' })
+```python
+event = client.Event().load({"id": "event_id"})
 ```
 
 #### Example: List
 
-```ts
-const events = await client.event.list()
+```python
+events = client.Event().list({})
 ```
 
 
 ### Expedition
 
-Create an instance: `const expedition = client.expedition`
+Create an instance: `expedition = client.Expedition()`
 
 #### Operations
 
@@ -706,20 +711,20 @@ Create an instance: `const expedition = client.expedition`
 
 #### Example: Load
 
-```ts
-const expedition = await client.expedition.load({ id: 'expedition_id' })
+```python
+expedition = client.Expedition().load({"id": "expedition_id"})
 ```
 
 #### Example: List
 
-```ts
-const expeditions = await client.expedition.list()
+```python
+expeditions = client.Expedition().list({})
 ```
 
 
 ### FirstStage
 
-Create an instance: `const first_stage = client.first_stage`
+Create an instance: `first_stage = client.FirstStage()`
 
 #### Operations
 
@@ -742,20 +747,20 @@ Create an instance: `const first_stage = client.first_stage`
 
 #### Example: Load
 
-```ts
-const first_stage = await client.first_stage.load({ id: 'first_stage_id' })
+```python
+first_stage = client.FirstStage().load({"id": "first_stage_id"})
 ```
 
 #### Example: List
 
-```ts
-const first_stages = await client.first_stage.list()
+```python
+first_stages = client.FirstStage().list({})
 ```
 
 
 ### Launch
 
-Create an instance: `const launch = client.launch`
+Create an instance: `launch = client.Launch()`
 
 #### Operations
 
@@ -785,20 +790,20 @@ Create an instance: `const launch = client.launch`
 
 #### Example: Load
 
-```ts
-const launch = await client.launch.load({ id: 'launch_id' })
+```python
+launch = client.Launch().load({"id": "launch_id"})
 ```
 
 #### Example: List
 
-```ts
-const launchs = await client.launch.list()
+```python
+launchs = client.Launch().list({})
 ```
 
 
 ### LaunchVehicle
 
-Create an instance: `const launch_vehicle = client.launch_vehicle`
+Create an instance: `launch_vehicle = client.LaunchVehicle()`
 
 #### Operations
 
@@ -835,14 +840,14 @@ Create an instance: `const launch_vehicle = client.launch_vehicle`
 
 #### Example: List
 
-```ts
-const launch_vehicles = await client.launch_vehicle.list()
+```python
+launch_vehicles = client.LaunchVehicle().list({})
 ```
 
 
 ### Launcher
 
-Create an instance: `const launcher = client.launcher`
+Create an instance: `launcher = client.Launcher()`
 
 #### Operations
 
@@ -879,14 +884,14 @@ Create an instance: `const launcher = client.launcher`
 
 #### Example: Load
 
-```ts
-const launcher = await client.launcher.load({ id: 'launcher_id' })
+```python
+launcher = client.Launcher().load({"id": "launcher_id"})
 ```
 
 
 ### Location
 
-Create an instance: `const location = client.location`
+Create an instance: `location = client.Location()`
 
 #### Operations
 
@@ -909,20 +914,20 @@ Create an instance: `const location = client.location`
 
 #### Example: Load
 
-```ts
-const location = await client.location.load({ id: 'location_id' })
+```python
+location = client.Location().load({"id": "location_id"})
 ```
 
 #### Example: List
 
-```ts
-const locations = await client.location.list()
+```python
+locations = client.Location().list({})
 ```
 
 
 ### Pad
 
-Create an instance: `const pad = client.pad`
+Create an instance: `pad = client.Pad()`
 
 #### Operations
 
@@ -950,25 +955,25 @@ Create an instance: `const pad = client.pad`
 
 #### Example: Load
 
-```ts
-const pad = await client.pad.load({ id: 'pad_id' })
+```python
+pad = client.Pad().load({"id": "pad_id"})
 ```
 
 #### Example: List
 
-```ts
-const pads = await client.pad.list()
+```python
+pads = client.Pad().list({})
 ```
 
 
 ### ReusableFirstStage
 
-Create an instance: `const reusable_first_stage = client.reusable_first_stage`
+Create an instance: `reusable_first_stage = client.ReusableFirstStage()`
 
 
 ### SpaceStation
 
-Create an instance: `const space_station = client.space_station`
+Create an instance: `space_station = client.SpaceStation()`
 
 #### Operations
 
@@ -995,20 +1000,20 @@ Create an instance: `const space_station = client.space_station`
 
 #### Example: Load
 
-```ts
-const space_station = await client.space_station.load({ id: 'space_station_id' })
+```python
+space_station = client.SpaceStation().load({"id": "space_station_id"})
 ```
 
 #### Example: List
 
-```ts
-const space_stations = await client.space_station.list()
+```python
+space_stations = client.SpaceStation().list({})
 ```
 
 
 ### Spacecraft
 
-Create an instance: `const spacecraft = client.spacecraft`
+Create an instance: `spacecraft = client.Spacecraft()`
 
 #### Operations
 
@@ -1039,14 +1044,14 @@ Create an instance: `const spacecraft = client.spacecraft`
 
 #### Example: Load
 
-```ts
-const spacecraft = await client.spacecraft.load({ id: 'spacecraft_id' })
+```python
+spacecraft = client.Spacecraft().load({"id": "spacecraft_id"})
 ```
 
 #### Example: List
 
-```ts
-const spacecrafts = await client.spacecraft.list()
+```python
+spacecrafts = client.Spacecraft().list({})
 ```
 
 
@@ -1120,7 +1125,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-agency = client.agency
+agency = client.Agency()
 agency.load({"id": "example_id"})
 
 # agency.data_get() now returns the loaded agency data

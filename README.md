@@ -26,9 +26,11 @@ import { LaunchLibrary2SDK } from '@voxgig-sdk/launch-library2'
 
 const client = new LaunchLibrary2SDK()
 
-// List all agencys
-const agencys = await client.agency.list()
-console.log(agencys.data)
+// List all agencys (returns Agency[])
+const agencys = await client.Agency().list()
+for (const agency of agencys) {
+  console.log(agency)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -97,12 +99,13 @@ from launchlibrary2_sdk import LaunchLibrary2SDK
 
 client = LaunchLibrary2SDK()
 
-# List all agencys
-agencys = client.agency.list()
-print(agencys)
+# List all agencys (returns a list, raises on error)
+agencys = client.Agency().list({})
+for agency in agencys:
+    print(agency)
 
-# Load a specific agency
-agency = client.agency.load({"id": "example_id"})
+# Load a specific agency (returns the record, raises on error)
+agency = client.Agency().load({"id": "example_id"})
 print(agency)
 ```
 
@@ -114,12 +117,12 @@ require_once 'launchlibrary2_sdk.php';
 
 $client = new LaunchLibrary2SDK();
 
-// List all agencys (throws on error)
-$agencys = $client->agency()->list();
+// List all agencys (returns an array; throws on error)
+$agencys = $client->Agency()->list();
 print_r($agencys);
 
-// Load a specific agency
-$agency = $client->agency()->load(["id" => "example_id"]);
+// Load a specific agency (returns the bare record; throws on error)
+$agency = $client->Agency()->load(["id" => "example_id"]);
 print_r($agency);
 ```
 
@@ -142,12 +145,12 @@ require_relative "LaunchLibrary2_sdk"
 
 client = LaunchLibrary2SDK.new
 
-# List all agencys
-agencys = client.agency.list
+# List all agencys (returns an Array; raises on error)
+agencys = client.Agency.list
 puts agencys
 
-# Load a specific agency
-agency = client.agency.load({ "id" => "example_id" })
+# Load a specific agency (returns the bare record; raises on error)
+agency = client.Agency.load({ "id" => "example_id" })
 puts agency
 ```
 
@@ -159,11 +162,11 @@ local sdk = require("launch-library2_sdk")
 local client = sdk.new()
 
 -- List all agencys
-local agencys, err = client:agency():list()
+local agencys, err = client:Agency():list()
 print(agencys)
 
 -- Load a specific agency
-local agency, err = client:agency():load({ id = "example_id" })
+local agency, err = client:Agency():load({ id = "example_id" })
 print(agency)
 ```
 
@@ -176,22 +179,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = LaunchLibrary2SDK.test()
-const result = await client.agency.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const agency = await client.Agency().load({ id: 1 })
+// agency is a bare Agency populated with mock data
+console.log(agency)
 ```
 
 ### Python
 
 ```python
 client = LaunchLibrary2SDK.test()
-result = client.agency.load({"id": "test01"})
+agency = client.Agency().load({"id": "test01"})
+print(agency)
 ```
 
 ### PHP
 
 ```php
-$client = LaunchLibrary2SDK::test();
-$result = $client->agency()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = LaunchLibrary2SDK::test([
+    "entity" => ["agency" => ["test01" => ["id" => "test01"]]],
+]);
+$agency = $client->Agency()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -206,15 +214,18 @@ result, err := client.Agency(nil).Load(
 ### Ruby
 
 ```ruby
-client = LaunchLibrary2SDK.test
-result = client.agency.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = LaunchLibrary2SDK.test({
+  "entity" => { "agency" => { "test01" => { "id" => "test01" } } },
+})
+agency = client.Agency.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:agency():load({ id = "test01" })
+local result, err = client:Agency():load({ id = "test01" })
 ```
 
 ## How it works
@@ -262,6 +273,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

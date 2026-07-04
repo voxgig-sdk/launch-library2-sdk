@@ -141,7 +141,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## AgencyEntity
 
 ```php
-$agency = $client->agency();
+$agency = $client->Agency();
 ```
 
 ### Fields
@@ -166,7 +166,7 @@ $agency = $client->agency();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->agency()->list([]);
+$results = $client->Agency()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -174,7 +174,7 @@ $results = $client->agency()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->agency()->load(["id" => "agency_id"]);
+$result = $client->Agency()->load(["id" => "agency_id"]);
 ```
 
 ### Common Methods
@@ -210,7 +210,7 @@ Return the entity name.
 ## AstronautEntity
 
 ```php
-$astronaut = $client->astronaut();
+$astronaut = $client->Astronaut();
 ```
 
 ### Fields
@@ -237,7 +237,7 @@ $astronaut = $client->astronaut();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->astronaut()->list([]);
+$results = $client->Astronaut()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -245,7 +245,7 @@ $results = $client->astronaut()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->astronaut()->load(["id" => "astronaut_id"]);
+$result = $client->Astronaut()->load(["id" => "astronaut_id"]);
 ```
 
 ### Common Methods
@@ -281,7 +281,7 @@ Return the entity name.
 ## DockingEntity
 
 ```php
-$docking = $client->docking();
+$docking = $client->Docking();
 ```
 
 ### Common Methods
@@ -317,7 +317,7 @@ Return the entity name.
 ## DockingEventEntity
 
 ```php
-$docking_event = $client->docking_event();
+$docking_event = $client->DockingEvent();
 ```
 
 ### Fields
@@ -338,7 +338,7 @@ $docking_event = $client->docking_event();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->docking_event()->list([]);
+$results = $client->DockingEvent()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -346,7 +346,7 @@ $results = $client->docking_event()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->docking_event()->load(["id" => "docking_event_id"]);
+$result = $client->DockingEvent()->load(["id" => "docking_event_id"]);
 ```
 
 ### Common Methods
@@ -382,7 +382,7 @@ Return the entity name.
 ## EventEntity
 
 ```php
-$event = $client->event();
+$event = $client->Event();
 ```
 
 ### Fields
@@ -407,7 +407,7 @@ $event = $client->event();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->event()->list([]);
+$results = $client->Event()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -415,7 +415,7 @@ $results = $client->event()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->event()->load(["id" => "event_id"]);
+$result = $client->Event()->load(["id" => "event_id"]);
 ```
 
 ### Common Methods
@@ -451,7 +451,7 @@ Return the entity name.
 ## ExpeditionEntity
 
 ```php
-$expedition = $client->expedition();
+$expedition = $client->Expedition();
 ```
 
 ### Fields
@@ -473,7 +473,7 @@ $expedition = $client->expedition();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->expedition()->list([]);
+$results = $client->Expedition()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -481,7 +481,7 @@ $results = $client->expedition()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->expedition()->load(["id" => "expedition_id"]);
+$result = $client->Expedition()->load(["id" => "expedition_id"]);
 ```
 
 ### Common Methods
@@ -517,7 +517,7 @@ Return the entity name.
 ## FirstStageEntity
 
 ```php
-$first_stage = $client->first_stage();
+$first_stage = $client->FirstStage();
 ```
 
 ### Fields
@@ -539,7 +539,7 @@ $first_stage = $client->first_stage();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->first_stage()->list([]);
+$results = $client->FirstStage()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -547,7 +547,7 @@ $results = $client->first_stage()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->first_stage()->load(["id" => "first_stage_id"]);
+$result = $client->FirstStage()->load(["id" => "first_stage_id"]);
 ```
 
 ### Common Methods
@@ -583,7 +583,7 @@ Return the entity name.
 ## LaunchEntity
 
 ```php
-$launch = $client->launch();
+$launch = $client->Launch();
 ```
 
 ### Fields
@@ -612,7 +612,7 @@ $launch = $client->launch();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->launch()->list([]);
+$results = $client->Launch()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -620,7 +620,7 @@ $results = $client->launch()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->launch()->load(["id" => "launch_id"]);
+$result = $client->Launch()->load(["id" => "launch_id"]);
 ```
 
 ### Common Methods
@@ -656,7 +656,7 @@ Return the entity name.
 ## LaunchVehicleEntity
 
 ```php
-$launch_vehicle = $client->launch_vehicle();
+$launch_vehicle = $client->LaunchVehicle();
 ```
 
 ### Fields
@@ -693,7 +693,7 @@ $launch_vehicle = $client->launch_vehicle();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->launch_vehicle()->list([]);
+$results = $client->LaunchVehicle()->list([]);
 ```
 
 ### Common Methods
@@ -729,7 +729,7 @@ Return the entity name.
 ## LauncherEntity
 
 ```php
-$launcher = $client->launcher();
+$launcher = $client->Launcher();
 ```
 
 ### Fields
@@ -766,7 +766,7 @@ $launcher = $client->launcher();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->launcher()->load(["id" => "launcher_id"]);
+$result = $client->Launcher()->load(["id" => "launcher_id"]);
 ```
 
 ### Common Methods
@@ -802,7 +802,7 @@ Return the entity name.
 ## LocationEntity
 
 ```php
-$location = $client->location();
+$location = $client->Location();
 ```
 
 ### Fields
@@ -824,7 +824,7 @@ $location = $client->location();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->location()->list([]);
+$results = $client->Location()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -832,7 +832,7 @@ $results = $client->location()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->location()->load(["id" => "location_id"]);
+$result = $client->Location()->load(["id" => "location_id"]);
 ```
 
 ### Common Methods
@@ -868,7 +868,7 @@ Return the entity name.
 ## PadEntity
 
 ```php
-$pad = $client->pad();
+$pad = $client->Pad();
 ```
 
 ### Fields
@@ -895,7 +895,7 @@ $pad = $client->pad();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->pad()->list([]);
+$results = $client->Pad()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -903,7 +903,7 @@ $results = $client->pad()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->pad()->load(["id" => "pad_id"]);
+$result = $client->Pad()->load(["id" => "pad_id"]);
 ```
 
 ### Common Methods
@@ -939,7 +939,7 @@ Return the entity name.
 ## ReusableFirstStageEntity
 
 ```php
-$reusable_first_stage = $client->reusable_first_stage();
+$reusable_first_stage = $client->ReusableFirstStage();
 ```
 
 ### Common Methods
@@ -975,7 +975,7 @@ Return the entity name.
 ## SpaceStationEntity
 
 ```php
-$space_station = $client->space_station();
+$space_station = $client->SpaceStation();
 ```
 
 ### Fields
@@ -1001,7 +1001,7 @@ $space_station = $client->space_station();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->space_station()->list([]);
+$results = $client->SpaceStation()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -1009,7 +1009,7 @@ $results = $client->space_station()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->space_station()->load(["id" => "space_station_id"]);
+$result = $client->SpaceStation()->load(["id" => "space_station_id"]);
 ```
 
 ### Common Methods
@@ -1045,7 +1045,7 @@ Return the entity name.
 ## SpacecraftEntity
 
 ```php
-$spacecraft = $client->spacecraft();
+$spacecraft = $client->Spacecraft();
 ```
 
 ### Fields
@@ -1075,7 +1075,7 @@ $spacecraft = $client->spacecraft();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->spacecraft()->list([]);
+$results = $client->Spacecraft()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -1083,7 +1083,7 @@ $results = $client->spacecraft()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->spacecraft()->load(["id" => "spacecraft_id"]);
+$result = $client->Spacecraft()->load(["id" => "spacecraft_id"]);
 ```
 
 ### Common Methods

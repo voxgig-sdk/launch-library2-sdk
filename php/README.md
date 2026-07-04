@@ -29,18 +29,16 @@ require_once 'launchlibrary2_sdk.php';
 $client = new LaunchLibrary2SDK();
 ```
 
-### 2. List agencys
+### 2. List agency records
 
 ```php
 try {
-    $result = $client->agency()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Agency records — iterate directly.
+    $agencys = $client->Agency()->list();
+    foreach ($agencys as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -49,9 +47,10 @@ try {
 
 ```php
 try {
-    $result = $client->agency()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Agency record (throws on error).
+    $agency = $client->Agency()->load(["id" => "example_id"]);
+    print_r($agency);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -97,13 +96,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = LaunchLibrary2SDK::test();
+$client = LaunchLibrary2SDK::test([
+    "entity" => ["agency" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->agency()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$agency = $client->Agency()->load(["id" => "test01"]);
+print_r($agency);
 ```
 
 ### Use a custom fetch function
@@ -182,12 +185,12 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `get_utility` | `(): Utility` | Copy of the SDK utility object. |
 | `prepare` | `(array $fetchargs): array` | Build an HTTP request definition without sending. |
 | `direct` | `(array $fetchargs): array` | Build and send an HTTP request. |
-| `Agency` | `($data): AgencyEntity` | Create a Agency entity instance. |
-| `Astronaut` | `($data): AstronautEntity` | Create a Astronaut entity instance. |
+| `Agency` | `($data): AgencyEntity` | Create an Agency entity instance. |
+| `Astronaut` | `($data): AstronautEntity` | Create an Astronaut entity instance. |
 | `Docking` | `($data): DockingEntity` | Create a Docking entity instance. |
 | `DockingEvent` | `($data): DockingEventEntity` | Create a DockingEvent entity instance. |
-| `Event` | `($data): EventEntity` | Create a Event entity instance. |
-| `Expedition` | `($data): ExpeditionEntity` | Create a Expedition entity instance. |
+| `Event` | `($data): EventEntity` | Create an Event entity instance. |
+| `Expedition` | `($data): ExpeditionEntity` | Create an Expedition entity instance. |
 | `FirstStage` | `($data): FirstStageEntity` | Create a FirstStage entity instance. |
 | `Launch` | `($data): LaunchEntity` | Create a Launch entity instance. |
 | `LaunchVehicle` | `($data): LaunchVehicleEntity` | Create a LaunchVehicle entity instance. |
@@ -533,7 +536,7 @@ API path: `/config/spacecraft`
 
 ### Agency
 
-Create an instance: `const agency = client.agency`
+Create an instance: `$agency = $client->Agency();`
 
 #### Operations
 
@@ -559,20 +562,22 @@ Create an instance: `const agency = client.agency`
 
 #### Example: Load
 
-```ts
-const agency = await client.agency.load({ id: 'agency_id' })
+```php
+// load() returns the bare Agency record (throws on error).
+$agency = $client->Agency()->load(["id" => "agency_id"]);
 ```
 
 #### Example: List
 
-```ts
-const agencys = await client.agency.list()
+```php
+// list() returns an array of Agency records (throws on error).
+$agencys = $client->Agency()->list();
 ```
 
 
 ### Astronaut
 
-Create an instance: `const astronaut = client.astronaut`
+Create an instance: `$astronaut = $client->Astronaut();`
 
 #### Operations
 
@@ -600,25 +605,27 @@ Create an instance: `const astronaut = client.astronaut`
 
 #### Example: Load
 
-```ts
-const astronaut = await client.astronaut.load({ id: 'astronaut_id' })
+```php
+// load() returns the bare Astronaut record (throws on error).
+$astronaut = $client->Astronaut()->load(["id" => "astronaut_id"]);
 ```
 
 #### Example: List
 
-```ts
-const astronauts = await client.astronaut.list()
+```php
+// list() returns an array of Astronaut records (throws on error).
+$astronauts = $client->Astronaut()->list();
 ```
 
 
 ### Docking
 
-Create an instance: `const docking = client.docking`
+Create an instance: `$docking = $client->Docking();`
 
 
 ### DockingEvent
 
-Create an instance: `const docking_event = client.docking_event`
+Create an instance: `$docking_event = $client->DockingEvent();`
 
 #### Operations
 
@@ -640,20 +647,22 @@ Create an instance: `const docking_event = client.docking_event`
 
 #### Example: Load
 
-```ts
-const docking_event = await client.docking_event.load({ id: 'docking_event_id' })
+```php
+// load() returns the bare DockingEvent record (throws on error).
+$docking_event = $client->DockingEvent()->load(["id" => "docking_event_id"]);
 ```
 
 #### Example: List
 
-```ts
-const docking_events = await client.docking_event.list()
+```php
+// list() returns an array of DockingEvent records (throws on error).
+$docking_events = $client->DockingEvent()->list();
 ```
 
 
 ### Event
 
-Create an instance: `const event = client.event`
+Create an instance: `$event = $client->Event();`
 
 #### Operations
 
@@ -679,20 +688,22 @@ Create an instance: `const event = client.event`
 
 #### Example: Load
 
-```ts
-const event = await client.event.load({ id: 'event_id' })
+```php
+// load() returns the bare Event record (throws on error).
+$event = $client->Event()->load(["id" => "event_id"]);
 ```
 
 #### Example: List
 
-```ts
-const events = await client.event.list()
+```php
+// list() returns an array of Event records (throws on error).
+$events = $client->Event()->list();
 ```
 
 
 ### Expedition
 
-Create an instance: `const expedition = client.expedition`
+Create an instance: `$expedition = $client->Expedition();`
 
 #### Operations
 
@@ -715,20 +726,22 @@ Create an instance: `const expedition = client.expedition`
 
 #### Example: Load
 
-```ts
-const expedition = await client.expedition.load({ id: 'expedition_id' })
+```php
+// load() returns the bare Expedition record (throws on error).
+$expedition = $client->Expedition()->load(["id" => "expedition_id"]);
 ```
 
 #### Example: List
 
-```ts
-const expeditions = await client.expedition.list()
+```php
+// list() returns an array of Expedition records (throws on error).
+$expeditions = $client->Expedition()->list();
 ```
 
 
 ### FirstStage
 
-Create an instance: `const first_stage = client.first_stage`
+Create an instance: `$first_stage = $client->FirstStage();`
 
 #### Operations
 
@@ -751,20 +764,22 @@ Create an instance: `const first_stage = client.first_stage`
 
 #### Example: Load
 
-```ts
-const first_stage = await client.first_stage.load({ id: 'first_stage_id' })
+```php
+// load() returns the bare FirstStage record (throws on error).
+$first_stage = $client->FirstStage()->load(["id" => "first_stage_id"]);
 ```
 
 #### Example: List
 
-```ts
-const first_stages = await client.first_stage.list()
+```php
+// list() returns an array of FirstStage records (throws on error).
+$first_stages = $client->FirstStage()->list();
 ```
 
 
 ### Launch
 
-Create an instance: `const launch = client.launch`
+Create an instance: `$launch = $client->Launch();`
 
 #### Operations
 
@@ -794,20 +809,22 @@ Create an instance: `const launch = client.launch`
 
 #### Example: Load
 
-```ts
-const launch = await client.launch.load({ id: 'launch_id' })
+```php
+// load() returns the bare Launch record (throws on error).
+$launch = $client->Launch()->load(["id" => "launch_id"]);
 ```
 
 #### Example: List
 
-```ts
-const launchs = await client.launch.list()
+```php
+// list() returns an array of Launch records (throws on error).
+$launchs = $client->Launch()->list();
 ```
 
 
 ### LaunchVehicle
 
-Create an instance: `const launch_vehicle = client.launch_vehicle`
+Create an instance: `$launch_vehicle = $client->LaunchVehicle();`
 
 #### Operations
 
@@ -844,14 +861,15 @@ Create an instance: `const launch_vehicle = client.launch_vehicle`
 
 #### Example: List
 
-```ts
-const launch_vehicles = await client.launch_vehicle.list()
+```php
+// list() returns an array of LaunchVehicle records (throws on error).
+$launch_vehicles = $client->LaunchVehicle()->list();
 ```
 
 
 ### Launcher
 
-Create an instance: `const launcher = client.launcher`
+Create an instance: `$launcher = $client->Launcher();`
 
 #### Operations
 
@@ -888,14 +906,15 @@ Create an instance: `const launcher = client.launcher`
 
 #### Example: Load
 
-```ts
-const launcher = await client.launcher.load({ id: 'launcher_id' })
+```php
+// load() returns the bare Launcher record (throws on error).
+$launcher = $client->Launcher()->load(["id" => "launcher_id"]);
 ```
 
 
 ### Location
 
-Create an instance: `const location = client.location`
+Create an instance: `$location = $client->Location();`
 
 #### Operations
 
@@ -918,20 +937,22 @@ Create an instance: `const location = client.location`
 
 #### Example: Load
 
-```ts
-const location = await client.location.load({ id: 'location_id' })
+```php
+// load() returns the bare Location record (throws on error).
+$location = $client->Location()->load(["id" => "location_id"]);
 ```
 
 #### Example: List
 
-```ts
-const locations = await client.location.list()
+```php
+// list() returns an array of Location records (throws on error).
+$locations = $client->Location()->list();
 ```
 
 
 ### Pad
 
-Create an instance: `const pad = client.pad`
+Create an instance: `$pad = $client->Pad();`
 
 #### Operations
 
@@ -959,25 +980,27 @@ Create an instance: `const pad = client.pad`
 
 #### Example: Load
 
-```ts
-const pad = await client.pad.load({ id: 'pad_id' })
+```php
+// load() returns the bare Pad record (throws on error).
+$pad = $client->Pad()->load(["id" => "pad_id"]);
 ```
 
 #### Example: List
 
-```ts
-const pads = await client.pad.list()
+```php
+// list() returns an array of Pad records (throws on error).
+$pads = $client->Pad()->list();
 ```
 
 
 ### ReusableFirstStage
 
-Create an instance: `const reusable_first_stage = client.reusable_first_stage`
+Create an instance: `$reusable_first_stage = $client->ReusableFirstStage();`
 
 
 ### SpaceStation
 
-Create an instance: `const space_station = client.space_station`
+Create an instance: `$space_station = $client->SpaceStation();`
 
 #### Operations
 
@@ -1004,20 +1027,22 @@ Create an instance: `const space_station = client.space_station`
 
 #### Example: Load
 
-```ts
-const space_station = await client.space_station.load({ id: 'space_station_id' })
+```php
+// load() returns the bare SpaceStation record (throws on error).
+$space_station = $client->SpaceStation()->load(["id" => "space_station_id"]);
 ```
 
 #### Example: List
 
-```ts
-const space_stations = await client.space_station.list()
+```php
+// list() returns an array of SpaceStation records (throws on error).
+$space_stations = $client->SpaceStation()->list();
 ```
 
 
 ### Spacecraft
 
-Create an instance: `const spacecraft = client.spacecraft`
+Create an instance: `$spacecraft = $client->Spacecraft();`
 
 #### Operations
 
@@ -1048,14 +1073,16 @@ Create an instance: `const spacecraft = client.spacecraft`
 
 #### Example: Load
 
-```ts
-const spacecraft = await client.spacecraft.load({ id: 'spacecraft_id' })
+```php
+// load() returns the bare Spacecraft record (throws on error).
+$spacecraft = $client->Spacecraft()->load(["id" => "spacecraft_id"]);
 ```
 
 #### Example: List
 
-```ts
-const spacecrafts = await client.spacecraft.list()
+```php
+// list() returns an array of Spacecraft records (throws on error).
+$spacecrafts = $client->Spacecraft()->list();
 ```
 
 
@@ -1130,7 +1157,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$agency = $client->agency();
+$agency = $client->Agency();
 $agency->load(["id" => "example_id"]);
 
 // $agency->dataGet() now returns the loaded agency data

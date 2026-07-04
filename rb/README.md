@@ -28,16 +28,14 @@ require_relative "LaunchLibrary2_sdk"
 client = LaunchLibrary2SDK.new
 ```
 
-### 2. List agencys
+### 2. List agency records
 
 ```ruby
 begin
-  result = client.agency.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of Agency records — iterate directly.
+  agencys = client.Agency.list
+  agencys.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -48,8 +46,9 @@ end
 
 ```ruby
 begin
-  result = client.agency.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Agency record (raises on error).
+  agency = client.Agency.load({ "id" => "example_id" })
+  puts agency
 rescue => err
   warn "load failed: #{err}"
 end
@@ -96,13 +95,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = LaunchLibrary2SDK.test
+client = LaunchLibrary2SDK.test({
+  "entity" => { "agency" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.agency.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+agency = client.Agency.load({ "id" => "test01" })
+puts agency
 ```
 
 ### Use a custom fetch function
@@ -178,12 +181,12 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
-| `Agency` | `(data) -> AgencyEntity` | Create a Agency entity instance. |
-| `Astronaut` | `(data) -> AstronautEntity` | Create a Astronaut entity instance. |
+| `Agency` | `(data) -> AgencyEntity` | Create an Agency entity instance. |
+| `Astronaut` | `(data) -> AstronautEntity` | Create an Astronaut entity instance. |
 | `Docking` | `(data) -> DockingEntity` | Create a Docking entity instance. |
 | `DockingEvent` | `(data) -> DockingEventEntity` | Create a DockingEvent entity instance. |
-| `Event` | `(data) -> EventEntity` | Create a Event entity instance. |
-| `Expedition` | `(data) -> ExpeditionEntity` | Create a Expedition entity instance. |
+| `Event` | `(data) -> EventEntity` | Create an Event entity instance. |
+| `Expedition` | `(data) -> ExpeditionEntity` | Create an Expedition entity instance. |
 | `FirstStage` | `(data) -> FirstStageEntity` | Create a FirstStage entity instance. |
 | `Launch` | `(data) -> LaunchEntity` | Create a Launch entity instance. |
 | `LaunchVehicle` | `(data) -> LaunchVehicleEntity` | Create a LaunchVehicle entity instance. |
@@ -528,7 +531,7 @@ API path: `/config/spacecraft`
 
 ### Agency
 
-Create an instance: `const agency = client.agency`
+Create an instance: `agency = client.Agency`
 
 #### Operations
 
@@ -554,20 +557,22 @@ Create an instance: `const agency = client.agency`
 
 #### Example: Load
 
-```ts
-const agency = await client.agency.load({ id: 'agency_id' })
+```ruby
+# load returns the bare Agency record (raises on error).
+agency = client.Agency.load({ "id" => "agency_id" })
 ```
 
 #### Example: List
 
-```ts
-const agencys = await client.agency.list()
+```ruby
+# list returns an Array of Agency records (raises on error).
+agencys = client.Agency.list
 ```
 
 
 ### Astronaut
 
-Create an instance: `const astronaut = client.astronaut`
+Create an instance: `astronaut = client.Astronaut`
 
 #### Operations
 
@@ -595,25 +600,27 @@ Create an instance: `const astronaut = client.astronaut`
 
 #### Example: Load
 
-```ts
-const astronaut = await client.astronaut.load({ id: 'astronaut_id' })
+```ruby
+# load returns the bare Astronaut record (raises on error).
+astronaut = client.Astronaut.load({ "id" => "astronaut_id" })
 ```
 
 #### Example: List
 
-```ts
-const astronauts = await client.astronaut.list()
+```ruby
+# list returns an Array of Astronaut records (raises on error).
+astronauts = client.Astronaut.list
 ```
 
 
 ### Docking
 
-Create an instance: `const docking = client.docking`
+Create an instance: `docking = client.Docking`
 
 
 ### DockingEvent
 
-Create an instance: `const docking_event = client.docking_event`
+Create an instance: `docking_event = client.DockingEvent`
 
 #### Operations
 
@@ -635,20 +642,22 @@ Create an instance: `const docking_event = client.docking_event`
 
 #### Example: Load
 
-```ts
-const docking_event = await client.docking_event.load({ id: 'docking_event_id' })
+```ruby
+# load returns the bare DockingEvent record (raises on error).
+docking_event = client.DockingEvent.load({ "id" => "docking_event_id" })
 ```
 
 #### Example: List
 
-```ts
-const docking_events = await client.docking_event.list()
+```ruby
+# list returns an Array of DockingEvent records (raises on error).
+docking_events = client.DockingEvent.list
 ```
 
 
 ### Event
 
-Create an instance: `const event = client.event`
+Create an instance: `event = client.Event`
 
 #### Operations
 
@@ -674,20 +683,22 @@ Create an instance: `const event = client.event`
 
 #### Example: Load
 
-```ts
-const event = await client.event.load({ id: 'event_id' })
+```ruby
+# load returns the bare Event record (raises on error).
+event = client.Event.load({ "id" => "event_id" })
 ```
 
 #### Example: List
 
-```ts
-const events = await client.event.list()
+```ruby
+# list returns an Array of Event records (raises on error).
+events = client.Event.list
 ```
 
 
 ### Expedition
 
-Create an instance: `const expedition = client.expedition`
+Create an instance: `expedition = client.Expedition`
 
 #### Operations
 
@@ -710,20 +721,22 @@ Create an instance: `const expedition = client.expedition`
 
 #### Example: Load
 
-```ts
-const expedition = await client.expedition.load({ id: 'expedition_id' })
+```ruby
+# load returns the bare Expedition record (raises on error).
+expedition = client.Expedition.load({ "id" => "expedition_id" })
 ```
 
 #### Example: List
 
-```ts
-const expeditions = await client.expedition.list()
+```ruby
+# list returns an Array of Expedition records (raises on error).
+expeditions = client.Expedition.list
 ```
 
 
 ### FirstStage
 
-Create an instance: `const first_stage = client.first_stage`
+Create an instance: `first_stage = client.FirstStage`
 
 #### Operations
 
@@ -746,20 +759,22 @@ Create an instance: `const first_stage = client.first_stage`
 
 #### Example: Load
 
-```ts
-const first_stage = await client.first_stage.load({ id: 'first_stage_id' })
+```ruby
+# load returns the bare FirstStage record (raises on error).
+first_stage = client.FirstStage.load({ "id" => "first_stage_id" })
 ```
 
 #### Example: List
 
-```ts
-const first_stages = await client.first_stage.list()
+```ruby
+# list returns an Array of FirstStage records (raises on error).
+first_stages = client.FirstStage.list
 ```
 
 
 ### Launch
 
-Create an instance: `const launch = client.launch`
+Create an instance: `launch = client.Launch`
 
 #### Operations
 
@@ -789,20 +804,22 @@ Create an instance: `const launch = client.launch`
 
 #### Example: Load
 
-```ts
-const launch = await client.launch.load({ id: 'launch_id' })
+```ruby
+# load returns the bare Launch record (raises on error).
+launch = client.Launch.load({ "id" => "launch_id" })
 ```
 
 #### Example: List
 
-```ts
-const launchs = await client.launch.list()
+```ruby
+# list returns an Array of Launch records (raises on error).
+launchs = client.Launch.list
 ```
 
 
 ### LaunchVehicle
 
-Create an instance: `const launch_vehicle = client.launch_vehicle`
+Create an instance: `launch_vehicle = client.LaunchVehicle`
 
 #### Operations
 
@@ -839,14 +856,15 @@ Create an instance: `const launch_vehicle = client.launch_vehicle`
 
 #### Example: List
 
-```ts
-const launch_vehicles = await client.launch_vehicle.list()
+```ruby
+# list returns an Array of LaunchVehicle records (raises on error).
+launch_vehicles = client.LaunchVehicle.list
 ```
 
 
 ### Launcher
 
-Create an instance: `const launcher = client.launcher`
+Create an instance: `launcher = client.Launcher`
 
 #### Operations
 
@@ -883,14 +901,15 @@ Create an instance: `const launcher = client.launcher`
 
 #### Example: Load
 
-```ts
-const launcher = await client.launcher.load({ id: 'launcher_id' })
+```ruby
+# load returns the bare Launcher record (raises on error).
+launcher = client.Launcher.load({ "id" => "launcher_id" })
 ```
 
 
 ### Location
 
-Create an instance: `const location = client.location`
+Create an instance: `location = client.Location`
 
 #### Operations
 
@@ -913,20 +932,22 @@ Create an instance: `const location = client.location`
 
 #### Example: Load
 
-```ts
-const location = await client.location.load({ id: 'location_id' })
+```ruby
+# load returns the bare Location record (raises on error).
+location = client.Location.load({ "id" => "location_id" })
 ```
 
 #### Example: List
 
-```ts
-const locations = await client.location.list()
+```ruby
+# list returns an Array of Location records (raises on error).
+locations = client.Location.list
 ```
 
 
 ### Pad
 
-Create an instance: `const pad = client.pad`
+Create an instance: `pad = client.Pad`
 
 #### Operations
 
@@ -954,25 +975,27 @@ Create an instance: `const pad = client.pad`
 
 #### Example: Load
 
-```ts
-const pad = await client.pad.load({ id: 'pad_id' })
+```ruby
+# load returns the bare Pad record (raises on error).
+pad = client.Pad.load({ "id" => "pad_id" })
 ```
 
 #### Example: List
 
-```ts
-const pads = await client.pad.list()
+```ruby
+# list returns an Array of Pad records (raises on error).
+pads = client.Pad.list
 ```
 
 
 ### ReusableFirstStage
 
-Create an instance: `const reusable_first_stage = client.reusable_first_stage`
+Create an instance: `reusable_first_stage = client.ReusableFirstStage`
 
 
 ### SpaceStation
 
-Create an instance: `const space_station = client.space_station`
+Create an instance: `space_station = client.SpaceStation`
 
 #### Operations
 
@@ -999,20 +1022,22 @@ Create an instance: `const space_station = client.space_station`
 
 #### Example: Load
 
-```ts
-const space_station = await client.space_station.load({ id: 'space_station_id' })
+```ruby
+# load returns the bare SpaceStation record (raises on error).
+space_station = client.SpaceStation.load({ "id" => "space_station_id" })
 ```
 
 #### Example: List
 
-```ts
-const space_stations = await client.space_station.list()
+```ruby
+# list returns an Array of SpaceStation records (raises on error).
+space_stations = client.SpaceStation.list
 ```
 
 
 ### Spacecraft
 
-Create an instance: `const spacecraft = client.spacecraft`
+Create an instance: `spacecraft = client.Spacecraft`
 
 #### Operations
 
@@ -1043,14 +1068,16 @@ Create an instance: `const spacecraft = client.spacecraft`
 
 #### Example: Load
 
-```ts
-const spacecraft = await client.spacecraft.load({ id: 'spacecraft_id' })
+```ruby
+# load returns the bare Spacecraft record (raises on error).
+spacecraft = client.Spacecraft.load({ "id" => "spacecraft_id" })
 ```
 
 #### Example: List
 
-```ts
-const spacecrafts = await client.spacecraft.list()
+```ruby
+# list returns an Array of Spacecraft records (raises on error).
+spacecrafts = client.Spacecraft.list
 ```
 
 
@@ -1125,7 +1152,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-agency = client.agency
+agency = client.Agency
 agency.load({ "id" => "example_id" })
 
 # agency.data_get now returns the loaded agency data
