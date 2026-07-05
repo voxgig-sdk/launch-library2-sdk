@@ -8,7 +8,7 @@ Complete API reference for the LaunchLibrary2 PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/launch-library2_sdk.php';
+require_once __DIR__ . '/launchlibrary2_sdk.php';
 
 $client = new LaunchLibrary2SDK($options);
 ```
@@ -101,11 +101,11 @@ Create a new `SpaceStationEntity` instance. Pass `null` for no initial data.
 
 Create a new `SpacecraftEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): LaunchLibrary2Utility`
 
 Return a copy of the SDK utility object.
 
@@ -148,25 +148,25 @@ $agency = $client->Agency();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbrev` | ``$STRING`` | No |  |
-| `administrator` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `founding_year` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `logo_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `abbrev` | `string` | No |  |
+| `administrator` | `string` | No |  |
+| `country_code` | `string` | No |  |
+| `description` | `string` | No |  |
+| `founding_year` | `string` | No |  |
+| `id` | `int` | No |  |
+| `logo_url` | `string` | No |  |
+| `name` | `string` | No |  |
+| `type` | `string` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Agency()->list([]);
+$results = $client->Agency()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -179,19 +179,19 @@ $result = $client->Agency()->load(["id" => "agency_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -200,7 +200,7 @@ Set the entity match criteria.
 Create a new `AgencyEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -217,27 +217,27 @@ $astronaut = $client->Astronaut();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bio` | ``$STRING`` | No |  |
-| `date_of_birth` | ``$STRING`` | No |  |
-| `date_of_death` | ``$STRING`` | No |  |
-| `flights_count` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `nationality` | ``$STRING`` | No |  |
-| `profile_image` | ``$STRING`` | No |  |
-| `spacewalks_count` | ``$INTEGER`` | No |  |
-| `status` | ``$OBJECT`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `bio` | `string` | No |  |
+| `date_of_birth` | `string` | No |  |
+| `date_of_death` | `string` | No |  |
+| `flights_count` | `int` | No |  |
+| `id` | `int` | No |  |
+| `name` | `string` | No |  |
+| `nationality` | `string` | No |  |
+| `profile_image` | `string` | No |  |
+| `spacewalks_count` | `int` | No |  |
+| `status` | `array` | No |  |
+| `type` | `array` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Astronaut()->list([]);
+$results = $client->Astronaut()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -250,19 +250,19 @@ $result = $client->Astronaut()->load(["id" => "astronaut_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -271,7 +271,7 @@ Set the entity match criteria.
 Create a new `AstronautEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -286,19 +286,19 @@ $docking = $client->Docking();
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -307,7 +307,7 @@ Set the entity match criteria.
 Create a new `DockingEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -324,21 +324,21 @@ $docking_event = $client->DockingEvent();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | ``$STRING`` | No |  |
-| `docking` | ``$STRING`` | No |  |
-| `docking_location` | ``$OBJECT`` | No |  |
-| `flight_vehicle` | ``$OBJECT`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `departure` | `string` | No |  |
+| `docking` | `string` | No |  |
+| `docking_location` | `array` | No |  |
+| `flight_vehicle` | `array` | No |  |
+| `id` | `int` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->DockingEvent()->list([]);
+$results = $client->DockingEvent()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -351,19 +351,19 @@ $result = $client->DockingEvent()->load(["id" => "docking_event_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -372,7 +372,7 @@ Set the entity match criteria.
 Create a new `DockingEventEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -389,25 +389,25 @@ $event = $client->Event();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `feature_image` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `location` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `news_url` | ``$STRING`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `video_url` | ``$STRING`` | No |  |
+| `date` | `string` | No |  |
+| `description` | `string` | No |  |
+| `feature_image` | `string` | No |  |
+| `id` | `int` | No |  |
+| `location` | `string` | No |  |
+| `name` | `string` | No |  |
+| `news_url` | `string` | No |  |
+| `type` | `array` | No |  |
+| `url` | `string` | No |  |
+| `video_url` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Event()->list([]);
+$results = $client->Event()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -420,19 +420,19 @@ $result = $client->Event()->load(["id" => "event_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -441,7 +441,7 @@ Set the entity match criteria.
 Create a new `EventEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -458,22 +458,22 @@ $expedition = $client->Expedition();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `crew` | ``$ARRAY`` | No |  |
-| `end` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `spacestation` | ``$OBJECT`` | No |  |
-| `start` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `crew` | `array` | No |  |
+| `end` | `string` | No |  |
+| `id` | `int` | No |  |
+| `name` | `string` | No |  |
+| `spacestation` | `array` | No |  |
+| `start` | `string` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Expedition()->list([]);
+$results = $client->Expedition()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -486,19 +486,19 @@ $result = $client->Expedition()->load(["id" => "expedition_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -507,7 +507,7 @@ Set the entity match criteria.
 Create a new `ExpeditionEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -524,22 +524,22 @@ $first_stage = $client->FirstStage();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `flight` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `launcher_config` | ``$OBJECT`` | No |  |
-| `serial_number` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `flight` | `int` | No |  |
+| `id` | `int` | No |  |
+| `launcher_config` | `array` | No |  |
+| `serial_number` | `string` | No |  |
+| `status` | `string` | No |  |
+| `type` | `string` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->FirstStage()->list([]);
+$results = $client->FirstStage()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -552,19 +552,19 @@ $result = $client->FirstStage()->load(["id" => "first_stage_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -573,7 +573,7 @@ Set the entity match criteria.
 Create a new `FirstStageEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -590,29 +590,29 @@ $launch = $client->Launch();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$STRING`` | No |  |
-| `launch_service_provider` | ``$OBJECT`` | No |  |
-| `mission` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `net` | ``$STRING`` | No |  |
-| `pad` | ``$OBJECT`` | No |  |
-| `probability` | ``$INTEGER`` | No |  |
-| `rocket` | ``$OBJECT`` | No |  |
-| `status` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `webcast_live` | ``$BOOLEAN`` | No |  |
-| `window_end` | ``$STRING`` | No |  |
-| `window_start` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
+| `image` | `string` | No |  |
+| `launch_service_provider` | `array` | No |  |
+| `mission` | `array` | No |  |
+| `name` | `string` | No |  |
+| `net` | `string` | No |  |
+| `pad` | `array` | No |  |
+| `probability` | `int` | No |  |
+| `rocket` | `array` | No |  |
+| `status` | `array` | No |  |
+| `url` | `string` | No |  |
+| `webcast_live` | `bool` | No |  |
+| `window_end` | `string` | No |  |
+| `window_start` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Launch()->list([]);
+$results = $client->Launch()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -625,19 +625,19 @@ $result = $client->Launch()->load(["id" => "launch_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -646,7 +646,7 @@ Set the entity match criteria.
 Create a new `LaunchEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -663,54 +663,54 @@ $launch_vehicle = $client->LaunchVehicle();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | ``$INTEGER`` | No |  |
-| `consecutive_successful_launch` | ``$INTEGER`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `diameter` | ``$NUMBER`` | No |  |
-| `failed_launch` | ``$INTEGER`` | No |  |
-| `family` | ``$STRING`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `gto_capacity` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `launch_mass` | ``$INTEGER`` | No |  |
-| `length` | ``$NUMBER`` | No |  |
-| `leo_capacity` | ``$INTEGER`` | No |  |
-| `maiden_flight` | ``$STRING`` | No |  |
-| `manufacturer` | ``$OBJECT`` | No |  |
-| `max_stage` | ``$INTEGER`` | No |  |
-| `min_stage` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `pending_launch` | ``$INTEGER`` | No |  |
-| `successful_launch` | ``$INTEGER`` | No |  |
-| `to_thrust` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `variant` | ``$STRING`` | No |  |
+| `apogee` | `int` | No |  |
+| `consecutive_successful_launch` | `int` | No |  |
+| `description` | `string` | No |  |
+| `diameter` | `float` | No |  |
+| `failed_launch` | `int` | No |  |
+| `family` | `string` | No |  |
+| `full_name` | `string` | No |  |
+| `gto_capacity` | `int` | No |  |
+| `id` | `int` | No |  |
+| `launch_mass` | `int` | No |  |
+| `length` | `float` | No |  |
+| `leo_capacity` | `int` | No |  |
+| `maiden_flight` | `string` | No |  |
+| `manufacturer` | `array` | No |  |
+| `max_stage` | `int` | No |  |
+| `min_stage` | `int` | No |  |
+| `name` | `string` | No |  |
+| `pending_launch` | `int` | No |  |
+| `successful_launch` | `int` | No |  |
+| `to_thrust` | `int` | No |  |
+| `url` | `string` | No |  |
+| `variant` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->LaunchVehicle()->list([]);
+$results = $client->LaunchVehicle()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -719,7 +719,7 @@ Set the entity match criteria.
 Create a new `LaunchVehicleEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -736,28 +736,28 @@ $launcher = $client->Launcher();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | ``$INTEGER`` | No |  |
-| `consecutive_successful_launch` | ``$INTEGER`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `diameter` | ``$NUMBER`` | No |  |
-| `failed_launch` | ``$INTEGER`` | No |  |
-| `family` | ``$STRING`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `gto_capacity` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `launch_mass` | ``$INTEGER`` | No |  |
-| `length` | ``$NUMBER`` | No |  |
-| `leo_capacity` | ``$INTEGER`` | No |  |
-| `maiden_flight` | ``$STRING`` | No |  |
-| `manufacturer` | ``$OBJECT`` | No |  |
-| `max_stage` | ``$INTEGER`` | No |  |
-| `min_stage` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `pending_launch` | ``$INTEGER`` | No |  |
-| `successful_launch` | ``$INTEGER`` | No |  |
-| `to_thrust` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `variant` | ``$STRING`` | No |  |
+| `apogee` | `int` | No |  |
+| `consecutive_successful_launch` | `int` | No |  |
+| `description` | `string` | No |  |
+| `diameter` | `float` | No |  |
+| `failed_launch` | `int` | No |  |
+| `family` | `string` | No |  |
+| `full_name` | `string` | No |  |
+| `gto_capacity` | `int` | No |  |
+| `id` | `int` | No |  |
+| `launch_mass` | `int` | No |  |
+| `length` | `float` | No |  |
+| `leo_capacity` | `int` | No |  |
+| `maiden_flight` | `string` | No |  |
+| `manufacturer` | `array` | No |  |
+| `max_stage` | `int` | No |  |
+| `min_stage` | `int` | No |  |
+| `name` | `string` | No |  |
+| `pending_launch` | `int` | No |  |
+| `successful_launch` | `int` | No |  |
+| `to_thrust` | `int` | No |  |
+| `url` | `string` | No |  |
+| `variant` | `string` | No |  |
 
 ### Operations
 
@@ -771,19 +771,19 @@ $result = $client->Launcher()->load(["id" => "launcher_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -792,7 +792,7 @@ Set the entity match criteria.
 Create a new `LauncherEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -809,22 +809,22 @@ $location = $client->Location();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `map_image` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `total_landing_count` | ``$INTEGER`` | No |  |
-| `total_launch_count` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `country_code` | `string` | No |  |
+| `id` | `int` | No |  |
+| `map_image` | `string` | No |  |
+| `name` | `string` | No |  |
+| `total_landing_count` | `int` | No |  |
+| `total_launch_count` | `int` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Location()->list([]);
+$results = $client->Location()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -837,19 +837,19 @@ $result = $client->Location()->load(["id" => "location_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -858,7 +858,7 @@ Set the entity match criteria.
 Create a new `LocationEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -875,27 +875,27 @@ $pad = $client->Pad();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agency_id` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `info_url` | ``$STRING`` | No |  |
-| `latitude` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `longitude` | ``$STRING`` | No |  |
-| `map_image` | ``$STRING`` | No |  |
-| `map_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `total_launch_count` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `wiki_url` | ``$STRING`` | No |  |
+| `agency_id` | `int` | No |  |
+| `id` | `int` | No |  |
+| `info_url` | `string` | No |  |
+| `latitude` | `string` | No |  |
+| `location` | `array` | No |  |
+| `longitude` | `string` | No |  |
+| `map_image` | `string` | No |  |
+| `map_url` | `string` | No |  |
+| `name` | `string` | No |  |
+| `total_launch_count` | `int` | No |  |
+| `url` | `string` | No |  |
+| `wiki_url` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Pad()->list([]);
+$results = $client->Pad()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -908,19 +908,19 @@ $result = $client->Pad()->load(["id" => "pad_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -929,7 +929,7 @@ Set the entity match criteria.
 Create a new `PadEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -944,19 +944,19 @@ $reusable_first_stage = $client->ReusableFirstStage();
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -965,7 +965,7 @@ Set the entity match criteria.
 Create a new `ReusableFirstStageEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -982,26 +982,26 @@ $space_station = $client->SpaceStation();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deorbited` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `founded` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `orbit` | ``$STRING`` | No |  |
-| `owner` | ``$ARRAY`` | No |  |
-| `status` | ``$OBJECT`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `deorbited` | `string` | No |  |
+| `description` | `string` | No |  |
+| `founded` | `string` | No |  |
+| `id` | `int` | No |  |
+| `image_url` | `string` | No |  |
+| `name` | `string` | No |  |
+| `orbit` | `string` | No |  |
+| `owner` | `array` | No |  |
+| `status` | `array` | No |  |
+| `type` | `array` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->SpaceStation()->list([]);
+$results = $client->SpaceStation()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -1014,19 +1014,19 @@ $result = $client->SpaceStation()->load(["id" => "space_station_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -1035,7 +1035,7 @@ Set the entity match criteria.
 Create a new `SpaceStationEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -1052,30 +1052,30 @@ $spacecraft = $client->Spacecraft();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agency` | ``$OBJECT`` | No |  |
-| `capability` | ``$STRING`` | No |  |
-| `crew_capacity` | ``$INTEGER`` | No |  |
-| `detail` | ``$STRING`` | No |  |
-| `diameter` | ``$NUMBER`` | No |  |
-| `height` | ``$NUMBER`` | No |  |
-| `history` | ``$STRING`` | No |  |
-| `human_rated` | ``$BOOLEAN`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image_url` | ``$STRING`` | No |  |
-| `in_use` | ``$BOOLEAN`` | No |  |
-| `maiden_flight` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `agency` | `array` | No |  |
+| `capability` | `string` | No |  |
+| `crew_capacity` | `int` | No |  |
+| `detail` | `string` | No |  |
+| `diameter` | `float` | No |  |
+| `height` | `float` | No |  |
+| `history` | `string` | No |  |
+| `human_rated` | `bool` | No |  |
+| `id` | `int` | No |  |
+| `image_url` | `string` | No |  |
+| `in_use` | `bool` | No |  |
+| `maiden_flight` | `string` | No |  |
+| `name` | `string` | No |  |
+| `type` | `array` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Spacecraft()->list([]);
+$results = $client->Spacecraft()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -1088,19 +1088,19 @@ $result = $client->Spacecraft()->load(["id" => "spacecraft_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -1109,7 +1109,7 @@ Set the entity match criteria.
 Create a new `SpacecraftEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

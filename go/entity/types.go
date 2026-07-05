@@ -27,8 +27,7 @@ type AgencyLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// AgencyListMatch mirrors the agency fields as an all-optional match
-// filter (Go analog of Partial<Agency>).
+// AgencyListMatch is the typed request payload for Agency.ListTyped.
 type AgencyListMatch struct {
 	Abbrev *string `json:"abbrev,omitempty"`
 	Administrator *string `json:"administrator,omitempty"`
@@ -63,8 +62,7 @@ type AstronautLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// AstronautListMatch mirrors the astronaut fields as an all-optional match
-// filter (Go analog of Partial<Astronaut>).
+// AstronautListMatch is the typed request payload for Astronaut.ListTyped.
 type AstronautListMatch struct {
 	Bio *string `json:"bio,omitempty"`
 	DateOfBirth *string `json:"date_of_birth,omitempty"`
@@ -99,8 +97,7 @@ type DockingEventLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// DockingEventListMatch mirrors the docking_event fields as an all-optional match
-// filter (Go analog of Partial<DockingEvent>).
+// DockingEventListMatch is the typed request payload for DockingEvent.ListTyped.
 type DockingEventListMatch struct {
 	Departure *string `json:"departure,omitempty"`
 	Docking *string `json:"docking,omitempty"`
@@ -129,8 +126,7 @@ type EventLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// EventListMatch mirrors the event fields as an all-optional match
-// filter (Go analog of Partial<Event>).
+// EventListMatch is the typed request payload for Event.ListTyped.
 type EventListMatch struct {
 	Date *string `json:"date,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -160,8 +156,7 @@ type ExpeditionLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// ExpeditionListMatch mirrors the expedition fields as an all-optional match
-// filter (Go analog of Partial<Expedition>).
+// ExpeditionListMatch is the typed request payload for Expedition.ListTyped.
 type ExpeditionListMatch struct {
 	Crew *[]any `json:"crew,omitempty"`
 	End *string `json:"end,omitempty"`
@@ -188,8 +183,7 @@ type FirstStageLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// FirstStageListMatch mirrors the first_stage fields as an all-optional match
-// filter (Go analog of Partial<FirstStage>).
+// FirstStageListMatch is the typed request payload for FirstStage.ListTyped.
 type FirstStageListMatch struct {
 	Flight *int `json:"flight,omitempty"`
 	Id *int `json:"id,omitempty"`
@@ -223,8 +217,7 @@ type LaunchLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// LaunchListMatch mirrors the launch fields as an all-optional match
-// filter (Go analog of Partial<Launch>).
+// LaunchListMatch is the typed request payload for Launch.ListTyped.
 type LaunchListMatch struct {
 	Id *string `json:"id,omitempty"`
 	Image *string `json:"image,omitempty"`
@@ -268,8 +261,7 @@ type LaunchVehicle struct {
 	Variant *string `json:"variant,omitempty"`
 }
 
-// LaunchVehicleListMatch mirrors the launch_vehicle fields as an all-optional match
-// filter (Go analog of Partial<LaunchVehicle>).
+// LaunchVehicleListMatch is the typed request payload for LaunchVehicle.ListTyped.
 type LaunchVehicleListMatch struct {
 	Apogee *int `json:"apogee,omitempty"`
 	ConsecutiveSuccessfulLaunch *int `json:"consecutive_successful_launch,omitempty"`
@@ -342,8 +334,7 @@ type LocationLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// LocationListMatch mirrors the location fields as an all-optional match
-// filter (Go analog of Partial<Location>).
+// LocationListMatch is the typed request payload for Location.ListTyped.
 type LocationListMatch struct {
 	CountryCode *string `json:"country_code,omitempty"`
 	Id *int `json:"id,omitempty"`
@@ -375,8 +366,7 @@ type PadLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// PadListMatch mirrors the pad fields as an all-optional match
-// filter (Go analog of Partial<Pad>).
+// PadListMatch is the typed request payload for Pad.ListTyped.
 type PadListMatch struct {
 	AgencyId *int `json:"agency_id,omitempty"`
 	Id *int `json:"id,omitempty"`
@@ -416,8 +406,7 @@ type SpaceStationLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// SpaceStationListMatch mirrors the space_station fields as an all-optional match
-// filter (Go analog of Partial<SpaceStation>).
+// SpaceStationListMatch is the typed request payload for SpaceStation.ListTyped.
 type SpaceStationListMatch struct {
 	Deorbited *string `json:"deorbited,omitempty"`
 	Description *string `json:"description,omitempty"`
@@ -456,8 +445,7 @@ type SpacecraftLoadMatch struct {
 	Id int `json:"id"`
 }
 
-// SpacecraftListMatch mirrors the spacecraft fields as an all-optional match
-// filter (Go analog of Partial<Spacecraft>).
+// SpacecraftListMatch is the typed request payload for Spacecraft.ListTyped.
 type SpacecraftListMatch struct {
 	Agency *map[string]any `json:"agency,omitempty"`
 	Capability *string `json:"capability,omitempty"`

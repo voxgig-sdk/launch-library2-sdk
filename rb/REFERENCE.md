@@ -8,7 +8,7 @@ Complete API reference for the LaunchLibrary2 Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'launch-library2_sdk'
+require_relative 'LaunchLibrary2_sdk'
 
 client = LaunchLibrary2SDK.new(options)
 ```
@@ -149,25 +149,25 @@ agency = client.Agency
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbrev` | ``$STRING`` | No |  |
-| `administrator` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `founding_year` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `logo_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `abbrev` | `String` | No |  |
+| `administrator` | `String` | No |  |
+| `country_code` | `String` | No |  |
+| `description` | `String` | No |  |
+| `founding_year` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `logo_url` | `String` | No |  |
+| `name` | `String` | No |  |
+| `type` | `String` | No |  |
+| `url` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Agency.list(nil)
+results = client.Agency.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -218,27 +218,27 @@ astronaut = client.Astronaut
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bio` | ``$STRING`` | No |  |
-| `date_of_birth` | ``$STRING`` | No |  |
-| `date_of_death` | ``$STRING`` | No |  |
-| `flights_count` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `nationality` | ``$STRING`` | No |  |
-| `profile_image` | ``$STRING`` | No |  |
-| `spacewalks_count` | ``$INTEGER`` | No |  |
-| `status` | ``$OBJECT`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `bio` | `String` | No |  |
+| `date_of_birth` | `String` | No |  |
+| `date_of_death` | `String` | No |  |
+| `flights_count` | `Integer` | No |  |
+| `id` | `Integer` | No |  |
+| `name` | `String` | No |  |
+| `nationality` | `String` | No |  |
+| `profile_image` | `String` | No |  |
+| `spacewalks_count` | `Integer` | No |  |
+| `status` | `Hash` | No |  |
+| `type` | `Hash` | No |  |
+| `url` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Astronaut.list(nil)
+results = client.Astronaut.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -325,21 +325,21 @@ docking_event = client.DockingEvent
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | ``$STRING`` | No |  |
-| `docking` | ``$STRING`` | No |  |
-| `docking_location` | ``$OBJECT`` | No |  |
-| `flight_vehicle` | ``$OBJECT`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `departure` | `String` | No |  |
+| `docking` | `String` | No |  |
+| `docking_location` | `Hash` | No |  |
+| `flight_vehicle` | `Hash` | No |  |
+| `id` | `Integer` | No |  |
+| `url` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.DockingEvent.list(nil)
+results = client.DockingEvent.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -390,25 +390,25 @@ event = client.Event
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `feature_image` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `location` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `news_url` | ``$STRING`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `video_url` | ``$STRING`` | No |  |
+| `date` | `String` | No |  |
+| `description` | `String` | No |  |
+| `feature_image` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `location` | `String` | No |  |
+| `name` | `String` | No |  |
+| `news_url` | `String` | No |  |
+| `type` | `Hash` | No |  |
+| `url` | `String` | No |  |
+| `video_url` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Event.list(nil)
+results = client.Event.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -459,22 +459,22 @@ expedition = client.Expedition
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `crew` | ``$ARRAY`` | No |  |
-| `end` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `spacestation` | ``$OBJECT`` | No |  |
-| `start` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `crew` | `Array` | No |  |
+| `end` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `name` | `String` | No |  |
+| `spacestation` | `Hash` | No |  |
+| `start` | `String` | No |  |
+| `url` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Expedition.list(nil)
+results = client.Expedition.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -525,22 +525,22 @@ first_stage = client.FirstStage
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `flight` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `launcher_config` | ``$OBJECT`` | No |  |
-| `serial_number` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `flight` | `Integer` | No |  |
+| `id` | `Integer` | No |  |
+| `launcher_config` | `Hash` | No |  |
+| `serial_number` | `String` | No |  |
+| `status` | `String` | No |  |
+| `type` | `String` | No |  |
+| `url` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.FirstStage.list(nil)
+results = client.FirstStage.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -591,29 +591,29 @@ launch = client.Launch
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$STRING`` | No |  |
-| `launch_service_provider` | ``$OBJECT`` | No |  |
-| `mission` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `net` | ``$STRING`` | No |  |
-| `pad` | ``$OBJECT`` | No |  |
-| `probability` | ``$INTEGER`` | No |  |
-| `rocket` | ``$OBJECT`` | No |  |
-| `status` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `webcast_live` | ``$BOOLEAN`` | No |  |
-| `window_end` | ``$STRING`` | No |  |
-| `window_start` | ``$STRING`` | No |  |
+| `id` | `String` | No |  |
+| `image` | `String` | No |  |
+| `launch_service_provider` | `Hash` | No |  |
+| `mission` | `Hash` | No |  |
+| `name` | `String` | No |  |
+| `net` | `String` | No |  |
+| `pad` | `Hash` | No |  |
+| `probability` | `Integer` | No |  |
+| `rocket` | `Hash` | No |  |
+| `status` | `Hash` | No |  |
+| `url` | `String` | No |  |
+| `webcast_live` | `Boolean` | No |  |
+| `window_end` | `String` | No |  |
+| `window_start` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Launch.list(nil)
+results = client.Launch.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -664,37 +664,37 @@ launch_vehicle = client.LaunchVehicle
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | ``$INTEGER`` | No |  |
-| `consecutive_successful_launch` | ``$INTEGER`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `diameter` | ``$NUMBER`` | No |  |
-| `failed_launch` | ``$INTEGER`` | No |  |
-| `family` | ``$STRING`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `gto_capacity` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `launch_mass` | ``$INTEGER`` | No |  |
-| `length` | ``$NUMBER`` | No |  |
-| `leo_capacity` | ``$INTEGER`` | No |  |
-| `maiden_flight` | ``$STRING`` | No |  |
-| `manufacturer` | ``$OBJECT`` | No |  |
-| `max_stage` | ``$INTEGER`` | No |  |
-| `min_stage` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `pending_launch` | ``$INTEGER`` | No |  |
-| `successful_launch` | ``$INTEGER`` | No |  |
-| `to_thrust` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `variant` | ``$STRING`` | No |  |
+| `apogee` | `Integer` | No |  |
+| `consecutive_successful_launch` | `Integer` | No |  |
+| `description` | `String` | No |  |
+| `diameter` | `Float` | No |  |
+| `failed_launch` | `Integer` | No |  |
+| `family` | `String` | No |  |
+| `full_name` | `String` | No |  |
+| `gto_capacity` | `Integer` | No |  |
+| `id` | `Integer` | No |  |
+| `launch_mass` | `Integer` | No |  |
+| `length` | `Float` | No |  |
+| `leo_capacity` | `Integer` | No |  |
+| `maiden_flight` | `String` | No |  |
+| `manufacturer` | `Hash` | No |  |
+| `max_stage` | `Integer` | No |  |
+| `min_stage` | `Integer` | No |  |
+| `name` | `String` | No |  |
+| `pending_launch` | `Integer` | No |  |
+| `successful_launch` | `Integer` | No |  |
+| `to_thrust` | `Integer` | No |  |
+| `url` | `String` | No |  |
+| `variant` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.LaunchVehicle.list(nil)
+results = client.LaunchVehicle.list
 ```
 
 ### Common Methods
@@ -737,28 +737,28 @@ launcher = client.Launcher
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | ``$INTEGER`` | No |  |
-| `consecutive_successful_launch` | ``$INTEGER`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `diameter` | ``$NUMBER`` | No |  |
-| `failed_launch` | ``$INTEGER`` | No |  |
-| `family` | ``$STRING`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `gto_capacity` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `launch_mass` | ``$INTEGER`` | No |  |
-| `length` | ``$NUMBER`` | No |  |
-| `leo_capacity` | ``$INTEGER`` | No |  |
-| `maiden_flight` | ``$STRING`` | No |  |
-| `manufacturer` | ``$OBJECT`` | No |  |
-| `max_stage` | ``$INTEGER`` | No |  |
-| `min_stage` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `pending_launch` | ``$INTEGER`` | No |  |
-| `successful_launch` | ``$INTEGER`` | No |  |
-| `to_thrust` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `variant` | ``$STRING`` | No |  |
+| `apogee` | `Integer` | No |  |
+| `consecutive_successful_launch` | `Integer` | No |  |
+| `description` | `String` | No |  |
+| `diameter` | `Float` | No |  |
+| `failed_launch` | `Integer` | No |  |
+| `family` | `String` | No |  |
+| `full_name` | `String` | No |  |
+| `gto_capacity` | `Integer` | No |  |
+| `id` | `Integer` | No |  |
+| `launch_mass` | `Integer` | No |  |
+| `length` | `Float` | No |  |
+| `leo_capacity` | `Integer` | No |  |
+| `maiden_flight` | `String` | No |  |
+| `manufacturer` | `Hash` | No |  |
+| `max_stage` | `Integer` | No |  |
+| `min_stage` | `Integer` | No |  |
+| `name` | `String` | No |  |
+| `pending_launch` | `Integer` | No |  |
+| `successful_launch` | `Integer` | No |  |
+| `to_thrust` | `Integer` | No |  |
+| `url` | `String` | No |  |
+| `variant` | `String` | No |  |
 
 ### Operations
 
@@ -810,22 +810,22 @@ location = client.Location
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `map_image` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `total_landing_count` | ``$INTEGER`` | No |  |
-| `total_launch_count` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `country_code` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `map_image` | `String` | No |  |
+| `name` | `String` | No |  |
+| `total_landing_count` | `Integer` | No |  |
+| `total_launch_count` | `Integer` | No |  |
+| `url` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Location.list(nil)
+results = client.Location.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -876,27 +876,27 @@ pad = client.Pad
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agency_id` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `info_url` | ``$STRING`` | No |  |
-| `latitude` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `longitude` | ``$STRING`` | No |  |
-| `map_image` | ``$STRING`` | No |  |
-| `map_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `total_launch_count` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `wiki_url` | ``$STRING`` | No |  |
+| `agency_id` | `Integer` | No |  |
+| `id` | `Integer` | No |  |
+| `info_url` | `String` | No |  |
+| `latitude` | `String` | No |  |
+| `location` | `Hash` | No |  |
+| `longitude` | `String` | No |  |
+| `map_image` | `String` | No |  |
+| `map_url` | `String` | No |  |
+| `name` | `String` | No |  |
+| `total_launch_count` | `Integer` | No |  |
+| `url` | `String` | No |  |
+| `wiki_url` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Pad.list(nil)
+results = client.Pad.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -983,26 +983,26 @@ space_station = client.SpaceStation
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deorbited` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `founded` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `orbit` | ``$STRING`` | No |  |
-| `owner` | ``$ARRAY`` | No |  |
-| `status` | ``$OBJECT`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `deorbited` | `String` | No |  |
+| `description` | `String` | No |  |
+| `founded` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `image_url` | `String` | No |  |
+| `name` | `String` | No |  |
+| `orbit` | `String` | No |  |
+| `owner` | `Array` | No |  |
+| `status` | `Hash` | No |  |
+| `type` | `Hash` | No |  |
+| `url` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.SpaceStation.list(nil)
+results = client.SpaceStation.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -1053,30 +1053,30 @@ spacecraft = client.Spacecraft
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agency` | ``$OBJECT`` | No |  |
-| `capability` | ``$STRING`` | No |  |
-| `crew_capacity` | ``$INTEGER`` | No |  |
-| `detail` | ``$STRING`` | No |  |
-| `diameter` | ``$NUMBER`` | No |  |
-| `height` | ``$NUMBER`` | No |  |
-| `history` | ``$STRING`` | No |  |
-| `human_rated` | ``$BOOLEAN`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image_url` | ``$STRING`` | No |  |
-| `in_use` | ``$BOOLEAN`` | No |  |
-| `maiden_flight` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `agency` | `Hash` | No |  |
+| `capability` | `String` | No |  |
+| `crew_capacity` | `Integer` | No |  |
+| `detail` | `String` | No |  |
+| `diameter` | `Float` | No |  |
+| `height` | `Float` | No |  |
+| `history` | `String` | No |  |
+| `human_rated` | `Boolean` | No |  |
+| `id` | `Integer` | No |  |
+| `image_url` | `String` | No |  |
+| `in_use` | `Boolean` | No |  |
+| `maiden_flight` | `String` | No |  |
+| `name` | `String` | No |  |
+| `type` | `Hash` | No |  |
+| `url` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Spacecraft.list(nil)
+results = client.Spacecraft.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`

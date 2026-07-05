@@ -67,10 +67,12 @@ class SpacecraftEntity
   
   # Load a single Spacecraft.
   #
-  # @param reqmatch [SpacecraftLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param reqmatch [SpacecraftLoadMatch, Hash, nil] match criteria (id/query fields);
+  #   optional — an entity with no id-like key loads with no match (nil is treated
+  #   as an empty match, so client.Spacecraft.load works with no args).
   # @param ctrl [Object, nil] optional per-call control
   # @return [Spacecraft, Hash] the loaded Spacecraft; raises LaunchLibrary2Error on failure
-  def load(reqmatch, ctrl = nil)
+  def load(reqmatch = nil, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
       "opname" => "load",
@@ -95,10 +97,11 @@ class SpacecraftEntity
   
   # List Spacecraft items matching the given filter.
   #
-  # @param reqmatch [SpacecraftListMatch, Hash, nil] match filter (any subset of Spacecraft fields)
+  # @param reqmatch [SpacecraftListMatch, Hash, nil] match filter (any subset of
+  #   Spacecraft fields); defaults to nil, treated as an empty match that lists all.
   # @param ctrl [Object, nil] optional per-call control
   # @return [Array<Spacecraft>, Array] the matching Spacecraft items; raises LaunchLibrary2Error on failure
-  def list(reqmatch, ctrl = nil)
+  def list(reqmatch = nil, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
       "opname" => "list",
@@ -108,11 +111,23 @@ class SpacecraftEntity
       "reqmatch" => reqmatch,
     }, @_entctx)
 
-    _run_op(ctx) do
+    records = _run_op(ctx) do
       if ctx.result
         @_match = ctx.result.resmatch if ctx.result.resmatch
       end
     end
+
+    # list yields the BARE Array of records — each an accessible Hash — so
+    # callers can index item["id"] directly, matching py/lua/go. make_result
+    # wraps each entry as an Entity instance for internal use; unwrap those
+    # back to their bare record Hashes here (load/create/etc. are unaffected).
+    if records.is_a?(Array)
+      records = records.map do |item|
+        item.respond_to?(:data_get) ? item.data_get : item
+      end
+    end
+
+    records
   end
 
 

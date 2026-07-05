@@ -153,16 +153,16 @@ agency := client.Agency(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbrev` | ``$STRING`` | No |  |
-| `administrator` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `founding_year` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `logo_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `abbrev` | `string` | No |  |
+| `administrator` | `string` | No |  |
+| `country_code` | `string` | No |  |
+| `description` | `string` | No |  |
+| `founding_year` | `string` | No |  |
+| `id` | `int` | No |  |
+| `logo_url` | `string` | No |  |
+| `name` | `string` | No |  |
+| `type` | `string` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
@@ -216,18 +216,18 @@ astronaut := client.Astronaut(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bio` | ``$STRING`` | No |  |
-| `date_of_birth` | ``$STRING`` | No |  |
-| `date_of_death` | ``$STRING`` | No |  |
-| `flights_count` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `nationality` | ``$STRING`` | No |  |
-| `profile_image` | ``$STRING`` | No |  |
-| `spacewalks_count` | ``$INTEGER`` | No |  |
-| `status` | ``$OBJECT`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `bio` | `string` | No |  |
+| `date_of_birth` | `string` | No |  |
+| `date_of_death` | `string` | No |  |
+| `flights_count` | `int` | No |  |
+| `id` | `int` | No |  |
+| `name` | `string` | No |  |
+| `nationality` | `string` | No |  |
+| `profile_image` | `string` | No |  |
+| `spacewalks_count` | `int` | No |  |
+| `status` | `map[string]any` | No |  |
+| `type` | `map[string]any` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
@@ -311,12 +311,12 @@ docking_event := client.DockingEvent(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | ``$STRING`` | No |  |
-| `docking` | ``$STRING`` | No |  |
-| `docking_location` | ``$OBJECT`` | No |  |
-| `flight_vehicle` | ``$OBJECT`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `departure` | `string` | No |  |
+| `docking` | `string` | No |  |
+| `docking_location` | `map[string]any` | No |  |
+| `flight_vehicle` | `map[string]any` | No |  |
+| `id` | `int` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
@@ -370,16 +370,16 @@ event := client.Event(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `feature_image` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `location` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `news_url` | ``$STRING`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `video_url` | ``$STRING`` | No |  |
+| `date` | `string` | No |  |
+| `description` | `string` | No |  |
+| `feature_image` | `string` | No |  |
+| `id` | `int` | No |  |
+| `location` | `string` | No |  |
+| `name` | `string` | No |  |
+| `news_url` | `string` | No |  |
+| `type` | `map[string]any` | No |  |
+| `url` | `string` | No |  |
+| `video_url` | `string` | No |  |
 
 ### Operations
 
@@ -433,13 +433,13 @@ expedition := client.Expedition(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `crew` | ``$ARRAY`` | No |  |
-| `end` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `spacestation` | ``$OBJECT`` | No |  |
-| `start` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `crew` | `[]any` | No |  |
+| `end` | `string` | No |  |
+| `id` | `int` | No |  |
+| `name` | `string` | No |  |
+| `spacestation` | `map[string]any` | No |  |
+| `start` | `string` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
@@ -493,13 +493,13 @@ first_stage := client.FirstStage(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `flight` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `launcher_config` | ``$OBJECT`` | No |  |
-| `serial_number` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `flight` | `int` | No |  |
+| `id` | `int` | No |  |
+| `launcher_config` | `map[string]any` | No |  |
+| `serial_number` | `string` | No |  |
+| `status` | `string` | No |  |
+| `type` | `string` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
@@ -553,20 +553,20 @@ launch := client.Launch(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$STRING`` | No |  |
-| `launch_service_provider` | ``$OBJECT`` | No |  |
-| `mission` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `net` | ``$STRING`` | No |  |
-| `pad` | ``$OBJECT`` | No |  |
-| `probability` | ``$INTEGER`` | No |  |
-| `rocket` | ``$OBJECT`` | No |  |
-| `status` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `webcast_live` | ``$BOOLEAN`` | No |  |
-| `window_end` | ``$STRING`` | No |  |
-| `window_start` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
+| `image` | `string` | No |  |
+| `launch_service_provider` | `map[string]any` | No |  |
+| `mission` | `map[string]any` | No |  |
+| `name` | `string` | No |  |
+| `net` | `string` | No |  |
+| `pad` | `map[string]any` | No |  |
+| `probability` | `int` | No |  |
+| `rocket` | `map[string]any` | No |  |
+| `status` | `map[string]any` | No |  |
+| `url` | `string` | No |  |
+| `webcast_live` | `bool` | No |  |
+| `window_end` | `string` | No |  |
+| `window_start` | `string` | No |  |
 
 ### Operations
 
@@ -620,28 +620,28 @@ launch_vehicle := client.LaunchVehicle(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | ``$INTEGER`` | No |  |
-| `consecutive_successful_launch` | ``$INTEGER`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `diameter` | ``$NUMBER`` | No |  |
-| `failed_launch` | ``$INTEGER`` | No |  |
-| `family` | ``$STRING`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `gto_capacity` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `launch_mass` | ``$INTEGER`` | No |  |
-| `length` | ``$NUMBER`` | No |  |
-| `leo_capacity` | ``$INTEGER`` | No |  |
-| `maiden_flight` | ``$STRING`` | No |  |
-| `manufacturer` | ``$OBJECT`` | No |  |
-| `max_stage` | ``$INTEGER`` | No |  |
-| `min_stage` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `pending_launch` | ``$INTEGER`` | No |  |
-| `successful_launch` | ``$INTEGER`` | No |  |
-| `to_thrust` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `variant` | ``$STRING`` | No |  |
+| `apogee` | `int` | No |  |
+| `consecutive_successful_launch` | `int` | No |  |
+| `description` | `string` | No |  |
+| `diameter` | `float64` | No |  |
+| `failed_launch` | `int` | No |  |
+| `family` | `string` | No |  |
+| `full_name` | `string` | No |  |
+| `gto_capacity` | `int` | No |  |
+| `id` | `int` | No |  |
+| `launch_mass` | `int` | No |  |
+| `length` | `float64` | No |  |
+| `leo_capacity` | `int` | No |  |
+| `maiden_flight` | `string` | No |  |
+| `manufacturer` | `map[string]any` | No |  |
+| `max_stage` | `int` | No |  |
+| `min_stage` | `int` | No |  |
+| `name` | `string` | No |  |
+| `pending_launch` | `int` | No |  |
+| `successful_launch` | `int` | No |  |
+| `to_thrust` | `int` | No |  |
+| `url` | `string` | No |  |
+| `variant` | `string` | No |  |
 
 ### Operations
 
@@ -687,28 +687,28 @@ launcher := client.Launcher(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | ``$INTEGER`` | No |  |
-| `consecutive_successful_launch` | ``$INTEGER`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `diameter` | ``$NUMBER`` | No |  |
-| `failed_launch` | ``$INTEGER`` | No |  |
-| `family` | ``$STRING`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `gto_capacity` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `launch_mass` | ``$INTEGER`` | No |  |
-| `length` | ``$NUMBER`` | No |  |
-| `leo_capacity` | ``$INTEGER`` | No |  |
-| `maiden_flight` | ``$STRING`` | No |  |
-| `manufacturer` | ``$OBJECT`` | No |  |
-| `max_stage` | ``$INTEGER`` | No |  |
-| `min_stage` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `pending_launch` | ``$INTEGER`` | No |  |
-| `successful_launch` | ``$INTEGER`` | No |  |
-| `to_thrust` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `variant` | ``$STRING`` | No |  |
+| `apogee` | `int` | No |  |
+| `consecutive_successful_launch` | `int` | No |  |
+| `description` | `string` | No |  |
+| `diameter` | `float64` | No |  |
+| `failed_launch` | `int` | No |  |
+| `family` | `string` | No |  |
+| `full_name` | `string` | No |  |
+| `gto_capacity` | `int` | No |  |
+| `id` | `int` | No |  |
+| `launch_mass` | `int` | No |  |
+| `length` | `float64` | No |  |
+| `leo_capacity` | `int` | No |  |
+| `maiden_flight` | `string` | No |  |
+| `manufacturer` | `map[string]any` | No |  |
+| `max_stage` | `int` | No |  |
+| `min_stage` | `int` | No |  |
+| `name` | `string` | No |  |
+| `pending_launch` | `int` | No |  |
+| `successful_launch` | `int` | No |  |
+| `to_thrust` | `int` | No |  |
+| `url` | `string` | No |  |
+| `variant` | `string` | No |  |
 
 ### Operations
 
@@ -754,13 +754,13 @@ location := client.Location(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `map_image` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `total_landing_count` | ``$INTEGER`` | No |  |
-| `total_launch_count` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `country_code` | `string` | No |  |
+| `id` | `int` | No |  |
+| `map_image` | `string` | No |  |
+| `name` | `string` | No |  |
+| `total_landing_count` | `int` | No |  |
+| `total_launch_count` | `int` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
@@ -814,18 +814,18 @@ pad := client.Pad(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agency_id` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `info_url` | ``$STRING`` | No |  |
-| `latitude` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `longitude` | ``$STRING`` | No |  |
-| `map_image` | ``$STRING`` | No |  |
-| `map_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `total_launch_count` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `wiki_url` | ``$STRING`` | No |  |
+| `agency_id` | `int` | No |  |
+| `id` | `int` | No |  |
+| `info_url` | `string` | No |  |
+| `latitude` | `string` | No |  |
+| `location` | `map[string]any` | No |  |
+| `longitude` | `string` | No |  |
+| `map_image` | `string` | No |  |
+| `map_url` | `string` | No |  |
+| `name` | `string` | No |  |
+| `total_launch_count` | `int` | No |  |
+| `url` | `string` | No |  |
+| `wiki_url` | `string` | No |  |
 
 ### Operations
 
@@ -909,17 +909,17 @@ space_station := client.SpaceStation(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deorbited` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `founded` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `orbit` | ``$STRING`` | No |  |
-| `owner` | ``$ARRAY`` | No |  |
-| `status` | ``$OBJECT`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `deorbited` | `string` | No |  |
+| `description` | `string` | No |  |
+| `founded` | `string` | No |  |
+| `id` | `int` | No |  |
+| `image_url` | `string` | No |  |
+| `name` | `string` | No |  |
+| `orbit` | `string` | No |  |
+| `owner` | `[]any` | No |  |
+| `status` | `map[string]any` | No |  |
+| `type` | `map[string]any` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 
@@ -973,21 +973,21 @@ spacecraft := client.Spacecraft(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agency` | ``$OBJECT`` | No |  |
-| `capability` | ``$STRING`` | No |  |
-| `crew_capacity` | ``$INTEGER`` | No |  |
-| `detail` | ``$STRING`` | No |  |
-| `diameter` | ``$NUMBER`` | No |  |
-| `height` | ``$NUMBER`` | No |  |
-| `history` | ``$STRING`` | No |  |
-| `human_rated` | ``$BOOLEAN`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image_url` | ``$STRING`` | No |  |
-| `in_use` | ``$BOOLEAN`` | No |  |
-| `maiden_flight` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `agency` | `map[string]any` | No |  |
+| `capability` | `string` | No |  |
+| `crew_capacity` | `int` | No |  |
+| `detail` | `string` | No |  |
+| `diameter` | `float64` | No |  |
+| `height` | `float64` | No |  |
+| `history` | `string` | No |  |
+| `human_rated` | `bool` | No |  |
+| `id` | `int` | No |  |
+| `image_url` | `string` | No |  |
+| `in_use` | `bool` | No |  |
+| `maiden_flight` | `string` | No |  |
+| `name` | `string` | No |  |
+| `type` | `map[string]any` | No |  |
+| `url` | `string` | No |  |
 
 ### Operations
 

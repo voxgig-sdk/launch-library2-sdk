@@ -62,7 +62,7 @@ AgencyLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Agency#list (any subset of Agency fields).
+# Request payload for Agency#list.
 #
 # @!attribute [rw] abbrev
 #   @return [String, nil]
@@ -169,7 +169,7 @@ AstronautLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Astronaut#list (any subset of Astronaut fields).
+# Request payload for Astronaut#list.
 #
 # @!attribute [rw] bio
 #   @return [String, nil]
@@ -264,7 +264,7 @@ DockingEventLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for DockingEvent#list (any subset of DockingEvent fields).
+# Request payload for DockingEvent#list.
 #
 # @!attribute [rw] departure
 #   @return [String, nil]
@@ -347,7 +347,7 @@ EventLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Event#list (any subset of Event fields).
+# Request payload for Event#list.
 #
 # @!attribute [rw] date
 #   @return [String, nil]
@@ -434,7 +434,7 @@ ExpeditionLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Expedition#list (any subset of Expedition fields).
+# Request payload for Expedition#list.
 #
 # @!attribute [rw] crew
 #   @return [Array, nil]
@@ -509,7 +509,7 @@ FirstStageLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for FirstStage#list (any subset of FirstStage fields).
+# Request payload for FirstStage#list.
 #
 # @!attribute [rw] flight
 #   @return [Integer, nil]
@@ -612,7 +612,7 @@ LaunchLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Launch#list (any subset of Launch fields).
+# Request payload for Launch#list.
 #
 # @!attribute [rw] id
 #   @return [String, nil]
@@ -766,7 +766,7 @@ LaunchVehicle = Struct.new(
   keyword_init: true
 )
 
-# Match filter for LaunchVehicle#list (any subset of LaunchVehicle fields).
+# Request payload for LaunchVehicle#list.
 #
 # @!attribute [rw] apogee
 #   @return [Integer, nil]
@@ -1003,7 +1003,7 @@ LocationLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Location#list (any subset of Location fields).
+# Request payload for Location#list.
 #
 # @!attribute [rw] country_code
 #   @return [String, nil]
@@ -1098,7 +1098,7 @@ PadLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Pad#list (any subset of Pad fields).
+# Request payload for Pad#list.
 #
 # @!attribute [rw] agency_id
 #   @return [Integer, nil]
@@ -1213,7 +1213,7 @@ SpaceStationLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for SpaceStation#list (any subset of SpaceStation fields).
+# Request payload for SpaceStation#list.
 #
 # @!attribute [rw] deorbited
 #   @return [String, nil]
@@ -1336,7 +1336,7 @@ SpacecraftLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Spacecraft#list (any subset of Spacecraft fields).
+# Request payload for Spacecraft#list.
 #
 # @!attribute [rw] agency
 #   @return [Hash, nil]

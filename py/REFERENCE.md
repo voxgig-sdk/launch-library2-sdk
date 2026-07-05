@@ -8,7 +8,7 @@ Complete API reference for the LaunchLibrary2 Python SDK.
 ### Constructor
 
 ```python
-from launch-library2_sdk import LaunchLibrary2SDK
+from launchlibrary2_sdk import LaunchLibrary2SDK
 
 client = LaunchLibrary2SDK(options)
 ```
@@ -143,25 +143,25 @@ agency = client.Agency()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbrev` | ``$STRING`` | No |  |
-| `administrator` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `founding_year` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `logo_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `abbrev` | `str` | No |  |
+| `administrator` | `str` | No |  |
+| `country_code` | `str` | No |  |
+| `description` | `str` | No |  |
+| `founding_year` | `str` | No |  |
+| `id` | `int` | No |  |
+| `logo_url` | `str` | No |  |
+| `name` | `str` | No |  |
+| `type` | `str` | No |  |
+| `url` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Agency().list({})
+results = client.Agency().list()
 for agency in results:
     print(agency)
 ```
@@ -213,27 +213,27 @@ astronaut = client.Astronaut()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bio` | ``$STRING`` | No |  |
-| `date_of_birth` | ``$STRING`` | No |  |
-| `date_of_death` | ``$STRING`` | No |  |
-| `flights_count` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `nationality` | ``$STRING`` | No |  |
-| `profile_image` | ``$STRING`` | No |  |
-| `spacewalks_count` | ``$INTEGER`` | No |  |
-| `status` | ``$OBJECT`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `bio` | `str` | No |  |
+| `date_of_birth` | `str` | No |  |
+| `date_of_death` | `str` | No |  |
+| `flights_count` | `int` | No |  |
+| `id` | `int` | No |  |
+| `name` | `str` | No |  |
+| `nationality` | `str` | No |  |
+| `profile_image` | `str` | No |  |
+| `spacewalks_count` | `int` | No |  |
+| `status` | `dict` | No |  |
+| `type` | `dict` | No |  |
+| `url` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Astronaut().list({})
+results = client.Astronaut().list()
 for astronaut in results:
     print(astronaut)
 ```
@@ -320,21 +320,21 @@ docking_event = client.DockingEvent()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | ``$STRING`` | No |  |
-| `docking` | ``$STRING`` | No |  |
-| `docking_location` | ``$OBJECT`` | No |  |
-| `flight_vehicle` | ``$OBJECT`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `departure` | `str` | No |  |
+| `docking` | `str` | No |  |
+| `docking_location` | `dict` | No |  |
+| `flight_vehicle` | `dict` | No |  |
+| `id` | `int` | No |  |
+| `url` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.DockingEvent().list({})
+results = client.DockingEvent().list()
 for docking_event in results:
     print(docking_event)
 ```
@@ -386,25 +386,25 @@ event = client.Event()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `feature_image` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `location` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `news_url` | ``$STRING`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `video_url` | ``$STRING`` | No |  |
+| `date` | `str` | No |  |
+| `description` | `str` | No |  |
+| `feature_image` | `str` | No |  |
+| `id` | `int` | No |  |
+| `location` | `str` | No |  |
+| `name` | `str` | No |  |
+| `news_url` | `str` | No |  |
+| `type` | `dict` | No |  |
+| `url` | `str` | No |  |
+| `video_url` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Event().list({})
+results = client.Event().list()
 for event in results:
     print(event)
 ```
@@ -456,22 +456,22 @@ expedition = client.Expedition()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `crew` | ``$ARRAY`` | No |  |
-| `end` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `spacestation` | ``$OBJECT`` | No |  |
-| `start` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `crew` | `list` | No |  |
+| `end` | `str` | No |  |
+| `id` | `int` | No |  |
+| `name` | `str` | No |  |
+| `spacestation` | `dict` | No |  |
+| `start` | `str` | No |  |
+| `url` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Expedition().list({})
+results = client.Expedition().list()
 for expedition in results:
     print(expedition)
 ```
@@ -523,22 +523,22 @@ first_stage = client.FirstStage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `flight` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `launcher_config` | ``$OBJECT`` | No |  |
-| `serial_number` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `flight` | `int` | No |  |
+| `id` | `int` | No |  |
+| `launcher_config` | `dict` | No |  |
+| `serial_number` | `str` | No |  |
+| `status` | `str` | No |  |
+| `type` | `str` | No |  |
+| `url` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.FirstStage().list({})
+results = client.FirstStage().list()
 for first_stage in results:
     print(first_stage)
 ```
@@ -590,29 +590,29 @@ launch = client.Launch()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$STRING`` | No |  |
-| `launch_service_provider` | ``$OBJECT`` | No |  |
-| `mission` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `net` | ``$STRING`` | No |  |
-| `pad` | ``$OBJECT`` | No |  |
-| `probability` | ``$INTEGER`` | No |  |
-| `rocket` | ``$OBJECT`` | No |  |
-| `status` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `webcast_live` | ``$BOOLEAN`` | No |  |
-| `window_end` | ``$STRING`` | No |  |
-| `window_start` | ``$STRING`` | No |  |
+| `id` | `str` | No |  |
+| `image` | `str` | No |  |
+| `launch_service_provider` | `dict` | No |  |
+| `mission` | `dict` | No |  |
+| `name` | `str` | No |  |
+| `net` | `str` | No |  |
+| `pad` | `dict` | No |  |
+| `probability` | `int` | No |  |
+| `rocket` | `dict` | No |  |
+| `status` | `dict` | No |  |
+| `url` | `str` | No |  |
+| `webcast_live` | `bool` | No |  |
+| `window_end` | `str` | No |  |
+| `window_start` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Launch().list({})
+results = client.Launch().list()
 for launch in results:
     print(launch)
 ```
@@ -664,37 +664,37 @@ launch_vehicle = client.LaunchVehicle()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | ``$INTEGER`` | No |  |
-| `consecutive_successful_launch` | ``$INTEGER`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `diameter` | ``$NUMBER`` | No |  |
-| `failed_launch` | ``$INTEGER`` | No |  |
-| `family` | ``$STRING`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `gto_capacity` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `launch_mass` | ``$INTEGER`` | No |  |
-| `length` | ``$NUMBER`` | No |  |
-| `leo_capacity` | ``$INTEGER`` | No |  |
-| `maiden_flight` | ``$STRING`` | No |  |
-| `manufacturer` | ``$OBJECT`` | No |  |
-| `max_stage` | ``$INTEGER`` | No |  |
-| `min_stage` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `pending_launch` | ``$INTEGER`` | No |  |
-| `successful_launch` | ``$INTEGER`` | No |  |
-| `to_thrust` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `variant` | ``$STRING`` | No |  |
+| `apogee` | `int` | No |  |
+| `consecutive_successful_launch` | `int` | No |  |
+| `description` | `str` | No |  |
+| `diameter` | `float` | No |  |
+| `failed_launch` | `int` | No |  |
+| `family` | `str` | No |  |
+| `full_name` | `str` | No |  |
+| `gto_capacity` | `int` | No |  |
+| `id` | `int` | No |  |
+| `launch_mass` | `int` | No |  |
+| `length` | `float` | No |  |
+| `leo_capacity` | `int` | No |  |
+| `maiden_flight` | `str` | No |  |
+| `manufacturer` | `dict` | No |  |
+| `max_stage` | `int` | No |  |
+| `min_stage` | `int` | No |  |
+| `name` | `str` | No |  |
+| `pending_launch` | `int` | No |  |
+| `successful_launch` | `int` | No |  |
+| `to_thrust` | `int` | No |  |
+| `url` | `str` | No |  |
+| `variant` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.LaunchVehicle().list({})
+results = client.LaunchVehicle().list()
 for launch_vehicle in results:
     print(launch_vehicle)
 ```
@@ -738,28 +738,28 @@ launcher = client.Launcher()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | ``$INTEGER`` | No |  |
-| `consecutive_successful_launch` | ``$INTEGER`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `diameter` | ``$NUMBER`` | No |  |
-| `failed_launch` | ``$INTEGER`` | No |  |
-| `family` | ``$STRING`` | No |  |
-| `full_name` | ``$STRING`` | No |  |
-| `gto_capacity` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `launch_mass` | ``$INTEGER`` | No |  |
-| `length` | ``$NUMBER`` | No |  |
-| `leo_capacity` | ``$INTEGER`` | No |  |
-| `maiden_flight` | ``$STRING`` | No |  |
-| `manufacturer` | ``$OBJECT`` | No |  |
-| `max_stage` | ``$INTEGER`` | No |  |
-| `min_stage` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `pending_launch` | ``$INTEGER`` | No |  |
-| `successful_launch` | ``$INTEGER`` | No |  |
-| `to_thrust` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `variant` | ``$STRING`` | No |  |
+| `apogee` | `int` | No |  |
+| `consecutive_successful_launch` | `int` | No |  |
+| `description` | `str` | No |  |
+| `diameter` | `float` | No |  |
+| `failed_launch` | `int` | No |  |
+| `family` | `str` | No |  |
+| `full_name` | `str` | No |  |
+| `gto_capacity` | `int` | No |  |
+| `id` | `int` | No |  |
+| `launch_mass` | `int` | No |  |
+| `length` | `float` | No |  |
+| `leo_capacity` | `int` | No |  |
+| `maiden_flight` | `str` | No |  |
+| `manufacturer` | `dict` | No |  |
+| `max_stage` | `int` | No |  |
+| `min_stage` | `int` | No |  |
+| `name` | `str` | No |  |
+| `pending_launch` | `int` | No |  |
+| `successful_launch` | `int` | No |  |
+| `to_thrust` | `int` | No |  |
+| `url` | `str` | No |  |
+| `variant` | `str` | No |  |
 
 ### Operations
 
@@ -810,22 +810,22 @@ location = client.Location()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `map_image` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `total_landing_count` | ``$INTEGER`` | No |  |
-| `total_launch_count` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `country_code` | `str` | No |  |
+| `id` | `int` | No |  |
+| `map_image` | `str` | No |  |
+| `name` | `str` | No |  |
+| `total_landing_count` | `int` | No |  |
+| `total_launch_count` | `int` | No |  |
+| `url` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Location().list({})
+results = client.Location().list()
 for location in results:
     print(location)
 ```
@@ -877,27 +877,27 @@ pad = client.Pad()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agency_id` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `info_url` | ``$STRING`` | No |  |
-| `latitude` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `longitude` | ``$STRING`` | No |  |
-| `map_image` | ``$STRING`` | No |  |
-| `map_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `total_launch_count` | ``$INTEGER`` | No |  |
-| `url` | ``$STRING`` | No |  |
-| `wiki_url` | ``$STRING`` | No |  |
+| `agency_id` | `int` | No |  |
+| `id` | `int` | No |  |
+| `info_url` | `str` | No |  |
+| `latitude` | `str` | No |  |
+| `location` | `dict` | No |  |
+| `longitude` | `str` | No |  |
+| `map_image` | `str` | No |  |
+| `map_url` | `str` | No |  |
+| `name` | `str` | No |  |
+| `total_launch_count` | `int` | No |  |
+| `url` | `str` | No |  |
+| `wiki_url` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Pad().list({})
+results = client.Pad().list()
 for pad in results:
     print(pad)
 ```
@@ -984,26 +984,26 @@ space_station = client.SpaceStation()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deorbited` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `founded` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image_url` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `orbit` | ``$STRING`` | No |  |
-| `owner` | ``$ARRAY`` | No |  |
-| `status` | ``$OBJECT`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `deorbited` | `str` | No |  |
+| `description` | `str` | No |  |
+| `founded` | `str` | No |  |
+| `id` | `int` | No |  |
+| `image_url` | `str` | No |  |
+| `name` | `str` | No |  |
+| `orbit` | `str` | No |  |
+| `owner` | `list` | No |  |
+| `status` | `dict` | No |  |
+| `type` | `dict` | No |  |
+| `url` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.SpaceStation().list({})
+results = client.SpaceStation().list()
 for space_station in results:
     print(space_station)
 ```
@@ -1055,30 +1055,30 @@ spacecraft = client.Spacecraft()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agency` | ``$OBJECT`` | No |  |
-| `capability` | ``$STRING`` | No |  |
-| `crew_capacity` | ``$INTEGER`` | No |  |
-| `detail` | ``$STRING`` | No |  |
-| `diameter` | ``$NUMBER`` | No |  |
-| `height` | ``$NUMBER`` | No |  |
-| `history` | ``$STRING`` | No |  |
-| `human_rated` | ``$BOOLEAN`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `image_url` | ``$STRING`` | No |  |
-| `in_use` | ``$BOOLEAN`` | No |  |
-| `maiden_flight` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `type` | ``$OBJECT`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `agency` | `dict` | No |  |
+| `capability` | `str` | No |  |
+| `crew_capacity` | `int` | No |  |
+| `detail` | `str` | No |  |
+| `diameter` | `float` | No |  |
+| `height` | `float` | No |  |
+| `history` | `str` | No |  |
+| `human_rated` | `bool` | No |  |
+| `id` | `int` | No |  |
+| `image_url` | `str` | No |  |
+| `in_use` | `bool` | No |  |
+| `maiden_flight` | `str` | No |  |
+| `name` | `str` | No |  |
+| `type` | `dict` | No |  |
+| `url` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Spacecraft().list({})
+results = client.Spacecraft().list()
 for spacecraft in results:
     print(spacecraft)
 ```

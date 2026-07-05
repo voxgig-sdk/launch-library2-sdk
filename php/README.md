@@ -4,6 +4,8 @@
 
 The PHP SDK for the LaunchLibrary2 API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Agency()` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -36,7 +38,7 @@ try {
     // list() returns an array of Agency records — iterate directly.
     $agencys = $client->Agency()->list();
     foreach ($agencys as $item) {
-        echo $item["id"] . " " . $item["name"] . "\n";
+        echo $item["id"] . " " . $item["abbrev"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -52,6 +54,37 @@ try {
     print_r($agency);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
+}
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $agencys = $client->Agency()->list();
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -75,7 +108,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -104,8 +140,8 @@ $client = LaunchLibrary2SDK::test([
     "entity" => ["agency" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// load() returns the bare mock record (throws on error).
-$agency = $client->Agency()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$agency = $client->Agency()->list();
 print_r($agency);
 ```
 
@@ -208,10 +244,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
-| `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
+| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -549,16 +582,16 @@ Create an instance: `$agency = $client->Agency();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbrev` | ``$STRING`` |  |
-| `administrator` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `founding_year` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `logo_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `type` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `abbrev` | `string` |  |
+| `administrator` | `string` |  |
+| `country_code` | `string` |  |
+| `description` | `string` |  |
+| `founding_year` | `string` |  |
+| `id` | `int` |  |
+| `logo_url` | `string` |  |
+| `name` | `string` |  |
+| `type` | `string` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
@@ -590,18 +623,18 @@ Create an instance: `$astronaut = $client->Astronaut();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bio` | ``$STRING`` |  |
-| `date_of_birth` | ``$STRING`` |  |
-| `date_of_death` | ``$STRING`` |  |
-| `flights_count` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `nationality` | ``$STRING`` |  |
-| `profile_image` | ``$STRING`` |  |
-| `spacewalks_count` | ``$INTEGER`` |  |
-| `status` | ``$OBJECT`` |  |
-| `type` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
+| `bio` | `string` |  |
+| `date_of_birth` | `string` |  |
+| `date_of_death` | `string` |  |
+| `flights_count` | `int` |  |
+| `id` | `int` |  |
+| `name` | `string` |  |
+| `nationality` | `string` |  |
+| `profile_image` | `string` |  |
+| `spacewalks_count` | `int` |  |
+| `status` | `array` |  |
+| `type` | `array` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
@@ -638,12 +671,12 @@ Create an instance: `$docking_event = $client->DockingEvent();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `departure` | ``$STRING`` |  |
-| `docking` | ``$STRING`` |  |
-| `docking_location` | ``$OBJECT`` |  |
-| `flight_vehicle` | ``$OBJECT`` |  |
-| `id` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
+| `departure` | `string` |  |
+| `docking` | `string` |  |
+| `docking_location` | `array` |  |
+| `flight_vehicle` | `array` |  |
+| `id` | `int` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
@@ -675,16 +708,16 @@ Create an instance: `$event = $client->Event();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `feature_image` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `location` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `news_url` | ``$STRING`` |  |
-| `type` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
-| `video_url` | ``$STRING`` |  |
+| `date` | `string` |  |
+| `description` | `string` |  |
+| `feature_image` | `string` |  |
+| `id` | `int` |  |
+| `location` | `string` |  |
+| `name` | `string` |  |
+| `news_url` | `string` |  |
+| `type` | `array` |  |
+| `url` | `string` |  |
+| `video_url` | `string` |  |
 
 #### Example: Load
 
@@ -716,13 +749,13 @@ Create an instance: `$expedition = $client->Expedition();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `crew` | ``$ARRAY`` |  |
-| `end` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `spacestation` | ``$OBJECT`` |  |
-| `start` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `crew` | `array` |  |
+| `end` | `string` |  |
+| `id` | `int` |  |
+| `name` | `string` |  |
+| `spacestation` | `array` |  |
+| `start` | `string` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
@@ -754,13 +787,13 @@ Create an instance: `$first_stage = $client->FirstStage();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `flight` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `launcher_config` | ``$OBJECT`` |  |
-| `serial_number` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `type` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `flight` | `int` |  |
+| `id` | `int` |  |
+| `launcher_config` | `array` |  |
+| `serial_number` | `string` |  |
+| `status` | `string` |  |
+| `type` | `string` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
@@ -792,20 +825,20 @@ Create an instance: `$launch = $client->Launch();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
-| `image` | ``$STRING`` |  |
-| `launch_service_provider` | ``$OBJECT`` |  |
-| `mission` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `net` | ``$STRING`` |  |
-| `pad` | ``$OBJECT`` |  |
-| `probability` | ``$INTEGER`` |  |
-| `rocket` | ``$OBJECT`` |  |
-| `status` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
-| `webcast_live` | ``$BOOLEAN`` |  |
-| `window_end` | ``$STRING`` |  |
-| `window_start` | ``$STRING`` |  |
+| `id` | `string` |  |
+| `image` | `string` |  |
+| `launch_service_provider` | `array` |  |
+| `mission` | `array` |  |
+| `name` | `string` |  |
+| `net` | `string` |  |
+| `pad` | `array` |  |
+| `probability` | `int` |  |
+| `rocket` | `array` |  |
+| `status` | `array` |  |
+| `url` | `string` |  |
+| `webcast_live` | `bool` |  |
+| `window_end` | `string` |  |
+| `window_start` | `string` |  |
 
 #### Example: Load
 
@@ -836,28 +869,28 @@ Create an instance: `$launch_vehicle = $client->LaunchVehicle();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | ``$INTEGER`` |  |
-| `consecutive_successful_launch` | ``$INTEGER`` |  |
-| `description` | ``$STRING`` |  |
-| `diameter` | ``$NUMBER`` |  |
-| `failed_launch` | ``$INTEGER`` |  |
-| `family` | ``$STRING`` |  |
-| `full_name` | ``$STRING`` |  |
-| `gto_capacity` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `launch_mass` | ``$INTEGER`` |  |
-| `length` | ``$NUMBER`` |  |
-| `leo_capacity` | ``$INTEGER`` |  |
-| `maiden_flight` | ``$STRING`` |  |
-| `manufacturer` | ``$OBJECT`` |  |
-| `max_stage` | ``$INTEGER`` |  |
-| `min_stage` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `pending_launch` | ``$INTEGER`` |  |
-| `successful_launch` | ``$INTEGER`` |  |
-| `to_thrust` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
-| `variant` | ``$STRING`` |  |
+| `apogee` | `int` |  |
+| `consecutive_successful_launch` | `int` |  |
+| `description` | `string` |  |
+| `diameter` | `float` |  |
+| `failed_launch` | `int` |  |
+| `family` | `string` |  |
+| `full_name` | `string` |  |
+| `gto_capacity` | `int` |  |
+| `id` | `int` |  |
+| `launch_mass` | `int` |  |
+| `length` | `float` |  |
+| `leo_capacity` | `int` |  |
+| `maiden_flight` | `string` |  |
+| `manufacturer` | `array` |  |
+| `max_stage` | `int` |  |
+| `min_stage` | `int` |  |
+| `name` | `string` |  |
+| `pending_launch` | `int` |  |
+| `successful_launch` | `int` |  |
+| `to_thrust` | `int` |  |
+| `url` | `string` |  |
+| `variant` | `string` |  |
 
 #### Example: List
 
@@ -881,28 +914,28 @@ Create an instance: `$launcher = $client->Launcher();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | ``$INTEGER`` |  |
-| `consecutive_successful_launch` | ``$INTEGER`` |  |
-| `description` | ``$STRING`` |  |
-| `diameter` | ``$NUMBER`` |  |
-| `failed_launch` | ``$INTEGER`` |  |
-| `family` | ``$STRING`` |  |
-| `full_name` | ``$STRING`` |  |
-| `gto_capacity` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `launch_mass` | ``$INTEGER`` |  |
-| `length` | ``$NUMBER`` |  |
-| `leo_capacity` | ``$INTEGER`` |  |
-| `maiden_flight` | ``$STRING`` |  |
-| `manufacturer` | ``$OBJECT`` |  |
-| `max_stage` | ``$INTEGER`` |  |
-| `min_stage` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `pending_launch` | ``$INTEGER`` |  |
-| `successful_launch` | ``$INTEGER`` |  |
-| `to_thrust` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
-| `variant` | ``$STRING`` |  |
+| `apogee` | `int` |  |
+| `consecutive_successful_launch` | `int` |  |
+| `description` | `string` |  |
+| `diameter` | `float` |  |
+| `failed_launch` | `int` |  |
+| `family` | `string` |  |
+| `full_name` | `string` |  |
+| `gto_capacity` | `int` |  |
+| `id` | `int` |  |
+| `launch_mass` | `int` |  |
+| `length` | `float` |  |
+| `leo_capacity` | `int` |  |
+| `maiden_flight` | `string` |  |
+| `manufacturer` | `array` |  |
+| `max_stage` | `int` |  |
+| `min_stage` | `int` |  |
+| `name` | `string` |  |
+| `pending_launch` | `int` |  |
+| `successful_launch` | `int` |  |
+| `to_thrust` | `int` |  |
+| `url` | `string` |  |
+| `variant` | `string` |  |
 
 #### Example: Load
 
@@ -927,13 +960,13 @@ Create an instance: `$location = $client->Location();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `map_image` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `total_landing_count` | ``$INTEGER`` |  |
-| `total_launch_count` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
+| `country_code` | `string` |  |
+| `id` | `int` |  |
+| `map_image` | `string` |  |
+| `name` | `string` |  |
+| `total_landing_count` | `int` |  |
+| `total_launch_count` | `int` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
@@ -965,18 +998,18 @@ Create an instance: `$pad = $client->Pad();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agency_id` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `info_url` | ``$STRING`` |  |
-| `latitude` | ``$STRING`` |  |
-| `location` | ``$OBJECT`` |  |
-| `longitude` | ``$STRING`` |  |
-| `map_image` | ``$STRING`` |  |
-| `map_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `total_launch_count` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
-| `wiki_url` | ``$STRING`` |  |
+| `agency_id` | `int` |  |
+| `id` | `int` |  |
+| `info_url` | `string` |  |
+| `latitude` | `string` |  |
+| `location` | `array` |  |
+| `longitude` | `string` |  |
+| `map_image` | `string` |  |
+| `map_url` | `string` |  |
+| `name` | `string` |  |
+| `total_launch_count` | `int` |  |
+| `url` | `string` |  |
+| `wiki_url` | `string` |  |
 
 #### Example: Load
 
@@ -1013,17 +1046,17 @@ Create an instance: `$space_station = $client->SpaceStation();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deorbited` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `founded` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `image_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `orbit` | ``$STRING`` |  |
-| `owner` | ``$ARRAY`` |  |
-| `status` | ``$OBJECT`` |  |
-| `type` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
+| `deorbited` | `string` |  |
+| `description` | `string` |  |
+| `founded` | `string` |  |
+| `id` | `int` |  |
+| `image_url` | `string` |  |
+| `name` | `string` |  |
+| `orbit` | `string` |  |
+| `owner` | `array` |  |
+| `status` | `array` |  |
+| `type` | `array` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
@@ -1055,21 +1088,21 @@ Create an instance: `$spacecraft = $client->Spacecraft();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agency` | ``$OBJECT`` |  |
-| `capability` | ``$STRING`` |  |
-| `crew_capacity` | ``$INTEGER`` |  |
-| `detail` | ``$STRING`` |  |
-| `diameter` | ``$NUMBER`` |  |
-| `height` | ``$NUMBER`` |  |
-| `history` | ``$STRING`` |  |
-| `human_rated` | ``$BOOLEAN`` |  |
-| `id` | ``$INTEGER`` |  |
-| `image_url` | ``$STRING`` |  |
-| `in_use` | ``$BOOLEAN`` |  |
-| `maiden_flight` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `type` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
+| `agency` | `array` |  |
+| `capability` | `string` |  |
+| `crew_capacity` | `int` |  |
+| `detail` | `string` |  |
+| `diameter` | `float` |  |
+| `height` | `float` |  |
+| `history` | `string` |  |
+| `human_rated` | `bool` |  |
+| `id` | `int` |  |
+| `image_url` | `string` |  |
+| `in_use` | `bool` |  |
+| `maiden_flight` | `string` |  |
+| `name` | `string` |  |
+| `type` | `array` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
@@ -1086,12 +1119,16 @@ $spacecrafts = $client->Spacecraft()->list();
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -1108,8 +1145,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -1153,15 +1191,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
 $agency = $client->Agency();
-$agency->load(["id" => "example_id"]);
+$agency->list();
 
-// $agency->dataGet() now returns the loaded agency data
-// $agency->matchGet() returns the last match criteria
+// $agency->data_get() now returns the agency data from the last list
+// $agency->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

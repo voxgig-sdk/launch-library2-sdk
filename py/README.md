@@ -4,6 +4,11 @@
 
 The Python SDK for the LaunchLibrary2 API — an entity-oriented client following Pythonic conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Agency()` — each
+carrying a small, uniform set of operations (`list`, `load`) instead of raw URL
+paths and query strings. You work with named resources and verbs, which
+keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -38,7 +43,7 @@ error — iterate it directly.
 
 ```python
 try:
-    agencys = client.Agency().list({})
+    agencys = client.Agency().list()
     for agency in agencys:
         print(agency)
 except Exception as err:
@@ -55,6 +60,34 @@ try:
     print(agency)
 except Exception as err:
     print(f"load failed: {err}")
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so wrap them in `try` / `except`:
+
+```python
+try:
+    agencys = client.Agency().list()
+    print(agencys)
+except Exception as err:
+    print(f"list failed: {err}")
+```
+
+`direct()` does **not** raise — it returns the result envelope. Branch
+on `ok`; on failure `status` holds the HTTP status (for error responses)
+and `err` holds a transport error, so read both defensively:
+
+```python
+result = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example_id"},
+})
+
+if not result["ok"]:
+    print("request failed:", result.get("status"), result.get("err"))
 ```
 
 
@@ -75,7 +108,10 @@ if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
 else:
-    print(result["err"])     # error value
+    # A non-2xx response carries status + data (the error body); a
+    # transport-level failure carries err instead. Only one is present, so
+    # read both with .get() rather than indexing a key that may be absent.
+    print(result.get("status"), result.get("err"))
 ```
 
 ### Prepare a request without sending it
@@ -101,7 +137,7 @@ Create a mock client for unit testing — no server required:
 client = LaunchLibrary2SDK.test()
 
 # Entity ops return the bare record and raise on error.
-agency = client.Agency().load({"id": "test01"})
+agency = client.Agency().list()
 # agency contains the mock response record
 ```
 
@@ -202,9 +238,6 @@ All entities share the same interface.
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
 | `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -535,23 +568,23 @@ Create an instance: `agency = client.Agency()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbrev` | ``$STRING`` |  |
-| `administrator` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `founding_year` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `logo_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `type` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `abbrev` | `str` |  |
+| `administrator` | `str` |  |
+| `country_code` | `str` |  |
+| `description` | `str` |  |
+| `founding_year` | `str` |  |
+| `id` | `int` |  |
+| `logo_url` | `str` |  |
+| `name` | `str` |  |
+| `type` | `str` |  |
+| `url` | `str` |  |
 
 #### Example: Load
 
@@ -562,7 +595,7 @@ agency = client.Agency().load({"id": "agency_id"})
 #### Example: List
 
 ```python
-agencys = client.Agency().list({})
+agencys = client.Agency().list()
 ```
 
 
@@ -574,25 +607,25 @@ Create an instance: `astronaut = client.Astronaut()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bio` | ``$STRING`` |  |
-| `date_of_birth` | ``$STRING`` |  |
-| `date_of_death` | ``$STRING`` |  |
-| `flights_count` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `nationality` | ``$STRING`` |  |
-| `profile_image` | ``$STRING`` |  |
-| `spacewalks_count` | ``$INTEGER`` |  |
-| `status` | ``$OBJECT`` |  |
-| `type` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
+| `bio` | `str` |  |
+| `date_of_birth` | `str` |  |
+| `date_of_death` | `str` |  |
+| `flights_count` | `int` |  |
+| `id` | `int` |  |
+| `name` | `str` |  |
+| `nationality` | `str` |  |
+| `profile_image` | `str` |  |
+| `spacewalks_count` | `int` |  |
+| `status` | `dict` |  |
+| `type` | `dict` |  |
+| `url` | `str` |  |
 
 #### Example: Load
 
@@ -603,7 +636,7 @@ astronaut = client.Astronaut().load({"id": "astronaut_id"})
 #### Example: List
 
 ```python
-astronauts = client.Astronaut().list({})
+astronauts = client.Astronaut().list()
 ```
 
 
@@ -620,19 +653,19 @@ Create an instance: `docking_event = client.DockingEvent()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `departure` | ``$STRING`` |  |
-| `docking` | ``$STRING`` |  |
-| `docking_location` | ``$OBJECT`` |  |
-| `flight_vehicle` | ``$OBJECT`` |  |
-| `id` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
+| `departure` | `str` |  |
+| `docking` | `str` |  |
+| `docking_location` | `dict` |  |
+| `flight_vehicle` | `dict` |  |
+| `id` | `int` |  |
+| `url` | `str` |  |
 
 #### Example: Load
 
@@ -643,7 +676,7 @@ docking_event = client.DockingEvent().load({"id": "docking_event_id"})
 #### Example: List
 
 ```python
-docking_events = client.DockingEvent().list({})
+docking_events = client.DockingEvent().list()
 ```
 
 
@@ -655,23 +688,23 @@ Create an instance: `event = client.Event()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `feature_image` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `location` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `news_url` | ``$STRING`` |  |
-| `type` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
-| `video_url` | ``$STRING`` |  |
+| `date` | `str` |  |
+| `description` | `str` |  |
+| `feature_image` | `str` |  |
+| `id` | `int` |  |
+| `location` | `str` |  |
+| `name` | `str` |  |
+| `news_url` | `str` |  |
+| `type` | `dict` |  |
+| `url` | `str` |  |
+| `video_url` | `str` |  |
 
 #### Example: Load
 
@@ -682,7 +715,7 @@ event = client.Event().load({"id": "event_id"})
 #### Example: List
 
 ```python
-events = client.Event().list({})
+events = client.Event().list()
 ```
 
 
@@ -694,20 +727,20 @@ Create an instance: `expedition = client.Expedition()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `crew` | ``$ARRAY`` |  |
-| `end` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `spacestation` | ``$OBJECT`` |  |
-| `start` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `crew` | `list` |  |
+| `end` | `str` |  |
+| `id` | `int` |  |
+| `name` | `str` |  |
+| `spacestation` | `dict` |  |
+| `start` | `str` |  |
+| `url` | `str` |  |
 
 #### Example: Load
 
@@ -718,7 +751,7 @@ expedition = client.Expedition().load({"id": "expedition_id"})
 #### Example: List
 
 ```python
-expeditions = client.Expedition().list({})
+expeditions = client.Expedition().list()
 ```
 
 
@@ -730,20 +763,20 @@ Create an instance: `first_stage = client.FirstStage()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `flight` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `launcher_config` | ``$OBJECT`` |  |
-| `serial_number` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `type` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `flight` | `int` |  |
+| `id` | `int` |  |
+| `launcher_config` | `dict` |  |
+| `serial_number` | `str` |  |
+| `status` | `str` |  |
+| `type` | `str` |  |
+| `url` | `str` |  |
 
 #### Example: Load
 
@@ -754,7 +787,7 @@ first_stage = client.FirstStage().load({"id": "first_stage_id"})
 #### Example: List
 
 ```python
-first_stages = client.FirstStage().list({})
+first_stages = client.FirstStage().list()
 ```
 
 
@@ -766,27 +799,27 @@ Create an instance: `launch = client.Launch()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
-| `image` | ``$STRING`` |  |
-| `launch_service_provider` | ``$OBJECT`` |  |
-| `mission` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `net` | ``$STRING`` |  |
-| `pad` | ``$OBJECT`` |  |
-| `probability` | ``$INTEGER`` |  |
-| `rocket` | ``$OBJECT`` |  |
-| `status` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
-| `webcast_live` | ``$BOOLEAN`` |  |
-| `window_end` | ``$STRING`` |  |
-| `window_start` | ``$STRING`` |  |
+| `id` | `str` |  |
+| `image` | `str` |  |
+| `launch_service_provider` | `dict` |  |
+| `mission` | `dict` |  |
+| `name` | `str` |  |
+| `net` | `str` |  |
+| `pad` | `dict` |  |
+| `probability` | `int` |  |
+| `rocket` | `dict` |  |
+| `status` | `dict` |  |
+| `url` | `str` |  |
+| `webcast_live` | `bool` |  |
+| `window_end` | `str` |  |
+| `window_start` | `str` |  |
 
 #### Example: Load
 
@@ -797,7 +830,7 @@ launch = client.Launch().load({"id": "launch_id"})
 #### Example: List
 
 ```python
-launchs = client.Launch().list({})
+launchs = client.Launch().list()
 ```
 
 
@@ -809,39 +842,39 @@ Create an instance: `launch_vehicle = client.LaunchVehicle()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | ``$INTEGER`` |  |
-| `consecutive_successful_launch` | ``$INTEGER`` |  |
-| `description` | ``$STRING`` |  |
-| `diameter` | ``$NUMBER`` |  |
-| `failed_launch` | ``$INTEGER`` |  |
-| `family` | ``$STRING`` |  |
-| `full_name` | ``$STRING`` |  |
-| `gto_capacity` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `launch_mass` | ``$INTEGER`` |  |
-| `length` | ``$NUMBER`` |  |
-| `leo_capacity` | ``$INTEGER`` |  |
-| `maiden_flight` | ``$STRING`` |  |
-| `manufacturer` | ``$OBJECT`` |  |
-| `max_stage` | ``$INTEGER`` |  |
-| `min_stage` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `pending_launch` | ``$INTEGER`` |  |
-| `successful_launch` | ``$INTEGER`` |  |
-| `to_thrust` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
-| `variant` | ``$STRING`` |  |
+| `apogee` | `int` |  |
+| `consecutive_successful_launch` | `int` |  |
+| `description` | `str` |  |
+| `diameter` | `float` |  |
+| `failed_launch` | `int` |  |
+| `family` | `str` |  |
+| `full_name` | `str` |  |
+| `gto_capacity` | `int` |  |
+| `id` | `int` |  |
+| `launch_mass` | `int` |  |
+| `length` | `float` |  |
+| `leo_capacity` | `int` |  |
+| `maiden_flight` | `str` |  |
+| `manufacturer` | `dict` |  |
+| `max_stage` | `int` |  |
+| `min_stage` | `int` |  |
+| `name` | `str` |  |
+| `pending_launch` | `int` |  |
+| `successful_launch` | `int` |  |
+| `to_thrust` | `int` |  |
+| `url` | `str` |  |
+| `variant` | `str` |  |
 
 #### Example: List
 
 ```python
-launch_vehicles = client.LaunchVehicle().list({})
+launch_vehicles = client.LaunchVehicle().list()
 ```
 
 
@@ -859,28 +892,28 @@ Create an instance: `launcher = client.Launcher()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | ``$INTEGER`` |  |
-| `consecutive_successful_launch` | ``$INTEGER`` |  |
-| `description` | ``$STRING`` |  |
-| `diameter` | ``$NUMBER`` |  |
-| `failed_launch` | ``$INTEGER`` |  |
-| `family` | ``$STRING`` |  |
-| `full_name` | ``$STRING`` |  |
-| `gto_capacity` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `launch_mass` | ``$INTEGER`` |  |
-| `length` | ``$NUMBER`` |  |
-| `leo_capacity` | ``$INTEGER`` |  |
-| `maiden_flight` | ``$STRING`` |  |
-| `manufacturer` | ``$OBJECT`` |  |
-| `max_stage` | ``$INTEGER`` |  |
-| `min_stage` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `pending_launch` | ``$INTEGER`` |  |
-| `successful_launch` | ``$INTEGER`` |  |
-| `to_thrust` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
-| `variant` | ``$STRING`` |  |
+| `apogee` | `int` |  |
+| `consecutive_successful_launch` | `int` |  |
+| `description` | `str` |  |
+| `diameter` | `float` |  |
+| `failed_launch` | `int` |  |
+| `family` | `str` |  |
+| `full_name` | `str` |  |
+| `gto_capacity` | `int` |  |
+| `id` | `int` |  |
+| `launch_mass` | `int` |  |
+| `length` | `float` |  |
+| `leo_capacity` | `int` |  |
+| `maiden_flight` | `str` |  |
+| `manufacturer` | `dict` |  |
+| `max_stage` | `int` |  |
+| `min_stage` | `int` |  |
+| `name` | `str` |  |
+| `pending_launch` | `int` |  |
+| `successful_launch` | `int` |  |
+| `to_thrust` | `int` |  |
+| `url` | `str` |  |
+| `variant` | `str` |  |
 
 #### Example: Load
 
@@ -897,20 +930,20 @@ Create an instance: `location = client.Location()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `map_image` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `total_landing_count` | ``$INTEGER`` |  |
-| `total_launch_count` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
+| `country_code` | `str` |  |
+| `id` | `int` |  |
+| `map_image` | `str` |  |
+| `name` | `str` |  |
+| `total_landing_count` | `int` |  |
+| `total_launch_count` | `int` |  |
+| `url` | `str` |  |
 
 #### Example: Load
 
@@ -921,7 +954,7 @@ location = client.Location().load({"id": "location_id"})
 #### Example: List
 
 ```python
-locations = client.Location().list({})
+locations = client.Location().list()
 ```
 
 
@@ -933,25 +966,25 @@ Create an instance: `pad = client.Pad()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agency_id` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `info_url` | ``$STRING`` |  |
-| `latitude` | ``$STRING`` |  |
-| `location` | ``$OBJECT`` |  |
-| `longitude` | ``$STRING`` |  |
-| `map_image` | ``$STRING`` |  |
-| `map_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `total_launch_count` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
-| `wiki_url` | ``$STRING`` |  |
+| `agency_id` | `int` |  |
+| `id` | `int` |  |
+| `info_url` | `str` |  |
+| `latitude` | `str` |  |
+| `location` | `dict` |  |
+| `longitude` | `str` |  |
+| `map_image` | `str` |  |
+| `map_url` | `str` |  |
+| `name` | `str` |  |
+| `total_launch_count` | `int` |  |
+| `url` | `str` |  |
+| `wiki_url` | `str` |  |
 
 #### Example: Load
 
@@ -962,7 +995,7 @@ pad = client.Pad().load({"id": "pad_id"})
 #### Example: List
 
 ```python
-pads = client.Pad().list({})
+pads = client.Pad().list()
 ```
 
 
@@ -979,24 +1012,24 @@ Create an instance: `space_station = client.SpaceStation()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deorbited` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `founded` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `image_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `orbit` | ``$STRING`` |  |
-| `owner` | ``$ARRAY`` |  |
-| `status` | ``$OBJECT`` |  |
-| `type` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
+| `deorbited` | `str` |  |
+| `description` | `str` |  |
+| `founded` | `str` |  |
+| `id` | `int` |  |
+| `image_url` | `str` |  |
+| `name` | `str` |  |
+| `orbit` | `str` |  |
+| `owner` | `list` |  |
+| `status` | `dict` |  |
+| `type` | `dict` |  |
+| `url` | `str` |  |
 
 #### Example: Load
 
@@ -1007,7 +1040,7 @@ space_station = client.SpaceStation().load({"id": "space_station_id"})
 #### Example: List
 
 ```python
-space_stations = client.SpaceStation().list({})
+space_stations = client.SpaceStation().list()
 ```
 
 
@@ -1019,28 +1052,28 @@ Create an instance: `spacecraft = client.Spacecraft()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agency` | ``$OBJECT`` |  |
-| `capability` | ``$STRING`` |  |
-| `crew_capacity` | ``$INTEGER`` |  |
-| `detail` | ``$STRING`` |  |
-| `diameter` | ``$NUMBER`` |  |
-| `height` | ``$NUMBER`` |  |
-| `history` | ``$STRING`` |  |
-| `human_rated` | ``$BOOLEAN`` |  |
-| `id` | ``$INTEGER`` |  |
-| `image_url` | ``$STRING`` |  |
-| `in_use` | ``$BOOLEAN`` |  |
-| `maiden_flight` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `type` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
+| `agency` | `dict` |  |
+| `capability` | `str` |  |
+| `crew_capacity` | `int` |  |
+| `detail` | `str` |  |
+| `diameter` | `float` |  |
+| `height` | `float` |  |
+| `history` | `str` |  |
+| `human_rated` | `bool` |  |
+| `id` | `int` |  |
+| `image_url` | `str` |  |
+| `in_use` | `bool` |  |
+| `maiden_flight` | `str` |  |
+| `name` | `str` |  |
+| `type` | `dict` |  |
+| `url` | `str` |  |
 
 #### Example: Load
 
@@ -1051,16 +1084,20 @@ spacecraft = client.Spacecraft().load({"id": "spacecraft_id"})
 #### Example: List
 
 ```python
-spacecrafts = client.Spacecraft().list({})
+spacecrafts = client.Spacecraft().list()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -1077,8 +1114,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return tuple.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -1121,14 +1159,14 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
 agency = client.Agency()
-agency.load({"id": "example_id"})
+agency.list()
 
-# agency.data_get() now returns the loaded agency data
+# agency.data_get() now returns the agency data from the last list
 # agency.match_get() returns the last match criteria
 ```
 

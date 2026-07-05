@@ -221,91 +221,91 @@ class LaunchLibrary2SDK:
 
 
     def Agency(self, data=None) -> "AgencyEntity":
-        """Entity factory: client.Agency().list({}) / client.Agency().load({"id": ...})."""
+        """Entity factory: client.Agency().list() / client.Agency().load({"id": ...})."""
         from entity.agency_entity import AgencyEntity
         return AgencyEntity(self, data)
 
 
     def Astronaut(self, data=None) -> "AstronautEntity":
-        """Entity factory: client.Astronaut().list({}) / client.Astronaut().load({"id": ...})."""
+        """Entity factory: client.Astronaut().list() / client.Astronaut().load({"id": ...})."""
         from entity.astronaut_entity import AstronautEntity
         return AstronautEntity(self, data)
 
 
     def Docking(self, data=None) -> "DockingEntity":
-        """Entity factory: client.Docking().list({}) / client.Docking().load({"id": ...})."""
+        """Entity factory: client.Docking().list() / client.Docking().load({"id": ...})."""
         from entity.docking_entity import DockingEntity
         return DockingEntity(self, data)
 
 
     def DockingEvent(self, data=None) -> "DockingEventEntity":
-        """Entity factory: client.DockingEvent().list({}) / client.DockingEvent().load({"id": ...})."""
+        """Entity factory: client.DockingEvent().list() / client.DockingEvent().load({"id": ...})."""
         from entity.docking_event_entity import DockingEventEntity
         return DockingEventEntity(self, data)
 
 
     def Event(self, data=None) -> "EventEntity":
-        """Entity factory: client.Event().list({}) / client.Event().load({"id": ...})."""
+        """Entity factory: client.Event().list() / client.Event().load({"id": ...})."""
         from entity.event_entity import EventEntity
         return EventEntity(self, data)
 
 
     def Expedition(self, data=None) -> "ExpeditionEntity":
-        """Entity factory: client.Expedition().list({}) / client.Expedition().load({"id": ...})."""
+        """Entity factory: client.Expedition().list() / client.Expedition().load({"id": ...})."""
         from entity.expedition_entity import ExpeditionEntity
         return ExpeditionEntity(self, data)
 
 
     def FirstStage(self, data=None) -> "FirstStageEntity":
-        """Entity factory: client.FirstStage().list({}) / client.FirstStage().load({"id": ...})."""
+        """Entity factory: client.FirstStage().list() / client.FirstStage().load({"id": ...})."""
         from entity.first_stage_entity import FirstStageEntity
         return FirstStageEntity(self, data)
 
 
     def Launch(self, data=None) -> "LaunchEntity":
-        """Entity factory: client.Launch().list({}) / client.Launch().load({"id": ...})."""
+        """Entity factory: client.Launch().list() / client.Launch().load({"id": ...})."""
         from entity.launch_entity import LaunchEntity
         return LaunchEntity(self, data)
 
 
     def LaunchVehicle(self, data=None) -> "LaunchVehicleEntity":
-        """Entity factory: client.LaunchVehicle().list({}) / client.LaunchVehicle().load({"id": ...})."""
+        """Entity factory: client.LaunchVehicle().list() / client.LaunchVehicle().load({"id": ...})."""
         from entity.launch_vehicle_entity import LaunchVehicleEntity
         return LaunchVehicleEntity(self, data)
 
 
     def Launcher(self, data=None) -> "LauncherEntity":
-        """Entity factory: client.Launcher().list({}) / client.Launcher().load({"id": ...})."""
+        """Entity factory: client.Launcher().list() / client.Launcher().load({"id": ...})."""
         from entity.launcher_entity import LauncherEntity
         return LauncherEntity(self, data)
 
 
     def Location(self, data=None) -> "LocationEntity":
-        """Entity factory: client.Location().list({}) / client.Location().load({"id": ...})."""
+        """Entity factory: client.Location().list() / client.Location().load({"id": ...})."""
         from entity.location_entity import LocationEntity
         return LocationEntity(self, data)
 
 
     def Pad(self, data=None) -> "PadEntity":
-        """Entity factory: client.Pad().list({}) / client.Pad().load({"id": ...})."""
+        """Entity factory: client.Pad().list() / client.Pad().load({"id": ...})."""
         from entity.pad_entity import PadEntity
         return PadEntity(self, data)
 
 
     def ReusableFirstStage(self, data=None) -> "ReusableFirstStageEntity":
-        """Entity factory: client.ReusableFirstStage().list({}) / client.ReusableFirstStage().load({"id": ...})."""
+        """Entity factory: client.ReusableFirstStage().list() / client.ReusableFirstStage().load({"id": ...})."""
         from entity.reusable_first_stage_entity import ReusableFirstStageEntity
         return ReusableFirstStageEntity(self, data)
 
 
     def SpaceStation(self, data=None) -> "SpaceStationEntity":
-        """Entity factory: client.SpaceStation().list({}) / client.SpaceStation().load({"id": ...})."""
+        """Entity factory: client.SpaceStation().list() / client.SpaceStation().load({"id": ...})."""
         from entity.space_station_entity import SpaceStationEntity
         return SpaceStationEntity(self, data)
 
 
     def Spacecraft(self, data=None) -> "SpacecraftEntity":
-        """Entity factory: client.Spacecraft().list({}) / client.Spacecraft().load({"id": ...})."""
+        """Entity factory: client.Spacecraft().list() / client.Spacecraft().load({"id": ...})."""
         from entity.spacecraft_entity import SpacecraftEntity
         return SpacecraftEntity(self, data)
 

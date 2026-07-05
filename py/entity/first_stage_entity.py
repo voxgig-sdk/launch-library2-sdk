@@ -65,8 +65,13 @@ class FirstStageEntity:
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch: FirstStageLoadMatch, ctrl=None) -> FirstStage:
+    def load(self, reqmatch=None, ctrl=None) -> FirstStage:
         utility = self._utility
+        # reqmatch is optional: an entity with no id-like key loads with no
+        # match. Treat None as an empty match so client.FirstStage().load()
+        # works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "load",
             "ctrl": ctrl,
@@ -87,8 +92,12 @@ class FirstStageEntity:
 
 
     
-    def list(self, reqmatch: FirstStageListMatch, ctrl=None) -> list[FirstStage]:
+    def list(self, reqmatch=None, ctrl=None) -> list[FirstStage]:
         utility = self._utility
+        # reqmatch is optional: an omitted match lists all records. Treat None
+        # as an empty match so client.FirstStage().list() works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "list",
             "ctrl": ctrl,

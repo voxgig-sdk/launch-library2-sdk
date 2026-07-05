@@ -4,6 +4,11 @@
 
 The TypeScript SDK for the LaunchLibrary2 API — a type-safe, entity-oriented client with full async/await support.
 
+The API is exposed as capitalised, semantic **Entities** — e.g.
+`client.Agency()` — each with a small set of operations (`list`, `load`)
+instead of raw URL paths and query parameters. This keeps the surface
+predictable and low-friction for both humans and AI agents.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -46,10 +51,39 @@ for (const agency of agencys) {
 
 ```ts
 try {
-  const agency = await client.Agency().load({ id: 'example_id' })
+  const agency = await client.Agency().load({ id: 1 })
   console.log(agency)
 } catch (err) {
   console.error('load failed:', err)
+}
+```
+
+
+## Error handling
+
+Entity operations reject on failure, so wrap them in `try` / `catch`:
+
+```ts
+try {
+  const agencys = await client.Agency().list()
+  console.log(agencys)
+} catch (err) {
+  console.error('list failed:', err)
+}
+```
+
+The low-level `direct()` method does **not** throw — it returns the
+value or an `Error`, so check the result before using it:
+
+```ts
+const result = await client.direct({
+  path: '/api/resource/{id}',
+  method: 'GET',
+  params: { id: 'example_id' },
+})
+
+if (result instanceof Error) {
+  throw result
 }
 ```
 
@@ -98,7 +132,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = LaunchLibrary2SDK.test()
 
-const agency = await client.Agency().load({ id: 'test01' })
+const agency = await client.Agency().list()
 // agency is a bare entity populated with mock response data
 console.log(agency)
 ```
@@ -117,12 +151,12 @@ Entity instances remember their last match and data:
 ```ts
 const entity = client.Agency()
 
-// First call sets internal match
-await entity.load({ id: 'example' })
+// First call runs the operation and stores its result
+await entity.list()
 
-// Subsequent calls reuse the stored match
+// Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data.id) // 'example'
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -226,11 +260,8 @@ All entities share the same interface.
 | --- | --- | --- |
 | `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
 | `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
-| `data` | `data(data?): any` | Get or set entity data. |
-| `match` | `match(match?): any` | Get or set entity match criteria. |
+| `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
+| `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): LaunchLibrary2SDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
@@ -240,10 +271,9 @@ All entities share the same interface.
 Entity operations resolve to the entity data directly — there is no
 result envelope:
 
-- `load`, `create` and `update` resolve to a single entity object.
+- `load` resolves to a single entity object.
 - `list` resolves to an **array** of entity objects (iterate it directly;
   there is no `.data` and no `.ok`).
-- `remove` resolves to `void`.
 
 On a failed request these methods **throw**, so wrap calls in
 `try`/`catch` to handle errors. Only `direct()` returns the result
@@ -589,21 +619,21 @@ Create an instance: `const agency = client.Agency()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbrev` | ``$STRING`` |  |
-| `administrator` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `founding_year` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `logo_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `type` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `abbrev` | `string` |  |
+| `administrator` | `string` |  |
+| `country_code` | `string` |  |
+| `description` | `string` |  |
+| `founding_year` | `string` |  |
+| `id` | `number` |  |
+| `logo_url` | `string` |  |
+| `name` | `string` |  |
+| `type` | `string` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const agency = await client.Agency().load({ id: 'agency_id' })
+const agency = await client.Agency().load({ id: 1 })
 ```
 
 #### Example: List
@@ -628,23 +658,23 @@ Create an instance: `const astronaut = client.Astronaut()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bio` | ``$STRING`` |  |
-| `date_of_birth` | ``$STRING`` |  |
-| `date_of_death` | ``$STRING`` |  |
-| `flights_count` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `nationality` | ``$STRING`` |  |
-| `profile_image` | ``$STRING`` |  |
-| `spacewalks_count` | ``$INTEGER`` |  |
-| `status` | ``$OBJECT`` |  |
-| `type` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
+| `bio` | `string` |  |
+| `date_of_birth` | `string` |  |
+| `date_of_death` | `string` |  |
+| `flights_count` | `number` |  |
+| `id` | `number` |  |
+| `name` | `string` |  |
+| `nationality` | `string` |  |
+| `profile_image` | `string` |  |
+| `spacewalks_count` | `number` |  |
+| `status` | `Record<string, any>` |  |
+| `type` | `Record<string, any>` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const astronaut = await client.Astronaut().load({ id: 'astronaut_id' })
+const astronaut = await client.Astronaut().load({ id: 1 })
 ```
 
 #### Example: List
@@ -674,17 +704,17 @@ Create an instance: `const docking_event = client.DockingEvent()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `departure` | ``$STRING`` |  |
-| `docking` | ``$STRING`` |  |
-| `docking_location` | ``$OBJECT`` |  |
-| `flight_vehicle` | ``$OBJECT`` |  |
-| `id` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
+| `departure` | `string` |  |
+| `docking` | `string` |  |
+| `docking_location` | `Record<string, any>` |  |
+| `flight_vehicle` | `Record<string, any>` |  |
+| `id` | `number` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const docking_event = await client.DockingEvent().load({ id: 'docking_event_id' })
+const docking_event = await client.DockingEvent().load({ id: 1 })
 ```
 
 #### Example: List
@@ -709,21 +739,21 @@ Create an instance: `const event = client.Event()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `feature_image` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `location` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `news_url` | ``$STRING`` |  |
-| `type` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
-| `video_url` | ``$STRING`` |  |
+| `date` | `string` |  |
+| `description` | `string` |  |
+| `feature_image` | `string` |  |
+| `id` | `number` |  |
+| `location` | `string` |  |
+| `name` | `string` |  |
+| `news_url` | `string` |  |
+| `type` | `Record<string, any>` |  |
+| `url` | `string` |  |
+| `video_url` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const event = await client.Event().load({ id: 'event_id' })
+const event = await client.Event().load({ id: 1 })
 ```
 
 #### Example: List
@@ -748,18 +778,18 @@ Create an instance: `const expedition = client.Expedition()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `crew` | ``$ARRAY`` |  |
-| `end` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `spacestation` | ``$OBJECT`` |  |
-| `start` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `crew` | `any[]` |  |
+| `end` | `string` |  |
+| `id` | `number` |  |
+| `name` | `string` |  |
+| `spacestation` | `Record<string, any>` |  |
+| `start` | `string` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const expedition = await client.Expedition().load({ id: 'expedition_id' })
+const expedition = await client.Expedition().load({ id: 1 })
 ```
 
 #### Example: List
@@ -784,18 +814,18 @@ Create an instance: `const first_stage = client.FirstStage()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `flight` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `launcher_config` | ``$OBJECT`` |  |
-| `serial_number` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `type` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `flight` | `number` |  |
+| `id` | `number` |  |
+| `launcher_config` | `Record<string, any>` |  |
+| `serial_number` | `string` |  |
+| `status` | `string` |  |
+| `type` | `string` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const first_stage = await client.FirstStage().load({ id: 'first_stage_id' })
+const first_stage = await client.FirstStage().load({ id: 1 })
 ```
 
 #### Example: List
@@ -820,20 +850,20 @@ Create an instance: `const launch = client.Launch()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | ``$STRING`` |  |
-| `image` | ``$STRING`` |  |
-| `launch_service_provider` | ``$OBJECT`` |  |
-| `mission` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `net` | ``$STRING`` |  |
-| `pad` | ``$OBJECT`` |  |
-| `probability` | ``$INTEGER`` |  |
-| `rocket` | ``$OBJECT`` |  |
-| `status` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
-| `webcast_live` | ``$BOOLEAN`` |  |
-| `window_end` | ``$STRING`` |  |
-| `window_start` | ``$STRING`` |  |
+| `id` | `string` |  |
+| `image` | `string` |  |
+| `launch_service_provider` | `Record<string, any>` |  |
+| `mission` | `Record<string, any>` |  |
+| `name` | `string` |  |
+| `net` | `string` |  |
+| `pad` | `Record<string, any>` |  |
+| `probability` | `number` |  |
+| `rocket` | `Record<string, any>` |  |
+| `status` | `Record<string, any>` |  |
+| `url` | `string` |  |
+| `webcast_live` | `boolean` |  |
+| `window_end` | `string` |  |
+| `window_start` | `string` |  |
 
 #### Example: Load
 
@@ -862,28 +892,28 @@ Create an instance: `const launch_vehicle = client.LaunchVehicle()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | ``$INTEGER`` |  |
-| `consecutive_successful_launch` | ``$INTEGER`` |  |
-| `description` | ``$STRING`` |  |
-| `diameter` | ``$NUMBER`` |  |
-| `failed_launch` | ``$INTEGER`` |  |
-| `family` | ``$STRING`` |  |
-| `full_name` | ``$STRING`` |  |
-| `gto_capacity` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `launch_mass` | ``$INTEGER`` |  |
-| `length` | ``$NUMBER`` |  |
-| `leo_capacity` | ``$INTEGER`` |  |
-| `maiden_flight` | ``$STRING`` |  |
-| `manufacturer` | ``$OBJECT`` |  |
-| `max_stage` | ``$INTEGER`` |  |
-| `min_stage` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `pending_launch` | ``$INTEGER`` |  |
-| `successful_launch` | ``$INTEGER`` |  |
-| `to_thrust` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
-| `variant` | ``$STRING`` |  |
+| `apogee` | `number` |  |
+| `consecutive_successful_launch` | `number` |  |
+| `description` | `string` |  |
+| `diameter` | `number` |  |
+| `failed_launch` | `number` |  |
+| `family` | `string` |  |
+| `full_name` | `string` |  |
+| `gto_capacity` | `number` |  |
+| `id` | `number` |  |
+| `launch_mass` | `number` |  |
+| `length` | `number` |  |
+| `leo_capacity` | `number` |  |
+| `maiden_flight` | `string` |  |
+| `manufacturer` | `Record<string, any>` |  |
+| `max_stage` | `number` |  |
+| `min_stage` | `number` |  |
+| `name` | `string` |  |
+| `pending_launch` | `number` |  |
+| `successful_launch` | `number` |  |
+| `to_thrust` | `number` |  |
+| `url` | `string` |  |
+| `variant` | `string` |  |
 
 #### Example: List
 
@@ -906,33 +936,33 @@ Create an instance: `const launcher = client.Launcher()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | ``$INTEGER`` |  |
-| `consecutive_successful_launch` | ``$INTEGER`` |  |
-| `description` | ``$STRING`` |  |
-| `diameter` | ``$NUMBER`` |  |
-| `failed_launch` | ``$INTEGER`` |  |
-| `family` | ``$STRING`` |  |
-| `full_name` | ``$STRING`` |  |
-| `gto_capacity` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `launch_mass` | ``$INTEGER`` |  |
-| `length` | ``$NUMBER`` |  |
-| `leo_capacity` | ``$INTEGER`` |  |
-| `maiden_flight` | ``$STRING`` |  |
-| `manufacturer` | ``$OBJECT`` |  |
-| `max_stage` | ``$INTEGER`` |  |
-| `min_stage` | ``$INTEGER`` |  |
-| `name` | ``$STRING`` |  |
-| `pending_launch` | ``$INTEGER`` |  |
-| `successful_launch` | ``$INTEGER`` |  |
-| `to_thrust` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
-| `variant` | ``$STRING`` |  |
+| `apogee` | `number` |  |
+| `consecutive_successful_launch` | `number` |  |
+| `description` | `string` |  |
+| `diameter` | `number` |  |
+| `failed_launch` | `number` |  |
+| `family` | `string` |  |
+| `full_name` | `string` |  |
+| `gto_capacity` | `number` |  |
+| `id` | `number` |  |
+| `launch_mass` | `number` |  |
+| `length` | `number` |  |
+| `leo_capacity` | `number` |  |
+| `maiden_flight` | `string` |  |
+| `manufacturer` | `Record<string, any>` |  |
+| `max_stage` | `number` |  |
+| `min_stage` | `number` |  |
+| `name` | `string` |  |
+| `pending_launch` | `number` |  |
+| `successful_launch` | `number` |  |
+| `to_thrust` | `number` |  |
+| `url` | `string` |  |
+| `variant` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const launcher = await client.Launcher().load({ id: 'launcher_id' })
+const launcher = await client.Launcher().load({ id: 1 })
 ```
 
 
@@ -951,18 +981,18 @@ Create an instance: `const location = client.Location()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `map_image` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `total_landing_count` | ``$INTEGER`` |  |
-| `total_launch_count` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
+| `country_code` | `string` |  |
+| `id` | `number` |  |
+| `map_image` | `string` |  |
+| `name` | `string` |  |
+| `total_landing_count` | `number` |  |
+| `total_launch_count` | `number` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const location = await client.Location().load({ id: 'location_id' })
+const location = await client.Location().load({ id: 1 })
 ```
 
 #### Example: List
@@ -987,23 +1017,23 @@ Create an instance: `const pad = client.Pad()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agency_id` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `info_url` | ``$STRING`` |  |
-| `latitude` | ``$STRING`` |  |
-| `location` | ``$OBJECT`` |  |
-| `longitude` | ``$STRING`` |  |
-| `map_image` | ``$STRING`` |  |
-| `map_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `total_launch_count` | ``$INTEGER`` |  |
-| `url` | ``$STRING`` |  |
-| `wiki_url` | ``$STRING`` |  |
+| `agency_id` | `number` |  |
+| `id` | `number` |  |
+| `info_url` | `string` |  |
+| `latitude` | `string` |  |
+| `location` | `Record<string, any>` |  |
+| `longitude` | `string` |  |
+| `map_image` | `string` |  |
+| `map_url` | `string` |  |
+| `name` | `string` |  |
+| `total_launch_count` | `number` |  |
+| `url` | `string` |  |
+| `wiki_url` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const pad = await client.Pad().load({ id: 'pad_id' })
+const pad = await client.Pad().load({ id: 1 })
 ```
 
 #### Example: List
@@ -1033,22 +1063,22 @@ Create an instance: `const space_station = client.SpaceStation()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deorbited` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `founded` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `image_url` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `orbit` | ``$STRING`` |  |
-| `owner` | ``$ARRAY`` |  |
-| `status` | ``$OBJECT`` |  |
-| `type` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
+| `deorbited` | `string` |  |
+| `description` | `string` |  |
+| `founded` | `string` |  |
+| `id` | `number` |  |
+| `image_url` | `string` |  |
+| `name` | `string` |  |
+| `orbit` | `string` |  |
+| `owner` | `any[]` |  |
+| `status` | `Record<string, any>` |  |
+| `type` | `Record<string, any>` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const space_station = await client.SpaceStation().load({ id: 'space_station_id' })
+const space_station = await client.SpaceStation().load({ id: 1 })
 ```
 
 #### Example: List
@@ -1073,26 +1103,26 @@ Create an instance: `const spacecraft = client.Spacecraft()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agency` | ``$OBJECT`` |  |
-| `capability` | ``$STRING`` |  |
-| `crew_capacity` | ``$INTEGER`` |  |
-| `detail` | ``$STRING`` |  |
-| `diameter` | ``$NUMBER`` |  |
-| `height` | ``$NUMBER`` |  |
-| `history` | ``$STRING`` |  |
-| `human_rated` | ``$BOOLEAN`` |  |
-| `id` | ``$INTEGER`` |  |
-| `image_url` | ``$STRING`` |  |
-| `in_use` | ``$BOOLEAN`` |  |
-| `maiden_flight` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `type` | ``$OBJECT`` |  |
-| `url` | ``$STRING`` |  |
+| `agency` | `Record<string, any>` |  |
+| `capability` | `string` |  |
+| `crew_capacity` | `number` |  |
+| `detail` | `string` |  |
+| `diameter` | `number` |  |
+| `height` | `number` |  |
+| `history` | `string` |  |
+| `human_rated` | `boolean` |  |
+| `id` | `number` |  |
+| `image_url` | `string` |  |
+| `in_use` | `boolean` |  |
+| `maiden_flight` | `string` |  |
+| `name` | `string` |  |
+| `type` | `Record<string, any>` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const spacecraft = await client.Spacecraft().load({ id: 'spacecraft_id' })
+const spacecraft = await client.Spacecraft().load({ id: 1 })
 ```
 
 #### Example: List
@@ -1102,12 +1132,16 @@ const spacecrafts = await client.Spacecraft().list()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -1124,11 +1158,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller.
-
-An unexpected exception triggers the `PreUnexpected` hook before
-propagating.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -1164,16 +1196,16 @@ import { LaunchLibrary2SDK } from '@voxgig-sdk/launch-library2'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
 const agency = client.Agency()
-await agency.load({ id: "example_id" })
+await agency.list()
 
-// agency.data() now returns the loaded agency data
-// agency.match() returns { id: "example_id" }
+// agency.data() now returns the agency data from the last `list`
+// agency.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -33,7 +33,7 @@ class AgencyLoadMatch
     public int $id;
 }
 
-/** Match filter for Agency#list (any subset of Agency fields). */
+/** Request payload for Agency#list. */
 class AgencyListMatch
 {
     public ?string $abbrev = null;
@@ -71,7 +71,7 @@ class AstronautLoadMatch
     public int $id;
 }
 
-/** Match filter for Astronaut#list (any subset of Astronaut fields). */
+/** Request payload for Astronaut#list. */
 class AstronautListMatch
 {
     public ?string $bio = null;
@@ -110,7 +110,7 @@ class DockingEventLoadMatch
     public int $id;
 }
 
-/** Match filter for DockingEvent#list (any subset of DockingEvent fields). */
+/** Request payload for DockingEvent#list. */
 class DockingEventListMatch
 {
     public ?string $departure = null;
@@ -142,7 +142,7 @@ class EventLoadMatch
     public int $id;
 }
 
-/** Match filter for Event#list (any subset of Event fields). */
+/** Request payload for Event#list. */
 class EventListMatch
 {
     public ?string $date = null;
@@ -175,7 +175,7 @@ class ExpeditionLoadMatch
     public int $id;
 }
 
-/** Match filter for Expedition#list (any subset of Expedition fields). */
+/** Request payload for Expedition#list. */
 class ExpeditionListMatch
 {
     public ?array $crew = null;
@@ -205,7 +205,7 @@ class FirstStageLoadMatch
     public int $id;
 }
 
-/** Match filter for FirstStage#list (any subset of FirstStage fields). */
+/** Request payload for FirstStage#list. */
 class FirstStageListMatch
 {
     public ?int $flight = null;
@@ -242,7 +242,7 @@ class LaunchLoadMatch
     public string $id;
 }
 
-/** Match filter for Launch#list (any subset of Launch fields). */
+/** Request payload for Launch#list. */
 class LaunchListMatch
 {
     public ?string $id = null;
@@ -288,7 +288,7 @@ class LaunchVehicle
     public ?string $variant = null;
 }
 
-/** Match filter for LaunchVehicle#list (any subset of LaunchVehicle fields). */
+/** Request payload for LaunchVehicle#list. */
 class LaunchVehicleListMatch
 {
     public ?int $apogee = null;
@@ -366,7 +366,7 @@ class LocationLoadMatch
     public int $id;
 }
 
-/** Match filter for Location#list (any subset of Location fields). */
+/** Request payload for Location#list. */
 class LocationListMatch
 {
     public ?string $country_code = null;
@@ -401,7 +401,7 @@ class PadLoadMatch
     public int $id;
 }
 
-/** Match filter for Pad#list (any subset of Pad fields). */
+/** Request payload for Pad#list. */
 class PadListMatch
 {
     public ?int $agency_id = null;
@@ -445,7 +445,7 @@ class SpaceStationLoadMatch
     public int $id;
 }
 
-/** Match filter for SpaceStation#list (any subset of SpaceStation fields). */
+/** Request payload for SpaceStation#list. */
 class SpaceStationListMatch
 {
     public ?string $deorbited = null;
@@ -487,7 +487,7 @@ class SpacecraftLoadMatch
     public int $id;
 }
 
-/** Match filter for Spacecraft#list (any subset of Spacecraft fields). */
+/** Request payload for Spacecraft#list. */
 class SpacecraftListMatch
 {
     public ?array $agency = null;
