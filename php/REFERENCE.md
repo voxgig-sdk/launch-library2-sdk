@@ -174,7 +174,7 @@ $results = $client->Agency()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Agency()->load(["id" => "agency_id"]);
+$result = $client->Agency()->load(["id" => 1]);
 ```
 
 ### Common Methods
@@ -245,7 +245,7 @@ $results = $client->Astronaut()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Astronaut()->load(["id" => "astronaut_id"]);
+$result = $client->Astronaut()->load(["id" => 1]);
 ```
 
 ### Common Methods
@@ -346,7 +346,7 @@ $results = $client->DockingEvent()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->DockingEvent()->load(["id" => "docking_event_id"]);
+$result = $client->DockingEvent()->load(["id" => 1]);
 ```
 
 ### Common Methods
@@ -415,7 +415,7 @@ $results = $client->Event()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Event()->load(["id" => "event_id"]);
+$result = $client->Event()->load(["id" => 1]);
 ```
 
 ### Common Methods
@@ -481,7 +481,7 @@ $results = $client->Expedition()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Expedition()->load(["id" => "expedition_id"]);
+$result = $client->Expedition()->load(["id" => 1]);
 ```
 
 ### Common Methods
@@ -547,7 +547,7 @@ $results = $client->FirstStage()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->FirstStage()->load(["id" => "first_stage_id"]);
+$result = $client->FirstStage()->load(["id" => 1]);
 ```
 
 ### Common Methods
@@ -766,7 +766,7 @@ $launcher = $client->Launcher();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Launcher()->load(["id" => "launcher_id"]);
+$result = $client->Launcher()->load(["id" => 1]);
 ```
 
 ### Common Methods
@@ -832,7 +832,7 @@ $results = $client->Location()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Location()->load(["id" => "location_id"]);
+$result = $client->Location()->load(["id" => 1]);
 ```
 
 ### Common Methods
@@ -903,7 +903,7 @@ $results = $client->Pad()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Pad()->load(["id" => "pad_id"]);
+$result = $client->Pad()->load(["id" => 1]);
 ```
 
 ### Common Methods
@@ -1009,7 +1009,7 @@ $results = $client->SpaceStation()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->SpaceStation()->load(["id" => "space_station_id"]);
+$result = $client->SpaceStation()->load(["id" => 1]);
 ```
 
 ### Common Methods
@@ -1083,7 +1083,7 @@ $results = $client->Spacecraft()->list();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Spacecraft()->load(["id" => "spacecraft_id"]);
+$result = $client->Spacecraft()->load(["id" => 1]);
 ```
 
 ### Common Methods

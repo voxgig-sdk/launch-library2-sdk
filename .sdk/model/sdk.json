@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -3183,15 +3180,18 @@
           "email": "support@thespacedevs.com"
         },
         "description": "The Launch Library 2 API provides access to a comprehensive database of rocket launches, space events, and astronauts. It serves both orbital and suborbital launches, offering data on launch service providers, events, agencies, and more, all accessible for free within certain request limits. Free tier allows up to 15 requests per hour.",
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "Launch Library 2 API Server",
             "url": "https://ll.thespacedevs.com/2.2.0"
           }
         ],
+        "summary": "The Launch Library 2 API provides access to a comprehensive database of rocket launches, space events, and astronauts.",
         "termsOfService": "https://thespacedevs.com/privacy",
         "title": "Launch Library 2",
-        "version": "2.0.0"
+        "version": "2.0.0",
+        "website": "https://thespacedevs.com/llapi"
       },
       "option": {},
       "target": {
@@ -3244,6 +3244,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -3294,6 +3297,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

@@ -15,10 +15,10 @@ main: {
           url: "https://ll.thespacedevs.com/2.2.0"
         }
       ]
+      summary: "The Launch Library 2 API provides access to a comprehensive database of rocket launches, space events, and astronauts."
       termsOfService: "https://thespacedevs.com/privacy"
       title: "Launch Library 2"
       version: "2.0.0"
+      website: "https://thespacedevs.com/llapi"
     }
   }
-}
-

@@ -172,7 +172,7 @@ local results, err = client:Agency():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Agency():load({ id = "agency_id" })
+local result, err = client:Agency():load({ id = 1 })
 ```
 
 ### Common Methods
@@ -243,7 +243,7 @@ local results, err = client:Astronaut():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Astronaut():load({ id = "astronaut_id" })
+local result, err = client:Astronaut():load({ id = 1 })
 ```
 
 ### Common Methods
@@ -344,7 +344,7 @@ local results, err = client:DockingEvent():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:DockingEvent():load({ id = "docking_event_id" })
+local result, err = client:DockingEvent():load({ id = 1 })
 ```
 
 ### Common Methods
@@ -413,7 +413,7 @@ local results, err = client:Event():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Event():load({ id = "event_id" })
+local result, err = client:Event():load({ id = 1 })
 ```
 
 ### Common Methods
@@ -479,7 +479,7 @@ local results, err = client:Expedition():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Expedition():load({ id = "expedition_id" })
+local result, err = client:Expedition():load({ id = 1 })
 ```
 
 ### Common Methods
@@ -545,7 +545,7 @@ local results, err = client:FirstStage():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:FirstStage():load({ id = "first_stage_id" })
+local result, err = client:FirstStage():load({ id = 1 })
 ```
 
 ### Common Methods
@@ -764,7 +764,7 @@ local launcher = client:Launcher(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Launcher():load({ id = "launcher_id" })
+local result, err = client:Launcher():load({ id = 1 })
 ```
 
 ### Common Methods
@@ -830,7 +830,7 @@ local results, err = client:Location():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Location():load({ id = "location_id" })
+local result, err = client:Location():load({ id = 1 })
 ```
 
 ### Common Methods
@@ -901,7 +901,7 @@ local results, err = client:Pad():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Pad():load({ id = "pad_id" })
+local result, err = client:Pad():load({ id = 1 })
 ```
 
 ### Common Methods
@@ -1007,7 +1007,7 @@ local results, err = client:SpaceStation():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:SpaceStation():load({ id = "space_station_id" })
+local result, err = client:SpaceStation():load({ id = 1 })
 ```
 
 ### Common Methods
@@ -1081,7 +1081,7 @@ local results, err = client:Spacecraft():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Spacecraft():load({ id = "spacecraft_id" })
+local result, err = client:Spacecraft():load({ id = 1 })
 ```
 
 ### Common Methods

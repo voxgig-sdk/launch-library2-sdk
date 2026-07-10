@@ -50,7 +50,7 @@ end
 ### 3. Load an agency
 
 ```lua
-local agency, err = client:Agency():load({ id = "example_id" })
+local agency, err = client:Agency():load({ id = 1 })
 if err then error(err) end
 print(agency)
 ```
@@ -575,7 +575,7 @@ Create an instance: `local agency = client:Agency(nil)`
 #### Example: Load
 
 ```lua
-local agency, err = client:Agency():load({ id = "agency_id" })
+local agency, err = client:Agency():load({ id = 1 })
 ```
 
 #### Example: List
@@ -616,7 +616,7 @@ Create an instance: `local astronaut = client:Astronaut(nil)`
 #### Example: Load
 
 ```lua
-local astronaut, err = client:Astronaut():load({ id = "astronaut_id" })
+local astronaut, err = client:Astronaut():load({ id = 1 })
 ```
 
 #### Example: List
@@ -656,7 +656,7 @@ Create an instance: `local docking_event = client:DockingEvent(nil)`
 #### Example: Load
 
 ```lua
-local docking_event, err = client:DockingEvent():load({ id = "docking_event_id" })
+local docking_event, err = client:DockingEvent():load({ id = 1 })
 ```
 
 #### Example: List
@@ -695,7 +695,7 @@ Create an instance: `local event = client:Event(nil)`
 #### Example: Load
 
 ```lua
-local event, err = client:Event():load({ id = "event_id" })
+local event, err = client:Event():load({ id = 1 })
 ```
 
 #### Example: List
@@ -731,7 +731,7 @@ Create an instance: `local expedition = client:Expedition(nil)`
 #### Example: Load
 
 ```lua
-local expedition, err = client:Expedition():load({ id = "expedition_id" })
+local expedition, err = client:Expedition():load({ id = 1 })
 ```
 
 #### Example: List
@@ -767,7 +767,7 @@ Create an instance: `local first_stage = client:FirstStage(nil)`
 #### Example: Load
 
 ```lua
-local first_stage, err = client:FirstStage():load({ id = "first_stage_id" })
+local first_stage, err = client:FirstStage():load({ id = 1 })
 ```
 
 #### Example: List
@@ -904,7 +904,7 @@ Create an instance: `local launcher = client:Launcher(nil)`
 #### Example: Load
 
 ```lua
-local launcher, err = client:Launcher():load({ id = "launcher_id" })
+local launcher, err = client:Launcher():load({ id = 1 })
 ```
 
 
@@ -934,7 +934,7 @@ Create an instance: `local location = client:Location(nil)`
 #### Example: Load
 
 ```lua
-local location, err = client:Location():load({ id = "location_id" })
+local location, err = client:Location():load({ id = 1 })
 ```
 
 #### Example: List
@@ -975,7 +975,7 @@ Create an instance: `local pad = client:Pad(nil)`
 #### Example: Load
 
 ```lua
-local pad, err = client:Pad():load({ id = "pad_id" })
+local pad, err = client:Pad():load({ id = 1 })
 ```
 
 #### Example: List
@@ -1020,7 +1020,7 @@ Create an instance: `local space_station = client:SpaceStation(nil)`
 #### Example: Load
 
 ```lua
-local space_station, err = client:SpaceStation():load({ id = "space_station_id" })
+local space_station, err = client:SpaceStation():load({ id = 1 })
 ```
 
 #### Example: List
@@ -1064,7 +1064,7 @@ Create an instance: `local spacecraft = client:Spacecraft(nil)`
 #### Example: Load
 
 ```lua
-local spacecraft, err = client:Spacecraft():load({ id = "spacecraft_id" })
+local spacecraft, err = client:Spacecraft():load({ id = 1 })
 ```
 
 #### Example: List

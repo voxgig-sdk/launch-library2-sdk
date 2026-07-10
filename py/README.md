@@ -56,7 +56,7 @@ except Exception as err:
 
 ```python
 try:
-    agency = client.Agency().load({"id": "example_id"})
+    agency = client.Agency().load({"id": 1})
     print(agency)
 except Exception as err:
     print(f"load failed: {err}")
@@ -589,7 +589,7 @@ Create an instance: `agency = client.Agency()`
 #### Example: Load
 
 ```python
-agency = client.Agency().load({"id": "agency_id"})
+agency = client.Agency().load({"id": 1})
 ```
 
 #### Example: List
@@ -630,7 +630,7 @@ Create an instance: `astronaut = client.Astronaut()`
 #### Example: Load
 
 ```python
-astronaut = client.Astronaut().load({"id": "astronaut_id"})
+astronaut = client.Astronaut().load({"id": 1})
 ```
 
 #### Example: List
@@ -670,7 +670,7 @@ Create an instance: `docking_event = client.DockingEvent()`
 #### Example: Load
 
 ```python
-docking_event = client.DockingEvent().load({"id": "docking_event_id"})
+docking_event = client.DockingEvent().load({"id": 1})
 ```
 
 #### Example: List
@@ -709,7 +709,7 @@ Create an instance: `event = client.Event()`
 #### Example: Load
 
 ```python
-event = client.Event().load({"id": "event_id"})
+event = client.Event().load({"id": 1})
 ```
 
 #### Example: List
@@ -745,7 +745,7 @@ Create an instance: `expedition = client.Expedition()`
 #### Example: Load
 
 ```python
-expedition = client.Expedition().load({"id": "expedition_id"})
+expedition = client.Expedition().load({"id": 1})
 ```
 
 #### Example: List
@@ -781,7 +781,7 @@ Create an instance: `first_stage = client.FirstStage()`
 #### Example: Load
 
 ```python
-first_stage = client.FirstStage().load({"id": "first_stage_id"})
+first_stage = client.FirstStage().load({"id": 1})
 ```
 
 #### Example: List
@@ -918,7 +918,7 @@ Create an instance: `launcher = client.Launcher()`
 #### Example: Load
 
 ```python
-launcher = client.Launcher().load({"id": "launcher_id"})
+launcher = client.Launcher().load({"id": 1})
 ```
 
 
@@ -948,7 +948,7 @@ Create an instance: `location = client.Location()`
 #### Example: Load
 
 ```python
-location = client.Location().load({"id": "location_id"})
+location = client.Location().load({"id": 1})
 ```
 
 #### Example: List
@@ -989,7 +989,7 @@ Create an instance: `pad = client.Pad()`
 #### Example: Load
 
 ```python
-pad = client.Pad().load({"id": "pad_id"})
+pad = client.Pad().load({"id": 1})
 ```
 
 #### Example: List
@@ -1034,7 +1034,7 @@ Create an instance: `space_station = client.SpaceStation()`
 #### Example: Load
 
 ```python
-space_station = client.SpaceStation().load({"id": "space_station_id"})
+space_station = client.SpaceStation().load({"id": 1})
 ```
 
 #### Example: List
@@ -1078,7 +1078,7 @@ Create an instance: `spacecraft = client.Spacecraft()`
 #### Example: Load
 
 ```python
-spacecraft = client.Spacecraft().load({"id": "spacecraft_id"})
+spacecraft = client.Spacecraft().load({"id": 1})
 ```
 
 #### Example: List

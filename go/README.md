@@ -603,7 +603,7 @@ Create an instance: `agency := client.Agency(nil)`
 #### Example: Load
 
 ```go
-agency, err := client.Agency(nil).Load(map[string]any{"id": "agency_id"}, nil)
+agency, err := client.Agency(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -652,7 +652,7 @@ Create an instance: `astronaut := client.Astronaut(nil)`
 #### Example: Load
 
 ```go
-astronaut, err := client.Astronaut(nil).Load(map[string]any{"id": "astronaut_id"}, nil)
+astronaut, err := client.Astronaut(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -677,7 +677,7 @@ Create an instance: `docking := client.Docking(nil)`
 
 ### DockingEvent
 
-Create an instance: `docking_event := client.DockingEvent(nil)`
+Create an instance: `dockingEvent := client.DockingEvent(nil)`
 
 #### Operations
 
@@ -700,21 +700,21 @@ Create an instance: `docking_event := client.DockingEvent(nil)`
 #### Example: Load
 
 ```go
-docking_event, err := client.DockingEvent(nil).Load(map[string]any{"id": "docking_event_id"}, nil)
+dockingEvent, err := client.DockingEvent(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(docking_event) // the loaded record
+fmt.Println(dockingEvent) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-docking_events, err := client.DockingEvent(nil).List(nil, nil)
+dockingEvents, err := client.DockingEvent(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(docking_events) // the array of records
+fmt.Println(dockingEvents) // the array of records
 ```
 
 
@@ -747,7 +747,7 @@ Create an instance: `event := client.Event(nil)`
 #### Example: Load
 
 ```go
-event, err := client.Event(nil).Load(map[string]any{"id": "event_id"}, nil)
+event, err := client.Event(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -791,7 +791,7 @@ Create an instance: `expedition := client.Expedition(nil)`
 #### Example: Load
 
 ```go
-expedition, err := client.Expedition(nil).Load(map[string]any{"id": "expedition_id"}, nil)
+expedition, err := client.Expedition(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -811,7 +811,7 @@ fmt.Println(expeditions) // the array of records
 
 ### FirstStage
 
-Create an instance: `first_stage := client.FirstStage(nil)`
+Create an instance: `firstStage := client.FirstStage(nil)`
 
 #### Operations
 
@@ -835,21 +835,21 @@ Create an instance: `first_stage := client.FirstStage(nil)`
 #### Example: Load
 
 ```go
-first_stage, err := client.FirstStage(nil).Load(map[string]any{"id": "first_stage_id"}, nil)
+firstStage, err := client.FirstStage(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(first_stage) // the loaded record
+fmt.Println(firstStage) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-first_stages, err := client.FirstStage(nil).List(nil, nil)
+firstStages, err := client.FirstStage(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(first_stages) // the array of records
+fmt.Println(firstStages) // the array of records
 ```
 
 
@@ -906,7 +906,7 @@ fmt.Println(launchs) // the array of records
 
 ### LaunchVehicle
 
-Create an instance: `launch_vehicle := client.LaunchVehicle(nil)`
+Create an instance: `launchVehicle := client.LaunchVehicle(nil)`
 
 #### Operations
 
@@ -944,11 +944,11 @@ Create an instance: `launch_vehicle := client.LaunchVehicle(nil)`
 #### Example: List
 
 ```go
-launch_vehicles, err := client.LaunchVehicle(nil).List(nil, nil)
+launchVehicles, err := client.LaunchVehicle(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(launch_vehicles) // the array of records
+fmt.Println(launchVehicles) // the array of records
 ```
 
 
@@ -992,7 +992,7 @@ Create an instance: `launcher := client.Launcher(nil)`
 #### Example: Load
 
 ```go
-launcher, err := client.Launcher(nil).Load(map[string]any{"id": "launcher_id"}, nil)
+launcher, err := client.Launcher(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -1026,7 +1026,7 @@ Create an instance: `location := client.Location(nil)`
 #### Example: Load
 
 ```go
-location, err := client.Location(nil).Load(map[string]any{"id": "location_id"}, nil)
+location, err := client.Location(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -1075,7 +1075,7 @@ Create an instance: `pad := client.Pad(nil)`
 #### Example: Load
 
 ```go
-pad, err := client.Pad(nil).Load(map[string]any{"id": "pad_id"}, nil)
+pad, err := client.Pad(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
@@ -1095,12 +1095,12 @@ fmt.Println(pads) // the array of records
 
 ### ReusableFirstStage
 
-Create an instance: `reusable_first_stage := client.ReusableFirstStage(nil)`
+Create an instance: `reusableFirstStage := client.ReusableFirstStage(nil)`
 
 
 ### SpaceStation
 
-Create an instance: `space_station := client.SpaceStation(nil)`
+Create an instance: `spaceStation := client.SpaceStation(nil)`
 
 #### Operations
 
@@ -1128,21 +1128,21 @@ Create an instance: `space_station := client.SpaceStation(nil)`
 #### Example: Load
 
 ```go
-space_station, err := client.SpaceStation(nil).Load(map[string]any{"id": "space_station_id"}, nil)
+spaceStation, err := client.SpaceStation(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(space_station) // the loaded record
+fmt.Println(spaceStation) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-space_stations, err := client.SpaceStation(nil).List(nil, nil)
+spaceStations, err := client.SpaceStation(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(space_stations) // the array of records
+fmt.Println(spaceStations) // the array of records
 ```
 
 
@@ -1180,7 +1180,7 @@ Create an instance: `spacecraft := client.Spacecraft(nil)`
 #### Example: Load
 
 ```go
-spacecraft, err := client.Spacecraft(nil).Load(map[string]any{"id": "spacecraft_id"}, nil)
+spacecraft, err := client.Spacecraft(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }

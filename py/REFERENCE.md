@@ -171,7 +171,7 @@ for agency in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Agency().load({"id": "agency_id"})
+result = client.Agency().load({"id": 1})
 ```
 
 ### Common Methods
@@ -243,7 +243,7 @@ for astronaut in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Astronaut().load({"id": "astronaut_id"})
+result = client.Astronaut().load({"id": 1})
 ```
 
 ### Common Methods
@@ -344,7 +344,7 @@ for docking_event in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.DockingEvent().load({"id": "docking_event_id"})
+result = client.DockingEvent().load({"id": 1})
 ```
 
 ### Common Methods
@@ -414,7 +414,7 @@ for event in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Event().load({"id": "event_id"})
+result = client.Event().load({"id": 1})
 ```
 
 ### Common Methods
@@ -481,7 +481,7 @@ for expedition in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Expedition().load({"id": "expedition_id"})
+result = client.Expedition().load({"id": 1})
 ```
 
 ### Common Methods
@@ -548,7 +548,7 @@ for first_stage in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.FirstStage().load({"id": "first_stage_id"})
+result = client.FirstStage().load({"id": 1})
 ```
 
 ### Common Methods
@@ -768,7 +768,7 @@ launcher = client.Launcher()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Launcher().load({"id": "launcher_id"})
+result = client.Launcher().load({"id": 1})
 ```
 
 ### Common Methods
@@ -835,7 +835,7 @@ for location in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Location().load({"id": "location_id"})
+result = client.Location().load({"id": 1})
 ```
 
 ### Common Methods
@@ -907,7 +907,7 @@ for pad in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Pad().load({"id": "pad_id"})
+result = client.Pad().load({"id": 1})
 ```
 
 ### Common Methods
@@ -1013,7 +1013,7 @@ for space_station in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.SpaceStation().load({"id": "space_station_id"})
+result = client.SpaceStation().load({"id": 1})
 ```
 
 ### Common Methods
@@ -1088,7 +1088,7 @@ for spacecraft in results:
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Spacecraft().load({"id": "spacecraft_id"})
+result = client.Spacecraft().load({"id": 1})
 ```
 
 ### Common Methods

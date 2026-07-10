@@ -49,7 +49,7 @@ end
 ```ruby
 begin
   # load returns the bare Agency record (raises on error).
-  agency = client.Agency.load({ "id" => "example_id" })
+  agency = client.Agency.load({ "id" => 1 })
   puts agency
 rescue => err
   warn "load failed: #{err}"
@@ -587,7 +587,7 @@ Create an instance: `agency = client.Agency`
 
 ```ruby
 # load returns the bare Agency record (raises on error).
-agency = client.Agency.load({ "id" => "agency_id" })
+agency = client.Agency.load({ "id" => 1 })
 ```
 
 #### Example: List
@@ -630,7 +630,7 @@ Create an instance: `astronaut = client.Astronaut`
 
 ```ruby
 # load returns the bare Astronaut record (raises on error).
-astronaut = client.Astronaut.load({ "id" => "astronaut_id" })
+astronaut = client.Astronaut.load({ "id" => 1 })
 ```
 
 #### Example: List
@@ -672,7 +672,7 @@ Create an instance: `docking_event = client.DockingEvent`
 
 ```ruby
 # load returns the bare DockingEvent record (raises on error).
-docking_event = client.DockingEvent.load({ "id" => "docking_event_id" })
+docking_event = client.DockingEvent.load({ "id" => 1 })
 ```
 
 #### Example: List
@@ -713,7 +713,7 @@ Create an instance: `event = client.Event`
 
 ```ruby
 # load returns the bare Event record (raises on error).
-event = client.Event.load({ "id" => "event_id" })
+event = client.Event.load({ "id" => 1 })
 ```
 
 #### Example: List
@@ -751,7 +751,7 @@ Create an instance: `expedition = client.Expedition`
 
 ```ruby
 # load returns the bare Expedition record (raises on error).
-expedition = client.Expedition.load({ "id" => "expedition_id" })
+expedition = client.Expedition.load({ "id" => 1 })
 ```
 
 #### Example: List
@@ -789,7 +789,7 @@ Create an instance: `first_stage = client.FirstStage`
 
 ```ruby
 # load returns the bare FirstStage record (raises on error).
-first_stage = client.FirstStage.load({ "id" => "first_stage_id" })
+first_stage = client.FirstStage.load({ "id" => 1 })
 ```
 
 #### Example: List
@@ -931,7 +931,7 @@ Create an instance: `launcher = client.Launcher`
 
 ```ruby
 # load returns the bare Launcher record (raises on error).
-launcher = client.Launcher.load({ "id" => "launcher_id" })
+launcher = client.Launcher.load({ "id" => 1 })
 ```
 
 
@@ -962,7 +962,7 @@ Create an instance: `location = client.Location`
 
 ```ruby
 # load returns the bare Location record (raises on error).
-location = client.Location.load({ "id" => "location_id" })
+location = client.Location.load({ "id" => 1 })
 ```
 
 #### Example: List
@@ -1005,7 +1005,7 @@ Create an instance: `pad = client.Pad`
 
 ```ruby
 # load returns the bare Pad record (raises on error).
-pad = client.Pad.load({ "id" => "pad_id" })
+pad = client.Pad.load({ "id" => 1 })
 ```
 
 #### Example: List
@@ -1052,7 +1052,7 @@ Create an instance: `space_station = client.SpaceStation`
 
 ```ruby
 # load returns the bare SpaceStation record (raises on error).
-space_station = client.SpaceStation.load({ "id" => "space_station_id" })
+space_station = client.SpaceStation.load({ "id" => 1 })
 ```
 
 #### Example: List
@@ -1098,7 +1098,7 @@ Create an instance: `spacecraft = client.Spacecraft`
 
 ```ruby
 # load returns the bare Spacecraft record (raises on error).
-spacecraft = client.Spacecraft.load({ "id" => "spacecraft_id" })
+spacecraft = client.Spacecraft.load({ "id" => 1 })
 ```
 
 #### Example: List

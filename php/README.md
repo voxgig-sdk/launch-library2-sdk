@@ -50,7 +50,7 @@ try {
 ```php
 try {
     // load() returns the bare Agency record (throws on error).
-    $agency = $client->Agency()->load(["id" => "example_id"]);
+    $agency = $client->Agency()->load(["id" => 1]);
     print_r($agency);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -597,7 +597,7 @@ Create an instance: `$agency = $client->Agency();`
 
 ```php
 // load() returns the bare Agency record (throws on error).
-$agency = $client->Agency()->load(["id" => "agency_id"]);
+$agency = $client->Agency()->load(["id" => 1]);
 ```
 
 #### Example: List
@@ -640,7 +640,7 @@ Create an instance: `$astronaut = $client->Astronaut();`
 
 ```php
 // load() returns the bare Astronaut record (throws on error).
-$astronaut = $client->Astronaut()->load(["id" => "astronaut_id"]);
+$astronaut = $client->Astronaut()->load(["id" => 1]);
 ```
 
 #### Example: List
@@ -682,7 +682,7 @@ Create an instance: `$docking_event = $client->DockingEvent();`
 
 ```php
 // load() returns the bare DockingEvent record (throws on error).
-$docking_event = $client->DockingEvent()->load(["id" => "docking_event_id"]);
+$docking_event = $client->DockingEvent()->load(["id" => 1]);
 ```
 
 #### Example: List
@@ -723,7 +723,7 @@ Create an instance: `$event = $client->Event();`
 
 ```php
 // load() returns the bare Event record (throws on error).
-$event = $client->Event()->load(["id" => "event_id"]);
+$event = $client->Event()->load(["id" => 1]);
 ```
 
 #### Example: List
@@ -761,7 +761,7 @@ Create an instance: `$expedition = $client->Expedition();`
 
 ```php
 // load() returns the bare Expedition record (throws on error).
-$expedition = $client->Expedition()->load(["id" => "expedition_id"]);
+$expedition = $client->Expedition()->load(["id" => 1]);
 ```
 
 #### Example: List
@@ -799,7 +799,7 @@ Create an instance: `$first_stage = $client->FirstStage();`
 
 ```php
 // load() returns the bare FirstStage record (throws on error).
-$first_stage = $client->FirstStage()->load(["id" => "first_stage_id"]);
+$first_stage = $client->FirstStage()->load(["id" => 1]);
 ```
 
 #### Example: List
@@ -941,7 +941,7 @@ Create an instance: `$launcher = $client->Launcher();`
 
 ```php
 // load() returns the bare Launcher record (throws on error).
-$launcher = $client->Launcher()->load(["id" => "launcher_id"]);
+$launcher = $client->Launcher()->load(["id" => 1]);
 ```
 
 
@@ -972,7 +972,7 @@ Create an instance: `$location = $client->Location();`
 
 ```php
 // load() returns the bare Location record (throws on error).
-$location = $client->Location()->load(["id" => "location_id"]);
+$location = $client->Location()->load(["id" => 1]);
 ```
 
 #### Example: List
@@ -1015,7 +1015,7 @@ Create an instance: `$pad = $client->Pad();`
 
 ```php
 // load() returns the bare Pad record (throws on error).
-$pad = $client->Pad()->load(["id" => "pad_id"]);
+$pad = $client->Pad()->load(["id" => 1]);
 ```
 
 #### Example: List
@@ -1062,7 +1062,7 @@ Create an instance: `$space_station = $client->SpaceStation();`
 
 ```php
 // load() returns the bare SpaceStation record (throws on error).
-$space_station = $client->SpaceStation()->load(["id" => "space_station_id"]);
+$space_station = $client->SpaceStation()->load(["id" => 1]);
 ```
 
 #### Example: List
@@ -1108,7 +1108,7 @@ Create an instance: `$spacecraft = $client->Spacecraft();`
 
 ```php
 // load() returns the bare Spacecraft record (throws on error).
-$spacecraft = $client->Spacecraft()->load(["id" => "spacecraft_id"]);
+$spacecraft = $client->Spacecraft()->load(["id" => 1]);
 ```
 
 #### Example: List
