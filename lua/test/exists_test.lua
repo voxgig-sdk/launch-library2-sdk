@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- LaunchLibrary2 SDK exists test
 
 local sdk = require("launch-library2_sdk")
 
