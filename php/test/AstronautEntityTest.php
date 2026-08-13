@@ -72,7 +72,7 @@ class AstronautEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set LAUNCHLIBRARY__TEST_ASTRONAUT_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set LAUNCH_LIBRARY2_TEST_ASTRONAUT_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -97,7 +97,7 @@ class AstronautEntityTest extends TestCase
             "id" => $astronaut_ref01_data["id"],
         ];
         $astronaut_ref01_data_dt0_loaded = $astronaut_ref01_ent->load($astronaut_ref01_match_dt0, null);
-        $astronaut_ref01_data_dt0_load_result = Helpers::to_map($astronaut_ref01_data_dt0_loaded);
+        $astronaut_ref01_data_dt0_load_result = Helpers::to_map(is_object($astronaut_ref01_data_dt0_loaded) && method_exists($astronaut_ref01_data_dt0_loaded, 'data_get') ? $astronaut_ref01_data_dt0_loaded->data_get() : $astronaut_ref01_data_dt0_loaded);
         $this->assertNotNull($astronaut_ref01_data_dt0_load_result);
         $this->assertEquals($astronaut_ref01_data_dt0_load_result["id"], $astronaut_ref01_data["id"]);
 
@@ -126,22 +126,22 @@ function astronaut_basic_setup($extra)
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("LAUNCHLIBRARY__TEST_ASTRONAUT_ENTID");
+    $entid_env_raw = getenv("LAUNCH_LIBRARY2_TEST_ASTRONAUT_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "LAUNCHLIBRARY__TEST_ASTRONAUT_ENTID" => $idmap,
-        "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
-        "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
+        "LAUNCH_LIBRARY2_TEST_ASTRONAUT_ENTID" => $idmap,
+        "LAUNCH_LIBRARY2_TEST_LIVE" => "FALSE",
+        "LAUNCH_LIBRARY2_TEST_EXPLAIN" => "FALSE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["LAUNCHLIBRARY__TEST_ASTRONAUT_ENTID"]);
+        $env["LAUNCH_LIBRARY2_TEST_ASTRONAUT_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["LAUNCHLIBRARY__TEST_LIVE"] === "TRUE") {
+    if ($env["LAUNCH_LIBRARY2_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
             ],
@@ -150,13 +150,13 @@ function astronaut_basic_setup($extra)
         $client = new LaunchLibrary2SDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["LAUNCHLIBRARY__TEST_LIVE"] === "TRUE";
+    $live = $env["LAUNCH_LIBRARY2_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["LAUNCHLIBRARY__TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["LAUNCH_LIBRARY2_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

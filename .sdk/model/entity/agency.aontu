@@ -125,7 +125,7 @@ main: kit: entity: agency: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.results`"
           }
         }
       ]

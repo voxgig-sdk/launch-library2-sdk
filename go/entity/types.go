@@ -6,7 +6,11 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/voxgig-sdk/launch-library2-sdk/go/core"
+)
 
 // Agency is the typed data model for the agency entity.
 type Agency struct {
@@ -169,13 +173,33 @@ type ExpeditionListMatch struct {
 
 // FirstStage is the typed data model for the first_stage entity.
 type FirstStage struct {
-	Flight *int `json:"flight,omitempty"`
+	Apogee *int `json:"apogee,omitempty"`
+	ConsecutiveSuccessfulLaunches *int `json:"consecutive_successful_launches,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Diameter *float64 `json:"diameter,omitempty"`
+	FailedLaunches *int `json:"failed_launches,omitempty"`
+	Family *string `json:"family,omitempty"`
+	Flights *int `json:"flights,omitempty"`
+	FullName *string `json:"full_name,omitempty"`
+	GtoCapacity *int `json:"gto_capacity,omitempty"`
 	Id *int `json:"id,omitempty"`
+	LaunchMass *int `json:"launch_mass,omitempty"`
 	LauncherConfig *map[string]any `json:"launcher_config,omitempty"`
+	Length *float64 `json:"length,omitempty"`
+	LeoCapacity *int `json:"leo_capacity,omitempty"`
+	MaidenFlight *string `json:"maiden_flight,omitempty"`
+	Manufacturer *map[string]any `json:"manufacturer,omitempty"`
+	MaxStage *int `json:"max_stage,omitempty"`
+	MinStage *int `json:"min_stage,omitempty"`
+	Name *string `json:"name,omitempty"`
+	PendingLaunches *int `json:"pending_launches,omitempty"`
 	SerialNumber *string `json:"serial_number,omitempty"`
 	Status *string `json:"status,omitempty"`
+	SuccessfulLaunches *int `json:"successful_launches,omitempty"`
+	ToThrust *int `json:"to_thrust,omitempty"`
 	Type *string `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
+	Variant *string `json:"variant,omitempty"`
 }
 
 // FirstStageLoadMatch is the typed request payload for FirstStage.LoadTyped.
@@ -185,13 +209,33 @@ type FirstStageLoadMatch struct {
 
 // FirstStageListMatch is the typed request payload for FirstStage.ListTyped.
 type FirstStageListMatch struct {
-	Flight *int `json:"flight,omitempty"`
+	Apogee *int `json:"apogee,omitempty"`
+	ConsecutiveSuccessfulLaunches *int `json:"consecutive_successful_launches,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Diameter *float64 `json:"diameter,omitempty"`
+	FailedLaunches *int `json:"failed_launches,omitempty"`
+	Family *string `json:"family,omitempty"`
+	Flights *int `json:"flights,omitempty"`
+	FullName *string `json:"full_name,omitempty"`
+	GtoCapacity *int `json:"gto_capacity,omitempty"`
 	Id *int `json:"id,omitempty"`
+	LaunchMass *int `json:"launch_mass,omitempty"`
 	LauncherConfig *map[string]any `json:"launcher_config,omitempty"`
+	Length *float64 `json:"length,omitempty"`
+	LeoCapacity *int `json:"leo_capacity,omitempty"`
+	MaidenFlight *string `json:"maiden_flight,omitempty"`
+	Manufacturer *map[string]any `json:"manufacturer,omitempty"`
+	MaxStage *int `json:"max_stage,omitempty"`
+	MinStage *int `json:"min_stage,omitempty"`
+	Name *string `json:"name,omitempty"`
+	PendingLaunches *int `json:"pending_launches,omitempty"`
 	SerialNumber *string `json:"serial_number,omitempty"`
 	Status *string `json:"status,omitempty"`
+	SuccessfulLaunches *int `json:"successful_launches,omitempty"`
+	ToThrust *int `json:"to_thrust,omitempty"`
 	Type *string `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
+	Variant *string `json:"variant,omitempty"`
 }
 
 // Launch is the typed data model for the launch entity.
@@ -238,10 +282,10 @@ type LaunchListMatch struct {
 // LaunchVehicle is the typed data model for the launch_vehicle entity.
 type LaunchVehicle struct {
 	Apogee *int `json:"apogee,omitempty"`
-	ConsecutiveSuccessfulLaunch *int `json:"consecutive_successful_launch,omitempty"`
+	ConsecutiveSuccessfulLaunches *int `json:"consecutive_successful_launches,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Diameter *float64 `json:"diameter,omitempty"`
-	FailedLaunch *int `json:"failed_launch,omitempty"`
+	FailedLaunches *int `json:"failed_launches,omitempty"`
 	Family *string `json:"family,omitempty"`
 	FullName *string `json:"full_name,omitempty"`
 	GtoCapacity *int `json:"gto_capacity,omitempty"`
@@ -254,8 +298,8 @@ type LaunchVehicle struct {
 	MaxStage *int `json:"max_stage,omitempty"`
 	MinStage *int `json:"min_stage,omitempty"`
 	Name *string `json:"name,omitempty"`
-	PendingLaunch *int `json:"pending_launch,omitempty"`
-	SuccessfulLaunch *int `json:"successful_launch,omitempty"`
+	PendingLaunches *int `json:"pending_launches,omitempty"`
+	SuccessfulLaunches *int `json:"successful_launches,omitempty"`
 	ToThrust *int `json:"to_thrust,omitempty"`
 	Url *string `json:"url,omitempty"`
 	Variant *string `json:"variant,omitempty"`
@@ -264,10 +308,10 @@ type LaunchVehicle struct {
 // LaunchVehicleListMatch is the typed request payload for LaunchVehicle.ListTyped.
 type LaunchVehicleListMatch struct {
 	Apogee *int `json:"apogee,omitempty"`
-	ConsecutiveSuccessfulLaunch *int `json:"consecutive_successful_launch,omitempty"`
+	ConsecutiveSuccessfulLaunches *int `json:"consecutive_successful_launches,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Diameter *float64 `json:"diameter,omitempty"`
-	FailedLaunch *int `json:"failed_launch,omitempty"`
+	FailedLaunches *int `json:"failed_launches,omitempty"`
 	Family *string `json:"family,omitempty"`
 	FullName *string `json:"full_name,omitempty"`
 	GtoCapacity *int `json:"gto_capacity,omitempty"`
@@ -280,8 +324,8 @@ type LaunchVehicleListMatch struct {
 	MaxStage *int `json:"max_stage,omitempty"`
 	MinStage *int `json:"min_stage,omitempty"`
 	Name *string `json:"name,omitempty"`
-	PendingLaunch *int `json:"pending_launch,omitempty"`
-	SuccessfulLaunch *int `json:"successful_launch,omitempty"`
+	PendingLaunches *int `json:"pending_launches,omitempty"`
+	SuccessfulLaunches *int `json:"successful_launches,omitempty"`
 	ToThrust *int `json:"to_thrust,omitempty"`
 	Url *string `json:"url,omitempty"`
 	Variant *string `json:"variant,omitempty"`
@@ -289,28 +333,16 @@ type LaunchVehicleListMatch struct {
 
 // Launcher is the typed data model for the launcher entity.
 type Launcher struct {
-	Apogee *int `json:"apogee,omitempty"`
-	ConsecutiveSuccessfulLaunch *int `json:"consecutive_successful_launch,omitempty"`
+	Abbrev *string `json:"abbrev,omitempty"`
+	Administrator *string `json:"administrator,omitempty"`
+	CountryCode *string `json:"country_code,omitempty"`
 	Description *string `json:"description,omitempty"`
-	Diameter *float64 `json:"diameter,omitempty"`
-	FailedLaunch *int `json:"failed_launch,omitempty"`
-	Family *string `json:"family,omitempty"`
-	FullName *string `json:"full_name,omitempty"`
-	GtoCapacity *int `json:"gto_capacity,omitempty"`
+	FoundingYear *string `json:"founding_year,omitempty"`
 	Id *int `json:"id,omitempty"`
-	LaunchMass *int `json:"launch_mass,omitempty"`
-	Length *float64 `json:"length,omitempty"`
-	LeoCapacity *int `json:"leo_capacity,omitempty"`
-	MaidenFlight *string `json:"maiden_flight,omitempty"`
-	Manufacturer *map[string]any `json:"manufacturer,omitempty"`
-	MaxStage *int `json:"max_stage,omitempty"`
-	MinStage *int `json:"min_stage,omitempty"`
+	LogoUrl *string `json:"logo_url,omitempty"`
 	Name *string `json:"name,omitempty"`
-	PendingLaunch *int `json:"pending_launch,omitempty"`
-	SuccessfulLaunch *int `json:"successful_launch,omitempty"`
-	ToThrust *int `json:"to_thrust,omitempty"`
+	Type *string `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
-	Variant *string `json:"variant,omitempty"`
 }
 
 // LauncherLoadMatch is the typed request payload for Launcher.LoadTyped.
@@ -348,6 +380,7 @@ type LocationListMatch struct {
 // Pad is the typed data model for the pad entity.
 type Pad struct {
 	AgencyId *int `json:"agency_id,omitempty"`
+	CountryCode *string `json:"country_code,omitempty"`
 	Id *int `json:"id,omitempty"`
 	InfoUrl *string `json:"info_url,omitempty"`
 	Latitude *string `json:"latitude,omitempty"`
@@ -356,6 +389,7 @@ type Pad struct {
 	MapImage *string `json:"map_image,omitempty"`
 	MapUrl *string `json:"map_url,omitempty"`
 	Name *string `json:"name,omitempty"`
+	TotalLandingCount *int `json:"total_landing_count,omitempty"`
 	TotalLaunchCount *int `json:"total_launch_count,omitempty"`
 	Url *string `json:"url,omitempty"`
 	WikiUrl *string `json:"wiki_url,omitempty"`
@@ -369,6 +403,7 @@ type PadLoadMatch struct {
 // PadListMatch is the typed request payload for Pad.ListTyped.
 type PadListMatch struct {
 	AgencyId *int `json:"agency_id,omitempty"`
+	CountryCode *string `json:"country_code,omitempty"`
 	Id *int `json:"id,omitempty"`
 	InfoUrl *string `json:"info_url,omitempty"`
 	Latitude *string `json:"latitude,omitempty"`
@@ -377,6 +412,7 @@ type PadListMatch struct {
 	MapImage *string `json:"map_image,omitempty"`
 	MapUrl *string `json:"map_url,omitempty"`
 	Name *string `json:"name,omitempty"`
+	TotalLandingCount *int `json:"total_landing_count,omitempty"`
 	TotalLaunchCount *int `json:"total_launch_count,omitempty"`
 	Url *string `json:"url,omitempty"`
 	WikiUrl *string `json:"wiki_url,omitempty"`
@@ -395,7 +431,7 @@ type SpaceStation struct {
 	ImageUrl *string `json:"image_url,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Orbit *string `json:"orbit,omitempty"`
-	Owner *[]any `json:"owner,omitempty"`
+	Owners *[]any `json:"owners,omitempty"`
 	Status *map[string]any `json:"status,omitempty"`
 	Type *map[string]any `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
@@ -415,7 +451,7 @@ type SpaceStationListMatch struct {
 	ImageUrl *string `json:"image_url,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Orbit *string `json:"orbit,omitempty"`
-	Owner *[]any `json:"owner,omitempty"`
+	Owners *[]any `json:"owners,omitempty"`
 	Status *map[string]any `json:"status,omitempty"`
 	Type *map[string]any `json:"type,omitempty"`
 	Url *string `json:"url,omitempty"`
@@ -426,7 +462,7 @@ type Spacecraft struct {
 	Agency *map[string]any `json:"agency,omitempty"`
 	Capability *string `json:"capability,omitempty"`
 	CrewCapacity *int `json:"crew_capacity,omitempty"`
-	Detail *string `json:"detail,omitempty"`
+	Details *string `json:"details,omitempty"`
 	Diameter *float64 `json:"diameter,omitempty"`
 	Height *float64 `json:"height,omitempty"`
 	History *string `json:"history,omitempty"`
@@ -450,7 +486,7 @@ type SpacecraftListMatch struct {
 	Agency *map[string]any `json:"agency,omitempty"`
 	Capability *string `json:"capability,omitempty"`
 	CrewCapacity *int `json:"crew_capacity,omitempty"`
-	Detail *string `json:"detail,omitempty"`
+	Details *string `json:"details,omitempty"`
 	Diameter *float64 `json:"diameter,omitempty"`
 	Height *float64 `json:"height,omitempty"`
 	History *string `json:"history,omitempty"`
@@ -476,12 +512,26 @@ func asMap(v any) map[string]any {
 	return out
 }
 
-// typedFrom decodes a runtime value (a map[string]any produced by the op
-// pipeline) into a typed model T via a JSON round-trip. On any error it
-// returns the zero value of T; the op's own (value, error) tuple carries the
-// real error.
+// entityData unwraps an entity to its data map.
+//
+// Operations resolve to the ENTITY, not the raw data (see AGENTS.md), and an
+// entity's fields are UNEXPORTED — marshalling one directly yields `{}`, so
+// every typed accessor would silently hand back a zero-valued struct. The
+// typed boundary therefore takes the data hop first.
+func entityData(v any) any {
+	if ent, ok := v.(core.Entity); ok {
+		return ent.Data()
+	}
+	return v
+}
+
+// typedFrom decodes a runtime value (an entity, or the map[string]any the op
+// pipeline produced) into a typed model T via a JSON round-trip. On any error
+// it returns the zero value of T; the op's own (value, error) tuple carries
+// the real error.
 func typedFrom[T any](v any) T {
 	var out T
+	v = entityData(v)
 	if v == nil {
 		return out
 	}
@@ -493,12 +543,20 @@ func typedFrom[T any](v any) T {
 	return out
 }
 
-// typedSliceFrom decodes a runtime list value ([]any of maps) into a typed
-// slice []T via a JSON round-trip, for list ops.
+// typedSliceFrom decodes a runtime list value into a typed slice []T via a
+// JSON round-trip, for list ops. `list` resolves to a slice of ENTITY
+// instances, so each element takes the data hop.
 func typedSliceFrom[T any](v any) []T {
 	var out []T
 	if v == nil {
 		return out
+	}
+	if list, ok := v.([]any); ok {
+		unwrapped := make([]any, 0, len(list))
+		for _, item := range list {
+			unwrapped = append(unwrapped, entityData(item))
+		}
+		v = unwrapped
 	}
 	b, err := json.Marshal(v)
 	if err != nil {

@@ -6,14 +6,19 @@ main: kit: entity: launcher: {
 
   fields: [
     {
-      name: "apogee"
+      name: "abbrev"
       req: false
-      type: "`$INTEGER`"
+      type: "`$STRING`"
     }
     {
-      name: "consecutive_successful_launch"
+      name: "administrator"
       req: false
-      type: "`$INTEGER`"
+      type: "`$STRING`"
+    }
+    {
+      name: "country_code"
+      req: false
+      type: "`$STRING`"
     }
     {
       name: "description"
@@ -21,29 +26,9 @@ main: kit: entity: launcher: {
       type: "`$STRING`"
     }
     {
-      name: "diameter"
-      req: false
-      type: "`$NUMBER`"
-    }
-    {
-      name: "failed_launch"
-      req: false
-      type: "`$INTEGER`"
-    }
-    {
-      name: "family"
+      name: "founding_year"
       req: false
       type: "`$STRING`"
-    }
-    {
-      name: "full_name"
-      req: false
-      type: "`$STRING`"
-    }
-    {
-      name: "gto_capacity"
-      req: false
-      type: "`$INTEGER`"
     }
     {
       name: "id"
@@ -51,39 +36,9 @@ main: kit: entity: launcher: {
       type: "`$INTEGER`"
     }
     {
-      name: "launch_mass"
-      req: false
-      type: "`$INTEGER`"
-    }
-    {
-      name: "length"
-      req: false
-      type: "`$NUMBER`"
-    }
-    {
-      name: "leo_capacity"
-      req: false
-      type: "`$INTEGER`"
-    }
-    {
-      name: "maiden_flight"
+      name: "logo_url"
       req: false
       type: "`$STRING`"
-    }
-    {
-      name: "manufacturer"
-      req: false
-      type: "`$OBJECT`"
-    }
-    {
-      name: "max_stage"
-      req: false
-      type: "`$INTEGER`"
-    }
-    {
-      name: "min_stage"
-      req: false
-      type: "`$INTEGER`"
     }
     {
       name: "name"
@@ -91,27 +46,12 @@ main: kit: entity: launcher: {
       type: "`$STRING`"
     }
     {
-      name: "pending_launch"
-      req: false
-      type: "`$INTEGER`"
-    }
-    {
-      name: "successful_launch"
-      req: false
-      type: "`$INTEGER`"
-    }
-    {
-      name: "to_thrust"
-      req: false
-      type: "`$INTEGER`"
-    }
-    {
-      name: "url"
+      name: "type"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "variant"
+      name: "url"
       req: false
       type: "`$STRING`"
     }
@@ -153,7 +93,7 @@ main: kit: entity: launcher: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.manufacturer`"
           }
         }
       ]

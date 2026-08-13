@@ -70,7 +70,7 @@ describe("AgencyEntity", function()
     -- The basic flow consumes synthetic IDs from the fixture. In live mode
     -- without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup.synthetic_only then
-      pending("live entity test uses synthetic IDs from fixture — set LAUNCHLIBRARY__TEST_AGENCY_ENTID JSON to run live")
+      pending("live entity test uses synthetic IDs from fixture — set LAUNCH_LIBRARY2_TEST_AGENCY_ENTID JSON to run live")
       return
     end
     local client = setup.client
@@ -97,7 +97,7 @@ describe("AgencyEntity", function()
     }
     local agency_ref01_data_dt0_loaded, err = agency_ref01_ent:load(agency_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local agency_ref01_data_dt0_load_result = helpers.to_map(agency_ref01_data_dt0_loaded)
+    local agency_ref01_data_dt0_load_result = helpers.to_map(type(agency_ref01_data_dt0_loaded) == 'table' and agency_ref01_data_dt0_loaded.data_get and agency_ref01_data_dt0_loaded:data_get() or agency_ref01_data_dt0_loaded)
     assert.is_not_nil(agency_ref01_data_dt0_load_result)
     assert.are.equal(agency_ref01_data_dt0_load_result["id"], agency_ref01_data["id"])
 
@@ -136,22 +136,22 @@ function agency_basic_setup(extra)
   -- Detect ENTID env override before envOverride consumes it. When live
   -- mode is on without a real override, the basic test runs against synthetic
   -- IDs from the fixture and 4xx's. Surface this so the test can skip.
-  local entid_env_raw = os.getenv("LAUNCHLIBRARY__TEST_AGENCY_ENTID")
+  local entid_env_raw = os.getenv("LAUNCH_LIBRARY2_TEST_AGENCY_ENTID")
   local idmap_overridden = entid_env_raw ~= nil and entid_env_raw:match("^%s*{") ~= nil
 
   local env = runner.env_override({
-    ["LAUNCHLIBRARY__TEST_AGENCY_ENTID"] = idmap,
-    ["LAUNCHLIBRARY__TEST_LIVE"] = "FALSE",
-    ["LAUNCHLIBRARY__TEST_EXPLAIN"] = "FALSE",
+    ["LAUNCH_LIBRARY2_TEST_AGENCY_ENTID"] = idmap,
+    ["LAUNCH_LIBRARY2_TEST_LIVE"] = "FALSE",
+    ["LAUNCH_LIBRARY2_TEST_EXPLAIN"] = "FALSE",
   })
 
   local idmap_resolved = helpers.to_map(
-    env["LAUNCHLIBRARY__TEST_AGENCY_ENTID"])
+    env["LAUNCH_LIBRARY2_TEST_AGENCY_ENTID"])
   if idmap_resolved == nil then
     idmap_resolved = helpers.to_map(idmap)
   end
 
-  if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE" then
+  if env["LAUNCH_LIBRARY2_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
       },
@@ -160,13 +160,13 @@ function agency_basic_setup(extra)
     client = sdk.new(helpers.to_map(merged_opts))
   end
 
-  local live = env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
+  local live = env["LAUNCH_LIBRARY2_TEST_LIVE"] == "TRUE"
   return {
     client = client,
     data = entity_data,
     idmap = idmap_resolved,
     env = env,
-    explain = env["LAUNCHLIBRARY__TEST_EXPLAIN"] == "TRUE",
+    explain = env["LAUNCH_LIBRARY2_TEST_EXPLAIN"] == "TRUE",
     live = live,
     synthetic_only = live and not idmap_overridden,
     now = os.time() * 1000,

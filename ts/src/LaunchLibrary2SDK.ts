@@ -160,8 +160,29 @@ class LaunchLibrary2SDK {
   }
 
 
+  // Raw endpoint access is operator-controllable, like every entity op.
+  // Blocking it means denying BOTH the 'direct' and 'graphql' tokens, since
+  // either one reaches the same endpoint.
   async direct(fetchargs?: any) {
+    if (!this._options.allow.op.includes('direct')) {
+      return {
+        ok: false,
+        err: new Error('LaunchLibrary2SDK: direct: operation not allowed by' +
+          ' SDK option allow.op value: "' + this._options.allow.op + '"'),
+      }
+    }
+
+    return this._rawRequest(fetchargs)
+  }
+
+
+  // Ungated request path shared by direct() and graphql(), each of which
+  // checks its own allow.op token first. Private, rather than a flag on
+  // fetchargs: a caller-supplied marker would let anyone opt straight back
+  // out of the gate by passing it.
+  async _rawRequest(fetchargs?: any) {
     const utility = this._utility
+
     const fetcher = utility.fetcher
     const makeContext = utility.makeContext
 
@@ -222,108 +243,192 @@ class LaunchLibrary2SDK {
 
 
 
+  // Raw GraphQL access: the pressure valve that makes the generated
+  // surface's deliberate omissions (per-call selection sets, typed filter
+  // builders, batching, subscriptions) livable — the whole schema stays
+  // reachable.
+  //
+  // Thin wrapper over the same prepare/fetch path `direct` uses, with the
+  // one thing raw `direct` cannot do for GraphQL: a GraphQL failure rides
+  // HTTP 200 as a top-level `errors` array, so status alone would report a
+  // failed query as ok.
+  //
+  // NOTE: like `direct`, this bypasses the feature pipeline — no retry,
+  // ratelimit or paging features apply.
+  async graphql(query: string, variables?: any, ctrl?: any) {
+    const options = this._options
+
+    if (!options.allow.op.includes('graphql')) {
+      return {
+        ok: false,
+        err: new Error('LaunchLibrary2SDK: graphql: operation not allowed by' +
+          ' SDK option allow.op value: "' + options.allow.op + '"'),
+      }
+    }
+
+    const res: any = await this._rawRequest({
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: { query, variables: variables || {} },
+      ctrl,
+    })
+
+    if (res instanceof Error) {
+      return res
+    }
+
+    // Errors are read BEFORE any status check: a GraphQL parse or validation
+    // failure comes back as HTTP 400 carrying the standard { errors: [...] }
+    // body, and the raw path represents a non-2xx as { ok: false } with no
+    // err — so returning early on status would discard the server's own
+    // diagnostics, which are the only useful part of that response.
+    const errors = null == res.data ? undefined : res.data.errors
+
+    if (null != errors && Array.isArray(errors) && 0 < errors.length) {
+      const first = errors[0] || {}
+      const err: any = new Error('LaunchLibrary2SDK: graphql: ' +
+        (first.message || 'graphql error'))
+      err.graphql = errors
+      return { ok: false, status: res.status, headers: res.headers, err, data: res.data }
+    }
+
+    return res
+  }
+
+
+
   // Entity access: `client.Agency().list()` / `client.Agency().load({ id })`.
-  Agency(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Agency(entopts?: Record<string, any>) {
     const self = this
-    return new AgencyEntity(self,data)
+    return new AgencyEntity(self, entopts)
   }
 
 
   // Entity access: `client.Astronaut().list()` / `client.Astronaut().load({ id })`.
-  Astronaut(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Astronaut(entopts?: Record<string, any>) {
     const self = this
-    return new AstronautEntity(self,data)
+    return new AstronautEntity(self, entopts)
   }
 
 
   // Entity access: `client.Docking().list()` / `client.Docking().load({ id })`.
-  Docking(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Docking(entopts?: Record<string, any>) {
     const self = this
-    return new DockingEntity(self,data)
+    return new DockingEntity(self, entopts)
   }
 
 
   // Entity access: `client.DockingEvent().list()` / `client.DockingEvent().load({ id })`.
-  DockingEvent(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  DockingEvent(entopts?: Record<string, any>) {
     const self = this
-    return new DockingEventEntity(self,data)
+    return new DockingEventEntity(self, entopts)
   }
 
 
   // Entity access: `client.Event().list()` / `client.Event().load({ id })`.
-  Event(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Event(entopts?: Record<string, any>) {
     const self = this
-    return new EventEntity(self,data)
+    return new EventEntity(self, entopts)
   }
 
 
   // Entity access: `client.Expedition().list()` / `client.Expedition().load({ id })`.
-  Expedition(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Expedition(entopts?: Record<string, any>) {
     const self = this
-    return new ExpeditionEntity(self,data)
+    return new ExpeditionEntity(self, entopts)
   }
 
 
   // Entity access: `client.FirstStage().list()` / `client.FirstStage().load({ id })`.
-  FirstStage(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  FirstStage(entopts?: Record<string, any>) {
     const self = this
-    return new FirstStageEntity(self,data)
+    return new FirstStageEntity(self, entopts)
   }
 
 
   // Entity access: `client.Launch().list()` / `client.Launch().load({ id })`.
-  Launch(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Launch(entopts?: Record<string, any>) {
     const self = this
-    return new LaunchEntity(self,data)
+    return new LaunchEntity(self, entopts)
   }
 
 
   // Entity access: `client.LaunchVehicle().list()` / `client.LaunchVehicle().load({ id })`.
-  LaunchVehicle(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  LaunchVehicle(entopts?: Record<string, any>) {
     const self = this
-    return new LaunchVehicleEntity(self,data)
+    return new LaunchVehicleEntity(self, entopts)
   }
 
 
   // Entity access: `client.Launcher().list()` / `client.Launcher().load({ id })`.
-  Launcher(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Launcher(entopts?: Record<string, any>) {
     const self = this
-    return new LauncherEntity(self,data)
+    return new LauncherEntity(self, entopts)
   }
 
 
   // Entity access: `client.Location().list()` / `client.Location().load({ id })`.
-  Location(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Location(entopts?: Record<string, any>) {
     const self = this
-    return new LocationEntity(self,data)
+    return new LocationEntity(self, entopts)
   }
 
 
   // Entity access: `client.Pad().list()` / `client.Pad().load({ id })`.
-  Pad(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Pad(entopts?: Record<string, any>) {
     const self = this
-    return new PadEntity(self,data)
+    return new PadEntity(self, entopts)
   }
 
 
   // Entity access: `client.ReusableFirstStage().list()` / `client.ReusableFirstStage().load({ id })`.
-  ReusableFirstStage(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ReusableFirstStage(entopts?: Record<string, any>) {
     const self = this
-    return new ReusableFirstStageEntity(self,data)
+    return new ReusableFirstStageEntity(self, entopts)
   }
 
 
   // Entity access: `client.SpaceStation().list()` / `client.SpaceStation().load({ id })`.
-  SpaceStation(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  SpaceStation(entopts?: Record<string, any>) {
     const self = this
-    return new SpaceStationEntity(self,data)
+    return new SpaceStationEntity(self, entopts)
   }
 
 
   // Entity access: `client.Spacecraft().list()` / `client.Spacecraft().load({ id })`.
-  Spacecraft(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Spacecraft(entopts?: Record<string, any>) {
     const self = this
-    return new SpacecraftEntity(self,data)
+    return new SpacecraftEntity(self, entopts)
   }
 
 

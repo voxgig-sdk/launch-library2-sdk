@@ -6,7 +6,47 @@ main: kit: entity: first_stage: {
 
   fields: [
     {
-      name: "flight"
+      name: "apogee"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "consecutive_successful_launches"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "description"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "diameter"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "failed_launches"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "family"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "flights"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "full_name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "gto_capacity"
       req: false
       type: "`$INTEGER`"
     }
@@ -16,9 +56,54 @@ main: kit: entity: first_stage: {
       type: "`$INTEGER`"
     }
     {
+      name: "launch_mass"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
       name: "launcher_config"
       req: false
       type: "`$OBJECT`"
+    }
+    {
+      name: "length"
+      req: false
+      type: "`$NUMBER`"
+    }
+    {
+      name: "leo_capacity"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "maiden_flight"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "manufacturer"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "max_stage"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "min_stage"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "pending_launches"
+      req: false
+      type: "`$INTEGER`"
     }
     {
       name: "serial_number"
@@ -31,12 +116,27 @@ main: kit: entity: first_stage: {
       type: "`$STRING`"
     }
     {
+      name: "successful_launches"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "to_thrust"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
       name: "type"
       req: false
       type: "`$STRING`"
     }
     {
       name: "url"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "variant"
       req: false
       type: "`$STRING`"
     }
@@ -102,7 +202,7 @@ main: kit: entity: first_stage: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.results`"
           }
         }
       ]
@@ -135,7 +235,7 @@ main: kit: entity: first_stage: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.launcher_config`"
           }
         }
       ]

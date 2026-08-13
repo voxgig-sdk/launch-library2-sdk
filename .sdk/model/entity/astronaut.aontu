@@ -135,7 +135,7 @@ main: kit: entity: astronaut: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.results`"
           }
         }
       ]

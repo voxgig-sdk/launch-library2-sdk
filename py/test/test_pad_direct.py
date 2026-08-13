@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from launchlibrary2_sdk.utility.voxgig_struct import voxgig_struct as vs
 from launchlibrary2_sdk import LaunchLibrary2SDK
-from core import helpers
+from launchlibrary2_sdk.core import helpers
 from test import runner
 
 
@@ -105,11 +105,11 @@ def _pad_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "LAUNCHLIBRARY__TEST_PAD_ENTID": {},
-        "LAUNCHLIBRARY__TEST_LIVE": "FALSE",
+        "LAUNCH_LIBRARY2_TEST_PAD_ENTID": {},
+        "LAUNCH_LIBRARY2_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("LAUNCHLIBRARY__TEST_LIVE") == "TRUE"
+    live = env.get("LAUNCH_LIBRARY2_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

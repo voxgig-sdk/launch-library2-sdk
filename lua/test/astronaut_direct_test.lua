@@ -115,11 +115,11 @@ function astronaut_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["LAUNCHLIBRARY__TEST_ASTRONAUT_ENTID"] = {},
-    ["LAUNCHLIBRARY__TEST_LIVE"] = "FALSE",
+    ["LAUNCH_LIBRARY2_TEST_ASTRONAUT_ENTID"] = {},
+    ["LAUNCH_LIBRARY2_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
+  local live = env["LAUNCH_LIBRARY2_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

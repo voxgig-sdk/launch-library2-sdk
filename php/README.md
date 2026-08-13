@@ -49,7 +49,7 @@ try {
 
 ```php
 try {
-    // load() returns the bare Agency record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Agency record (throws on error).
     $agency = $client->Agency()->load(["id" => 1]);
     print_r($agency);
 } catch (\Throwable $err) {
@@ -65,7 +65,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $agencys = $client->Agency()->list();
+    $astronauts = $client->Astronaut()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -137,12 +137,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```php
 $client = LaunchLibrary2SDK::test([
-    "entity" => ["agency" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["astronaut" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
-$agency = $client->Agency()->list();
-print_r($agency);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$astronaut = $client->Astronaut()->list();
+print_r($astronaut);
 ```
 
 ### Use a custom fetch function
@@ -254,7 +255,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -375,13 +376,33 @@ API path: `/expedition`
 
 | Field | Description |
 | --- | --- |
-| `flight` |  |
+| `apogee` |  |
+| `consecutive_successful_launches` |  |
+| `description` |  |
+| `diameter` |  |
+| `failed_launches` |  |
+| `family` |  |
+| `flights` |  |
+| `full_name` |  |
+| `gto_capacity` |  |
 | `id` |  |
+| `launch_mass` |  |
 | `launcher_config` |  |
+| `length` |  |
+| `leo_capacity` |  |
+| `maiden_flight` |  |
+| `manufacturer` |  |
+| `max_stage` |  |
+| `min_stage` |  |
+| `name` |  |
+| `pending_launches` |  |
 | `serial_number` |  |
 | `status` |  |
+| `successful_launches` |  |
+| `to_thrust` |  |
 | `type` |  |
 | `url` |  |
+| `variant` |  |
 
 Operations: List, Load.
 
@@ -415,10 +436,10 @@ API path: `/launch`
 | Field | Description |
 | --- | --- |
 | `apogee` |  |
-| `consecutive_successful_launch` |  |
+| `consecutive_successful_launches` |  |
 | `description` |  |
 | `diameter` |  |
-| `failed_launch` |  |
+| `failed_launches` |  |
 | `family` |  |
 | `full_name` |  |
 | `gto_capacity` |  |
@@ -431,8 +452,8 @@ API path: `/launch`
 | `max_stage` |  |
 | `min_stage` |  |
 | `name` |  |
-| `pending_launch` |  |
-| `successful_launch` |  |
+| `pending_launches` |  |
+| `successful_launches` |  |
 | `to_thrust` |  |
 | `url` |  |
 | `variant` |  |
@@ -445,28 +466,16 @@ API path: `/config/launcher`
 
 | Field | Description |
 | --- | --- |
-| `apogee` |  |
-| `consecutive_successful_launch` |  |
+| `abbrev` |  |
+| `administrator` |  |
+| `country_code` |  |
 | `description` |  |
-| `diameter` |  |
-| `failed_launch` |  |
-| `family` |  |
-| `full_name` |  |
-| `gto_capacity` |  |
+| `founding_year` |  |
 | `id` |  |
-| `launch_mass` |  |
-| `length` |  |
-| `leo_capacity` |  |
-| `maiden_flight` |  |
-| `manufacturer` |  |
-| `max_stage` |  |
-| `min_stage` |  |
+| `logo_url` |  |
 | `name` |  |
-| `pending_launch` |  |
-| `successful_launch` |  |
-| `to_thrust` |  |
+| `type` |  |
 | `url` |  |
-| `variant` |  |
 
 Operations: Load.
 
@@ -493,6 +502,7 @@ API path: `/location`
 | Field | Description |
 | --- | --- |
 | `agency_id` |  |
+| `country_code` |  |
 | `id` |  |
 | `info_url` |  |
 | `latitude` |  |
@@ -501,6 +511,7 @@ API path: `/location`
 | `map_image` |  |
 | `map_url` |  |
 | `name` |  |
+| `total_landing_count` |  |
 | `total_launch_count` |  |
 | `url` |  |
 | `wiki_url` |  |
@@ -529,7 +540,7 @@ API path: ``
 | `image_url` |  |
 | `name` |  |
 | `orbit` |  |
-| `owner` |  |
+| `owners` |  |
 | `status` |  |
 | `type` |  |
 | `url` |  |
@@ -545,7 +556,7 @@ API path: `/spacestation`
 | `agency` |  |
 | `capability` |  |
 | `crew_capacity` |  |
-| `detail` |  |
+| `details` |  |
 | `diameter` |  |
 | `height` |  |
 | `history` |  |
@@ -596,7 +607,7 @@ Create an instance: `$agency = $client->Agency();`
 #### Example: Load
 
 ```php
-// load() returns the bare Agency record (throws on error).
+// load() returns the ENTITY — call data_get() for the Agency record (throws on error).
 $agency = $client->Agency()->load(["id" => 1]);
 ```
 
@@ -639,7 +650,7 @@ Create an instance: `$astronaut = $client->Astronaut();`
 #### Example: Load
 
 ```php
-// load() returns the bare Astronaut record (throws on error).
+// load() returns the ENTITY — call data_get() for the Astronaut record (throws on error).
 $astronaut = $client->Astronaut()->load(["id" => 1]);
 ```
 
@@ -681,7 +692,7 @@ Create an instance: `$docking_event = $client->DockingEvent();`
 #### Example: Load
 
 ```php
-// load() returns the bare DockingEvent record (throws on error).
+// load() returns the ENTITY — call data_get() for the DockingEvent record (throws on error).
 $docking_event = $client->DockingEvent()->load(["id" => 1]);
 ```
 
@@ -722,7 +733,7 @@ Create an instance: `$event = $client->Event();`
 #### Example: Load
 
 ```php
-// load() returns the bare Event record (throws on error).
+// load() returns the ENTITY — call data_get() for the Event record (throws on error).
 $event = $client->Event()->load(["id" => 1]);
 ```
 
@@ -760,7 +771,7 @@ Create an instance: `$expedition = $client->Expedition();`
 #### Example: Load
 
 ```php
-// load() returns the bare Expedition record (throws on error).
+// load() returns the ENTITY — call data_get() for the Expedition record (throws on error).
 $expedition = $client->Expedition()->load(["id" => 1]);
 ```
 
@@ -787,18 +798,38 @@ Create an instance: `$first_stage = $client->FirstStage();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `flight` | `int` |  |
+| `apogee` | `int` |  |
+| `consecutive_successful_launches` | `int` |  |
+| `description` | `string` |  |
+| `diameter` | `float` |  |
+| `failed_launches` | `int` |  |
+| `family` | `string` |  |
+| `flights` | `int` |  |
+| `full_name` | `string` |  |
+| `gto_capacity` | `int` |  |
 | `id` | `int` |  |
+| `launch_mass` | `int` |  |
 | `launcher_config` | `array` |  |
+| `length` | `float` |  |
+| `leo_capacity` | `int` |  |
+| `maiden_flight` | `string` |  |
+| `manufacturer` | `array` |  |
+| `max_stage` | `int` |  |
+| `min_stage` | `int` |  |
+| `name` | `string` |  |
+| `pending_launches` | `int` |  |
 | `serial_number` | `string` |  |
 | `status` | `string` |  |
+| `successful_launches` | `int` |  |
+| `to_thrust` | `int` |  |
 | `type` | `string` |  |
 | `url` | `string` |  |
+| `variant` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare FirstStage record (throws on error).
+// load() returns the ENTITY — call data_get() for the FirstStage record (throws on error).
 $first_stage = $client->FirstStage()->load(["id" => 1]);
 ```
 
@@ -843,7 +874,7 @@ Create an instance: `$launch = $client->Launch();`
 #### Example: Load
 
 ```php
-// load() returns the bare Launch record (throws on error).
+// load() returns the ENTITY — call data_get() for the Launch record (throws on error).
 $launch = $client->Launch()->load(["id" => "launch_id"]);
 ```
 
@@ -870,10 +901,10 @@ Create an instance: `$launch_vehicle = $client->LaunchVehicle();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `apogee` | `int` |  |
-| `consecutive_successful_launch` | `int` |  |
+| `consecutive_successful_launches` | `int` |  |
 | `description` | `string` |  |
 | `diameter` | `float` |  |
-| `failed_launch` | `int` |  |
+| `failed_launches` | `int` |  |
 | `family` | `string` |  |
 | `full_name` | `string` |  |
 | `gto_capacity` | `int` |  |
@@ -886,8 +917,8 @@ Create an instance: `$launch_vehicle = $client->LaunchVehicle();`
 | `max_stage` | `int` |  |
 | `min_stage` | `int` |  |
 | `name` | `string` |  |
-| `pending_launch` | `int` |  |
-| `successful_launch` | `int` |  |
+| `pending_launches` | `int` |  |
+| `successful_launches` | `int` |  |
 | `to_thrust` | `int` |  |
 | `url` | `string` |  |
 | `variant` | `string` |  |
@@ -914,33 +945,21 @@ Create an instance: `$launcher = $client->Launcher();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | `int` |  |
-| `consecutive_successful_launch` | `int` |  |
+| `abbrev` | `string` |  |
+| `administrator` | `string` |  |
+| `country_code` | `string` |  |
 | `description` | `string` |  |
-| `diameter` | `float` |  |
-| `failed_launch` | `int` |  |
-| `family` | `string` |  |
-| `full_name` | `string` |  |
-| `gto_capacity` | `int` |  |
+| `founding_year` | `string` |  |
 | `id` | `int` |  |
-| `launch_mass` | `int` |  |
-| `length` | `float` |  |
-| `leo_capacity` | `int` |  |
-| `maiden_flight` | `string` |  |
-| `manufacturer` | `array` |  |
-| `max_stage` | `int` |  |
-| `min_stage` | `int` |  |
+| `logo_url` | `string` |  |
 | `name` | `string` |  |
-| `pending_launch` | `int` |  |
-| `successful_launch` | `int` |  |
-| `to_thrust` | `int` |  |
+| `type` | `string` |  |
 | `url` | `string` |  |
-| `variant` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Launcher record (throws on error).
+// load() returns the ENTITY — call data_get() for the Launcher record (throws on error).
 $launcher = $client->Launcher()->load(["id" => 1]);
 ```
 
@@ -971,7 +990,7 @@ Create an instance: `$location = $client->Location();`
 #### Example: Load
 
 ```php
-// load() returns the bare Location record (throws on error).
+// load() returns the ENTITY — call data_get() for the Location record (throws on error).
 $location = $client->Location()->load(["id" => 1]);
 ```
 
@@ -999,6 +1018,7 @@ Create an instance: `$pad = $client->Pad();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `agency_id` | `int` |  |
+| `country_code` | `string` |  |
 | `id` | `int` |  |
 | `info_url` | `string` |  |
 | `latitude` | `string` |  |
@@ -1007,6 +1027,7 @@ Create an instance: `$pad = $client->Pad();`
 | `map_image` | `string` |  |
 | `map_url` | `string` |  |
 | `name` | `string` |  |
+| `total_landing_count` | `int` |  |
 | `total_launch_count` | `int` |  |
 | `url` | `string` |  |
 | `wiki_url` | `string` |  |
@@ -1014,7 +1035,7 @@ Create an instance: `$pad = $client->Pad();`
 #### Example: Load
 
 ```php
-// load() returns the bare Pad record (throws on error).
+// load() returns the ENTITY — call data_get() for the Pad record (throws on error).
 $pad = $client->Pad()->load(["id" => 1]);
 ```
 
@@ -1053,7 +1074,7 @@ Create an instance: `$space_station = $client->SpaceStation();`
 | `image_url` | `string` |  |
 | `name` | `string` |  |
 | `orbit` | `string` |  |
-| `owner` | `array` |  |
+| `owners` | `array` |  |
 | `status` | `array` |  |
 | `type` | `array` |  |
 | `url` | `string` |  |
@@ -1061,7 +1082,7 @@ Create an instance: `$space_station = $client->SpaceStation();`
 #### Example: Load
 
 ```php
-// load() returns the bare SpaceStation record (throws on error).
+// load() returns the ENTITY — call data_get() for the SpaceStation record (throws on error).
 $space_station = $client->SpaceStation()->load(["id" => 1]);
 ```
 
@@ -1091,7 +1112,7 @@ Create an instance: `$spacecraft = $client->Spacecraft();`
 | `agency` | `array` |  |
 | `capability` | `string` |  |
 | `crew_capacity` | `int` |  |
-| `detail` | `string` |  |
+| `details` | `string` |  |
 | `diameter` | `float` |  |
 | `height` | `float` |  |
 | `history` | `string` |  |
@@ -1107,7 +1128,7 @@ Create an instance: `$spacecraft = $client->Spacecraft();`
 #### Example: Load
 
 ```php
-// load() returns the bare Spacecraft record (throws on error).
+// load() returns the ENTITY — call data_get() for the Spacecraft record (throws on error).
 $spacecraft = $client->Spacecraft()->load(["id" => 1]);
 ```
 
@@ -1195,11 +1216,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$agency = $client->Agency();
-$agency->list();
+$astronaut = $client->Astronaut();
+$astronaut->list();
 
-// $agency->data_get() now returns the agency data from the last list
-// $agency->match_get() returns the last match criteria
+// $astronaut->data_get() now returns the astronaut data from the last list
+// $astronaut->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import LaunchLibrary2Control
-from core.error import LaunchLibrary2Error
-from core.result import LaunchLibrary2Result
-from core.spec import LaunchLibrary2Spec
+from launchlibrary2_sdk.config import make_config
+from launchlibrary2_sdk.features import _make_feature
+from launchlibrary2_sdk.core.control import LaunchLibrary2Control
+from launchlibrary2_sdk.core.error import LaunchLibrary2Error
+from launchlibrary2_sdk.core.result import LaunchLibrary2Result
+from launchlibrary2_sdk.core.spec import LaunchLibrary2Spec
 
 
 # True when this SDK was generated with the named feature.

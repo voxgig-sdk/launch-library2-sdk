@@ -11,7 +11,7 @@ main: kit: entity: launch_vehicle: {
       type: "`$INTEGER`"
     }
     {
-      name: "consecutive_successful_launch"
+      name: "consecutive_successful_launches"
       req: false
       type: "`$INTEGER`"
     }
@@ -26,7 +26,7 @@ main: kit: entity: launch_vehicle: {
       type: "`$NUMBER`"
     }
     {
-      name: "failed_launch"
+      name: "failed_launches"
       req: false
       type: "`$INTEGER`"
     }
@@ -91,12 +91,12 @@ main: kit: entity: launch_vehicle: {
       type: "`$STRING`"
     }
     {
-      name: "pending_launch"
+      name: "pending_launches"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "successful_launch"
+      name: "successful_launches"
       req: false
       type: "`$INTEGER`"
     }
@@ -186,7 +186,7 @@ main: kit: entity: launch_vehicle: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.results`"
           }
         }
       ]

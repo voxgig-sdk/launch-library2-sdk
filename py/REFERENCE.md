@@ -523,13 +523,33 @@ first_stage = client.FirstStage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `flight` | `int` | No |  |
+| `apogee` | `int` | No |  |
+| `consecutive_successful_launches` | `int` | No |  |
+| `description` | `str` | No |  |
+| `diameter` | `float` | No |  |
+| `failed_launches` | `int` | No |  |
+| `family` | `str` | No |  |
+| `flights` | `int` | No |  |
+| `full_name` | `str` | No |  |
+| `gto_capacity` | `int` | No |  |
 | `id` | `int` | No |  |
+| `launch_mass` | `int` | No |  |
 | `launcher_config` | `dict` | No |  |
+| `length` | `float` | No |  |
+| `leo_capacity` | `int` | No |  |
+| `maiden_flight` | `str` | No |  |
+| `manufacturer` | `dict` | No |  |
+| `max_stage` | `int` | No |  |
+| `min_stage` | `int` | No |  |
+| `name` | `str` | No |  |
+| `pending_launches` | `int` | No |  |
 | `serial_number` | `str` | No |  |
 | `status` | `str` | No |  |
+| `successful_launches` | `int` | No |  |
+| `to_thrust` | `int` | No |  |
 | `type` | `str` | No |  |
 | `url` | `str` | No |  |
+| `variant` | `str` | No |  |
 
 ### Operations
 
@@ -665,10 +685,10 @@ launch_vehicle = client.LaunchVehicle()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `apogee` | `int` | No |  |
-| `consecutive_successful_launch` | `int` | No |  |
+| `consecutive_successful_launches` | `int` | No |  |
 | `description` | `str` | No |  |
 | `diameter` | `float` | No |  |
-| `failed_launch` | `int` | No |  |
+| `failed_launches` | `int` | No |  |
 | `family` | `str` | No |  |
 | `full_name` | `str` | No |  |
 | `gto_capacity` | `int` | No |  |
@@ -681,8 +701,8 @@ launch_vehicle = client.LaunchVehicle()
 | `max_stage` | `int` | No |  |
 | `min_stage` | `int` | No |  |
 | `name` | `str` | No |  |
-| `pending_launch` | `int` | No |  |
-| `successful_launch` | `int` | No |  |
+| `pending_launches` | `int` | No |  |
+| `successful_launches` | `int` | No |  |
 | `to_thrust` | `int` | No |  |
 | `url` | `str` | No |  |
 | `variant` | `str` | No |  |
@@ -738,28 +758,16 @@ launcher = client.Launcher()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `int` | No |  |
-| `consecutive_successful_launch` | `int` | No |  |
+| `abbrev` | `str` | No |  |
+| `administrator` | `str` | No |  |
+| `country_code` | `str` | No |  |
 | `description` | `str` | No |  |
-| `diameter` | `float` | No |  |
-| `failed_launch` | `int` | No |  |
-| `family` | `str` | No |  |
-| `full_name` | `str` | No |  |
-| `gto_capacity` | `int` | No |  |
+| `founding_year` | `str` | No |  |
 | `id` | `int` | No |  |
-| `launch_mass` | `int` | No |  |
-| `length` | `float` | No |  |
-| `leo_capacity` | `int` | No |  |
-| `maiden_flight` | `str` | No |  |
-| `manufacturer` | `dict` | No |  |
-| `max_stage` | `int` | No |  |
-| `min_stage` | `int` | No |  |
+| `logo_url` | `str` | No |  |
 | `name` | `str` | No |  |
-| `pending_launch` | `int` | No |  |
-| `successful_launch` | `int` | No |  |
-| `to_thrust` | `int` | No |  |
+| `type` | `str` | No |  |
 | `url` | `str` | No |  |
-| `variant` | `str` | No |  |
 
 ### Operations
 
@@ -878,6 +886,7 @@ pad = client.Pad()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `agency_id` | `int` | No |  |
+| `country_code` | `str` | No |  |
 | `id` | `int` | No |  |
 | `info_url` | `str` | No |  |
 | `latitude` | `str` | No |  |
@@ -886,6 +895,7 @@ pad = client.Pad()
 | `map_image` | `str` | No |  |
 | `map_url` | `str` | No |  |
 | `name` | `str` | No |  |
+| `total_landing_count` | `int` | No |  |
 | `total_launch_count` | `int` | No |  |
 | `url` | `str` | No |  |
 | `wiki_url` | `str` | No |  |
@@ -991,7 +1001,7 @@ space_station = client.SpaceStation()
 | `image_url` | `str` | No |  |
 | `name` | `str` | No |  |
 | `orbit` | `str` | No |  |
-| `owner` | `list` | No |  |
+| `owners` | `list` | No |  |
 | `status` | `dict` | No |  |
 | `type` | `dict` | No |  |
 | `url` | `str` | No |  |
@@ -1058,7 +1068,7 @@ spacecraft = client.Spacecraft()
 | `agency` | `dict` | No |  |
 | `capability` | `str` | No |  |
 | `crew_capacity` | `int` | No |  |
-| `detail` | `str` | No |  |
+| `details` | `str` | No |  |
 | `diameter` | `float` | No |  |
 | `height` | `float` | No |  |
 | `history` | `str` | No |  |

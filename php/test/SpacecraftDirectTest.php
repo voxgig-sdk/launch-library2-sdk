@@ -121,11 +121,11 @@ function spacecraft_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "LAUNCHLIBRARY__TEST_SPACECRAFT_ENTID" => [],
-        "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
+        "LAUNCH_LIBRARY2_TEST_SPACECRAFT_ENTID" => [],
+        "LAUNCH_LIBRARY2_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["LAUNCHLIBRARY__TEST_LIVE"] === "TRUE";
+    $live = $env["LAUNCH_LIBRARY2_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

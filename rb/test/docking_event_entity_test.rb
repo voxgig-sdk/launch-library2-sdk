@@ -62,7 +62,7 @@ class DockingEventEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set LAUNCHLIBRARY__TEST_DOCKING_EVENT_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set LAUNCH_LIBRARY2_TEST_DOCKING_EVENT_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -87,7 +87,7 @@ class DockingEventEntityTest < Minitest::Test
       "id" => docking_event_ref01_data["id"],
     }
     docking_event_ref01_data_dt0_loaded = docking_event_ref01_ent.load(docking_event_ref01_match_dt0, nil)
-    docking_event_ref01_data_dt0_load_result = Helpers.to_map(docking_event_ref01_data_dt0_loaded)
+    docking_event_ref01_data_dt0_load_result = Helpers.to_map(docking_event_ref01_data_dt0_loaded.respond_to?(:data_get) ? docking_event_ref01_data_dt0_loaded.data_get : docking_event_ref01_data_dt0_loaded)
     assert !docking_event_ref01_data_dt0_load_result.nil?
     assert_equal docking_event_ref01_data_dt0_load_result["id"], docking_event_ref01_data["id"]
 
@@ -120,22 +120,22 @@ def docking_event_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["LAUNCHLIBRARY__TEST_DOCKING_EVENT_ENTID"]
+  entid_env_raw = ENV["LAUNCH_LIBRARY2_TEST_DOCKING_EVENT_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "LAUNCHLIBRARY__TEST_DOCKING_EVENT_ENTID" => idmap,
-    "LAUNCHLIBRARY__TEST_LIVE" => "FALSE",
-    "LAUNCHLIBRARY__TEST_EXPLAIN" => "FALSE",
+    "LAUNCH_LIBRARY2_TEST_DOCKING_EVENT_ENTID" => idmap,
+    "LAUNCH_LIBRARY2_TEST_LIVE" => "FALSE",
+    "LAUNCH_LIBRARY2_TEST_EXPLAIN" => "FALSE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["LAUNCHLIBRARY__TEST_DOCKING_EVENT_ENTID"])
+    env["LAUNCH_LIBRARY2_TEST_DOCKING_EVENT_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
+  if env["LAUNCH_LIBRARY2_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
       },
@@ -144,13 +144,13 @@ def docking_event_basic_setup(extra)
     client = LaunchLibrary2SDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["LAUNCHLIBRARY__TEST_LIVE"] == "TRUE"
+  live = env["LAUNCH_LIBRARY2_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["LAUNCHLIBRARY__TEST_EXPLAIN"] == "TRUE",
+    explain: env["LAUNCH_LIBRARY2_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

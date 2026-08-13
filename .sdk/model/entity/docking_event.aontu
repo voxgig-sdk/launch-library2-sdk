@@ -97,7 +97,7 @@ main: kit: entity: docking_event: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.results`"
           }
         }
       ]

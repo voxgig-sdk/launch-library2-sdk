@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# LaunchLibrary2 SDK exists test
 
 import pytest
 from launchlibrary2_sdk import LaunchLibrary2SDK

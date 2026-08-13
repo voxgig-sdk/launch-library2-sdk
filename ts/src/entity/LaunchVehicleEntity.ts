@@ -37,7 +37,7 @@ class LaunchVehicleEntity extends LaunchLibrary2EntityBase<LaunchVehicle> {
 
 
 
-  async list(this: any, reqmatch?: LaunchVehicleListMatch, ctrl?: Control): Promise<LaunchVehicle[]> {
+  async list(this: any, reqmatch?: LaunchVehicleListMatch, ctrl?: Control): Promise<LaunchVehicleEntity[]> {
 
     const utility = this._utility
 

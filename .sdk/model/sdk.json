@@ -5,6 +5,10 @@
       "desc": ""
     },
     "kit": {
+      "author": {
+        "name": "",
+        "url": ""
+      },
       "config": {
         "docs_order": [
           "ts",
@@ -18,6 +22,7 @@
           "content-type": "application/json"
         }
       },
+      "contributor": {},
       "entity": {
         "agency": {
           "active": true,
@@ -144,6 +149,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/agencies",
                   "parts": [
@@ -160,7 +166,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -183,6 +189,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/agencies/{id}",
                   "parts": [
@@ -343,6 +350,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/astronaut",
                   "parts": [
@@ -359,7 +367,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -382,6 +390,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/astronaut/{id}",
                   "parts": [
@@ -510,6 +519,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/docking_event",
                   "parts": [
@@ -525,7 +535,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -548,6 +558,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/docking_event/{id}",
                   "parts": [
@@ -680,6 +691,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/event",
                   "parts": [
@@ -694,7 +706,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -717,6 +729,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/event/{id}",
                   "parts": [
@@ -730,7 +743,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.type`"
                   }
                 }
               ]
@@ -839,6 +852,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/expedition",
                   "parts": [
@@ -854,7 +868,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -877,6 +891,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/expedition/{id}",
                   "parts": [
@@ -908,7 +923,55 @@
           "fields": [
             {
               "active": true,
-              "name": "flight",
+              "name": "apogee",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "consecutive_successful_launches",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "description",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "diameter",
+              "req": false,
+              "type": "`$NUMBER`"
+            },
+            {
+              "active": true,
+              "name": "failed_launches",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "family",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "flights",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "full_name",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "gto_capacity",
               "req": false,
               "type": "`$INTEGER`"
             },
@@ -920,9 +983,63 @@
             },
             {
               "active": true,
+              "name": "launch_mass",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
               "name": "launcher_config",
               "req": false,
               "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "length",
+              "req": false,
+              "type": "`$NUMBER`"
+            },
+            {
+              "active": true,
+              "name": "leo_capacity",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "maiden_flight",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "manufacturer",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "max_stage",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "min_stage",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "name",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "pending_launches",
+              "req": false,
+              "type": "`$INTEGER`"
             },
             {
               "active": true,
@@ -938,6 +1055,18 @@
             },
             {
               "active": true,
+              "name": "successful_launches",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "to_thrust",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
               "name": "type",
               "req": false,
               "type": "`$STRING`"
@@ -945,6 +1074,12 @@
             {
               "active": true,
               "name": "url",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "variant",
               "req": false,
               "type": "`$STRING`"
             }
@@ -999,6 +1134,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/firststage",
                   "parts": [
@@ -1014,7 +1150,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -1037,6 +1173,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/firststage/{id}",
                   "parts": [
@@ -1050,7 +1187,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.launcher_config`"
                   }
                 }
               ]
@@ -1233,6 +1370,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/launch",
                   "parts": [
@@ -1252,7 +1390,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -1275,6 +1413,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/launch/{id}",
                   "parts": [
@@ -1312,7 +1451,7 @@
             },
             {
               "active": true,
-              "name": "consecutive_successful_launch",
+              "name": "consecutive_successful_launches",
               "req": false,
               "type": "`$INTEGER`"
             },
@@ -1330,7 +1469,7 @@
             },
             {
               "active": true,
-              "name": "failed_launch",
+              "name": "failed_launches",
               "req": false,
               "type": "`$INTEGER`"
             },
@@ -1408,13 +1547,13 @@
             },
             {
               "active": true,
-              "name": "pending_launch",
+              "name": "pending_launches",
               "req": false,
               "type": "`$INTEGER`"
             },
             {
               "active": true,
-              "name": "successful_launch",
+              "name": "successful_launches",
               "req": false,
               "type": "`$INTEGER`"
             },
@@ -1495,6 +1634,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/config/launcher",
                   "parts": [
@@ -1512,7 +1652,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -1530,15 +1670,21 @@
           "fields": [
             {
               "active": true,
-              "name": "apogee",
+              "name": "abbrev",
               "req": false,
-              "type": "`$INTEGER`"
+              "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "consecutive_successful_launch",
+              "name": "administrator",
               "req": false,
-              "type": "`$INTEGER`"
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "country_code",
+              "req": false,
+              "type": "`$STRING`"
             },
             {
               "active": true,
@@ -1548,33 +1694,9 @@
             },
             {
               "active": true,
-              "name": "diameter",
-              "req": false,
-              "type": "`$NUMBER`"
-            },
-            {
-              "active": true,
-              "name": "failed_launch",
-              "req": false,
-              "type": "`$INTEGER`"
-            },
-            {
-              "active": true,
-              "name": "family",
+              "name": "founding_year",
               "req": false,
               "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "full_name",
-              "req": false,
-              "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "gto_capacity",
-              "req": false,
-              "type": "`$INTEGER`"
             },
             {
               "active": true,
@@ -1584,45 +1706,9 @@
             },
             {
               "active": true,
-              "name": "launch_mass",
-              "req": false,
-              "type": "`$INTEGER`"
-            },
-            {
-              "active": true,
-              "name": "length",
-              "req": false,
-              "type": "`$NUMBER`"
-            },
-            {
-              "active": true,
-              "name": "leo_capacity",
-              "req": false,
-              "type": "`$INTEGER`"
-            },
-            {
-              "active": true,
-              "name": "maiden_flight",
+              "name": "logo_url",
               "req": false,
               "type": "`$STRING`"
-            },
-            {
-              "active": true,
-              "name": "manufacturer",
-              "req": false,
-              "type": "`$OBJECT`"
-            },
-            {
-              "active": true,
-              "name": "max_stage",
-              "req": false,
-              "type": "`$INTEGER`"
-            },
-            {
-              "active": true,
-              "name": "min_stage",
-              "req": false,
-              "type": "`$INTEGER`"
             },
             {
               "active": true,
@@ -1632,31 +1718,13 @@
             },
             {
               "active": true,
-              "name": "pending_launch",
-              "req": false,
-              "type": "`$INTEGER`"
-            },
-            {
-              "active": true,
-              "name": "successful_launch",
-              "req": false,
-              "type": "`$INTEGER`"
-            },
-            {
-              "active": true,
-              "name": "to_thrust",
-              "req": false,
-              "type": "`$INTEGER`"
-            },
-            {
-              "active": true,
-              "name": "url",
+              "name": "type",
               "req": false,
               "type": "`$STRING`"
             },
             {
               "active": true,
-              "name": "variant",
+              "name": "url",
               "req": false,
               "type": "`$STRING`"
             }
@@ -1685,6 +1753,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/config/launcher/{id}",
                   "parts": [
@@ -1699,7 +1768,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.manufacturer`"
                   }
                 }
               ]
@@ -1808,6 +1877,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/location",
                   "parts": [
@@ -1823,7 +1893,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -1846,6 +1916,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/location/{id}",
                   "parts": [
@@ -1880,6 +1951,12 @@
               "name": "agency_id",
               "req": false,
               "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "country_code",
+              "req": false,
+              "type": "`$STRING`"
             },
             {
               "active": true,
@@ -1928,6 +2005,12 @@
               "name": "name",
               "req": false,
               "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "total_landing_count",
+              "req": false,
+              "type": "`$INTEGER`"
             },
             {
               "active": true,
@@ -1998,6 +2081,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/pad",
                   "parts": [
@@ -2013,7 +2097,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -2036,6 +2120,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/pad/{id}",
                   "parts": [
@@ -2049,7 +2134,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.location`"
                   }
                 }
               ]
@@ -2121,7 +2206,7 @@
             },
             {
               "active": true,
-              "name": "owner",
+              "name": "owners",
               "req": false,
               "type": "`$ARRAY`"
             },
@@ -2202,6 +2287,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/spacestation",
                   "parts": [
@@ -2218,7 +2304,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -2241,6 +2327,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/spacestation/{id}",
                   "parts": [
@@ -2290,7 +2377,7 @@
             },
             {
               "active": true,
-              "name": "detail",
+              "name": "details",
               "req": false,
               "type": "`$STRING`"
             },
@@ -2411,6 +2498,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/config/spacecraft",
                   "parts": [
@@ -2427,7 +2515,7 @@
                   },
                   "transform": {
                     "req": "`reqdata`",
-                    "res": "`body`"
+                    "res": "`body.results`"
                   }
                 }
               ]
@@ -2450,6 +2538,7 @@
                       }
                     ]
                   },
+                  "kind": "http",
                   "method": "GET",
                   "orig": "/config/spacecraft/{id}",
                   "parts": [
@@ -3194,18 +3283,41 @@
         "website": "https://thespacedevs.com/llapi"
       },
       "option": {},
+      "repo": {
+        "host": "github.com",
+        "path": ""
+      },
       "target": {
         "go": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [
+              "test/feature_test.go"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "launch-library2"
+            "goversion": "",
+            "name": "launch-library2",
+            "package": "",
+            "path": ""
           },
           "name": "go",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3227,22 +3339,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Golang"
         },
         "go-cli": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "launch-library2"
+            "goversion": "",
+            "name": "launch-library2",
+            "package": "",
+            "path": ""
           },
           "name": "go-cli",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -3281,21 +3411,39 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go CLI"
         },
         "go-mcp": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "launch-library2"
+            "goversion": "",
+            "name": "launch-library2",
+            "package": "",
+            "path": ""
           },
           "name": "go-mcp",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "phase": {
             "agentguide": {
               "active": false
@@ -3334,12 +3482,17 @@
                 "recipe": "github"
               },
               "via": "root"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "Go MCP server"
         },
         "lua": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "--"
           },
@@ -3351,10 +3504,23 @@
             }
           },
           "ext": "lua",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "launch-library2"
+            "goversion": "",
+            "name": "launch-library2",
+            "package": "",
+            "path": ""
           },
           "name": "lua",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3376,22 +3542,40 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Lua"
         },
         "php": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "php",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "launch-library2"
+            "goversion": "",
+            "name": "launch-library2",
+            "package": "",
+            "path": ""
           },
           "name": "php",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3413,13 +3597,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "PHP"
         },
         "py": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -3431,10 +3620,23 @@
             }
           },
           "ext": "py",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "launch-library2"
+            "goversion": "",
+            "name": "launch-library2",
+            "package": "",
+            "path": ""
           },
           "name": "py",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3456,13 +3658,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Python"
         },
         "rb": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -3479,10 +3686,23 @@
             }
           },
           "ext": "rb",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "launch-library2"
+            "goversion": "",
+            "name": "launch-library2",
+            "package": "",
+            "path": ""
           },
           "name": "rb",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3504,13 +3724,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Ruby"
         },
         "ts": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
@@ -3533,10 +3758,23 @@
             }
           },
           "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "launch-library2"
+            "goversion": "",
+            "name": "launch-library2",
+            "package": "",
+            "path": ""
           },
           "name": "ts",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3558,9 +3796,17 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "TypeScript"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": false
         }
       }
     }

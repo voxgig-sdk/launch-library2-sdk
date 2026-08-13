@@ -23,8 +23,8 @@ module LaunchLibrary2TestRunner
   end
 
   def self.env_override(m)
-    live = getenv("LAUNCHLIBRARY2_TEST_LIVE")
-    override = getenv("LAUNCHLIBRARY2_TEST_OVERRIDE")
+    live = getenv("LAUNCH_LIBRARY2_TEST_LIVE")
+    override = getenv("LAUNCH_LIBRARY2_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module LaunchLibrary2TestRunner
       end
     end
 
-    explain = getenv("LAUNCHLIBRARY2_TEST_EXPLAIN")
-    m["LAUNCHLIBRARY2_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("LAUNCH_LIBRARY2_TEST_EXPLAIN")
+    m["LAUNCH_LIBRARY2_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

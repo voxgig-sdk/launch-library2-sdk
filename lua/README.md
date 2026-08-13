@@ -62,7 +62,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local agencys, err = client:Agency():list()
+local astronauts, err = client:Astronaut():list()
 if err then error(err) end
 ```
 
@@ -120,7 +120,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Agency():list()
+local result, err = client:Astronaut():list()
 -- result is the returned data; err is set on failure
 ```
 
@@ -354,13 +354,33 @@ API path: `/expedition`
 
 | Field | Description |
 | --- | --- |
-| `flight` |  |
+| `apogee` |  |
+| `consecutive_successful_launches` |  |
+| `description` |  |
+| `diameter` |  |
+| `failed_launches` |  |
+| `family` |  |
+| `flights` |  |
+| `full_name` |  |
+| `gto_capacity` |  |
 | `id` |  |
+| `launch_mass` |  |
 | `launcher_config` |  |
+| `length` |  |
+| `leo_capacity` |  |
+| `maiden_flight` |  |
+| `manufacturer` |  |
+| `max_stage` |  |
+| `min_stage` |  |
+| `name` |  |
+| `pending_launches` |  |
 | `serial_number` |  |
 | `status` |  |
+| `successful_launches` |  |
+| `to_thrust` |  |
 | `type` |  |
 | `url` |  |
+| `variant` |  |
 
 Operations: List, Load.
 
@@ -394,10 +414,10 @@ API path: `/launch`
 | Field | Description |
 | --- | --- |
 | `apogee` |  |
-| `consecutive_successful_launch` |  |
+| `consecutive_successful_launches` |  |
 | `description` |  |
 | `diameter` |  |
-| `failed_launch` |  |
+| `failed_launches` |  |
 | `family` |  |
 | `full_name` |  |
 | `gto_capacity` |  |
@@ -410,8 +430,8 @@ API path: `/launch`
 | `max_stage` |  |
 | `min_stage` |  |
 | `name` |  |
-| `pending_launch` |  |
-| `successful_launch` |  |
+| `pending_launches` |  |
+| `successful_launches` |  |
 | `to_thrust` |  |
 | `url` |  |
 | `variant` |  |
@@ -424,28 +444,16 @@ API path: `/config/launcher`
 
 | Field | Description |
 | --- | --- |
-| `apogee` |  |
-| `consecutive_successful_launch` |  |
+| `abbrev` |  |
+| `administrator` |  |
+| `country_code` |  |
 | `description` |  |
-| `diameter` |  |
-| `failed_launch` |  |
-| `family` |  |
-| `full_name` |  |
-| `gto_capacity` |  |
+| `founding_year` |  |
 | `id` |  |
-| `launch_mass` |  |
-| `length` |  |
-| `leo_capacity` |  |
-| `maiden_flight` |  |
-| `manufacturer` |  |
-| `max_stage` |  |
-| `min_stage` |  |
+| `logo_url` |  |
 | `name` |  |
-| `pending_launch` |  |
-| `successful_launch` |  |
-| `to_thrust` |  |
+| `type` |  |
 | `url` |  |
-| `variant` |  |
 
 Operations: Load.
 
@@ -472,6 +480,7 @@ API path: `/location`
 | Field | Description |
 | --- | --- |
 | `agency_id` |  |
+| `country_code` |  |
 | `id` |  |
 | `info_url` |  |
 | `latitude` |  |
@@ -480,6 +489,7 @@ API path: `/location`
 | `map_image` |  |
 | `map_url` |  |
 | `name` |  |
+| `total_landing_count` |  |
 | `total_launch_count` |  |
 | `url` |  |
 | `wiki_url` |  |
@@ -508,7 +518,7 @@ API path: ``
 | `image_url` |  |
 | `name` |  |
 | `orbit` |  |
-| `owner` |  |
+| `owners` |  |
 | `status` |  |
 | `type` |  |
 | `url` |  |
@@ -524,7 +534,7 @@ API path: `/spacestation`
 | `agency` |  |
 | `capability` |  |
 | `crew_capacity` |  |
-| `detail` |  |
+| `details` |  |
 | `diameter` |  |
 | `height` |  |
 | `history` |  |
@@ -756,13 +766,33 @@ Create an instance: `local first_stage = client:FirstStage(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `flight` | `number` |  |
+| `apogee` | `number` |  |
+| `consecutive_successful_launches` | `number` |  |
+| `description` | `string` |  |
+| `diameter` | `number` |  |
+| `failed_launches` | `number` |  |
+| `family` | `string` |  |
+| `flights` | `number` |  |
+| `full_name` | `string` |  |
+| `gto_capacity` | `number` |  |
 | `id` | `number` |  |
+| `launch_mass` | `number` |  |
 | `launcher_config` | `table` |  |
+| `length` | `number` |  |
+| `leo_capacity` | `number` |  |
+| `maiden_flight` | `string` |  |
+| `manufacturer` | `table` |  |
+| `max_stage` | `number` |  |
+| `min_stage` | `number` |  |
+| `name` | `string` |  |
+| `pending_launches` | `number` |  |
 | `serial_number` | `string` |  |
 | `status` | `string` |  |
+| `successful_launches` | `number` |  |
+| `to_thrust` | `number` |  |
 | `type` | `string` |  |
 | `url` | `string` |  |
+| `variant` | `string` |  |
 
 #### Example: Load
 
@@ -835,10 +865,10 @@ Create an instance: `local launch_vehicle = client:LaunchVehicle(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `apogee` | `number` |  |
-| `consecutive_successful_launch` | `number` |  |
+| `consecutive_successful_launches` | `number` |  |
 | `description` | `string` |  |
 | `diameter` | `number` |  |
-| `failed_launch` | `number` |  |
+| `failed_launches` | `number` |  |
 | `family` | `string` |  |
 | `full_name` | `string` |  |
 | `gto_capacity` | `number` |  |
@@ -851,8 +881,8 @@ Create an instance: `local launch_vehicle = client:LaunchVehicle(nil)`
 | `max_stage` | `number` |  |
 | `min_stage` | `number` |  |
 | `name` | `string` |  |
-| `pending_launch` | `number` |  |
-| `successful_launch` | `number` |  |
+| `pending_launches` | `number` |  |
+| `successful_launches` | `number` |  |
 | `to_thrust` | `number` |  |
 | `url` | `string` |  |
 | `variant` | `string` |  |
@@ -878,28 +908,16 @@ Create an instance: `local launcher = client:Launcher(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | `number` |  |
-| `consecutive_successful_launch` | `number` |  |
+| `abbrev` | `string` |  |
+| `administrator` | `string` |  |
+| `country_code` | `string` |  |
 | `description` | `string` |  |
-| `diameter` | `number` |  |
-| `failed_launch` | `number` |  |
-| `family` | `string` |  |
-| `full_name` | `string` |  |
-| `gto_capacity` | `number` |  |
+| `founding_year` | `string` |  |
 | `id` | `number` |  |
-| `launch_mass` | `number` |  |
-| `length` | `number` |  |
-| `leo_capacity` | `number` |  |
-| `maiden_flight` | `string` |  |
-| `manufacturer` | `table` |  |
-| `max_stage` | `number` |  |
-| `min_stage` | `number` |  |
+| `logo_url` | `string` |  |
 | `name` | `string` |  |
-| `pending_launch` | `number` |  |
-| `successful_launch` | `number` |  |
-| `to_thrust` | `number` |  |
+| `type` | `string` |  |
 | `url` | `string` |  |
-| `variant` | `string` |  |
 
 #### Example: Load
 
@@ -960,6 +978,7 @@ Create an instance: `local pad = client:Pad(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `agency_id` | `number` |  |
+| `country_code` | `string` |  |
 | `id` | `number` |  |
 | `info_url` | `string` |  |
 | `latitude` | `string` |  |
@@ -968,6 +987,7 @@ Create an instance: `local pad = client:Pad(nil)`
 | `map_image` | `string` |  |
 | `map_url` | `string` |  |
 | `name` | `string` |  |
+| `total_landing_count` | `number` |  |
 | `total_launch_count` | `number` |  |
 | `url` | `string` |  |
 | `wiki_url` | `string` |  |
@@ -1012,7 +1032,7 @@ Create an instance: `local space_station = client:SpaceStation(nil)`
 | `image_url` | `string` |  |
 | `name` | `string` |  |
 | `orbit` | `string` |  |
-| `owner` | `table` |  |
+| `owners` | `table` |  |
 | `status` | `table` |  |
 | `type` | `table` |  |
 | `url` | `string` |  |
@@ -1048,7 +1068,7 @@ Create an instance: `local spacecraft = client:Spacecraft(nil)`
 | `agency` | `table` |  |
 | `capability` | `string` |  |
 | `crew_capacity` | `number` |  |
-| `detail` | `string` |  |
+| `details` | `string` |  |
 | `diameter` | `number` |  |
 | `height` | `number` |  |
 | `history` | `string` |  |
@@ -1150,11 +1170,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local agency = client:Agency()
-agency:list()
+local astronaut = client:Astronaut()
+astronaut:list()
 
--- agency:data_get() now returns the agency data from the last list
--- agency:match_get() returns the last match criteria
+-- astronaut:data_get() now returns the astronaut data from the last list
+-- astronaut:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

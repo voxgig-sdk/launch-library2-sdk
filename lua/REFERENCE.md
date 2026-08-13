@@ -522,13 +522,33 @@ local first_stage = client:FirstStage(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `flight` | `number` | No |  |
+| `apogee` | `number` | No |  |
+| `consecutive_successful_launches` | `number` | No |  |
+| `description` | `string` | No |  |
+| `diameter` | `number` | No |  |
+| `failed_launches` | `number` | No |  |
+| `family` | `string` | No |  |
+| `flights` | `number` | No |  |
+| `full_name` | `string` | No |  |
+| `gto_capacity` | `number` | No |  |
 | `id` | `number` | No |  |
+| `launch_mass` | `number` | No |  |
 | `launcher_config` | `table` | No |  |
+| `length` | `number` | No |  |
+| `leo_capacity` | `number` | No |  |
+| `maiden_flight` | `string` | No |  |
+| `manufacturer` | `table` | No |  |
+| `max_stage` | `number` | No |  |
+| `min_stage` | `number` | No |  |
+| `name` | `string` | No |  |
+| `pending_launches` | `number` | No |  |
 | `serial_number` | `string` | No |  |
 | `status` | `string` | No |  |
+| `successful_launches` | `number` | No |  |
+| `to_thrust` | `number` | No |  |
 | `type` | `string` | No |  |
 | `url` | `string` | No |  |
+| `variant` | `string` | No |  |
 
 ### Operations
 
@@ -662,10 +682,10 @@ local launch_vehicle = client:LaunchVehicle(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `apogee` | `number` | No |  |
-| `consecutive_successful_launch` | `number` | No |  |
+| `consecutive_successful_launches` | `number` | No |  |
 | `description` | `string` | No |  |
 | `diameter` | `number` | No |  |
-| `failed_launch` | `number` | No |  |
+| `failed_launches` | `number` | No |  |
 | `family` | `string` | No |  |
 | `full_name` | `string` | No |  |
 | `gto_capacity` | `number` | No |  |
@@ -678,8 +698,8 @@ local launch_vehicle = client:LaunchVehicle(nil)
 | `max_stage` | `number` | No |  |
 | `min_stage` | `number` | No |  |
 | `name` | `string` | No |  |
-| `pending_launch` | `number` | No |  |
-| `successful_launch` | `number` | No |  |
+| `pending_launches` | `number` | No |  |
+| `successful_launches` | `number` | No |  |
 | `to_thrust` | `number` | No |  |
 | `url` | `string` | No |  |
 | `variant` | `string` | No |  |
@@ -734,28 +754,16 @@ local launcher = client:Launcher(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `number` | No |  |
-| `consecutive_successful_launch` | `number` | No |  |
+| `abbrev` | `string` | No |  |
+| `administrator` | `string` | No |  |
+| `country_code` | `string` | No |  |
 | `description` | `string` | No |  |
-| `diameter` | `number` | No |  |
-| `failed_launch` | `number` | No |  |
-| `family` | `string` | No |  |
-| `full_name` | `string` | No |  |
-| `gto_capacity` | `number` | No |  |
+| `founding_year` | `string` | No |  |
 | `id` | `number` | No |  |
-| `launch_mass` | `number` | No |  |
-| `length` | `number` | No |  |
-| `leo_capacity` | `number` | No |  |
-| `maiden_flight` | `string` | No |  |
-| `manufacturer` | `table` | No |  |
-| `max_stage` | `number` | No |  |
-| `min_stage` | `number` | No |  |
+| `logo_url` | `string` | No |  |
 | `name` | `string` | No |  |
-| `pending_launch` | `number` | No |  |
-| `successful_launch` | `number` | No |  |
-| `to_thrust` | `number` | No |  |
+| `type` | `string` | No |  |
 | `url` | `string` | No |  |
-| `variant` | `string` | No |  |
 
 ### Operations
 
@@ -874,6 +882,7 @@ local pad = client:Pad(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `agency_id` | `number` | No |  |
+| `country_code` | `string` | No |  |
 | `id` | `number` | No |  |
 | `info_url` | `string` | No |  |
 | `latitude` | `string` | No |  |
@@ -882,6 +891,7 @@ local pad = client:Pad(nil)
 | `map_image` | `string` | No |  |
 | `map_url` | `string` | No |  |
 | `name` | `string` | No |  |
+| `total_landing_count` | `number` | No |  |
 | `total_launch_count` | `number` | No |  |
 | `url` | `string` | No |  |
 | `wiki_url` | `string` | No |  |
@@ -987,7 +997,7 @@ local space_station = client:SpaceStation(nil)
 | `image_url` | `string` | No |  |
 | `name` | `string` | No |  |
 | `orbit` | `string` | No |  |
-| `owner` | `table` | No |  |
+| `owners` | `table` | No |  |
 | `status` | `table` | No |  |
 | `type` | `table` | No |  |
 | `url` | `string` | No |  |
@@ -1053,7 +1063,7 @@ local spacecraft = client:Spacecraft(nil)
 | `agency` | `table` | No |  |
 | `capability` | `string` | No |  |
 | `crew_capacity` | `number` | No |  |
-| `detail` | `string` | No |  |
+| `details` | `string` | No |  |
 | `diameter` | `number` | No |  |
 | `height` | `number` | No |  |
 | `history` | `string` | No |  |

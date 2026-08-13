@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = LaunchLibrary2SDK.test()
-const agencys = await client.Agency().list()
-// agencys is an array of bare Agency records populated with mock data
-console.log(agencys)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = LaunchLibrary2SDK.test({
+  entity: {
+    astronaut: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const astronauts = await client.Astronaut().list()
+// astronauts is an array of Astronaut entities, populated with mock data
+// — call astronauts[0].data() for the record itself
+console.log(astronauts)
 ```
 
 ### Python
 
 ```python
 client = LaunchLibrary2SDK.test()
-agencys = client.Agency().list()
-print(agencys)
+astronauts = client.Astronaut().list()
+print(astronauts)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(agencys)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = LaunchLibrary2SDK::test([
-    "entity" => ["agency" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["astronaut" => ["test01" => ["id" => "test01"]]],
 ]);
-$agencys = $client->Agency()->list();
+$astronauts = $client->Astronaut()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Agency(nil).List(
+result, err := client.Astronaut(nil).List(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Agency(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = LaunchLibrary2SDK.test({
-  "entity" => { "agency" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "astronaut" => { "test01" => { "id" => "test01" } } },
 })
-agencys = client.Agency.list()
+astronauts = client.Astronaut.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:Agency():list()
+local results, err = client:Astronaut():list()
 ```
 
 ## Packages
@@ -110,7 +119,7 @@ import { LaunchLibrary2SDK } from '@voxgig-sdk/launch-library2'
 
 const client = new LaunchLibrary2SDK()
 
-// List all agencys (returns Agency[])
+// List all agencys (returns AgencyEntity[] — .data() for the record)
 const agencys = await client.Agency().list()
 for (const agency of agencys) {
   console.log(agency)
@@ -205,7 +214,7 @@ $client = new LaunchLibrary2SDK();
 $agencys = $client->Agency()->list();
 print_r($agencys);
 
-// Load a specific agency (returns the bare record; throws on error)
+// Load a specific agency (returns the ENTITY; call data_get() for the record; throws on error)
 $agency = $client->Agency()->load(["id" => 1]);
 print_r($agency);
 ```
@@ -236,7 +245,7 @@ client = LaunchLibrary2SDK.new
 agencys = client.Agency.list
 puts agencys
 
-# Load a specific agency (returns the bare record; raises on error)
+# Load a specific agency (returns the ENTITY; call data_get for the record)
 agency = client.Agency.load({ "id" => 1 })
 puts agency
 ```
@@ -373,6 +382,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://ll.thespacedevs.com/2.2.0](https://ll.thespacedevs.com/2.2.0)
 

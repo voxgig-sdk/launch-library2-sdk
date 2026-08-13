@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import LaunchLibrary2SDK
-from core.error import LaunchLibrary2Error
-from core.result import LaunchLibrary2Result
-from core.response import LaunchLibrary2Response
-from core.spec import LaunchLibrary2Spec
-from feature.base_feature import LaunchLibrary2BaseFeature
+from projectname_sdk.core.error import LaunchLibrary2Error
+from projectname_sdk.core.result import LaunchLibrary2Result
+from projectname_sdk.core.response import LaunchLibrary2Response
+from projectname_sdk.core.spec import LaunchLibrary2Spec
+from projectname_sdk.feature.base_feature import LaunchLibrary2BaseFeature
 
 
 def _client():

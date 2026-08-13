@@ -149,13 +149,33 @@ export interface ExpeditionListMatch {
 }
 
 export interface FirstStage {
-  flight?: number
+  apogee?: number
+  consecutive_successful_launches?: number
+  description?: string
+  diameter?: number
+  failed_launches?: number
+  family?: string
+  flights?: number
+  full_name?: string
+  gto_capacity?: number
   id?: number
+  launch_mass?: number
   launcher_config?: Record<string, any>
+  length?: number
+  leo_capacity?: number
+  maiden_flight?: string
+  manufacturer?: Record<string, any>
+  max_stage?: number
+  min_stage?: number
+  name?: string
+  pending_launches?: number
   serial_number?: string
   status?: string
+  successful_launches?: number
+  to_thrust?: number
   type?: string
   url?: string
+  variant?: string
 }
 
 export interface FirstStageLoadMatch {
@@ -163,13 +183,33 @@ export interface FirstStageLoadMatch {
 }
 
 export interface FirstStageListMatch {
-  flight?: number
+  apogee?: number
+  consecutive_successful_launches?: number
+  description?: string
+  diameter?: number
+  failed_launches?: number
+  family?: string
+  flights?: number
+  full_name?: string
+  gto_capacity?: number
   id?: number
+  launch_mass?: number
   launcher_config?: Record<string, any>
+  length?: number
+  leo_capacity?: number
+  maiden_flight?: string
+  manufacturer?: Record<string, any>
+  max_stage?: number
+  min_stage?: number
+  name?: string
+  pending_launches?: number
   serial_number?: string
   status?: string
+  successful_launches?: number
+  to_thrust?: number
   type?: string
   url?: string
+  variant?: string
 }
 
 export interface Launch {
@@ -212,10 +252,10 @@ export interface LaunchListMatch {
 
 export interface LaunchVehicle {
   apogee?: number
-  consecutive_successful_launch?: number
+  consecutive_successful_launches?: number
   description?: string
   diameter?: number
-  failed_launch?: number
+  failed_launches?: number
   family?: string
   full_name?: string
   gto_capacity?: number
@@ -228,8 +268,8 @@ export interface LaunchVehicle {
   max_stage?: number
   min_stage?: number
   name?: string
-  pending_launch?: number
-  successful_launch?: number
+  pending_launches?: number
+  successful_launches?: number
   to_thrust?: number
   url?: string
   variant?: string
@@ -237,10 +277,10 @@ export interface LaunchVehicle {
 
 export interface LaunchVehicleListMatch {
   apogee?: number
-  consecutive_successful_launch?: number
+  consecutive_successful_launches?: number
   description?: string
   diameter?: number
-  failed_launch?: number
+  failed_launches?: number
   family?: string
   full_name?: string
   gto_capacity?: number
@@ -253,36 +293,24 @@ export interface LaunchVehicleListMatch {
   max_stage?: number
   min_stage?: number
   name?: string
-  pending_launch?: number
-  successful_launch?: number
+  pending_launches?: number
+  successful_launches?: number
   to_thrust?: number
   url?: string
   variant?: string
 }
 
 export interface Launcher {
-  apogee?: number
-  consecutive_successful_launch?: number
+  abbrev?: string
+  administrator?: string
+  country_code?: string
   description?: string
-  diameter?: number
-  failed_launch?: number
-  family?: string
-  full_name?: string
-  gto_capacity?: number
+  founding_year?: string
   id?: number
-  launch_mass?: number
-  length?: number
-  leo_capacity?: number
-  maiden_flight?: string
-  manufacturer?: Record<string, any>
-  max_stage?: number
-  min_stage?: number
+  logo_url?: string
   name?: string
-  pending_launch?: number
-  successful_launch?: number
-  to_thrust?: number
+  type?: string
   url?: string
-  variant?: string
 }
 
 export interface LauncherLoadMatch {
@@ -315,6 +343,7 @@ export interface LocationListMatch {
 
 export interface Pad {
   agency_id?: number
+  country_code?: string
   id?: number
   info_url?: string
   latitude?: string
@@ -323,6 +352,7 @@ export interface Pad {
   map_image?: string
   map_url?: string
   name?: string
+  total_landing_count?: number
   total_launch_count?: number
   url?: string
   wiki_url?: string
@@ -334,6 +364,7 @@ export interface PadLoadMatch {
 
 export interface PadListMatch {
   agency_id?: number
+  country_code?: string
   id?: number
   info_url?: string
   latitude?: string
@@ -342,6 +373,7 @@ export interface PadListMatch {
   map_image?: string
   map_url?: string
   name?: string
+  total_landing_count?: number
   total_launch_count?: number
   url?: string
   wiki_url?: string
@@ -358,7 +390,7 @@ export interface SpaceStation {
   image_url?: string
   name?: string
   orbit?: string
-  owner?: any[]
+  owners?: any[]
   status?: Record<string, any>
   type?: Record<string, any>
   url?: string
@@ -376,7 +408,7 @@ export interface SpaceStationListMatch {
   image_url?: string
   name?: string
   orbit?: string
-  owner?: any[]
+  owners?: any[]
   status?: Record<string, any>
   type?: Record<string, any>
   url?: string
@@ -386,7 +418,7 @@ export interface Spacecraft {
   agency?: Record<string, any>
   capability?: string
   crew_capacity?: number
-  detail?: string
+  details?: string
   diameter?: number
   height?: number
   history?: string
@@ -408,7 +440,7 @@ export interface SpacecraftListMatch {
   agency?: Record<string, any>
   capability?: string
   crew_capacity?: number
-  detail?: string
+  details?: string
   diameter?: number
   height?: number
   history?: string

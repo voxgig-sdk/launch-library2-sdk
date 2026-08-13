@@ -52,7 +52,7 @@ except Exception as err:
 
 ### 3. Load an agency
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -69,8 +69,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    agencys = client.Agency().list()
-    print(agencys)
+    astronauts = client.Astronaut().list()
+    print(astronauts)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -136,9 +136,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = LaunchLibrary2SDK.test()
 
-# Entity ops return the bare record and raise on error.
-agency = client.Agency().list()
-# agency contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+astronaut = client.Astronaut().list()
+# astronaut contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -247,7 +248,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -368,13 +369,33 @@ API path: `/expedition`
 
 | Field | Description |
 | --- | --- |
-| `flight` |  |
+| `apogee` |  |
+| `consecutive_successful_launches` |  |
+| `description` |  |
+| `diameter` |  |
+| `failed_launches` |  |
+| `family` |  |
+| `flights` |  |
+| `full_name` |  |
+| `gto_capacity` |  |
 | `id` |  |
+| `launch_mass` |  |
 | `launcher_config` |  |
+| `length` |  |
+| `leo_capacity` |  |
+| `maiden_flight` |  |
+| `manufacturer` |  |
+| `max_stage` |  |
+| `min_stage` |  |
+| `name` |  |
+| `pending_launches` |  |
 | `serial_number` |  |
 | `status` |  |
+| `successful_launches` |  |
+| `to_thrust` |  |
 | `type` |  |
 | `url` |  |
+| `variant` |  |
 
 Operations: List, Load.
 
@@ -408,10 +429,10 @@ API path: `/launch`
 | Field | Description |
 | --- | --- |
 | `apogee` |  |
-| `consecutive_successful_launch` |  |
+| `consecutive_successful_launches` |  |
 | `description` |  |
 | `diameter` |  |
-| `failed_launch` |  |
+| `failed_launches` |  |
 | `family` |  |
 | `full_name` |  |
 | `gto_capacity` |  |
@@ -424,8 +445,8 @@ API path: `/launch`
 | `max_stage` |  |
 | `min_stage` |  |
 | `name` |  |
-| `pending_launch` |  |
-| `successful_launch` |  |
+| `pending_launches` |  |
+| `successful_launches` |  |
 | `to_thrust` |  |
 | `url` |  |
 | `variant` |  |
@@ -438,28 +459,16 @@ API path: `/config/launcher`
 
 | Field | Description |
 | --- | --- |
-| `apogee` |  |
-| `consecutive_successful_launch` |  |
+| `abbrev` |  |
+| `administrator` |  |
+| `country_code` |  |
 | `description` |  |
-| `diameter` |  |
-| `failed_launch` |  |
-| `family` |  |
-| `full_name` |  |
-| `gto_capacity` |  |
+| `founding_year` |  |
 | `id` |  |
-| `launch_mass` |  |
-| `length` |  |
-| `leo_capacity` |  |
-| `maiden_flight` |  |
-| `manufacturer` |  |
-| `max_stage` |  |
-| `min_stage` |  |
+| `logo_url` |  |
 | `name` |  |
-| `pending_launch` |  |
-| `successful_launch` |  |
-| `to_thrust` |  |
+| `type` |  |
 | `url` |  |
-| `variant` |  |
 
 Operations: Load.
 
@@ -486,6 +495,7 @@ API path: `/location`
 | Field | Description |
 | --- | --- |
 | `agency_id` |  |
+| `country_code` |  |
 | `id` |  |
 | `info_url` |  |
 | `latitude` |  |
@@ -494,6 +504,7 @@ API path: `/location`
 | `map_image` |  |
 | `map_url` |  |
 | `name` |  |
+| `total_landing_count` |  |
 | `total_launch_count` |  |
 | `url` |  |
 | `wiki_url` |  |
@@ -522,7 +533,7 @@ API path: ``
 | `image_url` |  |
 | `name` |  |
 | `orbit` |  |
-| `owner` |  |
+| `owners` |  |
 | `status` |  |
 | `type` |  |
 | `url` |  |
@@ -538,7 +549,7 @@ API path: `/spacestation`
 | `agency` |  |
 | `capability` |  |
 | `crew_capacity` |  |
-| `detail` |  |
+| `details` |  |
 | `diameter` |  |
 | `height` |  |
 | `history` |  |
@@ -770,13 +781,33 @@ Create an instance: `first_stage = client.FirstStage()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `flight` | `int` |  |
+| `apogee` | `int` |  |
+| `consecutive_successful_launches` | `int` |  |
+| `description` | `str` |  |
+| `diameter` | `float` |  |
+| `failed_launches` | `int` |  |
+| `family` | `str` |  |
+| `flights` | `int` |  |
+| `full_name` | `str` |  |
+| `gto_capacity` | `int` |  |
 | `id` | `int` |  |
+| `launch_mass` | `int` |  |
 | `launcher_config` | `dict` |  |
+| `length` | `float` |  |
+| `leo_capacity` | `int` |  |
+| `maiden_flight` | `str` |  |
+| `manufacturer` | `dict` |  |
+| `max_stage` | `int` |  |
+| `min_stage` | `int` |  |
+| `name` | `str` |  |
+| `pending_launches` | `int` |  |
 | `serial_number` | `str` |  |
 | `status` | `str` |  |
+| `successful_launches` | `int` |  |
+| `to_thrust` | `int` |  |
 | `type` | `str` |  |
 | `url` | `str` |  |
+| `variant` | `str` |  |
 
 #### Example: Load
 
@@ -849,10 +880,10 @@ Create an instance: `launch_vehicle = client.LaunchVehicle()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `apogee` | `int` |  |
-| `consecutive_successful_launch` | `int` |  |
+| `consecutive_successful_launches` | `int` |  |
 | `description` | `str` |  |
 | `diameter` | `float` |  |
-| `failed_launch` | `int` |  |
+| `failed_launches` | `int` |  |
 | `family` | `str` |  |
 | `full_name` | `str` |  |
 | `gto_capacity` | `int` |  |
@@ -865,8 +896,8 @@ Create an instance: `launch_vehicle = client.LaunchVehicle()`
 | `max_stage` | `int` |  |
 | `min_stage` | `int` |  |
 | `name` | `str` |  |
-| `pending_launch` | `int` |  |
-| `successful_launch` | `int` |  |
+| `pending_launches` | `int` |  |
+| `successful_launches` | `int` |  |
 | `to_thrust` | `int` |  |
 | `url` | `str` |  |
 | `variant` | `str` |  |
@@ -892,28 +923,16 @@ Create an instance: `launcher = client.Launcher()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | `int` |  |
-| `consecutive_successful_launch` | `int` |  |
+| `abbrev` | `str` |  |
+| `administrator` | `str` |  |
+| `country_code` | `str` |  |
 | `description` | `str` |  |
-| `diameter` | `float` |  |
-| `failed_launch` | `int` |  |
-| `family` | `str` |  |
-| `full_name` | `str` |  |
-| `gto_capacity` | `int` |  |
+| `founding_year` | `str` |  |
 | `id` | `int` |  |
-| `launch_mass` | `int` |  |
-| `length` | `float` |  |
-| `leo_capacity` | `int` |  |
-| `maiden_flight` | `str` |  |
-| `manufacturer` | `dict` |  |
-| `max_stage` | `int` |  |
-| `min_stage` | `int` |  |
+| `logo_url` | `str` |  |
 | `name` | `str` |  |
-| `pending_launch` | `int` |  |
-| `successful_launch` | `int` |  |
-| `to_thrust` | `int` |  |
+| `type` | `str` |  |
 | `url` | `str` |  |
-| `variant` | `str` |  |
 
 #### Example: Load
 
@@ -974,6 +993,7 @@ Create an instance: `pad = client.Pad()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `agency_id` | `int` |  |
+| `country_code` | `str` |  |
 | `id` | `int` |  |
 | `info_url` | `str` |  |
 | `latitude` | `str` |  |
@@ -982,6 +1002,7 @@ Create an instance: `pad = client.Pad()`
 | `map_image` | `str` |  |
 | `map_url` | `str` |  |
 | `name` | `str` |  |
+| `total_landing_count` | `int` |  |
 | `total_launch_count` | `int` |  |
 | `url` | `str` |  |
 | `wiki_url` | `str` |  |
@@ -1026,7 +1047,7 @@ Create an instance: `space_station = client.SpaceStation()`
 | `image_url` | `str` |  |
 | `name` | `str` |  |
 | `orbit` | `str` |  |
-| `owner` | `list` |  |
+| `owners` | `list` |  |
 | `status` | `dict` |  |
 | `type` | `dict` |  |
 | `url` | `str` |  |
@@ -1062,7 +1083,7 @@ Create an instance: `spacecraft = client.Spacecraft()`
 | `agency` | `dict` |  |
 | `capability` | `str` |  |
 | `crew_capacity` | `int` |  |
-| `detail` | `str` |  |
+| `details` | `str` |  |
 | `diameter` | `float` |  |
 | `height` | `float` |  |
 | `history` | `str` |  |
@@ -1163,11 +1184,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-agency = client.Agency()
-agency.list()
+astronaut = client.Astronaut()
+astronaut.list()
 
-# agency.data_get() now returns the agency data from the last list
-# agency.match_get() returns the last match criteria
+# astronaut.data_get() now returns the astronaut data from the last list
+# astronaut.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

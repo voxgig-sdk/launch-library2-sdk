@@ -41,7 +41,7 @@ main: kit: entity: space_station: {
       type: "`$STRING`"
     }
     {
-      name: "owner"
+      name: "owners"
       req: false
       type: "`$ARRAY`"
     }
@@ -130,7 +130,7 @@ main: kit: entity: space_station: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.results`"
           }
         }
       ]

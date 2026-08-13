@@ -11,6 +11,11 @@ main: kit: entity: pad: {
       type: "`$INTEGER`"
     }
     {
+      name: "country_code"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "id"
       req: false
       type: "`$INTEGER`"
@@ -49,6 +54,11 @@ main: kit: entity: pad: {
       name: "name"
       req: false
       type: "`$STRING`"
+    }
+    {
+      name: "total_landing_count"
+      req: false
+      type: "`$INTEGER`"
     }
     {
       name: "total_launch_count"
@@ -127,7 +137,7 @@ main: kit: entity: pad: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.results`"
           }
         }
       ]
@@ -160,7 +170,7 @@ main: kit: entity: pad: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.location`"
           }
         }
       ]

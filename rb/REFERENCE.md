@@ -525,13 +525,33 @@ first_stage = client.FirstStage
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `flight` | `Integer` | No |  |
+| `apogee` | `Integer` | No |  |
+| `consecutive_successful_launches` | `Integer` | No |  |
+| `description` | `String` | No |  |
+| `diameter` | `Float` | No |  |
+| `failed_launches` | `Integer` | No |  |
+| `family` | `String` | No |  |
+| `flights` | `Integer` | No |  |
+| `full_name` | `String` | No |  |
+| `gto_capacity` | `Integer` | No |  |
 | `id` | `Integer` | No |  |
+| `launch_mass` | `Integer` | No |  |
 | `launcher_config` | `Hash` | No |  |
+| `length` | `Float` | No |  |
+| `leo_capacity` | `Integer` | No |  |
+| `maiden_flight` | `String` | No |  |
+| `manufacturer` | `Hash` | No |  |
+| `max_stage` | `Integer` | No |  |
+| `min_stage` | `Integer` | No |  |
+| `name` | `String` | No |  |
+| `pending_launches` | `Integer` | No |  |
 | `serial_number` | `String` | No |  |
 | `status` | `String` | No |  |
+| `successful_launches` | `Integer` | No |  |
+| `to_thrust` | `Integer` | No |  |
 | `type` | `String` | No |  |
 | `url` | `String` | No |  |
+| `variant` | `String` | No |  |
 
 ### Operations
 
@@ -665,10 +685,10 @@ launch_vehicle = client.LaunchVehicle
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `apogee` | `Integer` | No |  |
-| `consecutive_successful_launch` | `Integer` | No |  |
+| `consecutive_successful_launches` | `Integer` | No |  |
 | `description` | `String` | No |  |
 | `diameter` | `Float` | No |  |
-| `failed_launch` | `Integer` | No |  |
+| `failed_launches` | `Integer` | No |  |
 | `family` | `String` | No |  |
 | `full_name` | `String` | No |  |
 | `gto_capacity` | `Integer` | No |  |
@@ -681,8 +701,8 @@ launch_vehicle = client.LaunchVehicle
 | `max_stage` | `Integer` | No |  |
 | `min_stage` | `Integer` | No |  |
 | `name` | `String` | No |  |
-| `pending_launch` | `Integer` | No |  |
-| `successful_launch` | `Integer` | No |  |
+| `pending_launches` | `Integer` | No |  |
+| `successful_launches` | `Integer` | No |  |
 | `to_thrust` | `Integer` | No |  |
 | `url` | `String` | No |  |
 | `variant` | `String` | No |  |
@@ -737,28 +757,16 @@ launcher = client.Launcher
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `Integer` | No |  |
-| `consecutive_successful_launch` | `Integer` | No |  |
+| `abbrev` | `String` | No |  |
+| `administrator` | `String` | No |  |
+| `country_code` | `String` | No |  |
 | `description` | `String` | No |  |
-| `diameter` | `Float` | No |  |
-| `failed_launch` | `Integer` | No |  |
-| `family` | `String` | No |  |
-| `full_name` | `String` | No |  |
-| `gto_capacity` | `Integer` | No |  |
+| `founding_year` | `String` | No |  |
 | `id` | `Integer` | No |  |
-| `launch_mass` | `Integer` | No |  |
-| `length` | `Float` | No |  |
-| `leo_capacity` | `Integer` | No |  |
-| `maiden_flight` | `String` | No |  |
-| `manufacturer` | `Hash` | No |  |
-| `max_stage` | `Integer` | No |  |
-| `min_stage` | `Integer` | No |  |
+| `logo_url` | `String` | No |  |
 | `name` | `String` | No |  |
-| `pending_launch` | `Integer` | No |  |
-| `successful_launch` | `Integer` | No |  |
-| `to_thrust` | `Integer` | No |  |
+| `type` | `String` | No |  |
 | `url` | `String` | No |  |
-| `variant` | `String` | No |  |
 
 ### Operations
 
@@ -877,6 +885,7 @@ pad = client.Pad
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `agency_id` | `Integer` | No |  |
+| `country_code` | `String` | No |  |
 | `id` | `Integer` | No |  |
 | `info_url` | `String` | No |  |
 | `latitude` | `String` | No |  |
@@ -885,6 +894,7 @@ pad = client.Pad
 | `map_image` | `String` | No |  |
 | `map_url` | `String` | No |  |
 | `name` | `String` | No |  |
+| `total_landing_count` | `Integer` | No |  |
 | `total_launch_count` | `Integer` | No |  |
 | `url` | `String` | No |  |
 | `wiki_url` | `String` | No |  |
@@ -990,7 +1000,7 @@ space_station = client.SpaceStation
 | `image_url` | `String` | No |  |
 | `name` | `String` | No |  |
 | `orbit` | `String` | No |  |
-| `owner` | `Array` | No |  |
+| `owners` | `Array` | No |  |
 | `status` | `Hash` | No |  |
 | `type` | `Hash` | No |  |
 | `url` | `String` | No |  |
@@ -1056,7 +1066,7 @@ spacecraft = client.Spacecraft
 | `agency` | `Hash` | No |  |
 | `capability` | `String` | No |  |
 | `crew_capacity` | `Integer` | No |  |
-| `detail` | `String` | No |  |
+| `details` | `String` | No |  |
 | `diameter` | `Float` | No |  |
 | `height` | `Float` | No |  |
 | `history` | `String` | No |  |

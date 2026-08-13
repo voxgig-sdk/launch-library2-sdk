@@ -102,7 +102,7 @@ main: kit: entity: expedition: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.results`"
           }
         }
       ]

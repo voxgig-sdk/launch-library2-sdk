@@ -190,13 +190,33 @@ class ExpeditionListMatch
 /** FirstStage entity data model. */
 class FirstStage
 {
-    public ?int $flight = null;
+    public ?int $apogee = null;
+    public ?int $consecutive_successful_launches = null;
+    public ?string $description = null;
+    public ?float $diameter = null;
+    public ?int $failed_launches = null;
+    public ?string $family = null;
+    public ?int $flights = null;
+    public ?string $full_name = null;
+    public ?int $gto_capacity = null;
     public ?int $id = null;
+    public ?int $launch_mass = null;
     public ?array $launcher_config = null;
+    public ?float $length = null;
+    public ?int $leo_capacity = null;
+    public ?string $maiden_flight = null;
+    public ?array $manufacturer = null;
+    public ?int $max_stage = null;
+    public ?int $min_stage = null;
+    public ?string $name = null;
+    public ?int $pending_launches = null;
     public ?string $serial_number = null;
     public ?string $status = null;
+    public ?int $successful_launches = null;
+    public ?int $to_thrust = null;
     public ?string $type = null;
     public ?string $url = null;
+    public ?string $variant = null;
 }
 
 /** Request payload for FirstStage#load. */
@@ -208,13 +228,33 @@ class FirstStageLoadMatch
 /** Request payload for FirstStage#list. */
 class FirstStageListMatch
 {
-    public ?int $flight = null;
+    public ?int $apogee = null;
+    public ?int $consecutive_successful_launches = null;
+    public ?string $description = null;
+    public ?float $diameter = null;
+    public ?int $failed_launches = null;
+    public ?string $family = null;
+    public ?int $flights = null;
+    public ?string $full_name = null;
+    public ?int $gto_capacity = null;
     public ?int $id = null;
+    public ?int $launch_mass = null;
     public ?array $launcher_config = null;
+    public ?float $length = null;
+    public ?int $leo_capacity = null;
+    public ?string $maiden_flight = null;
+    public ?array $manufacturer = null;
+    public ?int $max_stage = null;
+    public ?int $min_stage = null;
+    public ?string $name = null;
+    public ?int $pending_launches = null;
     public ?string $serial_number = null;
     public ?string $status = null;
+    public ?int $successful_launches = null;
+    public ?int $to_thrust = null;
     public ?string $type = null;
     public ?string $url = null;
+    public ?string $variant = null;
 }
 
 /** Launch entity data model. */
@@ -265,10 +305,10 @@ class LaunchListMatch
 class LaunchVehicle
 {
     public ?int $apogee = null;
-    public ?int $consecutive_successful_launch = null;
+    public ?int $consecutive_successful_launches = null;
     public ?string $description = null;
     public ?float $diameter = null;
-    public ?int $failed_launch = null;
+    public ?int $failed_launches = null;
     public ?string $family = null;
     public ?string $full_name = null;
     public ?int $gto_capacity = null;
@@ -281,8 +321,8 @@ class LaunchVehicle
     public ?int $max_stage = null;
     public ?int $min_stage = null;
     public ?string $name = null;
-    public ?int $pending_launch = null;
-    public ?int $successful_launch = null;
+    public ?int $pending_launches = null;
+    public ?int $successful_launches = null;
     public ?int $to_thrust = null;
     public ?string $url = null;
     public ?string $variant = null;
@@ -292,10 +332,10 @@ class LaunchVehicle
 class LaunchVehicleListMatch
 {
     public ?int $apogee = null;
-    public ?int $consecutive_successful_launch = null;
+    public ?int $consecutive_successful_launches = null;
     public ?string $description = null;
     public ?float $diameter = null;
-    public ?int $failed_launch = null;
+    public ?int $failed_launches = null;
     public ?string $family = null;
     public ?string $full_name = null;
     public ?int $gto_capacity = null;
@@ -308,8 +348,8 @@ class LaunchVehicleListMatch
     public ?int $max_stage = null;
     public ?int $min_stage = null;
     public ?string $name = null;
-    public ?int $pending_launch = null;
-    public ?int $successful_launch = null;
+    public ?int $pending_launches = null;
+    public ?int $successful_launches = null;
     public ?int $to_thrust = null;
     public ?string $url = null;
     public ?string $variant = null;
@@ -318,28 +358,16 @@ class LaunchVehicleListMatch
 /** Launcher entity data model. */
 class Launcher
 {
-    public ?int $apogee = null;
-    public ?int $consecutive_successful_launch = null;
+    public ?string $abbrev = null;
+    public ?string $administrator = null;
+    public ?string $country_code = null;
     public ?string $description = null;
-    public ?float $diameter = null;
-    public ?int $failed_launch = null;
-    public ?string $family = null;
-    public ?string $full_name = null;
-    public ?int $gto_capacity = null;
+    public ?string $founding_year = null;
     public ?int $id = null;
-    public ?int $launch_mass = null;
-    public ?float $length = null;
-    public ?int $leo_capacity = null;
-    public ?string $maiden_flight = null;
-    public ?array $manufacturer = null;
-    public ?int $max_stage = null;
-    public ?int $min_stage = null;
+    public ?string $logo_url = null;
     public ?string $name = null;
-    public ?int $pending_launch = null;
-    public ?int $successful_launch = null;
-    public ?int $to_thrust = null;
+    public ?string $type = null;
     public ?string $url = null;
-    public ?string $variant = null;
 }
 
 /** Request payload for Launcher#load. */
@@ -382,6 +410,7 @@ class LocationListMatch
 class Pad
 {
     public ?int $agency_id = null;
+    public ?string $country_code = null;
     public ?int $id = null;
     public ?string $info_url = null;
     public ?string $latitude = null;
@@ -390,6 +419,7 @@ class Pad
     public ?string $map_image = null;
     public ?string $map_url = null;
     public ?string $name = null;
+    public ?int $total_landing_count = null;
     public ?int $total_launch_count = null;
     public ?string $url = null;
     public ?string $wiki_url = null;
@@ -405,6 +435,7 @@ class PadLoadMatch
 class PadListMatch
 {
     public ?int $agency_id = null;
+    public ?string $country_code = null;
     public ?int $id = null;
     public ?string $info_url = null;
     public ?string $latitude = null;
@@ -413,6 +444,7 @@ class PadListMatch
     public ?string $map_image = null;
     public ?string $map_url = null;
     public ?string $name = null;
+    public ?int $total_landing_count = null;
     public ?int $total_launch_count = null;
     public ?string $url = null;
     public ?string $wiki_url = null;
@@ -433,7 +465,7 @@ class SpaceStation
     public ?string $image_url = null;
     public ?string $name = null;
     public ?string $orbit = null;
-    public ?array $owner = null;
+    public ?array $owners = null;
     public ?array $status = null;
     public ?array $type = null;
     public ?string $url = null;
@@ -455,7 +487,7 @@ class SpaceStationListMatch
     public ?string $image_url = null;
     public ?string $name = null;
     public ?string $orbit = null;
-    public ?array $owner = null;
+    public ?array $owners = null;
     public ?array $status = null;
     public ?array $type = null;
     public ?string $url = null;
@@ -467,7 +499,7 @@ class Spacecraft
     public ?array $agency = null;
     public ?string $capability = null;
     public ?int $crew_capacity = null;
-    public ?string $detail = null;
+    public ?string $details = null;
     public ?float $diameter = null;
     public ?float $height = null;
     public ?string $history = null;
@@ -493,7 +525,7 @@ class SpacecraftListMatch
     public ?array $agency = null;
     public ?string $capability = null;
     public ?int $crew_capacity = null;
-    public ?string $detail = null;
+    public ?string $details = null;
     public ?float $diameter = null;
     public ?float $height = null;
     public ?string $history = null;

@@ -48,7 +48,7 @@ end
 
 ```ruby
 begin
-  # load returns the bare Agency record (raises on error).
+  # load returns the ENTITY — call data_get for the Agency record (raises on error).
   agency = client.Agency.load({ "id" => 1 })
   puts agency
 rescue => err
@@ -63,7 +63,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  agencys = client.Agency.list()
+  astronauts = client.Astronaut.list()
 rescue => err
   warn "list failed: #{err}"
 end
@@ -131,12 +131,13 @@ data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
 client = LaunchLibrary2SDK.test({
-  "entity" => { "agency" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "astronaut" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
-agency = client.Agency.list()
-puts agency
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+astronaut = client.Astronaut.list()
+puts astronaut
 ```
 
 ### Use a custom fetch function
@@ -365,13 +366,33 @@ API path: `/expedition`
 
 | Field | Description |
 | --- | --- |
-| `flight` |  |
+| `apogee` |  |
+| `consecutive_successful_launches` |  |
+| `description` |  |
+| `diameter` |  |
+| `failed_launches` |  |
+| `family` |  |
+| `flights` |  |
+| `full_name` |  |
+| `gto_capacity` |  |
 | `id` |  |
+| `launch_mass` |  |
 | `launcher_config` |  |
+| `length` |  |
+| `leo_capacity` |  |
+| `maiden_flight` |  |
+| `manufacturer` |  |
+| `max_stage` |  |
+| `min_stage` |  |
+| `name` |  |
+| `pending_launches` |  |
 | `serial_number` |  |
 | `status` |  |
+| `successful_launches` |  |
+| `to_thrust` |  |
 | `type` |  |
 | `url` |  |
+| `variant` |  |
 
 Operations: List, Load.
 
@@ -405,10 +426,10 @@ API path: `/launch`
 | Field | Description |
 | --- | --- |
 | `apogee` |  |
-| `consecutive_successful_launch` |  |
+| `consecutive_successful_launches` |  |
 | `description` |  |
 | `diameter` |  |
-| `failed_launch` |  |
+| `failed_launches` |  |
 | `family` |  |
 | `full_name` |  |
 | `gto_capacity` |  |
@@ -421,8 +442,8 @@ API path: `/launch`
 | `max_stage` |  |
 | `min_stage` |  |
 | `name` |  |
-| `pending_launch` |  |
-| `successful_launch` |  |
+| `pending_launches` |  |
+| `successful_launches` |  |
 | `to_thrust` |  |
 | `url` |  |
 | `variant` |  |
@@ -435,28 +456,16 @@ API path: `/config/launcher`
 
 | Field | Description |
 | --- | --- |
-| `apogee` |  |
-| `consecutive_successful_launch` |  |
+| `abbrev` |  |
+| `administrator` |  |
+| `country_code` |  |
 | `description` |  |
-| `diameter` |  |
-| `failed_launch` |  |
-| `family` |  |
-| `full_name` |  |
-| `gto_capacity` |  |
+| `founding_year` |  |
 | `id` |  |
-| `launch_mass` |  |
-| `length` |  |
-| `leo_capacity` |  |
-| `maiden_flight` |  |
-| `manufacturer` |  |
-| `max_stage` |  |
-| `min_stage` |  |
+| `logo_url` |  |
 | `name` |  |
-| `pending_launch` |  |
-| `successful_launch` |  |
-| `to_thrust` |  |
+| `type` |  |
 | `url` |  |
-| `variant` |  |
 
 Operations: Load.
 
@@ -483,6 +492,7 @@ API path: `/location`
 | Field | Description |
 | --- | --- |
 | `agency_id` |  |
+| `country_code` |  |
 | `id` |  |
 | `info_url` |  |
 | `latitude` |  |
@@ -491,6 +501,7 @@ API path: `/location`
 | `map_image` |  |
 | `map_url` |  |
 | `name` |  |
+| `total_landing_count` |  |
 | `total_launch_count` |  |
 | `url` |  |
 | `wiki_url` |  |
@@ -519,7 +530,7 @@ API path: ``
 | `image_url` |  |
 | `name` |  |
 | `orbit` |  |
-| `owner` |  |
+| `owners` |  |
 | `status` |  |
 | `type` |  |
 | `url` |  |
@@ -535,7 +546,7 @@ API path: `/spacestation`
 | `agency` |  |
 | `capability` |  |
 | `crew_capacity` |  |
-| `detail` |  |
+| `details` |  |
 | `diameter` |  |
 | `height` |  |
 | `history` |  |
@@ -586,7 +597,7 @@ Create an instance: `agency = client.Agency`
 #### Example: Load
 
 ```ruby
-# load returns the bare Agency record (raises on error).
+# load returns the ENTITY — call data_get for the Agency record (raises on error).
 agency = client.Agency.load({ "id" => 1 })
 ```
 
@@ -629,7 +640,7 @@ Create an instance: `astronaut = client.Astronaut`
 #### Example: Load
 
 ```ruby
-# load returns the bare Astronaut record (raises on error).
+# load returns the ENTITY — call data_get for the Astronaut record (raises on error).
 astronaut = client.Astronaut.load({ "id" => 1 })
 ```
 
@@ -671,7 +682,7 @@ Create an instance: `docking_event = client.DockingEvent`
 #### Example: Load
 
 ```ruby
-# load returns the bare DockingEvent record (raises on error).
+# load returns the ENTITY — call data_get for the DockingEvent record (raises on error).
 docking_event = client.DockingEvent.load({ "id" => 1 })
 ```
 
@@ -712,7 +723,7 @@ Create an instance: `event = client.Event`
 #### Example: Load
 
 ```ruby
-# load returns the bare Event record (raises on error).
+# load returns the ENTITY — call data_get for the Event record (raises on error).
 event = client.Event.load({ "id" => 1 })
 ```
 
@@ -750,7 +761,7 @@ Create an instance: `expedition = client.Expedition`
 #### Example: Load
 
 ```ruby
-# load returns the bare Expedition record (raises on error).
+# load returns the ENTITY — call data_get for the Expedition record (raises on error).
 expedition = client.Expedition.load({ "id" => 1 })
 ```
 
@@ -777,18 +788,38 @@ Create an instance: `first_stage = client.FirstStage`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `flight` | `Integer` |  |
+| `apogee` | `Integer` |  |
+| `consecutive_successful_launches` | `Integer` |  |
+| `description` | `String` |  |
+| `diameter` | `Float` |  |
+| `failed_launches` | `Integer` |  |
+| `family` | `String` |  |
+| `flights` | `Integer` |  |
+| `full_name` | `String` |  |
+| `gto_capacity` | `Integer` |  |
 | `id` | `Integer` |  |
+| `launch_mass` | `Integer` |  |
 | `launcher_config` | `Hash` |  |
+| `length` | `Float` |  |
+| `leo_capacity` | `Integer` |  |
+| `maiden_flight` | `String` |  |
+| `manufacturer` | `Hash` |  |
+| `max_stage` | `Integer` |  |
+| `min_stage` | `Integer` |  |
+| `name` | `String` |  |
+| `pending_launches` | `Integer` |  |
 | `serial_number` | `String` |  |
 | `status` | `String` |  |
+| `successful_launches` | `Integer` |  |
+| `to_thrust` | `Integer` |  |
 | `type` | `String` |  |
 | `url` | `String` |  |
+| `variant` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare FirstStage record (raises on error).
+# load returns the ENTITY — call data_get for the FirstStage record (raises on error).
 first_stage = client.FirstStage.load({ "id" => 1 })
 ```
 
@@ -833,7 +864,7 @@ Create an instance: `launch = client.Launch`
 #### Example: Load
 
 ```ruby
-# load returns the bare Launch record (raises on error).
+# load returns the ENTITY — call data_get for the Launch record (raises on error).
 launch = client.Launch.load({ "id" => "launch_id" })
 ```
 
@@ -860,10 +891,10 @@ Create an instance: `launch_vehicle = client.LaunchVehicle`
 | Field | Type | Description |
 | --- | --- | --- |
 | `apogee` | `Integer` |  |
-| `consecutive_successful_launch` | `Integer` |  |
+| `consecutive_successful_launches` | `Integer` |  |
 | `description` | `String` |  |
 | `diameter` | `Float` |  |
-| `failed_launch` | `Integer` |  |
+| `failed_launches` | `Integer` |  |
 | `family` | `String` |  |
 | `full_name` | `String` |  |
 | `gto_capacity` | `Integer` |  |
@@ -876,8 +907,8 @@ Create an instance: `launch_vehicle = client.LaunchVehicle`
 | `max_stage` | `Integer` |  |
 | `min_stage` | `Integer` |  |
 | `name` | `String` |  |
-| `pending_launch` | `Integer` |  |
-| `successful_launch` | `Integer` |  |
+| `pending_launches` | `Integer` |  |
+| `successful_launches` | `Integer` |  |
 | `to_thrust` | `Integer` |  |
 | `url` | `String` |  |
 | `variant` | `String` |  |
@@ -904,33 +935,21 @@ Create an instance: `launcher = client.Launcher`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | `Integer` |  |
-| `consecutive_successful_launch` | `Integer` |  |
+| `abbrev` | `String` |  |
+| `administrator` | `String` |  |
+| `country_code` | `String` |  |
 | `description` | `String` |  |
-| `diameter` | `Float` |  |
-| `failed_launch` | `Integer` |  |
-| `family` | `String` |  |
-| `full_name` | `String` |  |
-| `gto_capacity` | `Integer` |  |
+| `founding_year` | `String` |  |
 | `id` | `Integer` |  |
-| `launch_mass` | `Integer` |  |
-| `length` | `Float` |  |
-| `leo_capacity` | `Integer` |  |
-| `maiden_flight` | `String` |  |
-| `manufacturer` | `Hash` |  |
-| `max_stage` | `Integer` |  |
-| `min_stage` | `Integer` |  |
+| `logo_url` | `String` |  |
 | `name` | `String` |  |
-| `pending_launch` | `Integer` |  |
-| `successful_launch` | `Integer` |  |
-| `to_thrust` | `Integer` |  |
+| `type` | `String` |  |
 | `url` | `String` |  |
-| `variant` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Launcher record (raises on error).
+# load returns the ENTITY — call data_get for the Launcher record (raises on error).
 launcher = client.Launcher.load({ "id" => 1 })
 ```
 
@@ -961,7 +980,7 @@ Create an instance: `location = client.Location`
 #### Example: Load
 
 ```ruby
-# load returns the bare Location record (raises on error).
+# load returns the ENTITY — call data_get for the Location record (raises on error).
 location = client.Location.load({ "id" => 1 })
 ```
 
@@ -989,6 +1008,7 @@ Create an instance: `pad = client.Pad`
 | Field | Type | Description |
 | --- | --- | --- |
 | `agency_id` | `Integer` |  |
+| `country_code` | `String` |  |
 | `id` | `Integer` |  |
 | `info_url` | `String` |  |
 | `latitude` | `String` |  |
@@ -997,6 +1017,7 @@ Create an instance: `pad = client.Pad`
 | `map_image` | `String` |  |
 | `map_url` | `String` |  |
 | `name` | `String` |  |
+| `total_landing_count` | `Integer` |  |
 | `total_launch_count` | `Integer` |  |
 | `url` | `String` |  |
 | `wiki_url` | `String` |  |
@@ -1004,7 +1025,7 @@ Create an instance: `pad = client.Pad`
 #### Example: Load
 
 ```ruby
-# load returns the bare Pad record (raises on error).
+# load returns the ENTITY — call data_get for the Pad record (raises on error).
 pad = client.Pad.load({ "id" => 1 })
 ```
 
@@ -1043,7 +1064,7 @@ Create an instance: `space_station = client.SpaceStation`
 | `image_url` | `String` |  |
 | `name` | `String` |  |
 | `orbit` | `String` |  |
-| `owner` | `Array` |  |
+| `owners` | `Array` |  |
 | `status` | `Hash` |  |
 | `type` | `Hash` |  |
 | `url` | `String` |  |
@@ -1051,7 +1072,7 @@ Create an instance: `space_station = client.SpaceStation`
 #### Example: Load
 
 ```ruby
-# load returns the bare SpaceStation record (raises on error).
+# load returns the ENTITY — call data_get for the SpaceStation record (raises on error).
 space_station = client.SpaceStation.load({ "id" => 1 })
 ```
 
@@ -1081,7 +1102,7 @@ Create an instance: `spacecraft = client.Spacecraft`
 | `agency` | `Hash` |  |
 | `capability` | `String` |  |
 | `crew_capacity` | `Integer` |  |
-| `detail` | `String` |  |
+| `details` | `String` |  |
 | `diameter` | `Float` |  |
 | `height` | `Float` |  |
 | `history` | `String` |  |
@@ -1097,7 +1118,7 @@ Create an instance: `spacecraft = client.Spacecraft`
 #### Example: Load
 
 ```ruby
-# load returns the bare Spacecraft record (raises on error).
+# load returns the ENTITY — call data_get for the Spacecraft record (raises on error).
 spacecraft = client.Spacecraft.load({ "id" => 1 })
 ```
 
@@ -1185,11 +1206,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-agency = client.Agency
-agency.list()
+astronaut = client.Astronaut
+astronaut.list()
 
-# agency.data_get now returns the agency data from the last list
-# agency.match_get returns the last match criteria
+# astronaut.data_get now returns the astronaut data from the last list
+# astronaut.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

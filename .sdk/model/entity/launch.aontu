@@ -169,7 +169,7 @@ main: kit: entity: launch: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.results`"
           }
         }
       ]

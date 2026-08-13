@@ -4,7 +4,7 @@ from __future__ import annotations
 import os
 import json
 
-from utility.voxgig_struct import voxgig_struct as vs
+from launchlibrary2_sdk.utility.voxgig_struct import voxgig_struct as vs
 
 
 class LaunchLibrary2TestRunner:
@@ -38,8 +38,8 @@ class LaunchLibrary2TestRunner:
 
     @staticmethod
     def env_override(m):
-        live = LaunchLibrary2TestRunner.getenv("LAUNCHLIBRARY2_TEST_LIVE")
-        override = LaunchLibrary2TestRunner.getenv("LAUNCHLIBRARY2_TEST_OVERRIDE")
+        live = LaunchLibrary2TestRunner.getenv("LAUNCH_LIBRARY2_TEST_LIVE")
+        override = LaunchLibrary2TestRunner.getenv("LAUNCH_LIBRARY2_TEST_OVERRIDE")
 
         if live == "TRUE" or override == "TRUE":
             for key in list(m.keys()):
@@ -56,9 +56,9 @@ class LaunchLibrary2TestRunner:
                             pass
                     m[key] = envval
 
-        explain = LaunchLibrary2TestRunner.getenv("LAUNCHLIBRARY2_TEST_EXPLAIN")
+        explain = LaunchLibrary2TestRunner.getenv("LAUNCH_LIBRARY2_TEST_EXPLAIN")
         if explain is not None and explain != "":
-            m["LAUNCHLIBRARY2_TEST_EXPLAIN"] = explain
+            m["LAUNCH_LIBRARY2_TEST_EXPLAIN"] = explain
 
         return m
 
@@ -111,6 +111,17 @@ class LaunchLibrary2TestRunner:
         return 500
 
     @staticmethod
+    def entity_data(v):
+        """Extract the data map from an op result.
+
+        Every entity operation resolves to the ENTITY (see AGENTS.md), so a
+        flow test that wants the record takes this hop. A plain dict passes
+        through unchanged.
+        """
+        if hasattr(v, "data_get") and callable(v.data_get):
+            return v.data_get()
+        return v
+
     def entity_list_to_data(lst):
         out = []
         for item in lst:
@@ -132,6 +143,10 @@ def load_env_local():
 
 def env_override(m):
     return LaunchLibrary2TestRunner.env_override(m)
+
+
+def entity_data(v):
+    return LaunchLibrary2TestRunner.entity_data(v)
 
 
 def entity_list_to_data(lst):

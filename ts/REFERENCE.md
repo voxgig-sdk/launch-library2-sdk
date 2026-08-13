@@ -648,13 +648,33 @@ const first_stage = client.FirstStage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `flight` | `number` | No |  |
+| `apogee` | `number` | No |  |
+| `consecutive_successful_launches` | `number` | No |  |
+| `description` | `string` | No |  |
+| `diameter` | `number` | No |  |
+| `failed_launches` | `number` | No |  |
+| `family` | `string` | No |  |
+| `flights` | `number` | No |  |
+| `full_name` | `string` | No |  |
+| `gto_capacity` | `number` | No |  |
 | `id` | `number` | No |  |
+| `launch_mass` | `number` | No |  |
 | `launcher_config` | `Record<string, any>` | No |  |
+| `length` | `number` | No |  |
+| `leo_capacity` | `number` | No |  |
+| `maiden_flight` | `string` | No |  |
+| `manufacturer` | `Record<string, any>` | No |  |
+| `max_stage` | `number` | No |  |
+| `min_stage` | `number` | No |  |
+| `name` | `string` | No |  |
+| `pending_launches` | `number` | No |  |
 | `serial_number` | `string` | No |  |
 | `status` | `string` | No |  |
+| `successful_launches` | `number` | No |  |
+| `to_thrust` | `number` | No |  |
 | `type` | `string` | No |  |
 | `url` | `string` | No |  |
+| `variant` | `string` | No |  |
 
 ### Operations
 
@@ -784,10 +804,10 @@ const launch_vehicle = client.LaunchVehicle()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `apogee` | `number` | No |  |
-| `consecutive_successful_launch` | `number` | No |  |
+| `consecutive_successful_launches` | `number` | No |  |
 | `description` | `string` | No |  |
 | `diameter` | `number` | No |  |
-| `failed_launch` | `number` | No |  |
+| `failed_launches` | `number` | No |  |
 | `family` | `string` | No |  |
 | `full_name` | `string` | No |  |
 | `gto_capacity` | `number` | No |  |
@@ -800,8 +820,8 @@ const launch_vehicle = client.LaunchVehicle()
 | `max_stage` | `number` | No |  |
 | `min_stage` | `number` | No |  |
 | `name` | `string` | No |  |
-| `pending_launch` | `number` | No |  |
-| `successful_launch` | `number` | No |  |
+| `pending_launches` | `number` | No |  |
+| `successful_launches` | `number` | No |  |
 | `to_thrust` | `number` | No |  |
 | `url` | `string` | No |  |
 | `variant` | `string` | No |  |
@@ -854,28 +874,16 @@ const launcher = client.Launcher()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `number` | No |  |
-| `consecutive_successful_launch` | `number` | No |  |
+| `abbrev` | `string` | No |  |
+| `administrator` | `string` | No |  |
+| `country_code` | `string` | No |  |
 | `description` | `string` | No |  |
-| `diameter` | `number` | No |  |
-| `failed_launch` | `number` | No |  |
-| `family` | `string` | No |  |
-| `full_name` | `string` | No |  |
-| `gto_capacity` | `number` | No |  |
+| `founding_year` | `string` | No |  |
 | `id` | `number` | No |  |
-| `launch_mass` | `number` | No |  |
-| `length` | `number` | No |  |
-| `leo_capacity` | `number` | No |  |
-| `maiden_flight` | `string` | No |  |
-| `manufacturer` | `Record<string, any>` | No |  |
-| `max_stage` | `number` | No |  |
-| `min_stage` | `number` | No |  |
+| `logo_url` | `string` | No |  |
 | `name` | `string` | No |  |
-| `pending_launch` | `number` | No |  |
-| `successful_launch` | `number` | No |  |
-| `to_thrust` | `number` | No |  |
+| `type` | `string` | No |  |
 | `url` | `string` | No |  |
-| `variant` | `string` | No |  |
 
 ### Operations
 
@@ -990,6 +998,7 @@ const pad = client.Pad()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `agency_id` | `number` | No |  |
+| `country_code` | `string` | No |  |
 | `id` | `number` | No |  |
 | `info_url` | `string` | No |  |
 | `latitude` | `string` | No |  |
@@ -998,6 +1007,7 @@ const pad = client.Pad()
 | `map_image` | `string` | No |  |
 | `map_url` | `string` | No |  |
 | `name` | `string` | No |  |
+| `total_landing_count` | `number` | No |  |
 | `total_launch_count` | `number` | No |  |
 | `url` | `string` | No |  |
 | `wiki_url` | `string` | No |  |
@@ -1099,7 +1109,7 @@ const space_station = client.SpaceStation()
 | `image_url` | `string` | No |  |
 | `name` | `string` | No |  |
 | `orbit` | `string` | No |  |
-| `owner` | `any[]` | No |  |
+| `owners` | `any[]` | No |  |
 | `status` | `Record<string, any>` | No |  |
 | `type` | `Record<string, any>` | No |  |
 | `url` | `string` | No |  |
@@ -1163,7 +1173,7 @@ const spacecraft = client.Spacecraft()
 | `agency` | `Record<string, any>` | No |  |
 | `capability` | `string` | No |  |
 | `crew_capacity` | `number` | No |  |
-| `detail` | `string` | No |  |
+| `details` | `string` | No |  |
 | `diameter` | `number` | No |  |
 | `height` | `number` | No |  |
 | `history` | `string` | No |  |

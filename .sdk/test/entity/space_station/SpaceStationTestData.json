@@ -9,7 +9,7 @@
         "image_url": "s72",
         "name": "s73",
         "orbit": "s74",
-        "owner": [],
+        "owners": [],
         "status": {},
         "type": {},
         "url": "s78"
@@ -22,7 +22,7 @@
         "image_url": "se0",
         "name": "se1",
         "orbit": "se2",
-        "owner": [],
+        "owners": [],
         "status": {},
         "type": {},
         "url": "se6"
@@ -35,7 +35,7 @@
         "image_url": "s14e",
         "name": "s14f",
         "orbit": "s150",
-        "owner": [],
+        "owners": [],
         "status": {},
         "type": {},
         "url": "s154"
@@ -51,7 +51,7 @@
         "image_url": "s1bc",
         "name": "s1bd",
         "orbit": "s1be",
-        "owner": [],
+        "owners": [],
         "status": {},
         "type": {},
         "url": "s1c2"

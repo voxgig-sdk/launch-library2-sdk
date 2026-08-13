@@ -35,7 +35,9 @@ const client = new LaunchLibrary2SDK()
 
 ### 2. List agency records
 
-`list()` resolves to an array of Agency objects — iterate it directly:
+`list()` resolves to an array of Agency ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const agencys = await client.Agency().list()
@@ -65,8 +67,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const agencys = await client.Agency().list()
-  console.log(agencys)
+  const astronauts = await client.Astronaut().list()
+  console.log(astronauts)
 } catch (err) {
   console.error('list failed:', err)
 }
@@ -132,9 +134,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = LaunchLibrary2SDK.test()
 
-const agency = await client.Agency().list()
-// agency is a bare entity populated with mock response data
-console.log(agency)
+const astronaut = await client.Astronaut().list()
+// astronaut is the entity, populated with mock response data
+// — call astronaut.data() for the record itself
+console.log(astronaut)
 ```
 
 You can also use the instance method:
@@ -149,7 +152,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Agency()
+const entity = client.Astronaut()
 
 // First call runs the operation and stores its result
 await entity.list()
@@ -412,13 +415,33 @@ API path: `/expedition`
 
 | Field | Description |
 | --- | --- |
-| `flight` |  |
+| `apogee` |  |
+| `consecutive_successful_launches` |  |
+| `description` |  |
+| `diameter` |  |
+| `failed_launches` |  |
+| `family` |  |
+| `flights` |  |
+| `full_name` |  |
+| `gto_capacity` |  |
 | `id` |  |
+| `launch_mass` |  |
 | `launcher_config` |  |
+| `length` |  |
+| `leo_capacity` |  |
+| `maiden_flight` |  |
+| `manufacturer` |  |
+| `max_stage` |  |
+| `min_stage` |  |
+| `name` |  |
+| `pending_launches` |  |
 | `serial_number` |  |
 | `status` |  |
+| `successful_launches` |  |
+| `to_thrust` |  |
 | `type` |  |
 | `url` |  |
+| `variant` |  |
 
 Operations: list, load.
 
@@ -452,10 +475,10 @@ API path: `/launch`
 | Field | Description |
 | --- | --- |
 | `apogee` |  |
-| `consecutive_successful_launch` |  |
+| `consecutive_successful_launches` |  |
 | `description` |  |
 | `diameter` |  |
-| `failed_launch` |  |
+| `failed_launches` |  |
 | `family` |  |
 | `full_name` |  |
 | `gto_capacity` |  |
@@ -468,8 +491,8 @@ API path: `/launch`
 | `max_stage` |  |
 | `min_stage` |  |
 | `name` |  |
-| `pending_launch` |  |
-| `successful_launch` |  |
+| `pending_launches` |  |
+| `successful_launches` |  |
 | `to_thrust` |  |
 | `url` |  |
 | `variant` |  |
@@ -482,28 +505,16 @@ API path: `/config/launcher`
 
 | Field | Description |
 | --- | --- |
-| `apogee` |  |
-| `consecutive_successful_launch` |  |
+| `abbrev` |  |
+| `administrator` |  |
+| `country_code` |  |
 | `description` |  |
-| `diameter` |  |
-| `failed_launch` |  |
-| `family` |  |
-| `full_name` |  |
-| `gto_capacity` |  |
+| `founding_year` |  |
 | `id` |  |
-| `launch_mass` |  |
-| `length` |  |
-| `leo_capacity` |  |
-| `maiden_flight` |  |
-| `manufacturer` |  |
-| `max_stage` |  |
-| `min_stage` |  |
+| `logo_url` |  |
 | `name` |  |
-| `pending_launch` |  |
-| `successful_launch` |  |
-| `to_thrust` |  |
+| `type` |  |
 | `url` |  |
-| `variant` |  |
 
 Operations: load.
 
@@ -530,6 +541,7 @@ API path: `/location`
 | Field | Description |
 | --- | --- |
 | `agency_id` |  |
+| `country_code` |  |
 | `id` |  |
 | `info_url` |  |
 | `latitude` |  |
@@ -538,6 +550,7 @@ API path: `/location`
 | `map_image` |  |
 | `map_url` |  |
 | `name` |  |
+| `total_landing_count` |  |
 | `total_launch_count` |  |
 | `url` |  |
 | `wiki_url` |  |
@@ -566,7 +579,7 @@ API path: ``
 | `image_url` |  |
 | `name` |  |
 | `orbit` |  |
-| `owner` |  |
+| `owners` |  |
 | `status` |  |
 | `type` |  |
 | `url` |  |
@@ -582,7 +595,7 @@ API path: `/spacestation`
 | `agency` |  |
 | `capability` |  |
 | `crew_capacity` |  |
-| `detail` |  |
+| `details` |  |
 | `diameter` |  |
 | `height` |  |
 | `history` |  |
@@ -814,13 +827,33 @@ Create an instance: `const first_stage = client.FirstStage()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `flight` | `number` |  |
+| `apogee` | `number` |  |
+| `consecutive_successful_launches` | `number` |  |
+| `description` | `string` |  |
+| `diameter` | `number` |  |
+| `failed_launches` | `number` |  |
+| `family` | `string` |  |
+| `flights` | `number` |  |
+| `full_name` | `string` |  |
+| `gto_capacity` | `number` |  |
 | `id` | `number` |  |
+| `launch_mass` | `number` |  |
 | `launcher_config` | `Record<string, any>` |  |
+| `length` | `number` |  |
+| `leo_capacity` | `number` |  |
+| `maiden_flight` | `string` |  |
+| `manufacturer` | `Record<string, any>` |  |
+| `max_stage` | `number` |  |
+| `min_stage` | `number` |  |
+| `name` | `string` |  |
+| `pending_launches` | `number` |  |
 | `serial_number` | `string` |  |
 | `status` | `string` |  |
+| `successful_launches` | `number` |  |
+| `to_thrust` | `number` |  |
 | `type` | `string` |  |
 | `url` | `string` |  |
+| `variant` | `string` |  |
 
 #### Example: Load
 
@@ -893,10 +926,10 @@ Create an instance: `const launch_vehicle = client.LaunchVehicle()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `apogee` | `number` |  |
-| `consecutive_successful_launch` | `number` |  |
+| `consecutive_successful_launches` | `number` |  |
 | `description` | `string` |  |
 | `diameter` | `number` |  |
-| `failed_launch` | `number` |  |
+| `failed_launches` | `number` |  |
 | `family` | `string` |  |
 | `full_name` | `string` |  |
 | `gto_capacity` | `number` |  |
@@ -909,8 +942,8 @@ Create an instance: `const launch_vehicle = client.LaunchVehicle()`
 | `max_stage` | `number` |  |
 | `min_stage` | `number` |  |
 | `name` | `string` |  |
-| `pending_launch` | `number` |  |
-| `successful_launch` | `number` |  |
+| `pending_launches` | `number` |  |
+| `successful_launches` | `number` |  |
 | `to_thrust` | `number` |  |
 | `url` | `string` |  |
 | `variant` | `string` |  |
@@ -936,28 +969,16 @@ Create an instance: `const launcher = client.Launcher()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | `number` |  |
-| `consecutive_successful_launch` | `number` |  |
+| `abbrev` | `string` |  |
+| `administrator` | `string` |  |
+| `country_code` | `string` |  |
 | `description` | `string` |  |
-| `diameter` | `number` |  |
-| `failed_launch` | `number` |  |
-| `family` | `string` |  |
-| `full_name` | `string` |  |
-| `gto_capacity` | `number` |  |
+| `founding_year` | `string` |  |
 | `id` | `number` |  |
-| `launch_mass` | `number` |  |
-| `length` | `number` |  |
-| `leo_capacity` | `number` |  |
-| `maiden_flight` | `string` |  |
-| `manufacturer` | `Record<string, any>` |  |
-| `max_stage` | `number` |  |
-| `min_stage` | `number` |  |
+| `logo_url` | `string` |  |
 | `name` | `string` |  |
-| `pending_launch` | `number` |  |
-| `successful_launch` | `number` |  |
-| `to_thrust` | `number` |  |
+| `type` | `string` |  |
 | `url` | `string` |  |
-| `variant` | `string` |  |
 
 #### Example: Load
 
@@ -1018,6 +1039,7 @@ Create an instance: `const pad = client.Pad()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `agency_id` | `number` |  |
+| `country_code` | `string` |  |
 | `id` | `number` |  |
 | `info_url` | `string` |  |
 | `latitude` | `string` |  |
@@ -1026,6 +1048,7 @@ Create an instance: `const pad = client.Pad()`
 | `map_image` | `string` |  |
 | `map_url` | `string` |  |
 | `name` | `string` |  |
+| `total_landing_count` | `number` |  |
 | `total_launch_count` | `number` |  |
 | `url` | `string` |  |
 | `wiki_url` | `string` |  |
@@ -1070,7 +1093,7 @@ Create an instance: `const space_station = client.SpaceStation()`
 | `image_url` | `string` |  |
 | `name` | `string` |  |
 | `orbit` | `string` |  |
-| `owner` | `any[]` |  |
+| `owners` | `any[]` |  |
 | `status` | `Record<string, any>` |  |
 | `type` | `Record<string, any>` |  |
 | `url` | `string` |  |
@@ -1106,7 +1129,7 @@ Create an instance: `const spacecraft = client.Spacecraft()`
 | `agency` | `Record<string, any>` |  |
 | `capability` | `string` |  |
 | `crew_capacity` | `number` |  |
-| `detail` | `string` |  |
+| `details` | `string` |  |
 | `diameter` | `number` |  |
 | `height` | `number` |  |
 | `history` | `string` |  |
@@ -1201,11 +1224,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const agency = client.Agency()
-await agency.list()
+const astronaut = client.Astronaut()
+await astronaut.list()
 
-// agency.data() now returns the agency data from the last `list`
-// agency.match() returns the last match criteria
+// astronaut.data() now returns the astronaut data from the last `list`
+// astronaut.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

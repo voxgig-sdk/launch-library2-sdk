@@ -43,8 +43,8 @@ class LaunchLibrary2TestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('LAUNCHLIBRARY2_TEST_LIVE');
-        $override = self::getenv('LAUNCHLIBRARY2_TEST_OVERRIDE');
+        $live = self::getenv('LAUNCH_LIBRARY2_TEST_LIVE');
+        $override = self::getenv('LAUNCH_LIBRARY2_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class LaunchLibrary2TestRunner
             }
         }
 
-        $explain = self::getenv('LAUNCHLIBRARY2_TEST_EXPLAIN');
+        $explain = self::getenv('LAUNCH_LIBRARY2_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['LAUNCHLIBRARY2_TEST_EXPLAIN'] = $explain;
+            $m['LAUNCH_LIBRARY2_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

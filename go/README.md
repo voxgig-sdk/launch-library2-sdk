@@ -75,12 +75,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-agencys, err := client.Agency(nil).List(nil, nil)
+astronauts, err := client.Astronaut(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = agencys
+_ = astronauts
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -144,13 +144,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-agency, err := client.Agency(nil).List(
+astronaut, err := client.Astronaut(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(agency) // the returned mock data
+fmt.Println(astronaut) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -382,13 +382,33 @@ API path: `/expedition`
 
 | Field | Description |
 | --- | --- |
-| `"flight"` |  |
+| `"apogee"` |  |
+| `"consecutive_successful_launches"` |  |
+| `"description"` |  |
+| `"diameter"` |  |
+| `"failed_launches"` |  |
+| `"family"` |  |
+| `"flights"` |  |
+| `"full_name"` |  |
+| `"gto_capacity"` |  |
 | `"id"` |  |
+| `"launch_mass"` |  |
 | `"launcher_config"` |  |
+| `"length"` |  |
+| `"leo_capacity"` |  |
+| `"maiden_flight"` |  |
+| `"manufacturer"` |  |
+| `"max_stage"` |  |
+| `"min_stage"` |  |
+| `"name"` |  |
+| `"pending_launches"` |  |
 | `"serial_number"` |  |
 | `"status"` |  |
+| `"successful_launches"` |  |
+| `"to_thrust"` |  |
 | `"type"` |  |
 | `"url"` |  |
+| `"variant"` |  |
 
 Operations: List, Load.
 
@@ -422,10 +442,10 @@ API path: `/launch`
 | Field | Description |
 | --- | --- |
 | `"apogee"` |  |
-| `"consecutive_successful_launch"` |  |
+| `"consecutive_successful_launches"` |  |
 | `"description"` |  |
 | `"diameter"` |  |
-| `"failed_launch"` |  |
+| `"failed_launches"` |  |
 | `"family"` |  |
 | `"full_name"` |  |
 | `"gto_capacity"` |  |
@@ -438,8 +458,8 @@ API path: `/launch`
 | `"max_stage"` |  |
 | `"min_stage"` |  |
 | `"name"` |  |
-| `"pending_launch"` |  |
-| `"successful_launch"` |  |
+| `"pending_launches"` |  |
+| `"successful_launches"` |  |
 | `"to_thrust"` |  |
 | `"url"` |  |
 | `"variant"` |  |
@@ -452,28 +472,16 @@ API path: `/config/launcher`
 
 | Field | Description |
 | --- | --- |
-| `"apogee"` |  |
-| `"consecutive_successful_launch"` |  |
+| `"abbrev"` |  |
+| `"administrator"` |  |
+| `"country_code"` |  |
 | `"description"` |  |
-| `"diameter"` |  |
-| `"failed_launch"` |  |
-| `"family"` |  |
-| `"full_name"` |  |
-| `"gto_capacity"` |  |
+| `"founding_year"` |  |
 | `"id"` |  |
-| `"launch_mass"` |  |
-| `"length"` |  |
-| `"leo_capacity"` |  |
-| `"maiden_flight"` |  |
-| `"manufacturer"` |  |
-| `"max_stage"` |  |
-| `"min_stage"` |  |
+| `"logo_url"` |  |
 | `"name"` |  |
-| `"pending_launch"` |  |
-| `"successful_launch"` |  |
-| `"to_thrust"` |  |
+| `"type"` |  |
 | `"url"` |  |
-| `"variant"` |  |
 
 Operations: Load.
 
@@ -500,6 +508,7 @@ API path: `/location`
 | Field | Description |
 | --- | --- |
 | `"agency_id"` |  |
+| `"country_code"` |  |
 | `"id"` |  |
 | `"info_url"` |  |
 | `"latitude"` |  |
@@ -508,6 +517,7 @@ API path: `/location`
 | `"map_image"` |  |
 | `"map_url"` |  |
 | `"name"` |  |
+| `"total_landing_count"` |  |
 | `"total_launch_count"` |  |
 | `"url"` |  |
 | `"wiki_url"` |  |
@@ -536,7 +546,7 @@ API path: ``
 | `"image_url"` |  |
 | `"name"` |  |
 | `"orbit"` |  |
-| `"owner"` |  |
+| `"owners"` |  |
 | `"status"` |  |
 | `"type"` |  |
 | `"url"` |  |
@@ -552,7 +562,7 @@ API path: `/spacestation`
 | `"agency"` |  |
 | `"capability"` |  |
 | `"crew_capacity"` |  |
-| `"detail"` |  |
+| `"details"` |  |
 | `"diameter"` |  |
 | `"height"` |  |
 | `"history"` |  |
@@ -824,13 +834,33 @@ Create an instance: `firstStage := client.FirstStage(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `flight` | `int` |  |
+| `apogee` | `int` |  |
+| `consecutive_successful_launches` | `int` |  |
+| `description` | `string` |  |
+| `diameter` | `float64` |  |
+| `failed_launches` | `int` |  |
+| `family` | `string` |  |
+| `flights` | `int` |  |
+| `full_name` | `string` |  |
+| `gto_capacity` | `int` |  |
 | `id` | `int` |  |
+| `launch_mass` | `int` |  |
 | `launcher_config` | `map[string]any` |  |
+| `length` | `float64` |  |
+| `leo_capacity` | `int` |  |
+| `maiden_flight` | `string` |  |
+| `manufacturer` | `map[string]any` |  |
+| `max_stage` | `int` |  |
+| `min_stage` | `int` |  |
+| `name` | `string` |  |
+| `pending_launches` | `int` |  |
 | `serial_number` | `string` |  |
 | `status` | `string` |  |
+| `successful_launches` | `int` |  |
+| `to_thrust` | `int` |  |
 | `type` | `string` |  |
 | `url` | `string` |  |
+| `variant` | `string` |  |
 
 #### Example: Load
 
@@ -919,10 +949,10 @@ Create an instance: `launchVehicle := client.LaunchVehicle(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `apogee` | `int` |  |
-| `consecutive_successful_launch` | `int` |  |
+| `consecutive_successful_launches` | `int` |  |
 | `description` | `string` |  |
 | `diameter` | `float64` |  |
-| `failed_launch` | `int` |  |
+| `failed_launches` | `int` |  |
 | `family` | `string` |  |
 | `full_name` | `string` |  |
 | `gto_capacity` | `int` |  |
@@ -935,8 +965,8 @@ Create an instance: `launchVehicle := client.LaunchVehicle(nil)`
 | `max_stage` | `int` |  |
 | `min_stage` | `int` |  |
 | `name` | `string` |  |
-| `pending_launch` | `int` |  |
-| `successful_launch` | `int` |  |
+| `pending_launches` | `int` |  |
+| `successful_launches` | `int` |  |
 | `to_thrust` | `int` |  |
 | `url` | `string` |  |
 | `variant` | `string` |  |
@@ -966,28 +996,16 @@ Create an instance: `launcher := client.Launcher(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | `int` |  |
-| `consecutive_successful_launch` | `int` |  |
+| `abbrev` | `string` |  |
+| `administrator` | `string` |  |
+| `country_code` | `string` |  |
 | `description` | `string` |  |
-| `diameter` | `float64` |  |
-| `failed_launch` | `int` |  |
-| `family` | `string` |  |
-| `full_name` | `string` |  |
-| `gto_capacity` | `int` |  |
+| `founding_year` | `string` |  |
 | `id` | `int` |  |
-| `launch_mass` | `int` |  |
-| `length` | `float64` |  |
-| `leo_capacity` | `int` |  |
-| `maiden_flight` | `string` |  |
-| `manufacturer` | `map[string]any` |  |
-| `max_stage` | `int` |  |
-| `min_stage` | `int` |  |
+| `logo_url` | `string` |  |
 | `name` | `string` |  |
-| `pending_launch` | `int` |  |
-| `successful_launch` | `int` |  |
-| `to_thrust` | `int` |  |
+| `type` | `string` |  |
 | `url` | `string` |  |
-| `variant` | `string` |  |
 
 #### Example: Load
 
@@ -1060,6 +1078,7 @@ Create an instance: `pad := client.Pad(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `agency_id` | `int` |  |
+| `country_code` | `string` |  |
 | `id` | `int` |  |
 | `info_url` | `string` |  |
 | `latitude` | `string` |  |
@@ -1068,6 +1087,7 @@ Create an instance: `pad := client.Pad(nil)`
 | `map_image` | `string` |  |
 | `map_url` | `string` |  |
 | `name` | `string` |  |
+| `total_landing_count` | `int` |  |
 | `total_launch_count` | `int` |  |
 | `url` | `string` |  |
 | `wiki_url` | `string` |  |
@@ -1120,7 +1140,7 @@ Create an instance: `spaceStation := client.SpaceStation(nil)`
 | `image_url` | `string` |  |
 | `name` | `string` |  |
 | `orbit` | `string` |  |
-| `owner` | `[]any` |  |
+| `owners` | `[]any` |  |
 | `status` | `map[string]any` |  |
 | `type` | `map[string]any` |  |
 | `url` | `string` |  |
@@ -1164,7 +1184,7 @@ Create an instance: `spacecraft := client.Spacecraft(nil)`
 | `agency` | `map[string]any` |  |
 | `capability` | `string` |  |
 | `crew_capacity` | `int` |  |
-| `detail` | `string` |  |
+| `details` | `string` |  |
 | `diameter` | `float64` |  |
 | `height` | `float64` |  |
 | `history` | `string` |  |
@@ -1271,11 +1291,11 @@ Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-agency := client.Agency(nil)
-agency.List(nil, nil)
+astronaut := client.Astronaut(nil)
+astronaut.List(nil, nil)
 
-// agency.Data() now returns the agency data from the last list
-// agency.Match() returns the last match criteria
+// astronaut.Data() now returns the astronaut data from the last list
+// astronaut.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

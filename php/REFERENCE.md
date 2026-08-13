@@ -524,13 +524,33 @@ $first_stage = $client->FirstStage();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `flight` | `int` | No |  |
+| `apogee` | `int` | No |  |
+| `consecutive_successful_launches` | `int` | No |  |
+| `description` | `string` | No |  |
+| `diameter` | `float` | No |  |
+| `failed_launches` | `int` | No |  |
+| `family` | `string` | No |  |
+| `flights` | `int` | No |  |
+| `full_name` | `string` | No |  |
+| `gto_capacity` | `int` | No |  |
 | `id` | `int` | No |  |
+| `launch_mass` | `int` | No |  |
 | `launcher_config` | `array` | No |  |
+| `length` | `float` | No |  |
+| `leo_capacity` | `int` | No |  |
+| `maiden_flight` | `string` | No |  |
+| `manufacturer` | `array` | No |  |
+| `max_stage` | `int` | No |  |
+| `min_stage` | `int` | No |  |
+| `name` | `string` | No |  |
+| `pending_launches` | `int` | No |  |
 | `serial_number` | `string` | No |  |
 | `status` | `string` | No |  |
+| `successful_launches` | `int` | No |  |
+| `to_thrust` | `int` | No |  |
 | `type` | `string` | No |  |
 | `url` | `string` | No |  |
+| `variant` | `string` | No |  |
 
 ### Operations
 
@@ -664,10 +684,10 @@ $launch_vehicle = $client->LaunchVehicle();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `apogee` | `int` | No |  |
-| `consecutive_successful_launch` | `int` | No |  |
+| `consecutive_successful_launches` | `int` | No |  |
 | `description` | `string` | No |  |
 | `diameter` | `float` | No |  |
-| `failed_launch` | `int` | No |  |
+| `failed_launches` | `int` | No |  |
 | `family` | `string` | No |  |
 | `full_name` | `string` | No |  |
 | `gto_capacity` | `int` | No |  |
@@ -680,8 +700,8 @@ $launch_vehicle = $client->LaunchVehicle();
 | `max_stage` | `int` | No |  |
 | `min_stage` | `int` | No |  |
 | `name` | `string` | No |  |
-| `pending_launch` | `int` | No |  |
-| `successful_launch` | `int` | No |  |
+| `pending_launches` | `int` | No |  |
+| `successful_launches` | `int` | No |  |
 | `to_thrust` | `int` | No |  |
 | `url` | `string` | No |  |
 | `variant` | `string` | No |  |
@@ -736,28 +756,16 @@ $launcher = $client->Launcher();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `int` | No |  |
-| `consecutive_successful_launch` | `int` | No |  |
+| `abbrev` | `string` | No |  |
+| `administrator` | `string` | No |  |
+| `country_code` | `string` | No |  |
 | `description` | `string` | No |  |
-| `diameter` | `float` | No |  |
-| `failed_launch` | `int` | No |  |
-| `family` | `string` | No |  |
-| `full_name` | `string` | No |  |
-| `gto_capacity` | `int` | No |  |
+| `founding_year` | `string` | No |  |
 | `id` | `int` | No |  |
-| `launch_mass` | `int` | No |  |
-| `length` | `float` | No |  |
-| `leo_capacity` | `int` | No |  |
-| `maiden_flight` | `string` | No |  |
-| `manufacturer` | `array` | No |  |
-| `max_stage` | `int` | No |  |
-| `min_stage` | `int` | No |  |
+| `logo_url` | `string` | No |  |
 | `name` | `string` | No |  |
-| `pending_launch` | `int` | No |  |
-| `successful_launch` | `int` | No |  |
-| `to_thrust` | `int` | No |  |
+| `type` | `string` | No |  |
 | `url` | `string` | No |  |
-| `variant` | `string` | No |  |
 
 ### Operations
 
@@ -876,6 +884,7 @@ $pad = $client->Pad();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `agency_id` | `int` | No |  |
+| `country_code` | `string` | No |  |
 | `id` | `int` | No |  |
 | `info_url` | `string` | No |  |
 | `latitude` | `string` | No |  |
@@ -884,6 +893,7 @@ $pad = $client->Pad();
 | `map_image` | `string` | No |  |
 | `map_url` | `string` | No |  |
 | `name` | `string` | No |  |
+| `total_landing_count` | `int` | No |  |
 | `total_launch_count` | `int` | No |  |
 | `url` | `string` | No |  |
 | `wiki_url` | `string` | No |  |
@@ -989,7 +999,7 @@ $space_station = $client->SpaceStation();
 | `image_url` | `string` | No |  |
 | `name` | `string` | No |  |
 | `orbit` | `string` | No |  |
-| `owner` | `array` | No |  |
+| `owners` | `array` | No |  |
 | `status` | `array` | No |  |
 | `type` | `array` | No |  |
 | `url` | `string` | No |  |
@@ -1055,7 +1065,7 @@ $spacecraft = $client->Spacecraft();
 | `agency` | `array` | No |  |
 | `capability` | `string` | No |  |
 | `crew_capacity` | `int` | No |  |
-| `detail` | `string` | No |  |
+| `details` | `string` | No |  |
 | `diameter` | `float` | No |  |
 | `height` | `float` | No |  |
 | `history` | `string` | No |  |

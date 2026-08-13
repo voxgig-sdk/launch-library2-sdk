@@ -134,25 +134,65 @@
 ---@field url? string
 
 ---@class FirstStage
----@field flight? number
+---@field apogee? number
+---@field consecutive_successful_launches? number
+---@field description? string
+---@field diameter? number
+---@field failed_launches? number
+---@field family? string
+---@field flights? number
+---@field full_name? string
+---@field gto_capacity? number
 ---@field id? number
+---@field launch_mass? number
 ---@field launcher_config? table
+---@field length? number
+---@field leo_capacity? number
+---@field maiden_flight? string
+---@field manufacturer? table
+---@field max_stage? number
+---@field min_stage? number
+---@field name? string
+---@field pending_launches? number
 ---@field serial_number? string
 ---@field status? string
+---@field successful_launches? number
+---@field to_thrust? number
 ---@field type? string
 ---@field url? string
+---@field variant? string
 
 ---@class FirstStageLoadMatch
 ---@field id number
 
 ---@class FirstStageListMatch
----@field flight? number
+---@field apogee? number
+---@field consecutive_successful_launches? number
+---@field description? string
+---@field diameter? number
+---@field failed_launches? number
+---@field family? string
+---@field flights? number
+---@field full_name? string
+---@field gto_capacity? number
 ---@field id? number
+---@field launch_mass? number
 ---@field launcher_config? table
+---@field length? number
+---@field leo_capacity? number
+---@field maiden_flight? string
+---@field manufacturer? table
+---@field max_stage? number
+---@field min_stage? number
+---@field name? string
+---@field pending_launches? number
 ---@field serial_number? string
 ---@field status? string
+---@field successful_launches? number
+---@field to_thrust? number
 ---@field type? string
 ---@field url? string
+---@field variant? string
 
 ---@class Launch
 ---@field id? string
@@ -191,10 +231,10 @@
 
 ---@class LaunchVehicle
 ---@field apogee? number
----@field consecutive_successful_launch? number
+---@field consecutive_successful_launches? number
 ---@field description? string
 ---@field diameter? number
----@field failed_launch? number
+---@field failed_launches? number
 ---@field family? string
 ---@field full_name? string
 ---@field gto_capacity? number
@@ -207,18 +247,18 @@
 ---@field max_stage? number
 ---@field min_stage? number
 ---@field name? string
----@field pending_launch? number
----@field successful_launch? number
+---@field pending_launches? number
+---@field successful_launches? number
 ---@field to_thrust? number
 ---@field url? string
 ---@field variant? string
 
 ---@class LaunchVehicleListMatch
 ---@field apogee? number
----@field consecutive_successful_launch? number
+---@field consecutive_successful_launches? number
 ---@field description? string
 ---@field diameter? number
----@field failed_launch? number
+---@field failed_launches? number
 ---@field family? string
 ---@field full_name? string
 ---@field gto_capacity? number
@@ -231,35 +271,23 @@
 ---@field max_stage? number
 ---@field min_stage? number
 ---@field name? string
----@field pending_launch? number
----@field successful_launch? number
+---@field pending_launches? number
+---@field successful_launches? number
 ---@field to_thrust? number
 ---@field url? string
 ---@field variant? string
 
 ---@class Launcher
----@field apogee? number
----@field consecutive_successful_launch? number
+---@field abbrev? string
+---@field administrator? string
+---@field country_code? string
 ---@field description? string
----@field diameter? number
----@field failed_launch? number
----@field family? string
----@field full_name? string
----@field gto_capacity? number
+---@field founding_year? string
 ---@field id? number
----@field launch_mass? number
----@field length? number
----@field leo_capacity? number
----@field maiden_flight? string
----@field manufacturer? table
----@field max_stage? number
----@field min_stage? number
+---@field logo_url? string
 ---@field name? string
----@field pending_launch? number
----@field successful_launch? number
----@field to_thrust? number
+---@field type? string
 ---@field url? string
----@field variant? string
 
 ---@class LauncherLoadMatch
 ---@field id number
@@ -287,6 +315,7 @@
 
 ---@class Pad
 ---@field agency_id? number
+---@field country_code? string
 ---@field id? number
 ---@field info_url? string
 ---@field latitude? string
@@ -295,6 +324,7 @@
 ---@field map_image? string
 ---@field map_url? string
 ---@field name? string
+---@field total_landing_count? number
 ---@field total_launch_count? number
 ---@field url? string
 ---@field wiki_url? string
@@ -304,6 +334,7 @@
 
 ---@class PadListMatch
 ---@field agency_id? number
+---@field country_code? string
 ---@field id? number
 ---@field info_url? string
 ---@field latitude? string
@@ -312,6 +343,7 @@
 ---@field map_image? string
 ---@field map_url? string
 ---@field name? string
+---@field total_landing_count? number
 ---@field total_launch_count? number
 ---@field url? string
 ---@field wiki_url? string
@@ -326,7 +358,7 @@
 ---@field image_url? string
 ---@field name? string
 ---@field orbit? string
----@field owner? table
+---@field owners? table
 ---@field status? table
 ---@field type? table
 ---@field url? string
@@ -342,7 +374,7 @@
 ---@field image_url? string
 ---@field name? string
 ---@field orbit? string
----@field owner? table
+---@field owners? table
 ---@field status? table
 ---@field type? table
 ---@field url? string
@@ -351,7 +383,7 @@
 ---@field agency? table
 ---@field capability? string
 ---@field crew_capacity? number
----@field detail? string
+---@field details? string
 ---@field diameter? number
 ---@field height? number
 ---@field history? string
@@ -371,7 +403,7 @@
 ---@field agency? table
 ---@field capability? string
 ---@field crew_capacity? number
----@field detail? string
+---@field details? string
 ---@field diameter? number
 ---@field height? number
 ---@field history? string
