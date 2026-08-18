@@ -40,7 +40,7 @@ class LaunchLibrary2SDK
         $utility = new LaunchLibrary2Utility();
         $this->_utility = $utility;
 
-        $config = LaunchLibrary2Config::make_config();
+        $config = LaunchLibrary2Config::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

@@ -40,7 +40,7 @@ class LaunchEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = LaunchLibrary2Config::make_config();
+        $cfg = LaunchLibrary2Config::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = LaunchLibrary2SDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];

@@ -28,7 +28,7 @@ class LaunchLibrary2SDK
     utility = LaunchLibrary2Utility.new
     @_utility = utility
 
-    config = LaunchLibrary2Config.make_config
+    config = LaunchLibrary2Config.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

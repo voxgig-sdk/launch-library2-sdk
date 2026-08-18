@@ -23,8 +23,8 @@ class LaunchLibrary2SDK:
         utility = LaunchLibrary2Utility()
         self._utility = utility
 
-        from launchlibrary2_sdk.config import make_config
-        config = make_config()
+        from launchlibrary2_sdk.config import shared_config
+        config = shared_config()
 
         self._rootctx = utility.make_context({
             "client": self,
