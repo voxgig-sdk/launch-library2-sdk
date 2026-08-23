@@ -1,0 +1,195 @@
+# Entity: pad
+
+main: kit: entity: pad: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "agency_id"
+      req: false
+      short: "ID of the agency that operates this pad"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "country_code"
+      req: false
+      short: "ISO country code"
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
+      short: "Location ID"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "info_url"
+      req: false
+      short: "URL to more information"
+      type: "`$STRING`"
+    }
+    {
+      name: "latitude"
+      req: false
+      short: "Latitude coordinate"
+      type: "`$STRING`"
+    }
+    {
+      name: "location"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "longitude"
+      req: false
+      short: "Longitude coordinate"
+      type: "`$STRING`"
+    }
+    {
+      name: "map_image"
+      req: false
+      short: "URL to map image"
+      type: "`$STRING`"
+    }
+    {
+      name: "map_url"
+      req: false
+      short: "URL to map"
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      short: "Name of the location"
+      type: "`$STRING`"
+    }
+    {
+      name: "total_landing_count"
+      req: false
+      short: "Total number of landings at this location"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "total_launch_count"
+      req: false
+      short: "Total number of launches from this location"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "url"
+      req: false
+      short: "API URL for this location"
+      type: "`$STRING`"
+    }
+    {
+      name: "wiki_url"
+      req: false
+      short: "Wikipedia URL"
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "pad"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: 10
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "location"
+                orig: "location"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 0
+                kind: "query"
+                name: "offset"
+                orig: "offset"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "search"
+                orig: "search"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/pad"
+          parts: [
+            "pad"
+          ]
+          select: {
+            exist: [
+              "limit"
+              "location"
+              "offset"
+              "search"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/pad/{id}"
+          parts: [
+            "pad"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.location`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

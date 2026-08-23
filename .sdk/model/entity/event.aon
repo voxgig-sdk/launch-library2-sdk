@@ -1,0 +1,163 @@
+# Entity: event
+
+main: kit: entity: event: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "date"
+      req: false
+      short: "Event date and time"
+      type: "`$STRING`"
+    }
+    {
+      name: "description"
+      req: false
+      short: "Description of the event"
+      type: "`$STRING`"
+    }
+    {
+      name: "feature_image"
+      req: false
+      short: "URL to feature image"
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
+      short: "Event ID"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "location"
+      req: false
+      short: "Event location"
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      short: "Name of the event"
+      type: "`$STRING`"
+    }
+    {
+      name: "news_url"
+      req: false
+      short: "URL to news article"
+      type: "`$STRING`"
+    }
+    {
+      name: "type"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "url"
+      req: false
+      short: "API URL for this event"
+      type: "`$STRING`"
+    }
+    {
+      name: "video_url"
+      req: false
+      short: "URL to video"
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "event"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: 10
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 0
+                kind: "query"
+                name: "offset"
+                orig: "offset"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "search"
+                orig: "search"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/event"
+          parts: [
+            "event"
+          ]
+          select: {
+            exist: [
+              "limit"
+              "offset"
+              "search"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/event/{id}"
+          parts: [
+            "event"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.type`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

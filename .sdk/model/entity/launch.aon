@@ -1,0 +1,223 @@
+# Entity: launch
+
+main: kit: entity: launch: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "id"
+      req: false
+      short: "UUID of the launch"
+      type: "`$STRING`"
+    }
+    {
+      name: "image"
+      req: false
+      short: "URL to launch image"
+      type: "`$STRING`"
+    }
+    {
+      name: "launch_service_provider"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "mission"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "name"
+      req: false
+      short: "Name of the launch"
+      type: "`$STRING`"
+    }
+    {
+      name: "net"
+      req: false
+      short: "Net Earliest Time (NET) for launch"
+      type: "`$STRING`"
+    }
+    {
+      name: "pad"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "probability"
+      req: false
+      short: "Launch probability percentage"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "rocket"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "url"
+      req: false
+      short: "API URL for this launch"
+      type: "`$STRING`"
+    }
+    {
+      name: "webcast_live"
+      req: false
+      short: "Whether the webcast is currently live"
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "window_end"
+      req: false
+      short: "End of launch window"
+      type: "`$STRING`"
+    }
+    {
+      name: "window_start"
+      req: false
+      short: "Start of launch window"
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "launch"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: 10
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "lsp_id"
+                orig: "lsp_id"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "lsp_name"
+                orig: "lsp_name"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: 0
+                kind: "query"
+                name: "offset"
+                orig: "offset"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "rocket_configuration_id"
+                orig: "rocket_configuration_id"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "search"
+                orig: "search"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "spacecraft_id"
+                orig: "spacecraft_id"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "status"
+                orig: "status"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/launch"
+          parts: [
+            "launch"
+          ]
+          select: {
+            exist: [
+              "limit"
+              "lsp_id"
+              "lsp_name"
+              "offset"
+              "rocket_configuration_id"
+              "search"
+              "spacecraft_id"
+              "status"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/launch/{id}"
+          parts: [
+            "launch"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

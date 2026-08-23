@@ -36,60 +36,70 @@
               "active": true,
               "name": "abbrev",
               "req": false,
+              "short": "Agency abbreviation",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "administrator",
               "req": false,
+              "short": "Agency administrator",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "country_code",
               "req": false,
+              "short": "ISO country code",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "description",
               "req": false,
+              "short": "Agency description",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "founding_year",
               "req": false,
+              "short": "Year agency was founded",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Agency ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "logo_url",
               "req": false,
+              "short": "URL to agency logo",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the agency",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "type",
               "req": false,
+              "short": "Type of agency",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this agency",
               "type": "`$STRING`"
             }
           ],
@@ -225,54 +235,63 @@
               "active": true,
               "name": "bio",
               "req": false,
+              "short": "Biographical information",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "date_of_birth",
               "req": false,
+              "short": "Date of birth",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "date_of_death",
               "req": false,
+              "short": "Date of death if applicable",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "flights_count",
               "req": false,
+              "short": "Number of flights",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Astronaut ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the astronaut",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "nationality",
               "req": false,
+              "short": "Astronaut nationality",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "profile_image",
               "req": false,
+              "short": "URL to profile image",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "spacewalks_count",
               "req": false,
+              "short": "Number of spacewalks",
               "type": "`$INTEGER`"
             },
             {
@@ -291,6 +310,7 @@
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this astronaut",
               "type": "`$STRING`"
             }
           ],
@@ -438,12 +458,14 @@
               "active": true,
               "name": "departure",
               "req": false,
+              "short": "Departure time",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "docking",
               "req": false,
+              "short": "Docking time",
               "type": "`$STRING`"
             },
             {
@@ -462,12 +484,14 @@
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Docking event ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this docking event",
               "type": "`$STRING`"
             }
           ],
@@ -594,42 +618,49 @@
               "active": true,
               "name": "date",
               "req": false,
+              "short": "Event date and time",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "description",
               "req": false,
+              "short": "Description of the event",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "feature_image",
               "req": false,
+              "short": "URL to feature image",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Event ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "location",
               "req": false,
+              "short": "Event location",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the event",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "news_url",
               "req": false,
+              "short": "URL to news article",
               "type": "`$STRING`"
             },
             {
@@ -642,12 +673,14 @@
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this event",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "video_url",
               "req": false,
+              "short": "URL to video",
               "type": "`$STRING`"
             }
           ],
@@ -771,18 +804,21 @@
               "active": true,
               "name": "end",
               "req": false,
+              "short": "End date of the expedition",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Expedition ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the expedition",
               "type": "`$STRING`"
             },
             {
@@ -795,12 +831,14 @@
               "active": true,
               "name": "start",
               "req": false,
+              "short": "Start date of the expedition",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this expedition",
               "type": "`$STRING`"
             }
           ],
@@ -927,66 +965,77 @@
               "active": true,
               "name": "apogee",
               "req": false,
+              "short": "Apogee in km",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "consecutive_successful_launches",
               "req": false,
+              "short": "Number of consecutive successful launches",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "description",
               "req": false,
+              "short": "Description of the launcher",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "diameter",
               "req": false,
+              "short": "Diameter in meters",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "failed_launches",
               "req": false,
+              "short": "Number of failed launches",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "family",
               "req": false,
+              "short": "Launcher family",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "flights",
               "req": false,
+              "short": "Number of flights",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "full_name",
               "req": false,
+              "short": "Full name of the launcher",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "gto_capacity",
               "req": false,
+              "short": "GTO capacity in kg",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Configuration ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "launch_mass",
               "req": false,
+              "short": "Launch mass in kg",
               "type": "`$INTEGER`"
             },
             {
@@ -999,18 +1048,21 @@
               "active": true,
               "name": "length",
               "req": false,
+              "short": "Length in meters",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "leo_capacity",
               "req": false,
+              "short": "LEO capacity in kg",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "maiden_flight",
               "req": false,
+              "short": "Date of maiden flight",
               "type": "`$STRING`"
             },
             {
@@ -1023,66 +1075,77 @@
               "active": true,
               "name": "max_stage",
               "req": false,
+              "short": "Maximum number of stages",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "min_stage",
               "req": false,
+              "short": "Minimum number of stages",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the launcher configuration",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "pending_launches",
               "req": false,
+              "short": "Number of pending launches",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "serial_number",
               "req": false,
+              "short": "Serial number of the first stage",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "status",
               "req": false,
+              "short": "Current status",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "successful_launches",
               "req": false,
+              "short": "Number of successful launches",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "to_thrust",
               "req": false,
+              "short": "Takeoff thrust in kN",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "type",
               "req": false,
+              "short": "Type of first stage",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this configuration",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "variant",
               "req": false,
+              "short": "Variant of the launcher",
               "type": "`$STRING`"
             }
           ],
@@ -1209,12 +1272,14 @@
               "active": true,
               "name": "id",
               "req": false,
+              "short": "UUID of the launch",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "image",
               "req": false,
+              "short": "URL to launch image",
               "type": "`$STRING`"
             },
             {
@@ -1233,12 +1298,14 @@
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the launch",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "net",
               "req": false,
+              "short": "Net Earliest Time (NET) for launch",
               "type": "`$STRING`"
             },
             {
@@ -1251,6 +1318,7 @@
               "active": true,
               "name": "probability",
               "req": false,
+              "short": "Launch probability percentage",
               "type": "`$INTEGER`"
             },
             {
@@ -1269,24 +1337,28 @@
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this launch",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "webcast_live",
               "req": false,
+              "short": "Whether the webcast is currently live",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "window_end",
               "req": false,
+              "short": "End of launch window",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "window_start",
               "req": false,
+              "short": "Start of launch window",
               "type": "`$STRING`"
             }
           ],
@@ -1449,78 +1521,91 @@
               "active": true,
               "name": "apogee",
               "req": false,
+              "short": "Apogee in km",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "consecutive_successful_launches",
               "req": false,
+              "short": "Number of consecutive successful launches",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "description",
               "req": false,
+              "short": "Description of the launcher",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "diameter",
               "req": false,
+              "short": "Diameter in meters",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "failed_launches",
               "req": false,
+              "short": "Number of failed launches",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "family",
               "req": false,
+              "short": "Launcher family",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "full_name",
               "req": false,
+              "short": "Full name of the launcher",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "gto_capacity",
               "req": false,
+              "short": "GTO capacity in kg",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Configuration ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "launch_mass",
               "req": false,
+              "short": "Launch mass in kg",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "length",
               "req": false,
+              "short": "Length in meters",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "leo_capacity",
               "req": false,
+              "short": "LEO capacity in kg",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "maiden_flight",
               "req": false,
+              "short": "Date of maiden flight",
               "type": "`$STRING`"
             },
             {
@@ -1533,48 +1618,56 @@
               "active": true,
               "name": "max_stage",
               "req": false,
+              "short": "Maximum number of stages",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "min_stage",
               "req": false,
+              "short": "Minimum number of stages",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the launcher configuration",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "pending_launches",
               "req": false,
+              "short": "Number of pending launches",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "successful_launches",
               "req": false,
+              "short": "Number of successful launches",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "to_thrust",
               "req": false,
+              "short": "Takeoff thrust in kN",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this configuration",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "variant",
               "req": false,
+              "short": "Variant of the launcher",
               "type": "`$STRING`"
             }
           ],
@@ -1674,60 +1767,70 @@
               "active": true,
               "name": "abbrev",
               "req": false,
+              "short": "Agency abbreviation",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "administrator",
               "req": false,
+              "short": "Agency administrator",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "country_code",
               "req": false,
+              "short": "ISO country code",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "description",
               "req": false,
+              "short": "Agency description",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "founding_year",
               "req": false,
+              "short": "Year agency was founded",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Agency ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "logo_url",
               "req": false,
+              "short": "URL to agency logo",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the agency",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "type",
               "req": false,
+              "short": "Type of agency",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this agency",
               "type": "`$STRING`"
             }
           ],
@@ -1790,42 +1893,49 @@
               "active": true,
               "name": "country_code",
               "req": false,
+              "short": "ISO country code",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Location ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "map_image",
               "req": false,
+              "short": "URL to map image",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the location",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "total_landing_count",
               "req": false,
+              "short": "Total number of landings at this location",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "total_launch_count",
               "req": false,
+              "short": "Total number of launches from this location",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this location",
               "type": "`$STRING`"
             }
           ],
@@ -1952,30 +2062,35 @@
               "active": true,
               "name": "agency_id",
               "req": false,
+              "short": "ID of the agency that operates this pad",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "country_code",
               "req": false,
+              "short": "ISO country code",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Location ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "info_url",
               "req": false,
+              "short": "URL to more information",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "latitude",
               "req": false,
+              "short": "Latitude coordinate",
               "type": "`$STRING`"
             },
             {
@@ -1988,48 +2103,56 @@
               "active": true,
               "name": "longitude",
               "req": false,
+              "short": "Longitude coordinate",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "map_image",
               "req": false,
+              "short": "URL to map image",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "map_url",
               "req": false,
+              "short": "URL to map",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the location",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "total_landing_count",
               "req": false,
+              "short": "Total number of landings at this location",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "total_launch_count",
               "req": false,
+              "short": "Total number of launches from this location",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this location",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "wiki_url",
               "req": false,
+              "short": "Wikipedia URL",
               "type": "`$STRING`"
             }
           ],
@@ -2168,42 +2291,49 @@
               "active": true,
               "name": "deorbited",
               "req": false,
+              "short": "Date the space station was deorbited",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "description",
               "req": false,
+              "short": "Description of the space station",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "founded",
               "req": false,
+              "short": "Date the space station was founded",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Space station ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "image_url",
               "req": false,
+              "short": "URL to space station image",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the space station",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "orbit",
               "req": false,
+              "short": "Orbital information",
               "type": "`$STRING`"
             },
             {
@@ -2228,6 +2358,7 @@
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this space station",
               "type": "`$STRING`"
             }
           ],
@@ -2369,72 +2500,84 @@
               "active": true,
               "name": "capability",
               "req": false,
+              "short": "Spacecraft capability",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "crew_capacity",
               "req": false,
+              "short": "Crew capacity",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "details",
               "req": false,
+              "short": "Detailed information",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "diameter",
               "req": false,
+              "short": "Diameter in meters",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "height",
               "req": false,
+              "short": "Height in meters",
               "type": "`$NUMBER`"
             },
             {
               "active": true,
               "name": "history",
               "req": false,
+              "short": "Historical information",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "human_rated",
               "req": false,
+              "short": "Whether the spacecraft is human-rated",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Spacecraft configuration ID",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "image_url",
               "req": false,
+              "short": "URL to spacecraft image",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "in_use",
               "req": false,
+              "short": "Whether the spacecraft is currently in use",
               "type": "`$BOOLEAN`"
             },
             {
               "active": true,
               "name": "maiden_flight",
               "req": false,
+              "short": "Date of maiden flight",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the spacecraft",
               "type": "`$STRING`"
             },
             {
@@ -2447,6 +2590,7 @@
               "active": true,
               "name": "url",
               "req": false,
+              "short": "API URL for this configuration",
               "type": "`$STRING`"
             }
           ],

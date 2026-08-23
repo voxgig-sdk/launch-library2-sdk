@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "LaunchLibrary2",
+			"slug": "launch-library2",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -47,42 +50,52 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "abbrev",
+						"short": "Agency abbreviation",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "administrator",
+						"short": "Agency administrator",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "country_code",
+						"short": "ISO country code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "description",
+						"short": "Agency description",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "founding_year",
+						"short": "Year agency was founded",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Agency ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "logo_url",
+						"short": "URL to agency logo",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the agency",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "type",
+						"short": "Type of agency",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this agency",
 						"type": "`$STRING`",
 					},
 				},
@@ -195,38 +208,47 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "bio",
+						"short": "Biographical information",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "date_of_birth",
+						"short": "Date of birth",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "date_of_death",
+						"short": "Date of death if applicable",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "flights_count",
+						"short": "Number of flights",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Astronaut ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the astronaut",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "nationality",
+						"short": "Astronaut nationality",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "profile_image",
+						"short": "URL to profile image",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "spacewalks_count",
+						"short": "Number of spacewalks",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
@@ -239,6 +261,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this astronaut",
 						"type": "`$STRING`",
 					},
 				},
@@ -359,10 +382,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "departure",
+						"short": "Departure time",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "docking",
+						"short": "Docking time",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -375,10 +400,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Docking event ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this docking event",
 						"type": "`$STRING`",
 					},
 				},
@@ -484,30 +511,37 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "date",
+						"short": "Event date and time",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "description",
+						"short": "Description of the event",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "feature_image",
+						"short": "URL to feature image",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Event ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "location",
+						"short": "Event location",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the event",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "news_url",
+						"short": "URL to news article",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -516,10 +550,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this event",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "video_url",
+						"short": "URL to video",
 						"type": "`$STRING`",
 					},
 				},
@@ -622,14 +658,17 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "end",
+						"short": "End date of the expedition",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Expedition ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the expedition",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -638,10 +677,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "start",
+						"short": "Start date of the expedition",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this expedition",
 						"type": "`$STRING`",
 					},
 				},
@@ -747,46 +788,57 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "apogee",
+						"short": "Apogee in km",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "consecutive_successful_launches",
+						"short": "Number of consecutive successful launches",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "description",
+						"short": "Description of the launcher",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "diameter",
+						"short": "Diameter in meters",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "failed_launches",
+						"short": "Number of failed launches",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "family",
+						"short": "Launcher family",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "flights",
+						"short": "Number of flights",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "full_name",
+						"short": "Full name of the launcher",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "gto_capacity",
+						"short": "GTO capacity in kg",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Configuration ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "launch_mass",
+						"short": "Launch mass in kg",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
@@ -795,14 +847,17 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "length",
+						"short": "Length in meters",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "leo_capacity",
+						"short": "LEO capacity in kg",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "maiden_flight",
+						"short": "Date of maiden flight",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -811,46 +866,57 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "max_stage",
+						"short": "Maximum number of stages",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "min_stage",
+						"short": "Minimum number of stages",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the launcher configuration",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "pending_launches",
+						"short": "Number of pending launches",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "serial_number",
+						"short": "Serial number of the first stage",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "status",
+						"short": "Current status",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "successful_launches",
+						"short": "Number of successful launches",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "to_thrust",
+						"short": "Takeoff thrust in kN",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "type",
+						"short": "Type of first stage",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this configuration",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "variant",
+						"short": "Variant of the launcher",
 						"type": "`$STRING`",
 					},
 				},
@@ -956,10 +1022,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
+						"short": "UUID of the launch",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "image",
+						"short": "URL to launch image",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -972,10 +1040,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the launch",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "net",
+						"short": "Net Earliest Time (NET) for launch",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -984,6 +1054,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "probability",
+						"short": "Launch probability percentage",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
@@ -996,18 +1067,22 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this launch",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "webcast_live",
+						"short": "Whether the webcast is currently live",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "window_end",
+						"short": "End of launch window",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "window_start",
+						"short": "Start of launch window",
 						"type": "`$STRING`",
 					},
 				},
@@ -1141,54 +1216,67 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "apogee",
+						"short": "Apogee in km",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "consecutive_successful_launches",
+						"short": "Number of consecutive successful launches",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "description",
+						"short": "Description of the launcher",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "diameter",
+						"short": "Diameter in meters",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "failed_launches",
+						"short": "Number of failed launches",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "family",
+						"short": "Launcher family",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "full_name",
+						"short": "Full name of the launcher",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "gto_capacity",
+						"short": "GTO capacity in kg",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Configuration ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "launch_mass",
+						"short": "Launch mass in kg",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "length",
+						"short": "Length in meters",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "leo_capacity",
+						"short": "LEO capacity in kg",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "maiden_flight",
+						"short": "Date of maiden flight",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -1197,34 +1285,42 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "max_stage",
+						"short": "Maximum number of stages",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "min_stage",
+						"short": "Minimum number of stages",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the launcher configuration",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "pending_launches",
+						"short": "Number of pending launches",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "successful_launches",
+						"short": "Number of successful launches",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "to_thrust",
+						"short": "Takeoff thrust in kN",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this configuration",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "variant",
+						"short": "Variant of the launcher",
 						"type": "`$STRING`",
 					},
 				},
@@ -1303,42 +1399,52 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "abbrev",
+						"short": "Agency abbreviation",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "administrator",
+						"short": "Agency administrator",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "country_code",
+						"short": "ISO country code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "description",
+						"short": "Agency description",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "founding_year",
+						"short": "Year agency was founded",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Agency ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "logo_url",
+						"short": "URL to agency logo",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the agency",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "type",
+						"short": "Type of agency",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this agency",
 						"type": "`$STRING`",
 					},
 				},
@@ -1389,30 +1495,37 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "country_code",
+						"short": "ISO country code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Location ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "map_image",
+						"short": "URL to map image",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the location",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "total_landing_count",
+						"short": "Total number of landings at this location",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "total_launch_count",
+						"short": "Total number of launches from this location",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this location",
 						"type": "`$STRING`",
 					},
 				},
@@ -1518,22 +1631,27 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "agency_id",
+						"short": "ID of the agency that operates this pad",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "country_code",
+						"short": "ISO country code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Location ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "info_url",
+						"short": "URL to more information",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "latitude",
+						"short": "Latitude coordinate",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -1542,34 +1660,42 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "longitude",
+						"short": "Longitude coordinate",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "map_image",
+						"short": "URL to map image",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "map_url",
+						"short": "URL to map",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the location",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "total_landing_count",
+						"short": "Total number of landings at this location",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "total_launch_count",
+						"short": "Total number of launches from this location",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this location",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "wiki_url",
+						"short": "Wikipedia URL",
 						"type": "`$STRING`",
 					},
 				},
@@ -1683,30 +1809,37 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "deorbited",
+						"short": "Date the space station was deorbited",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "description",
+						"short": "Description of the space station",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "founded",
+						"short": "Date the space station was founded",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Space station ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "image_url",
+						"short": "URL to space station image",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the space station",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "orbit",
+						"short": "Orbital information",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -1723,6 +1856,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this space station",
 						"type": "`$STRING`",
 					},
 				},
@@ -1839,50 +1973,62 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "capability",
+						"short": "Spacecraft capability",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "crew_capacity",
+						"short": "Crew capacity",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "details",
+						"short": "Detailed information",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "diameter",
+						"short": "Diameter in meters",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "height",
+						"short": "Height in meters",
 						"type": "`$NUMBER`",
 					},
 					map[string]any{
 						"name": "history",
+						"short": "Historical information",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "human_rated",
+						"short": "Whether the spacecraft is human-rated",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Spacecraft configuration ID",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "image_url",
+						"short": "URL to spacecraft image",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "in_use",
+						"short": "Whether the spacecraft is currently in use",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "maiden_flight",
+						"short": "Date of maiden flight",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the spacecraft",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -1891,6 +2037,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "url",
+						"short": "API URL for this configuration",
 						"type": "`$STRING`",
 					},
 				},

@@ -143,16 +143,16 @@ agency = client.Agency()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbrev` | `str` | No |  |
-| `administrator` | `str` | No |  |
-| `country_code` | `str` | No |  |
-| `description` | `str` | No |  |
-| `founding_year` | `str` | No |  |
-| `id` | `int` | No |  |
-| `logo_url` | `str` | No |  |
-| `name` | `str` | No |  |
-| `type` | `str` | No |  |
-| `url` | `str` | No |  |
+| `abbrev` | `str` | No | Agency abbreviation |
+| `administrator` | `str` | No | Agency administrator |
+| `country_code` | `str` | No | ISO country code |
+| `description` | `str` | No | Agency description |
+| `founding_year` | `str` | No | Year agency was founded |
+| `id` | `int` | No | Agency ID |
+| `logo_url` | `str` | No | URL to agency logo |
+| `name` | `str` | No | Name of the agency |
+| `type` | `str` | No | Type of agency |
+| `url` | `str` | No | API URL for this agency |
 
 ### Operations
 
@@ -213,18 +213,18 @@ astronaut = client.Astronaut()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bio` | `str` | No |  |
-| `date_of_birth` | `str` | No |  |
-| `date_of_death` | `str` | No |  |
-| `flights_count` | `int` | No |  |
-| `id` | `int` | No |  |
-| `name` | `str` | No |  |
-| `nationality` | `str` | No |  |
-| `profile_image` | `str` | No |  |
-| `spacewalks_count` | `int` | No |  |
+| `bio` | `str` | No | Biographical information |
+| `date_of_birth` | `str` | No | Date of birth |
+| `date_of_death` | `str` | No | Date of death if applicable |
+| `flights_count` | `int` | No | Number of flights |
+| `id` | `int` | No | Astronaut ID |
+| `name` | `str` | No | Name of the astronaut |
+| `nationality` | `str` | No | Astronaut nationality |
+| `profile_image` | `str` | No | URL to profile image |
+| `spacewalks_count` | `int` | No | Number of spacewalks |
 | `status` | `dict` | No |  |
 | `type` | `dict` | No |  |
-| `url` | `str` | No |  |
+| `url` | `str` | No | API URL for this astronaut |
 
 ### Operations
 
@@ -320,12 +320,12 @@ docking_event = client.DockingEvent()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | `str` | No |  |
-| `docking` | `str` | No |  |
+| `departure` | `str` | No | Departure time |
+| `docking` | `str` | No | Docking time |
 | `docking_location` | `dict` | No |  |
 | `flight_vehicle` | `dict` | No |  |
-| `id` | `int` | No |  |
-| `url` | `str` | No |  |
+| `id` | `int` | No | Docking event ID |
+| `url` | `str` | No | API URL for this docking event |
 
 ### Operations
 
@@ -386,16 +386,16 @@ event = client.Event()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | `str` | No |  |
-| `description` | `str` | No |  |
-| `feature_image` | `str` | No |  |
-| `id` | `int` | No |  |
-| `location` | `str` | No |  |
-| `name` | `str` | No |  |
-| `news_url` | `str` | No |  |
+| `date` | `str` | No | Event date and time |
+| `description` | `str` | No | Description of the event |
+| `feature_image` | `str` | No | URL to feature image |
+| `id` | `int` | No | Event ID |
+| `location` | `str` | No | Event location |
+| `name` | `str` | No | Name of the event |
+| `news_url` | `str` | No | URL to news article |
 | `type` | `dict` | No |  |
-| `url` | `str` | No |  |
-| `video_url` | `str` | No |  |
+| `url` | `str` | No | API URL for this event |
+| `video_url` | `str` | No | URL to video |
 
 ### Operations
 
@@ -457,12 +457,12 @@ expedition = client.Expedition()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `crew` | `list` | No |  |
-| `end` | `str` | No |  |
-| `id` | `int` | No |  |
-| `name` | `str` | No |  |
+| `end` | `str` | No | End date of the expedition |
+| `id` | `int` | No | Expedition ID |
+| `name` | `str` | No | Name of the expedition |
 | `spacestation` | `dict` | No |  |
-| `start` | `str` | No |  |
-| `url` | `str` | No |  |
+| `start` | `str` | No | Start date of the expedition |
+| `url` | `str` | No | API URL for this expedition |
 
 ### Operations
 
@@ -523,33 +523,33 @@ first_stage = client.FirstStage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `int` | No |  |
-| `consecutive_successful_launches` | `int` | No |  |
-| `description` | `str` | No |  |
-| `diameter` | `float` | No |  |
-| `failed_launches` | `int` | No |  |
-| `family` | `str` | No |  |
-| `flights` | `int` | No |  |
-| `full_name` | `str` | No |  |
-| `gto_capacity` | `int` | No |  |
-| `id` | `int` | No |  |
-| `launch_mass` | `int` | No |  |
+| `apogee` | `int` | No | Apogee in km |
+| `consecutive_successful_launches` | `int` | No | Number of consecutive successful launches |
+| `description` | `str` | No | Description of the launcher |
+| `diameter` | `float` | No | Diameter in meters |
+| `failed_launches` | `int` | No | Number of failed launches |
+| `family` | `str` | No | Launcher family |
+| `flights` | `int` | No | Number of flights |
+| `full_name` | `str` | No | Full name of the launcher |
+| `gto_capacity` | `int` | No | GTO capacity in kg |
+| `id` | `int` | No | Configuration ID |
+| `launch_mass` | `int` | No | Launch mass in kg |
 | `launcher_config` | `dict` | No |  |
-| `length` | `float` | No |  |
-| `leo_capacity` | `int` | No |  |
-| `maiden_flight` | `str` | No |  |
+| `length` | `float` | No | Length in meters |
+| `leo_capacity` | `int` | No | LEO capacity in kg |
+| `maiden_flight` | `str` | No | Date of maiden flight |
 | `manufacturer` | `dict` | No |  |
-| `max_stage` | `int` | No |  |
-| `min_stage` | `int` | No |  |
-| `name` | `str` | No |  |
-| `pending_launches` | `int` | No |  |
-| `serial_number` | `str` | No |  |
-| `status` | `str` | No |  |
-| `successful_launches` | `int` | No |  |
-| `to_thrust` | `int` | No |  |
-| `type` | `str` | No |  |
-| `url` | `str` | No |  |
-| `variant` | `str` | No |  |
+| `max_stage` | `int` | No | Maximum number of stages |
+| `min_stage` | `int` | No | Minimum number of stages |
+| `name` | `str` | No | Name of the launcher configuration |
+| `pending_launches` | `int` | No | Number of pending launches |
+| `serial_number` | `str` | No | Serial number of the first stage |
+| `status` | `str` | No | Current status |
+| `successful_launches` | `int` | No | Number of successful launches |
+| `to_thrust` | `int` | No | Takeoff thrust in kN |
+| `type` | `str` | No | Type of first stage |
+| `url` | `str` | No | API URL for this configuration |
+| `variant` | `str` | No | Variant of the launcher |
 
 ### Operations
 
@@ -610,20 +610,20 @@ launch = client.Launch()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `str` | No |  |
-| `image` | `str` | No |  |
+| `id` | `str` | No | UUID of the launch |
+| `image` | `str` | No | URL to launch image |
 | `launch_service_provider` | `dict` | No |  |
 | `mission` | `dict` | No |  |
-| `name` | `str` | No |  |
-| `net` | `str` | No |  |
+| `name` | `str` | No | Name of the launch |
+| `net` | `str` | No | Net Earliest Time (NET) for launch |
 | `pad` | `dict` | No |  |
-| `probability` | `int` | No |  |
+| `probability` | `int` | No | Launch probability percentage |
 | `rocket` | `dict` | No |  |
 | `status` | `dict` | No |  |
-| `url` | `str` | No |  |
-| `webcast_live` | `bool` | No |  |
-| `window_end` | `str` | No |  |
-| `window_start` | `str` | No |  |
+| `url` | `str` | No | API URL for this launch |
+| `webcast_live` | `bool` | No | Whether the webcast is currently live |
+| `window_end` | `str` | No | End of launch window |
+| `window_start` | `str` | No | Start of launch window |
 
 ### Operations
 
@@ -684,28 +684,28 @@ launch_vehicle = client.LaunchVehicle()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `int` | No |  |
-| `consecutive_successful_launches` | `int` | No |  |
-| `description` | `str` | No |  |
-| `diameter` | `float` | No |  |
-| `failed_launches` | `int` | No |  |
-| `family` | `str` | No |  |
-| `full_name` | `str` | No |  |
-| `gto_capacity` | `int` | No |  |
-| `id` | `int` | No |  |
-| `launch_mass` | `int` | No |  |
-| `length` | `float` | No |  |
-| `leo_capacity` | `int` | No |  |
-| `maiden_flight` | `str` | No |  |
+| `apogee` | `int` | No | Apogee in km |
+| `consecutive_successful_launches` | `int` | No | Number of consecutive successful launches |
+| `description` | `str` | No | Description of the launcher |
+| `diameter` | `float` | No | Diameter in meters |
+| `failed_launches` | `int` | No | Number of failed launches |
+| `family` | `str` | No | Launcher family |
+| `full_name` | `str` | No | Full name of the launcher |
+| `gto_capacity` | `int` | No | GTO capacity in kg |
+| `id` | `int` | No | Configuration ID |
+| `launch_mass` | `int` | No | Launch mass in kg |
+| `length` | `float` | No | Length in meters |
+| `leo_capacity` | `int` | No | LEO capacity in kg |
+| `maiden_flight` | `str` | No | Date of maiden flight |
 | `manufacturer` | `dict` | No |  |
-| `max_stage` | `int` | No |  |
-| `min_stage` | `int` | No |  |
-| `name` | `str` | No |  |
-| `pending_launches` | `int` | No |  |
-| `successful_launches` | `int` | No |  |
-| `to_thrust` | `int` | No |  |
-| `url` | `str` | No |  |
-| `variant` | `str` | No |  |
+| `max_stage` | `int` | No | Maximum number of stages |
+| `min_stage` | `int` | No | Minimum number of stages |
+| `name` | `str` | No | Name of the launcher configuration |
+| `pending_launches` | `int` | No | Number of pending launches |
+| `successful_launches` | `int` | No | Number of successful launches |
+| `to_thrust` | `int` | No | Takeoff thrust in kN |
+| `url` | `str` | No | API URL for this configuration |
+| `variant` | `str` | No | Variant of the launcher |
 
 ### Operations
 
@@ -758,16 +758,16 @@ launcher = client.Launcher()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbrev` | `str` | No |  |
-| `administrator` | `str` | No |  |
-| `country_code` | `str` | No |  |
-| `description` | `str` | No |  |
-| `founding_year` | `str` | No |  |
-| `id` | `int` | No |  |
-| `logo_url` | `str` | No |  |
-| `name` | `str` | No |  |
-| `type` | `str` | No |  |
-| `url` | `str` | No |  |
+| `abbrev` | `str` | No | Agency abbreviation |
+| `administrator` | `str` | No | Agency administrator |
+| `country_code` | `str` | No | ISO country code |
+| `description` | `str` | No | Agency description |
+| `founding_year` | `str` | No | Year agency was founded |
+| `id` | `int` | No | Agency ID |
+| `logo_url` | `str` | No | URL to agency logo |
+| `name` | `str` | No | Name of the agency |
+| `type` | `str` | No | Type of agency |
+| `url` | `str` | No | API URL for this agency |
 
 ### Operations
 
@@ -818,13 +818,13 @@ location = client.Location()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `str` | No |  |
-| `id` | `int` | No |  |
-| `map_image` | `str` | No |  |
-| `name` | `str` | No |  |
-| `total_landing_count` | `int` | No |  |
-| `total_launch_count` | `int` | No |  |
-| `url` | `str` | No |  |
+| `country_code` | `str` | No | ISO country code |
+| `id` | `int` | No | Location ID |
+| `map_image` | `str` | No | URL to map image |
+| `name` | `str` | No | Name of the location |
+| `total_landing_count` | `int` | No | Total number of landings at this location |
+| `total_launch_count` | `int` | No | Total number of launches from this location |
+| `url` | `str` | No | API URL for this location |
 
 ### Operations
 
@@ -885,20 +885,20 @@ pad = client.Pad()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agency_id` | `int` | No |  |
-| `country_code` | `str` | No |  |
-| `id` | `int` | No |  |
-| `info_url` | `str` | No |  |
-| `latitude` | `str` | No |  |
+| `agency_id` | `int` | No | ID of the agency that operates this pad |
+| `country_code` | `str` | No | ISO country code |
+| `id` | `int` | No | Location ID |
+| `info_url` | `str` | No | URL to more information |
+| `latitude` | `str` | No | Latitude coordinate |
 | `location` | `dict` | No |  |
-| `longitude` | `str` | No |  |
-| `map_image` | `str` | No |  |
-| `map_url` | `str` | No |  |
-| `name` | `str` | No |  |
-| `total_landing_count` | `int` | No |  |
-| `total_launch_count` | `int` | No |  |
-| `url` | `str` | No |  |
-| `wiki_url` | `str` | No |  |
+| `longitude` | `str` | No | Longitude coordinate |
+| `map_image` | `str` | No | URL to map image |
+| `map_url` | `str` | No | URL to map |
+| `name` | `str` | No | Name of the location |
+| `total_landing_count` | `int` | No | Total number of landings at this location |
+| `total_launch_count` | `int` | No | Total number of launches from this location |
+| `url` | `str` | No | API URL for this location |
+| `wiki_url` | `str` | No | Wikipedia URL |
 
 ### Operations
 
@@ -994,17 +994,17 @@ space_station = client.SpaceStation()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deorbited` | `str` | No |  |
-| `description` | `str` | No |  |
-| `founded` | `str` | No |  |
-| `id` | `int` | No |  |
-| `image_url` | `str` | No |  |
-| `name` | `str` | No |  |
-| `orbit` | `str` | No |  |
+| `deorbited` | `str` | No | Date the space station was deorbited |
+| `description` | `str` | No | Description of the space station |
+| `founded` | `str` | No | Date the space station was founded |
+| `id` | `int` | No | Space station ID |
+| `image_url` | `str` | No | URL to space station image |
+| `name` | `str` | No | Name of the space station |
+| `orbit` | `str` | No | Orbital information |
 | `owners` | `list` | No |  |
 | `status` | `dict` | No |  |
 | `type` | `dict` | No |  |
-| `url` | `str` | No |  |
+| `url` | `str` | No | API URL for this space station |
 
 ### Operations
 
@@ -1066,20 +1066,20 @@ spacecraft = client.Spacecraft()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `agency` | `dict` | No |  |
-| `capability` | `str` | No |  |
-| `crew_capacity` | `int` | No |  |
-| `details` | `str` | No |  |
-| `diameter` | `float` | No |  |
-| `height` | `float` | No |  |
-| `history` | `str` | No |  |
-| `human_rated` | `bool` | No |  |
-| `id` | `int` | No |  |
-| `image_url` | `str` | No |  |
-| `in_use` | `bool` | No |  |
-| `maiden_flight` | `str` | No |  |
-| `name` | `str` | No |  |
+| `capability` | `str` | No | Spacecraft capability |
+| `crew_capacity` | `int` | No | Crew capacity |
+| `details` | `str` | No | Detailed information |
+| `diameter` | `float` | No | Diameter in meters |
+| `height` | `float` | No | Height in meters |
+| `history` | `str` | No | Historical information |
+| `human_rated` | `bool` | No | Whether the spacecraft is human-rated |
+| `id` | `int` | No | Spacecraft configuration ID |
+| `image_url` | `str` | No | URL to spacecraft image |
+| `in_use` | `bool` | No | Whether the spacecraft is currently in use |
+| `maiden_flight` | `str` | No | Date of maiden flight |
+| `name` | `str` | No | Name of the spacecraft |
 | `type` | `dict` | No |  |
-| `url` | `str` | No |  |
+| `url` | `str` | No | API URL for this configuration |
 
 ### Operations
 

@@ -6,7 +6,7 @@ The Golang SDK for the LaunchLibrary2 API — an entity-oriented client using st
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Agency(nil)` — each with the same small set of operations (`List`, `Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -283,16 +283,16 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"abbrev"` |  |
-| `"administrator"` |  |
-| `"country_code"` |  |
-| `"description"` |  |
-| `"founding_year"` |  |
-| `"id"` |  |
-| `"logo_url"` |  |
-| `"name"` |  |
-| `"type"` |  |
-| `"url"` |  |
+| `"abbrev"` | Agency abbreviation |
+| `"administrator"` | Agency administrator |
+| `"country_code"` | ISO country code |
+| `"description"` | Agency description |
+| `"founding_year"` | Year agency was founded |
+| `"id"` | Agency ID |
+| `"logo_url"` | URL to agency logo |
+| `"name"` | Name of the agency |
+| `"type"` | Type of agency |
+| `"url"` | API URL for this agency |
 
 Operations: List, Load.
 
@@ -302,18 +302,18 @@ API path: `/agencies`
 
 | Field | Description |
 | --- | --- |
-| `"bio"` |  |
-| `"date_of_birth"` |  |
-| `"date_of_death"` |  |
-| `"flights_count"` |  |
-| `"id"` |  |
-| `"name"` |  |
-| `"nationality"` |  |
-| `"profile_image"` |  |
-| `"spacewalks_count"` |  |
+| `"bio"` | Biographical information |
+| `"date_of_birth"` | Date of birth |
+| `"date_of_death"` | Date of death if applicable |
+| `"flights_count"` | Number of flights |
+| `"id"` | Astronaut ID |
+| `"name"` | Name of the astronaut |
+| `"nationality"` | Astronaut nationality |
+| `"profile_image"` | URL to profile image |
+| `"spacewalks_count"` | Number of spacewalks |
 | `"status"` |  |
 | `"type"` |  |
-| `"url"` |  |
+| `"url"` | API URL for this astronaut |
 
 Operations: List, Load.
 
@@ -332,12 +332,12 @@ API path: ``
 
 | Field | Description |
 | --- | --- |
-| `"departure"` |  |
-| `"docking"` |  |
+| `"departure"` | Departure time |
+| `"docking"` | Docking time |
 | `"docking_location"` |  |
 | `"flight_vehicle"` |  |
-| `"id"` |  |
-| `"url"` |  |
+| `"id"` | Docking event ID |
+| `"url"` | API URL for this docking event |
 
 Operations: List, Load.
 
@@ -347,16 +347,16 @@ API path: `/docking_event`
 
 | Field | Description |
 | --- | --- |
-| `"date"` |  |
-| `"description"` |  |
-| `"feature_image"` |  |
-| `"id"` |  |
-| `"location"` |  |
-| `"name"` |  |
-| `"news_url"` |  |
+| `"date"` | Event date and time |
+| `"description"` | Description of the event |
+| `"feature_image"` | URL to feature image |
+| `"id"` | Event ID |
+| `"location"` | Event location |
+| `"name"` | Name of the event |
+| `"news_url"` | URL to news article |
 | `"type"` |  |
-| `"url"` |  |
-| `"video_url"` |  |
+| `"url"` | API URL for this event |
+| `"video_url"` | URL to video |
 
 Operations: List, Load.
 
@@ -367,12 +367,12 @@ API path: `/event`
 | Field | Description |
 | --- | --- |
 | `"crew"` |  |
-| `"end"` |  |
-| `"id"` |  |
-| `"name"` |  |
+| `"end"` | End date of the expedition |
+| `"id"` | Expedition ID |
+| `"name"` | Name of the expedition |
 | `"spacestation"` |  |
-| `"start"` |  |
-| `"url"` |  |
+| `"start"` | Start date of the expedition |
+| `"url"` | API URL for this expedition |
 
 Operations: List, Load.
 
@@ -382,33 +382,33 @@ API path: `/expedition`
 
 | Field | Description |
 | --- | --- |
-| `"apogee"` |  |
-| `"consecutive_successful_launches"` |  |
-| `"description"` |  |
-| `"diameter"` |  |
-| `"failed_launches"` |  |
-| `"family"` |  |
-| `"flights"` |  |
-| `"full_name"` |  |
-| `"gto_capacity"` |  |
-| `"id"` |  |
-| `"launch_mass"` |  |
+| `"apogee"` | Apogee in km |
+| `"consecutive_successful_launches"` | Number of consecutive successful launches |
+| `"description"` | Description of the launcher |
+| `"diameter"` | Diameter in meters |
+| `"failed_launches"` | Number of failed launches |
+| `"family"` | Launcher family |
+| `"flights"` | Number of flights |
+| `"full_name"` | Full name of the launcher |
+| `"gto_capacity"` | GTO capacity in kg |
+| `"id"` | Configuration ID |
+| `"launch_mass"` | Launch mass in kg |
 | `"launcher_config"` |  |
-| `"length"` |  |
-| `"leo_capacity"` |  |
-| `"maiden_flight"` |  |
+| `"length"` | Length in meters |
+| `"leo_capacity"` | LEO capacity in kg |
+| `"maiden_flight"` | Date of maiden flight |
 | `"manufacturer"` |  |
-| `"max_stage"` |  |
-| `"min_stage"` |  |
-| `"name"` |  |
-| `"pending_launches"` |  |
-| `"serial_number"` |  |
-| `"status"` |  |
-| `"successful_launches"` |  |
-| `"to_thrust"` |  |
-| `"type"` |  |
-| `"url"` |  |
-| `"variant"` |  |
+| `"max_stage"` | Maximum number of stages |
+| `"min_stage"` | Minimum number of stages |
+| `"name"` | Name of the launcher configuration |
+| `"pending_launches"` | Number of pending launches |
+| `"serial_number"` | Serial number of the first stage |
+| `"status"` | Current status |
+| `"successful_launches"` | Number of successful launches |
+| `"to_thrust"` | Takeoff thrust in kN |
+| `"type"` | Type of first stage |
+| `"url"` | API URL for this configuration |
+| `"variant"` | Variant of the launcher |
 
 Operations: List, Load.
 
@@ -418,20 +418,20 @@ API path: `/firststage`
 
 | Field | Description |
 | --- | --- |
-| `"id"` |  |
-| `"image"` |  |
+| `"id"` | UUID of the launch |
+| `"image"` | URL to launch image |
 | `"launch_service_provider"` |  |
 | `"mission"` |  |
-| `"name"` |  |
-| `"net"` |  |
+| `"name"` | Name of the launch |
+| `"net"` | Net Earliest Time (NET) for launch |
 | `"pad"` |  |
-| `"probability"` |  |
+| `"probability"` | Launch probability percentage |
 | `"rocket"` |  |
 | `"status"` |  |
-| `"url"` |  |
-| `"webcast_live"` |  |
-| `"window_end"` |  |
-| `"window_start"` |  |
+| `"url"` | API URL for this launch |
+| `"webcast_live"` | Whether the webcast is currently live |
+| `"window_end"` | End of launch window |
+| `"window_start"` | Start of launch window |
 
 Operations: List, Load.
 
@@ -441,28 +441,28 @@ API path: `/launch`
 
 | Field | Description |
 | --- | --- |
-| `"apogee"` |  |
-| `"consecutive_successful_launches"` |  |
-| `"description"` |  |
-| `"diameter"` |  |
-| `"failed_launches"` |  |
-| `"family"` |  |
-| `"full_name"` |  |
-| `"gto_capacity"` |  |
-| `"id"` |  |
-| `"launch_mass"` |  |
-| `"length"` |  |
-| `"leo_capacity"` |  |
-| `"maiden_flight"` |  |
+| `"apogee"` | Apogee in km |
+| `"consecutive_successful_launches"` | Number of consecutive successful launches |
+| `"description"` | Description of the launcher |
+| `"diameter"` | Diameter in meters |
+| `"failed_launches"` | Number of failed launches |
+| `"family"` | Launcher family |
+| `"full_name"` | Full name of the launcher |
+| `"gto_capacity"` | GTO capacity in kg |
+| `"id"` | Configuration ID |
+| `"launch_mass"` | Launch mass in kg |
+| `"length"` | Length in meters |
+| `"leo_capacity"` | LEO capacity in kg |
+| `"maiden_flight"` | Date of maiden flight |
 | `"manufacturer"` |  |
-| `"max_stage"` |  |
-| `"min_stage"` |  |
-| `"name"` |  |
-| `"pending_launches"` |  |
-| `"successful_launches"` |  |
-| `"to_thrust"` |  |
-| `"url"` |  |
-| `"variant"` |  |
+| `"max_stage"` | Maximum number of stages |
+| `"min_stage"` | Minimum number of stages |
+| `"name"` | Name of the launcher configuration |
+| `"pending_launches"` | Number of pending launches |
+| `"successful_launches"` | Number of successful launches |
+| `"to_thrust"` | Takeoff thrust in kN |
+| `"url"` | API URL for this configuration |
+| `"variant"` | Variant of the launcher |
 
 Operations: List.
 
@@ -472,16 +472,16 @@ API path: `/config/launcher`
 
 | Field | Description |
 | --- | --- |
-| `"abbrev"` |  |
-| `"administrator"` |  |
-| `"country_code"` |  |
-| `"description"` |  |
-| `"founding_year"` |  |
-| `"id"` |  |
-| `"logo_url"` |  |
-| `"name"` |  |
-| `"type"` |  |
-| `"url"` |  |
+| `"abbrev"` | Agency abbreviation |
+| `"administrator"` | Agency administrator |
+| `"country_code"` | ISO country code |
+| `"description"` | Agency description |
+| `"founding_year"` | Year agency was founded |
+| `"id"` | Agency ID |
+| `"logo_url"` | URL to agency logo |
+| `"name"` | Name of the agency |
+| `"type"` | Type of agency |
+| `"url"` | API URL for this agency |
 
 Operations: Load.
 
@@ -491,13 +491,13 @@ API path: `/config/launcher/{id}`
 
 | Field | Description |
 | --- | --- |
-| `"country_code"` |  |
-| `"id"` |  |
-| `"map_image"` |  |
-| `"name"` |  |
-| `"total_landing_count"` |  |
-| `"total_launch_count"` |  |
-| `"url"` |  |
+| `"country_code"` | ISO country code |
+| `"id"` | Location ID |
+| `"map_image"` | URL to map image |
+| `"name"` | Name of the location |
+| `"total_landing_count"` | Total number of landings at this location |
+| `"total_launch_count"` | Total number of launches from this location |
+| `"url"` | API URL for this location |
 
 Operations: List, Load.
 
@@ -507,20 +507,20 @@ API path: `/location`
 
 | Field | Description |
 | --- | --- |
-| `"agency_id"` |  |
-| `"country_code"` |  |
-| `"id"` |  |
-| `"info_url"` |  |
-| `"latitude"` |  |
+| `"agency_id"` | ID of the agency that operates this pad |
+| `"country_code"` | ISO country code |
+| `"id"` | Location ID |
+| `"info_url"` | URL to more information |
+| `"latitude"` | Latitude coordinate |
 | `"location"` |  |
-| `"longitude"` |  |
-| `"map_image"` |  |
-| `"map_url"` |  |
-| `"name"` |  |
-| `"total_landing_count"` |  |
-| `"total_launch_count"` |  |
-| `"url"` |  |
-| `"wiki_url"` |  |
+| `"longitude"` | Longitude coordinate |
+| `"map_image"` | URL to map image |
+| `"map_url"` | URL to map |
+| `"name"` | Name of the location |
+| `"total_landing_count"` | Total number of landings at this location |
+| `"total_launch_count"` | Total number of launches from this location |
+| `"url"` | API URL for this location |
+| `"wiki_url"` | Wikipedia URL |
 
 Operations: List, Load.
 
@@ -539,17 +539,17 @@ API path: ``
 
 | Field | Description |
 | --- | --- |
-| `"deorbited"` |  |
-| `"description"` |  |
-| `"founded"` |  |
-| `"id"` |  |
-| `"image_url"` |  |
-| `"name"` |  |
-| `"orbit"` |  |
+| `"deorbited"` | Date the space station was deorbited |
+| `"description"` | Description of the space station |
+| `"founded"` | Date the space station was founded |
+| `"id"` | Space station ID |
+| `"image_url"` | URL to space station image |
+| `"name"` | Name of the space station |
+| `"orbit"` | Orbital information |
 | `"owners"` |  |
 | `"status"` |  |
 | `"type"` |  |
-| `"url"` |  |
+| `"url"` | API URL for this space station |
 
 Operations: List, Load.
 
@@ -560,20 +560,20 @@ API path: `/spacestation`
 | Field | Description |
 | --- | --- |
 | `"agency"` |  |
-| `"capability"` |  |
-| `"crew_capacity"` |  |
-| `"details"` |  |
-| `"diameter"` |  |
-| `"height"` |  |
-| `"history"` |  |
-| `"human_rated"` |  |
-| `"id"` |  |
-| `"image_url"` |  |
-| `"in_use"` |  |
-| `"maiden_flight"` |  |
-| `"name"` |  |
+| `"capability"` | Spacecraft capability |
+| `"crew_capacity"` | Crew capacity |
+| `"details"` | Detailed information |
+| `"diameter"` | Diameter in meters |
+| `"height"` | Height in meters |
+| `"history"` | Historical information |
+| `"human_rated"` | Whether the spacecraft is human-rated |
+| `"id"` | Spacecraft configuration ID |
+| `"image_url"` | URL to spacecraft image |
+| `"in_use"` | Whether the spacecraft is currently in use |
+| `"maiden_flight"` | Date of maiden flight |
+| `"name"` | Name of the spacecraft |
 | `"type"` |  |
-| `"url"` |  |
+| `"url"` | API URL for this configuration |
 
 Operations: List, Load.
 
@@ -599,16 +599,16 @@ Create an instance: `agency := client.Agency(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbrev` | `string` |  |
-| `administrator` | `string` |  |
-| `country_code` | `string` |  |
-| `description` | `string` |  |
-| `founding_year` | `string` |  |
-| `id` | `int` |  |
-| `logo_url` | `string` |  |
-| `name` | `string` |  |
-| `type` | `string` |  |
-| `url` | `string` |  |
+| `abbrev` | `string` | Agency abbreviation |
+| `administrator` | `string` | Agency administrator |
+| `country_code` | `string` | ISO country code |
+| `description` | `string` | Agency description |
+| `founding_year` | `string` | Year agency was founded |
+| `id` | `int` | Agency ID |
+| `logo_url` | `string` | URL to agency logo |
+| `name` | `string` | Name of the agency |
+| `type` | `string` | Type of agency |
+| `url` | `string` | API URL for this agency |
 
 #### Example: Load
 
@@ -646,18 +646,18 @@ Create an instance: `astronaut := client.Astronaut(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bio` | `string` |  |
-| `date_of_birth` | `string` |  |
-| `date_of_death` | `string` |  |
-| `flights_count` | `int` |  |
-| `id` | `int` |  |
-| `name` | `string` |  |
-| `nationality` | `string` |  |
-| `profile_image` | `string` |  |
-| `spacewalks_count` | `int` |  |
+| `bio` | `string` | Biographical information |
+| `date_of_birth` | `string` | Date of birth |
+| `date_of_death` | `string` | Date of death if applicable |
+| `flights_count` | `int` | Number of flights |
+| `id` | `int` | Astronaut ID |
+| `name` | `string` | Name of the astronaut |
+| `nationality` | `string` | Astronaut nationality |
+| `profile_image` | `string` | URL to profile image |
+| `spacewalks_count` | `int` | Number of spacewalks |
 | `status` | `map[string]any` |  |
 | `type` | `map[string]any` |  |
-| `url` | `string` |  |
+| `url` | `string` | API URL for this astronaut |
 
 #### Example: Load
 
@@ -700,12 +700,12 @@ Create an instance: `dockingEvent := client.DockingEvent(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `departure` | `string` |  |
-| `docking` | `string` |  |
+| `departure` | `string` | Departure time |
+| `docking` | `string` | Docking time |
 | `docking_location` | `map[string]any` |  |
 | `flight_vehicle` | `map[string]any` |  |
-| `id` | `int` |  |
-| `url` | `string` |  |
+| `id` | `int` | Docking event ID |
+| `url` | `string` | API URL for this docking event |
 
 #### Example: Load
 
@@ -743,16 +743,16 @@ Create an instance: `event := client.Event(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `date` | `string` |  |
-| `description` | `string` |  |
-| `feature_image` | `string` |  |
-| `id` | `int` |  |
-| `location` | `string` |  |
-| `name` | `string` |  |
-| `news_url` | `string` |  |
+| `date` | `string` | Event date and time |
+| `description` | `string` | Description of the event |
+| `feature_image` | `string` | URL to feature image |
+| `id` | `int` | Event ID |
+| `location` | `string` | Event location |
+| `name` | `string` | Name of the event |
+| `news_url` | `string` | URL to news article |
 | `type` | `map[string]any` |  |
-| `url` | `string` |  |
-| `video_url` | `string` |  |
+| `url` | `string` | API URL for this event |
+| `video_url` | `string` | URL to video |
 
 #### Example: Load
 
@@ -791,12 +791,12 @@ Create an instance: `expedition := client.Expedition(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `crew` | `[]any` |  |
-| `end` | `string` |  |
-| `id` | `int` |  |
-| `name` | `string` |  |
+| `end` | `string` | End date of the expedition |
+| `id` | `int` | Expedition ID |
+| `name` | `string` | Name of the expedition |
 | `spacestation` | `map[string]any` |  |
-| `start` | `string` |  |
-| `url` | `string` |  |
+| `start` | `string` | Start date of the expedition |
+| `url` | `string` | API URL for this expedition |
 
 #### Example: Load
 
@@ -834,33 +834,33 @@ Create an instance: `firstStage := client.FirstStage(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | `int` |  |
-| `consecutive_successful_launches` | `int` |  |
-| `description` | `string` |  |
-| `diameter` | `float64` |  |
-| `failed_launches` | `int` |  |
-| `family` | `string` |  |
-| `flights` | `int` |  |
-| `full_name` | `string` |  |
-| `gto_capacity` | `int` |  |
-| `id` | `int` |  |
-| `launch_mass` | `int` |  |
+| `apogee` | `int` | Apogee in km |
+| `consecutive_successful_launches` | `int` | Number of consecutive successful launches |
+| `description` | `string` | Description of the launcher |
+| `diameter` | `float64` | Diameter in meters |
+| `failed_launches` | `int` | Number of failed launches |
+| `family` | `string` | Launcher family |
+| `flights` | `int` | Number of flights |
+| `full_name` | `string` | Full name of the launcher |
+| `gto_capacity` | `int` | GTO capacity in kg |
+| `id` | `int` | Configuration ID |
+| `launch_mass` | `int` | Launch mass in kg |
 | `launcher_config` | `map[string]any` |  |
-| `length` | `float64` |  |
-| `leo_capacity` | `int` |  |
-| `maiden_flight` | `string` |  |
+| `length` | `float64` | Length in meters |
+| `leo_capacity` | `int` | LEO capacity in kg |
+| `maiden_flight` | `string` | Date of maiden flight |
 | `manufacturer` | `map[string]any` |  |
-| `max_stage` | `int` |  |
-| `min_stage` | `int` |  |
-| `name` | `string` |  |
-| `pending_launches` | `int` |  |
-| `serial_number` | `string` |  |
-| `status` | `string` |  |
-| `successful_launches` | `int` |  |
-| `to_thrust` | `int` |  |
-| `type` | `string` |  |
-| `url` | `string` |  |
-| `variant` | `string` |  |
+| `max_stage` | `int` | Maximum number of stages |
+| `min_stage` | `int` | Minimum number of stages |
+| `name` | `string` | Name of the launcher configuration |
+| `pending_launches` | `int` | Number of pending launches |
+| `serial_number` | `string` | Serial number of the first stage |
+| `status` | `string` | Current status |
+| `successful_launches` | `int` | Number of successful launches |
+| `to_thrust` | `int` | Takeoff thrust in kN |
+| `type` | `string` | Type of first stage |
+| `url` | `string` | API URL for this configuration |
+| `variant` | `string` | Variant of the launcher |
 
 #### Example: Load
 
@@ -898,20 +898,20 @@ Create an instance: `launch := client.Launch(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
-| `image` | `string` |  |
+| `id` | `string` | UUID of the launch |
+| `image` | `string` | URL to launch image |
 | `launch_service_provider` | `map[string]any` |  |
 | `mission` | `map[string]any` |  |
-| `name` | `string` |  |
-| `net` | `string` |  |
+| `name` | `string` | Name of the launch |
+| `net` | `string` | Net Earliest Time (NET) for launch |
 | `pad` | `map[string]any` |  |
-| `probability` | `int` |  |
+| `probability` | `int` | Launch probability percentage |
 | `rocket` | `map[string]any` |  |
 | `status` | `map[string]any` |  |
-| `url` | `string` |  |
-| `webcast_live` | `bool` |  |
-| `window_end` | `string` |  |
-| `window_start` | `string` |  |
+| `url` | `string` | API URL for this launch |
+| `webcast_live` | `bool` | Whether the webcast is currently live |
+| `window_end` | `string` | End of launch window |
+| `window_start` | `string` | Start of launch window |
 
 #### Example: Load
 
@@ -948,28 +948,28 @@ Create an instance: `launchVehicle := client.LaunchVehicle(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | `int` |  |
-| `consecutive_successful_launches` | `int` |  |
-| `description` | `string` |  |
-| `diameter` | `float64` |  |
-| `failed_launches` | `int` |  |
-| `family` | `string` |  |
-| `full_name` | `string` |  |
-| `gto_capacity` | `int` |  |
-| `id` | `int` |  |
-| `launch_mass` | `int` |  |
-| `length` | `float64` |  |
-| `leo_capacity` | `int` |  |
-| `maiden_flight` | `string` |  |
+| `apogee` | `int` | Apogee in km |
+| `consecutive_successful_launches` | `int` | Number of consecutive successful launches |
+| `description` | `string` | Description of the launcher |
+| `diameter` | `float64` | Diameter in meters |
+| `failed_launches` | `int` | Number of failed launches |
+| `family` | `string` | Launcher family |
+| `full_name` | `string` | Full name of the launcher |
+| `gto_capacity` | `int` | GTO capacity in kg |
+| `id` | `int` | Configuration ID |
+| `launch_mass` | `int` | Launch mass in kg |
+| `length` | `float64` | Length in meters |
+| `leo_capacity` | `int` | LEO capacity in kg |
+| `maiden_flight` | `string` | Date of maiden flight |
 | `manufacturer` | `map[string]any` |  |
-| `max_stage` | `int` |  |
-| `min_stage` | `int` |  |
-| `name` | `string` |  |
-| `pending_launches` | `int` |  |
-| `successful_launches` | `int` |  |
-| `to_thrust` | `int` |  |
-| `url` | `string` |  |
-| `variant` | `string` |  |
+| `max_stage` | `int` | Maximum number of stages |
+| `min_stage` | `int` | Minimum number of stages |
+| `name` | `string` | Name of the launcher configuration |
+| `pending_launches` | `int` | Number of pending launches |
+| `successful_launches` | `int` | Number of successful launches |
+| `to_thrust` | `int` | Takeoff thrust in kN |
+| `url` | `string` | API URL for this configuration |
+| `variant` | `string` | Variant of the launcher |
 
 #### Example: List
 
@@ -996,16 +996,16 @@ Create an instance: `launcher := client.Launcher(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `abbrev` | `string` |  |
-| `administrator` | `string` |  |
-| `country_code` | `string` |  |
-| `description` | `string` |  |
-| `founding_year` | `string` |  |
-| `id` | `int` |  |
-| `logo_url` | `string` |  |
-| `name` | `string` |  |
-| `type` | `string` |  |
-| `url` | `string` |  |
+| `abbrev` | `string` | Agency abbreviation |
+| `administrator` | `string` | Agency administrator |
+| `country_code` | `string` | ISO country code |
+| `description` | `string` | Agency description |
+| `founding_year` | `string` | Year agency was founded |
+| `id` | `int` | Agency ID |
+| `logo_url` | `string` | URL to agency logo |
+| `name` | `string` | Name of the agency |
+| `type` | `string` | Type of agency |
+| `url` | `string` | API URL for this agency |
 
 #### Example: Load
 
@@ -1033,13 +1033,13 @@ Create an instance: `location := client.Location(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `country_code` | `string` |  |
-| `id` | `int` |  |
-| `map_image` | `string` |  |
-| `name` | `string` |  |
-| `total_landing_count` | `int` |  |
-| `total_launch_count` | `int` |  |
-| `url` | `string` |  |
+| `country_code` | `string` | ISO country code |
+| `id` | `int` | Location ID |
+| `map_image` | `string` | URL to map image |
+| `name` | `string` | Name of the location |
+| `total_landing_count` | `int` | Total number of landings at this location |
+| `total_launch_count` | `int` | Total number of launches from this location |
+| `url` | `string` | API URL for this location |
 
 #### Example: Load
 
@@ -1077,20 +1077,20 @@ Create an instance: `pad := client.Pad(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `agency_id` | `int` |  |
-| `country_code` | `string` |  |
-| `id` | `int` |  |
-| `info_url` | `string` |  |
-| `latitude` | `string` |  |
+| `agency_id` | `int` | ID of the agency that operates this pad |
+| `country_code` | `string` | ISO country code |
+| `id` | `int` | Location ID |
+| `info_url` | `string` | URL to more information |
+| `latitude` | `string` | Latitude coordinate |
 | `location` | `map[string]any` |  |
-| `longitude` | `string` |  |
-| `map_image` | `string` |  |
-| `map_url` | `string` |  |
-| `name` | `string` |  |
-| `total_landing_count` | `int` |  |
-| `total_launch_count` | `int` |  |
-| `url` | `string` |  |
-| `wiki_url` | `string` |  |
+| `longitude` | `string` | Longitude coordinate |
+| `map_image` | `string` | URL to map image |
+| `map_url` | `string` | URL to map |
+| `name` | `string` | Name of the location |
+| `total_landing_count` | `int` | Total number of landings at this location |
+| `total_launch_count` | `int` | Total number of launches from this location |
+| `url` | `string` | API URL for this location |
+| `wiki_url` | `string` | Wikipedia URL |
 
 #### Example: Load
 
@@ -1133,17 +1133,17 @@ Create an instance: `spaceStation := client.SpaceStation(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `deorbited` | `string` |  |
-| `description` | `string` |  |
-| `founded` | `string` |  |
-| `id` | `int` |  |
-| `image_url` | `string` |  |
-| `name` | `string` |  |
-| `orbit` | `string` |  |
+| `deorbited` | `string` | Date the space station was deorbited |
+| `description` | `string` | Description of the space station |
+| `founded` | `string` | Date the space station was founded |
+| `id` | `int` | Space station ID |
+| `image_url` | `string` | URL to space station image |
+| `name` | `string` | Name of the space station |
+| `orbit` | `string` | Orbital information |
 | `owners` | `[]any` |  |
 | `status` | `map[string]any` |  |
 | `type` | `map[string]any` |  |
-| `url` | `string` |  |
+| `url` | `string` | API URL for this space station |
 
 #### Example: Load
 
@@ -1182,20 +1182,20 @@ Create an instance: `spacecraft := client.Spacecraft(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `agency` | `map[string]any` |  |
-| `capability` | `string` |  |
-| `crew_capacity` | `int` |  |
-| `details` | `string` |  |
-| `diameter` | `float64` |  |
-| `height` | `float64` |  |
-| `history` | `string` |  |
-| `human_rated` | `bool` |  |
-| `id` | `int` |  |
-| `image_url` | `string` |  |
-| `in_use` | `bool` |  |
-| `maiden_flight` | `string` |  |
-| `name` | `string` |  |
+| `capability` | `string` | Spacecraft capability |
+| `crew_capacity` | `int` | Crew capacity |
+| `details` | `string` | Detailed information |
+| `diameter` | `float64` | Diameter in meters |
+| `height` | `float64` | Height in meters |
+| `history` | `string` | Historical information |
+| `human_rated` | `bool` | Whether the spacecraft is human-rated |
+| `id` | `int` | Spacecraft configuration ID |
+| `image_url` | `string` | URL to spacecraft image |
+| `in_use` | `bool` | Whether the spacecraft is currently in use |
+| `maiden_flight` | `string` | Date of maiden flight |
+| `name` | `string` | Name of the spacecraft |
 | `type` | `map[string]any` |  |
-| `url` | `string` |  |
+| `url` | `string` | API URL for this configuration |
 
 #### Example: Load
 

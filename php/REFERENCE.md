@@ -148,16 +148,16 @@ $agency = $client->Agency();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbrev` | `string` | No |  |
-| `administrator` | `string` | No |  |
-| `country_code` | `string` | No |  |
-| `description` | `string` | No |  |
-| `founding_year` | `string` | No |  |
-| `id` | `int` | No |  |
-| `logo_url` | `string` | No |  |
-| `name` | `string` | No |  |
-| `type` | `string` | No |  |
-| `url` | `string` | No |  |
+| `abbrev` | `string` | No | Agency abbreviation |
+| `administrator` | `string` | No | Agency administrator |
+| `country_code` | `string` | No | ISO country code |
+| `description` | `string` | No | Agency description |
+| `founding_year` | `string` | No | Year agency was founded |
+| `id` | `int` | No | Agency ID |
+| `logo_url` | `string` | No | URL to agency logo |
+| `name` | `string` | No | Name of the agency |
+| `type` | `string` | No | Type of agency |
+| `url` | `string` | No | API URL for this agency |
 
 ### Operations
 
@@ -217,18 +217,18 @@ $astronaut = $client->Astronaut();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `bio` | `string` | No |  |
-| `date_of_birth` | `string` | No |  |
-| `date_of_death` | `string` | No |  |
-| `flights_count` | `int` | No |  |
-| `id` | `int` | No |  |
-| `name` | `string` | No |  |
-| `nationality` | `string` | No |  |
-| `profile_image` | `string` | No |  |
-| `spacewalks_count` | `int` | No |  |
+| `bio` | `string` | No | Biographical information |
+| `date_of_birth` | `string` | No | Date of birth |
+| `date_of_death` | `string` | No | Date of death if applicable |
+| `flights_count` | `int` | No | Number of flights |
+| `id` | `int` | No | Astronaut ID |
+| `name` | `string` | No | Name of the astronaut |
+| `nationality` | `string` | No | Astronaut nationality |
+| `profile_image` | `string` | No | URL to profile image |
+| `spacewalks_count` | `int` | No | Number of spacewalks |
 | `status` | `array` | No |  |
 | `type` | `array` | No |  |
-| `url` | `string` | No |  |
+| `url` | `string` | No | API URL for this astronaut |
 
 ### Operations
 
@@ -324,12 +324,12 @@ $docking_event = $client->DockingEvent();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | `string` | No |  |
-| `docking` | `string` | No |  |
+| `departure` | `string` | No | Departure time |
+| `docking` | `string` | No | Docking time |
 | `docking_location` | `array` | No |  |
 | `flight_vehicle` | `array` | No |  |
-| `id` | `int` | No |  |
-| `url` | `string` | No |  |
+| `id` | `int` | No | Docking event ID |
+| `url` | `string` | No | API URL for this docking event |
 
 ### Operations
 
@@ -389,16 +389,16 @@ $event = $client->Event();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `date` | `string` | No |  |
-| `description` | `string` | No |  |
-| `feature_image` | `string` | No |  |
-| `id` | `int` | No |  |
-| `location` | `string` | No |  |
-| `name` | `string` | No |  |
-| `news_url` | `string` | No |  |
+| `date` | `string` | No | Event date and time |
+| `description` | `string` | No | Description of the event |
+| `feature_image` | `string` | No | URL to feature image |
+| `id` | `int` | No | Event ID |
+| `location` | `string` | No | Event location |
+| `name` | `string` | No | Name of the event |
+| `news_url` | `string` | No | URL to news article |
 | `type` | `array` | No |  |
-| `url` | `string` | No |  |
-| `video_url` | `string` | No |  |
+| `url` | `string` | No | API URL for this event |
+| `video_url` | `string` | No | URL to video |
 
 ### Operations
 
@@ -459,12 +459,12 @@ $expedition = $client->Expedition();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `crew` | `array` | No |  |
-| `end` | `string` | No |  |
-| `id` | `int` | No |  |
-| `name` | `string` | No |  |
+| `end` | `string` | No | End date of the expedition |
+| `id` | `int` | No | Expedition ID |
+| `name` | `string` | No | Name of the expedition |
 | `spacestation` | `array` | No |  |
-| `start` | `string` | No |  |
-| `url` | `string` | No |  |
+| `start` | `string` | No | Start date of the expedition |
+| `url` | `string` | No | API URL for this expedition |
 
 ### Operations
 
@@ -524,33 +524,33 @@ $first_stage = $client->FirstStage();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `int` | No |  |
-| `consecutive_successful_launches` | `int` | No |  |
-| `description` | `string` | No |  |
-| `diameter` | `float` | No |  |
-| `failed_launches` | `int` | No |  |
-| `family` | `string` | No |  |
-| `flights` | `int` | No |  |
-| `full_name` | `string` | No |  |
-| `gto_capacity` | `int` | No |  |
-| `id` | `int` | No |  |
-| `launch_mass` | `int` | No |  |
+| `apogee` | `int` | No | Apogee in km |
+| `consecutive_successful_launches` | `int` | No | Number of consecutive successful launches |
+| `description` | `string` | No | Description of the launcher |
+| `diameter` | `float` | No | Diameter in meters |
+| `failed_launches` | `int` | No | Number of failed launches |
+| `family` | `string` | No | Launcher family |
+| `flights` | `int` | No | Number of flights |
+| `full_name` | `string` | No | Full name of the launcher |
+| `gto_capacity` | `int` | No | GTO capacity in kg |
+| `id` | `int` | No | Configuration ID |
+| `launch_mass` | `int` | No | Launch mass in kg |
 | `launcher_config` | `array` | No |  |
-| `length` | `float` | No |  |
-| `leo_capacity` | `int` | No |  |
-| `maiden_flight` | `string` | No |  |
+| `length` | `float` | No | Length in meters |
+| `leo_capacity` | `int` | No | LEO capacity in kg |
+| `maiden_flight` | `string` | No | Date of maiden flight |
 | `manufacturer` | `array` | No |  |
-| `max_stage` | `int` | No |  |
-| `min_stage` | `int` | No |  |
-| `name` | `string` | No |  |
-| `pending_launches` | `int` | No |  |
-| `serial_number` | `string` | No |  |
-| `status` | `string` | No |  |
-| `successful_launches` | `int` | No |  |
-| `to_thrust` | `int` | No |  |
-| `type` | `string` | No |  |
-| `url` | `string` | No |  |
-| `variant` | `string` | No |  |
+| `max_stage` | `int` | No | Maximum number of stages |
+| `min_stage` | `int` | No | Minimum number of stages |
+| `name` | `string` | No | Name of the launcher configuration |
+| `pending_launches` | `int` | No | Number of pending launches |
+| `serial_number` | `string` | No | Serial number of the first stage |
+| `status` | `string` | No | Current status |
+| `successful_launches` | `int` | No | Number of successful launches |
+| `to_thrust` | `int` | No | Takeoff thrust in kN |
+| `type` | `string` | No | Type of first stage |
+| `url` | `string` | No | API URL for this configuration |
+| `variant` | `string` | No | Variant of the launcher |
 
 ### Operations
 
@@ -610,20 +610,20 @@ $launch = $client->Launch();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
-| `image` | `string` | No |  |
+| `id` | `string` | No | UUID of the launch |
+| `image` | `string` | No | URL to launch image |
 | `launch_service_provider` | `array` | No |  |
 | `mission` | `array` | No |  |
-| `name` | `string` | No |  |
-| `net` | `string` | No |  |
+| `name` | `string` | No | Name of the launch |
+| `net` | `string` | No | Net Earliest Time (NET) for launch |
 | `pad` | `array` | No |  |
-| `probability` | `int` | No |  |
+| `probability` | `int` | No | Launch probability percentage |
 | `rocket` | `array` | No |  |
 | `status` | `array` | No |  |
-| `url` | `string` | No |  |
-| `webcast_live` | `bool` | No |  |
-| `window_end` | `string` | No |  |
-| `window_start` | `string` | No |  |
+| `url` | `string` | No | API URL for this launch |
+| `webcast_live` | `bool` | No | Whether the webcast is currently live |
+| `window_end` | `string` | No | End of launch window |
+| `window_start` | `string` | No | Start of launch window |
 
 ### Operations
 
@@ -683,28 +683,28 @@ $launch_vehicle = $client->LaunchVehicle();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `int` | No |  |
-| `consecutive_successful_launches` | `int` | No |  |
-| `description` | `string` | No |  |
-| `diameter` | `float` | No |  |
-| `failed_launches` | `int` | No |  |
-| `family` | `string` | No |  |
-| `full_name` | `string` | No |  |
-| `gto_capacity` | `int` | No |  |
-| `id` | `int` | No |  |
-| `launch_mass` | `int` | No |  |
-| `length` | `float` | No |  |
-| `leo_capacity` | `int` | No |  |
-| `maiden_flight` | `string` | No |  |
+| `apogee` | `int` | No | Apogee in km |
+| `consecutive_successful_launches` | `int` | No | Number of consecutive successful launches |
+| `description` | `string` | No | Description of the launcher |
+| `diameter` | `float` | No | Diameter in meters |
+| `failed_launches` | `int` | No | Number of failed launches |
+| `family` | `string` | No | Launcher family |
+| `full_name` | `string` | No | Full name of the launcher |
+| `gto_capacity` | `int` | No | GTO capacity in kg |
+| `id` | `int` | No | Configuration ID |
+| `launch_mass` | `int` | No | Launch mass in kg |
+| `length` | `float` | No | Length in meters |
+| `leo_capacity` | `int` | No | LEO capacity in kg |
+| `maiden_flight` | `string` | No | Date of maiden flight |
 | `manufacturer` | `array` | No |  |
-| `max_stage` | `int` | No |  |
-| `min_stage` | `int` | No |  |
-| `name` | `string` | No |  |
-| `pending_launches` | `int` | No |  |
-| `successful_launches` | `int` | No |  |
-| `to_thrust` | `int` | No |  |
-| `url` | `string` | No |  |
-| `variant` | `string` | No |  |
+| `max_stage` | `int` | No | Maximum number of stages |
+| `min_stage` | `int` | No | Minimum number of stages |
+| `name` | `string` | No | Name of the launcher configuration |
+| `pending_launches` | `int` | No | Number of pending launches |
+| `successful_launches` | `int` | No | Number of successful launches |
+| `to_thrust` | `int` | No | Takeoff thrust in kN |
+| `url` | `string` | No | API URL for this configuration |
+| `variant` | `string` | No | Variant of the launcher |
 
 ### Operations
 
@@ -756,16 +756,16 @@ $launcher = $client->Launcher();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `abbrev` | `string` | No |  |
-| `administrator` | `string` | No |  |
-| `country_code` | `string` | No |  |
-| `description` | `string` | No |  |
-| `founding_year` | `string` | No |  |
-| `id` | `int` | No |  |
-| `logo_url` | `string` | No |  |
-| `name` | `string` | No |  |
-| `type` | `string` | No |  |
-| `url` | `string` | No |  |
+| `abbrev` | `string` | No | Agency abbreviation |
+| `administrator` | `string` | No | Agency administrator |
+| `country_code` | `string` | No | ISO country code |
+| `description` | `string` | No | Agency description |
+| `founding_year` | `string` | No | Year agency was founded |
+| `id` | `int` | No | Agency ID |
+| `logo_url` | `string` | No | URL to agency logo |
+| `name` | `string` | No | Name of the agency |
+| `type` | `string` | No | Type of agency |
+| `url` | `string` | No | API URL for this agency |
 
 ### Operations
 
@@ -817,13 +817,13 @@ $location = $client->Location();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `country_code` | `string` | No |  |
-| `id` | `int` | No |  |
-| `map_image` | `string` | No |  |
-| `name` | `string` | No |  |
-| `total_landing_count` | `int` | No |  |
-| `total_launch_count` | `int` | No |  |
-| `url` | `string` | No |  |
+| `country_code` | `string` | No | ISO country code |
+| `id` | `int` | No | Location ID |
+| `map_image` | `string` | No | URL to map image |
+| `name` | `string` | No | Name of the location |
+| `total_landing_count` | `int` | No | Total number of landings at this location |
+| `total_launch_count` | `int` | No | Total number of launches from this location |
+| `url` | `string` | No | API URL for this location |
 
 ### Operations
 
@@ -883,20 +883,20 @@ $pad = $client->Pad();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `agency_id` | `int` | No |  |
-| `country_code` | `string` | No |  |
-| `id` | `int` | No |  |
-| `info_url` | `string` | No |  |
-| `latitude` | `string` | No |  |
+| `agency_id` | `int` | No | ID of the agency that operates this pad |
+| `country_code` | `string` | No | ISO country code |
+| `id` | `int` | No | Location ID |
+| `info_url` | `string` | No | URL to more information |
+| `latitude` | `string` | No | Latitude coordinate |
 | `location` | `array` | No |  |
-| `longitude` | `string` | No |  |
-| `map_image` | `string` | No |  |
-| `map_url` | `string` | No |  |
-| `name` | `string` | No |  |
-| `total_landing_count` | `int` | No |  |
-| `total_launch_count` | `int` | No |  |
-| `url` | `string` | No |  |
-| `wiki_url` | `string` | No |  |
+| `longitude` | `string` | No | Longitude coordinate |
+| `map_image` | `string` | No | URL to map image |
+| `map_url` | `string` | No | URL to map |
+| `name` | `string` | No | Name of the location |
+| `total_landing_count` | `int` | No | Total number of landings at this location |
+| `total_launch_count` | `int` | No | Total number of launches from this location |
+| `url` | `string` | No | API URL for this location |
+| `wiki_url` | `string` | No | Wikipedia URL |
 
 ### Operations
 
@@ -992,17 +992,17 @@ $space_station = $client->SpaceStation();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `deorbited` | `string` | No |  |
-| `description` | `string` | No |  |
-| `founded` | `string` | No |  |
-| `id` | `int` | No |  |
-| `image_url` | `string` | No |  |
-| `name` | `string` | No |  |
-| `orbit` | `string` | No |  |
+| `deorbited` | `string` | No | Date the space station was deorbited |
+| `description` | `string` | No | Description of the space station |
+| `founded` | `string` | No | Date the space station was founded |
+| `id` | `int` | No | Space station ID |
+| `image_url` | `string` | No | URL to space station image |
+| `name` | `string` | No | Name of the space station |
+| `orbit` | `string` | No | Orbital information |
 | `owners` | `array` | No |  |
 | `status` | `array` | No |  |
 | `type` | `array` | No |  |
-| `url` | `string` | No |  |
+| `url` | `string` | No | API URL for this space station |
 
 ### Operations
 
@@ -1063,20 +1063,20 @@ $spacecraft = $client->Spacecraft();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `agency` | `array` | No |  |
-| `capability` | `string` | No |  |
-| `crew_capacity` | `int` | No |  |
-| `details` | `string` | No |  |
-| `diameter` | `float` | No |  |
-| `height` | `float` | No |  |
-| `history` | `string` | No |  |
-| `human_rated` | `bool` | No |  |
-| `id` | `int` | No |  |
-| `image_url` | `string` | No |  |
-| `in_use` | `bool` | No |  |
-| `maiden_flight` | `string` | No |  |
-| `name` | `string` | No |  |
+| `capability` | `string` | No | Spacecraft capability |
+| `crew_capacity` | `int` | No | Crew capacity |
+| `details` | `string` | No | Detailed information |
+| `diameter` | `float` | No | Diameter in meters |
+| `height` | `float` | No | Height in meters |
+| `history` | `string` | No | Historical information |
+| `human_rated` | `bool` | No | Whether the spacecraft is human-rated |
+| `id` | `int` | No | Spacecraft configuration ID |
+| `image_url` | `string` | No | URL to spacecraft image |
+| `in_use` | `bool` | No | Whether the spacecraft is currently in use |
+| `maiden_flight` | `string` | No | Date of maiden flight |
+| `name` | `string` | No | Name of the spacecraft |
 | `type` | `array` | No |  |
-| `url` | `string` | No |  |
+| `url` | `string` | No | API URL for this configuration |
 
 ### Operations
 

@@ -1,0 +1,190 @@
+# Entity: astronaut
+
+main: kit: entity: astronaut: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "bio"
+      req: false
+      short: "Biographical information"
+      type: "`$STRING`"
+    }
+    {
+      name: "date_of_birth"
+      req: false
+      short: "Date of birth"
+      type: "`$STRING`"
+    }
+    {
+      name: "date_of_death"
+      req: false
+      short: "Date of death if applicable"
+      type: "`$STRING`"
+    }
+    {
+      name: "flights_count"
+      req: false
+      short: "Number of flights"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "id"
+      req: false
+      short: "Astronaut ID"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "name"
+      req: false
+      short: "Name of the astronaut"
+      type: "`$STRING`"
+    }
+    {
+      name: "nationality"
+      req: false
+      short: "Astronaut nationality"
+      type: "`$STRING`"
+    }
+    {
+      name: "profile_image"
+      req: false
+      short: "URL to profile image"
+      type: "`$STRING`"
+    }
+    {
+      name: "spacewalks_count"
+      req: false
+      short: "Number of spacewalks"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "type"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "url"
+      req: false
+      short: "API URL for this astronaut"
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "astronaut"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: 10
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "nationality"
+                orig: "nationality"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: 0
+                kind: "query"
+                name: "offset"
+                orig: "offset"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "search"
+                orig: "search"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "status"
+                orig: "status"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/astronaut"
+          parts: [
+            "astronaut"
+          ]
+          select: {
+            exist: [
+              "limit"
+              "nationality"
+              "offset"
+              "search"
+              "status"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/astronaut/{id}"
+          parts: [
+            "astronaut"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,219 @@
+# Entity: launch_vehicle
+
+main: kit: entity: launch_vehicle: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "apogee"
+      req: false
+      short: "Apogee in km"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "consecutive_successful_launches"
+      req: false
+      short: "Number of consecutive successful launches"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "description"
+      req: false
+      short: "Description of the launcher"
+      type: "`$STRING`"
+    }
+    {
+      name: "diameter"
+      req: false
+      short: "Diameter in meters"
+      type: "`$NUMBER`"
+    }
+    {
+      name: "failed_launches"
+      req: false
+      short: "Number of failed launches"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "family"
+      req: false
+      short: "Launcher family"
+      type: "`$STRING`"
+    }
+    {
+      name: "full_name"
+      req: false
+      short: "Full name of the launcher"
+      type: "`$STRING`"
+    }
+    {
+      name: "gto_capacity"
+      req: false
+      short: "GTO capacity in kg"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "id"
+      req: false
+      short: "Configuration ID"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "launch_mass"
+      req: false
+      short: "Launch mass in kg"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "length"
+      req: false
+      short: "Length in meters"
+      type: "`$NUMBER`"
+    }
+    {
+      name: "leo_capacity"
+      req: false
+      short: "LEO capacity in kg"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "maiden_flight"
+      req: false
+      short: "Date of maiden flight"
+      type: "`$STRING`"
+    }
+    {
+      name: "manufacturer"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "max_stage"
+      req: false
+      short: "Maximum number of stages"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "min_stage"
+      req: false
+      short: "Minimum number of stages"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "name"
+      req: false
+      short: "Name of the launcher configuration"
+      type: "`$STRING`"
+    }
+    {
+      name: "pending_launches"
+      req: false
+      short: "Number of pending launches"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "successful_launches"
+      req: false
+      short: "Number of successful launches"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "to_thrust"
+      req: false
+      short: "Takeoff thrust in kN"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "url"
+      req: false
+      short: "API URL for this configuration"
+      type: "`$STRING`"
+    }
+    {
+      name: "variant"
+      req: false
+      short: "Variant of the launcher"
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "launch_vehicle"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "family"
+                orig: "family"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: 10
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "manufacturer"
+                orig: "manufacturer"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 0
+                kind: "query"
+                name: "offset"
+                orig: "offset"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "search"
+                orig: "search"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/config/launcher"
+          parts: [
+            "config"
+            "launcher"
+          ]
+          select: {
+            exist: [
+              "family"
+              "limit"
+              "manufacturer"
+              "offset"
+              "search"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

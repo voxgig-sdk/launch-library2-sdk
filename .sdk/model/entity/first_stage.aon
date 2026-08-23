@@ -1,0 +1,272 @@
+# Entity: first_stage
+
+main: kit: entity: first_stage: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "apogee"
+      req: false
+      short: "Apogee in km"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "consecutive_successful_launches"
+      req: false
+      short: "Number of consecutive successful launches"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "description"
+      req: false
+      short: "Description of the launcher"
+      type: "`$STRING`"
+    }
+    {
+      name: "diameter"
+      req: false
+      short: "Diameter in meters"
+      type: "`$NUMBER`"
+    }
+    {
+      name: "failed_launches"
+      req: false
+      short: "Number of failed launches"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "family"
+      req: false
+      short: "Launcher family"
+      type: "`$STRING`"
+    }
+    {
+      name: "flights"
+      req: false
+      short: "Number of flights"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "full_name"
+      req: false
+      short: "Full name of the launcher"
+      type: "`$STRING`"
+    }
+    {
+      name: "gto_capacity"
+      req: false
+      short: "GTO capacity in kg"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "id"
+      req: false
+      short: "Configuration ID"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "launch_mass"
+      req: false
+      short: "Launch mass in kg"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "launcher_config"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "length"
+      req: false
+      short: "Length in meters"
+      type: "`$NUMBER`"
+    }
+    {
+      name: "leo_capacity"
+      req: false
+      short: "LEO capacity in kg"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "maiden_flight"
+      req: false
+      short: "Date of maiden flight"
+      type: "`$STRING`"
+    }
+    {
+      name: "manufacturer"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "max_stage"
+      req: false
+      short: "Maximum number of stages"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "min_stage"
+      req: false
+      short: "Minimum number of stages"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "name"
+      req: false
+      short: "Name of the launcher configuration"
+      type: "`$STRING`"
+    }
+    {
+      name: "pending_launches"
+      req: false
+      short: "Number of pending launches"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "serial_number"
+      req: false
+      short: "Serial number of the first stage"
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: false
+      short: "Current status"
+      type: "`$STRING`"
+    }
+    {
+      name: "successful_launches"
+      req: false
+      short: "Number of successful launches"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "to_thrust"
+      req: false
+      short: "Takeoff thrust in kN"
+      type: "`$INTEGER`"
+    }
+    {
+      name: "type"
+      req: false
+      short: "Type of first stage"
+      type: "`$STRING`"
+    }
+    {
+      name: "url"
+      req: false
+      short: "API URL for this configuration"
+      type: "`$STRING`"
+    }
+    {
+      name: "variant"
+      req: false
+      short: "Variant of the launcher"
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "first_stage"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "flight_number"
+                orig: "flight_number"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 10
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: 0
+                kind: "query"
+                name: "offset"
+                orig: "offset"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "serial_number"
+                orig: "serial_number"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/firststage"
+          parts: [
+            "firststage"
+          ]
+          select: {
+            exist: [
+              "flight_number"
+              "limit"
+              "offset"
+              "serial_number"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/firststage/{id}"
+          parts: [
+            "firststage"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.launcher_config`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
