@@ -44,7 +44,8 @@ class SpacecraftEntity extends LaunchLibrary2EntityBase<Spacecraft> {
     const {
       makeContext,
       done,
-      error,
+      // The registry name is `makeError`; `error` is the local alias.
+      makeError: error,
       featureHook,
       makePoint,
       makeRequest,
@@ -165,7 +166,8 @@ class SpacecraftEntity extends LaunchLibrary2EntityBase<Spacecraft> {
     const {
       makeContext,
       done,
-      error,
+      // The registry name is `makeError`; `error` is the local alias.
+      makeError: error,
       featureHook,
       makePoint,
       makeRequest,
