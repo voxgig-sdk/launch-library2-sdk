@@ -34,16 +34,11 @@ class AgencyLoadMatch(TypedDict):
 
 
 class AgencyListMatch(TypedDict, total=False):
-    abbrev: str
-    administrator: str
+    agency_type: str
     country_code: str
-    description: str
-    founding_year: str
-    id: int
-    logo_url: str
-    name: str
-    type: str
-    url: str
+    limit: int
+    offset: int
+    search: str
 
 
 class Astronaut(TypedDict, total=False):
@@ -66,18 +61,11 @@ class AstronautLoadMatch(TypedDict):
 
 
 class AstronautListMatch(TypedDict, total=False):
-    bio: str
-    date_of_birth: str
-    date_of_death: str
-    flights_count: int
-    id: int
-    name: str
+    limit: int
     nationality: str
-    profile_image: str
-    spacewalks_count: int
-    status: dict
-    type: dict
-    url: str
+    offset: int
+    search: str
+    status: str
 
 
 class Docking(TypedDict):
@@ -98,12 +86,10 @@ class DockingEventLoadMatch(TypedDict):
 
 
 class DockingEventListMatch(TypedDict, total=False):
-    departure: str
-    docking: str
-    docking_location: dict
-    flight_vehicle: dict
-    id: int
-    url: str
+    docking_location: int
+    limit: int
+    offset: int
+    spacestation: int
 
 
 class Event(TypedDict, total=False):
@@ -124,16 +110,9 @@ class EventLoadMatch(TypedDict):
 
 
 class EventListMatch(TypedDict, total=False):
-    date: str
-    description: str
-    feature_image: str
-    id: int
-    location: str
-    name: str
-    news_url: str
-    type: dict
-    url: str
-    video_url: str
+    limit: int
+    offset: int
+    search: str
 
 
 class Expedition(TypedDict, total=False):
@@ -151,13 +130,10 @@ class ExpeditionLoadMatch(TypedDict):
 
 
 class ExpeditionListMatch(TypedDict, total=False):
-    crew: list
-    end: str
-    id: int
-    name: str
-    spacestation: dict
-    start: str
-    url: str
+    limit: int
+    offset: int
+    search: str
+    spacestation: int
 
 
 class FirstStage(TypedDict, total=False):
@@ -195,33 +171,10 @@ class FirstStageLoadMatch(TypedDict):
 
 
 class FirstStageListMatch(TypedDict, total=False):
-    apogee: int
-    consecutive_successful_launches: int
-    description: str
-    diameter: float
-    failed_launches: int
-    family: str
-    flights: int
-    full_name: str
-    gto_capacity: int
-    id: int
-    launch_mass: int
-    launcher_config: dict
-    length: float
-    leo_capacity: int
-    maiden_flight: str
-    manufacturer: dict
-    max_stage: int
-    min_stage: int
-    name: str
-    pending_launches: int
+    flight_number: int
+    limit: int
+    offset: int
     serial_number: str
-    status: str
-    successful_launches: int
-    to_thrust: int
-    type: str
-    url: str
-    variant: str
 
 
 class Launch(TypedDict, total=False):
@@ -246,20 +199,14 @@ class LaunchLoadMatch(TypedDict):
 
 
 class LaunchListMatch(TypedDict, total=False):
-    id: str
-    image: str
-    launch_service_provider: dict
-    mission: dict
-    name: str
-    net: str
-    pad: dict
-    probability: int
-    rocket: dict
-    status: dict
-    url: str
-    webcast_live: bool
-    window_end: str
-    window_start: str
+    limit: int
+    lsp_id: int
+    lsp_name: str
+    offset: int
+    rocket_configuration_id: int
+    search: str
+    spacecraft_id: int
+    status: str
 
 
 class LaunchVehicle(TypedDict, total=False):
@@ -288,28 +235,11 @@ class LaunchVehicle(TypedDict, total=False):
 
 
 class LaunchVehicleListMatch(TypedDict, total=False):
-    apogee: int
-    consecutive_successful_launches: int
-    description: str
-    diameter: float
-    failed_launches: int
     family: str
-    full_name: str
-    gto_capacity: int
-    id: int
-    launch_mass: int
-    length: float
-    leo_capacity: int
-    maiden_flight: str
-    manufacturer: dict
-    max_stage: int
-    min_stage: int
-    name: str
-    pending_launches: int
-    successful_launches: int
-    to_thrust: int
-    url: str
-    variant: str
+    limit: int
+    manufacturer: int
+    offset: int
+    search: str
 
 
 class Launcher(TypedDict, total=False):
@@ -345,12 +275,9 @@ class LocationLoadMatch(TypedDict):
 
 class LocationListMatch(TypedDict, total=False):
     country_code: str
-    id: int
-    map_image: str
-    name: str
-    total_landing_count: int
-    total_launch_count: int
-    url: str
+    limit: int
+    offset: int
+    search: str
 
 
 class Pad(TypedDict, total=False):
@@ -375,20 +302,10 @@ class PadLoadMatch(TypedDict):
 
 
 class PadListMatch(TypedDict, total=False):
-    agency_id: int
-    country_code: str
-    id: int
-    info_url: str
-    latitude: str
-    location: dict
-    longitude: str
-    map_image: str
-    map_url: str
-    name: str
-    total_landing_count: int
-    total_launch_count: int
-    url: str
-    wiki_url: str
+    limit: int
+    location: int
+    offset: int
+    search: str
 
 
 class ReusableFirstStage(TypedDict):
@@ -414,17 +331,11 @@ class SpaceStationLoadMatch(TypedDict):
 
 
 class SpaceStationListMatch(TypedDict, total=False):
-    deorbited: str
-    description: str
-    founded: str
-    id: int
-    image_url: str
-    name: str
-    orbit: str
-    owners: list
-    status: dict
-    type: dict
-    url: str
+    limit: int
+    offset: int
+    owner: str
+    search: str
+    status: str
 
 
 class Spacecraft(TypedDict, total=False):
@@ -450,18 +361,7 @@ class SpacecraftLoadMatch(TypedDict):
 
 
 class SpacecraftListMatch(TypedDict, total=False):
-    agency: dict
-    capability: str
-    crew_capacity: int
-    details: str
-    diameter: float
-    height: float
-    history: str
-    human_rated: bool
-    id: int
-    image_url: str
-    in_use: bool
-    maiden_flight: str
-    name: str
-    type: dict
-    url: str
+    limit: int
+    offset: int
+    search: str
+    status: str

@@ -33,16 +33,11 @@ type AgencyLoadMatch struct {
 
 // AgencyListMatch is the typed request payload for Agency.ListTyped.
 type AgencyListMatch struct {
-	Abbrev *string `json:"abbrev,omitempty"`
-	Administrator *string `json:"administrator,omitempty"`
+	AgencyType *string `json:"agency_type,omitempty"`
 	CountryCode *string `json:"country_code,omitempty"`
-	Description *string `json:"description,omitempty"`
-	FoundingYear *string `json:"founding_year,omitempty"`
-	Id *int `json:"id,omitempty"`
-	LogoUrl *string `json:"logo_url,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Type *string `json:"type,omitempty"`
-	Url *string `json:"url,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Search *string `json:"search,omitempty"`
 }
 
 // Astronaut is the typed data model for the astronaut entity.
@@ -68,18 +63,11 @@ type AstronautLoadMatch struct {
 
 // AstronautListMatch is the typed request payload for Astronaut.ListTyped.
 type AstronautListMatch struct {
-	Bio *string `json:"bio,omitempty"`
-	DateOfBirth *string `json:"date_of_birth,omitempty"`
-	DateOfDeath *string `json:"date_of_death,omitempty"`
-	FlightsCount *int `json:"flights_count,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
+	Limit *int `json:"limit,omitempty"`
 	Nationality *string `json:"nationality,omitempty"`
-	ProfileImage *string `json:"profile_image,omitempty"`
-	SpacewalksCount *int `json:"spacewalks_count,omitempty"`
-	Status *map[string]any `json:"status,omitempty"`
-	Type *map[string]any `json:"type,omitempty"`
-	Url *string `json:"url,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Search *string `json:"search,omitempty"`
+	Status *string `json:"status,omitempty"`
 }
 
 // Docking is the typed data model for the docking entity.
@@ -103,12 +91,10 @@ type DockingEventLoadMatch struct {
 
 // DockingEventListMatch is the typed request payload for DockingEvent.ListTyped.
 type DockingEventListMatch struct {
-	Departure *string `json:"departure,omitempty"`
-	Docking *string `json:"docking,omitempty"`
-	DockingLocation *map[string]any `json:"docking_location,omitempty"`
-	FlightVehicle *map[string]any `json:"flight_vehicle,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Url *string `json:"url,omitempty"`
+	DockingLocation *int `json:"docking_location,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Spacestation *int `json:"spacestation,omitempty"`
 }
 
 // Event is the typed data model for the event entity.
@@ -132,16 +118,9 @@ type EventLoadMatch struct {
 
 // EventListMatch is the typed request payload for Event.ListTyped.
 type EventListMatch struct {
-	Date *string `json:"date,omitempty"`
-	Description *string `json:"description,omitempty"`
-	FeatureImage *string `json:"feature_image,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Location *string `json:"location,omitempty"`
-	Name *string `json:"name,omitempty"`
-	NewsUrl *string `json:"news_url,omitempty"`
-	Type *map[string]any `json:"type,omitempty"`
-	Url *string `json:"url,omitempty"`
-	VideoUrl *string `json:"video_url,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Search *string `json:"search,omitempty"`
 }
 
 // Expedition is the typed data model for the expedition entity.
@@ -162,13 +141,10 @@ type ExpeditionLoadMatch struct {
 
 // ExpeditionListMatch is the typed request payload for Expedition.ListTyped.
 type ExpeditionListMatch struct {
-	Crew *[]any `json:"crew,omitempty"`
-	End *string `json:"end,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Spacestation *map[string]any `json:"spacestation,omitempty"`
-	Start *string `json:"start,omitempty"`
-	Url *string `json:"url,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Search *string `json:"search,omitempty"`
+	Spacestation *int `json:"spacestation,omitempty"`
 }
 
 // FirstStage is the typed data model for the first_stage entity.
@@ -209,33 +185,10 @@ type FirstStageLoadMatch struct {
 
 // FirstStageListMatch is the typed request payload for FirstStage.ListTyped.
 type FirstStageListMatch struct {
-	Apogee *int `json:"apogee,omitempty"`
-	ConsecutiveSuccessfulLaunches *int `json:"consecutive_successful_launches,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Diameter *float64 `json:"diameter,omitempty"`
-	FailedLaunches *int `json:"failed_launches,omitempty"`
-	Family *string `json:"family,omitempty"`
-	Flights *int `json:"flights,omitempty"`
-	FullName *string `json:"full_name,omitempty"`
-	GtoCapacity *int `json:"gto_capacity,omitempty"`
-	Id *int `json:"id,omitempty"`
-	LaunchMass *int `json:"launch_mass,omitempty"`
-	LauncherConfig *map[string]any `json:"launcher_config,omitempty"`
-	Length *float64 `json:"length,omitempty"`
-	LeoCapacity *int `json:"leo_capacity,omitempty"`
-	MaidenFlight *string `json:"maiden_flight,omitempty"`
-	Manufacturer *map[string]any `json:"manufacturer,omitempty"`
-	MaxStage *int `json:"max_stage,omitempty"`
-	MinStage *int `json:"min_stage,omitempty"`
-	Name *string `json:"name,omitempty"`
-	PendingLaunches *int `json:"pending_launches,omitempty"`
+	FlightNumber *int `json:"flight_number,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
 	SerialNumber *string `json:"serial_number,omitempty"`
-	Status *string `json:"status,omitempty"`
-	SuccessfulLaunches *int `json:"successful_launches,omitempty"`
-	ToThrust *int `json:"to_thrust,omitempty"`
-	Type *string `json:"type,omitempty"`
-	Url *string `json:"url,omitempty"`
-	Variant *string `json:"variant,omitempty"`
 }
 
 // Launch is the typed data model for the launch entity.
@@ -263,20 +216,14 @@ type LaunchLoadMatch struct {
 
 // LaunchListMatch is the typed request payload for Launch.ListTyped.
 type LaunchListMatch struct {
-	Id *string `json:"id,omitempty"`
-	Image *string `json:"image,omitempty"`
-	LaunchServiceProvider *map[string]any `json:"launch_service_provider,omitempty"`
-	Mission *map[string]any `json:"mission,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Net *string `json:"net,omitempty"`
-	Pad *map[string]any `json:"pad,omitempty"`
-	Probability *int `json:"probability,omitempty"`
-	Rocket *map[string]any `json:"rocket,omitempty"`
-	Status *map[string]any `json:"status,omitempty"`
-	Url *string `json:"url,omitempty"`
-	WebcastLive *bool `json:"webcast_live,omitempty"`
-	WindowEnd *string `json:"window_end,omitempty"`
-	WindowStart *string `json:"window_start,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	LspId *int `json:"lsp_id,omitempty"`
+	LspName *string `json:"lsp_name,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	RocketConfigurationId *int `json:"rocket_configuration_id,omitempty"`
+	Search *string `json:"search,omitempty"`
+	SpacecraftId *int `json:"spacecraft_id,omitempty"`
+	Status *string `json:"status,omitempty"`
 }
 
 // LaunchVehicle is the typed data model for the launch_vehicle entity.
@@ -307,28 +254,11 @@ type LaunchVehicle struct {
 
 // LaunchVehicleListMatch is the typed request payload for LaunchVehicle.ListTyped.
 type LaunchVehicleListMatch struct {
-	Apogee *int `json:"apogee,omitempty"`
-	ConsecutiveSuccessfulLaunches *int `json:"consecutive_successful_launches,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Diameter *float64 `json:"diameter,omitempty"`
-	FailedLaunches *int `json:"failed_launches,omitempty"`
 	Family *string `json:"family,omitempty"`
-	FullName *string `json:"full_name,omitempty"`
-	GtoCapacity *int `json:"gto_capacity,omitempty"`
-	Id *int `json:"id,omitempty"`
-	LaunchMass *int `json:"launch_mass,omitempty"`
-	Length *float64 `json:"length,omitempty"`
-	LeoCapacity *int `json:"leo_capacity,omitempty"`
-	MaidenFlight *string `json:"maiden_flight,omitempty"`
-	Manufacturer *map[string]any `json:"manufacturer,omitempty"`
-	MaxStage *int `json:"max_stage,omitempty"`
-	MinStage *int `json:"min_stage,omitempty"`
-	Name *string `json:"name,omitempty"`
-	PendingLaunches *int `json:"pending_launches,omitempty"`
-	SuccessfulLaunches *int `json:"successful_launches,omitempty"`
-	ToThrust *int `json:"to_thrust,omitempty"`
-	Url *string `json:"url,omitempty"`
-	Variant *string `json:"variant,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Manufacturer *int `json:"manufacturer,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Search *string `json:"search,omitempty"`
 }
 
 // Launcher is the typed data model for the launcher entity.
@@ -369,12 +299,9 @@ type LocationLoadMatch struct {
 // LocationListMatch is the typed request payload for Location.ListTyped.
 type LocationListMatch struct {
 	CountryCode *string `json:"country_code,omitempty"`
-	Id *int `json:"id,omitempty"`
-	MapImage *string `json:"map_image,omitempty"`
-	Name *string `json:"name,omitempty"`
-	TotalLandingCount *int `json:"total_landing_count,omitempty"`
-	TotalLaunchCount *int `json:"total_launch_count,omitempty"`
-	Url *string `json:"url,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Search *string `json:"search,omitempty"`
 }
 
 // Pad is the typed data model for the pad entity.
@@ -402,20 +329,10 @@ type PadLoadMatch struct {
 
 // PadListMatch is the typed request payload for Pad.ListTyped.
 type PadListMatch struct {
-	AgencyId *int `json:"agency_id,omitempty"`
-	CountryCode *string `json:"country_code,omitempty"`
-	Id *int `json:"id,omitempty"`
-	InfoUrl *string `json:"info_url,omitempty"`
-	Latitude *string `json:"latitude,omitempty"`
-	Location *map[string]any `json:"location,omitempty"`
-	Longitude *string `json:"longitude,omitempty"`
-	MapImage *string `json:"map_image,omitempty"`
-	MapUrl *string `json:"map_url,omitempty"`
-	Name *string `json:"name,omitempty"`
-	TotalLandingCount *int `json:"total_landing_count,omitempty"`
-	TotalLaunchCount *int `json:"total_launch_count,omitempty"`
-	Url *string `json:"url,omitempty"`
-	WikiUrl *string `json:"wiki_url,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Location *int `json:"location,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Search *string `json:"search,omitempty"`
 }
 
 // ReusableFirstStage is the typed data model for the reusable_first_stage entity.
@@ -444,17 +361,11 @@ type SpaceStationLoadMatch struct {
 
 // SpaceStationListMatch is the typed request payload for SpaceStation.ListTyped.
 type SpaceStationListMatch struct {
-	Deorbited *string `json:"deorbited,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Founded *string `json:"founded,omitempty"`
-	Id *int `json:"id,omitempty"`
-	ImageUrl *string `json:"image_url,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Orbit *string `json:"orbit,omitempty"`
-	Owners *[]any `json:"owners,omitempty"`
-	Status *map[string]any `json:"status,omitempty"`
-	Type *map[string]any `json:"type,omitempty"`
-	Url *string `json:"url,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Owner *string `json:"owner,omitempty"`
+	Search *string `json:"search,omitempty"`
+	Status *string `json:"status,omitempty"`
 }
 
 // Spacecraft is the typed data model for the spacecraft entity.
@@ -483,21 +394,10 @@ type SpacecraftLoadMatch struct {
 
 // SpacecraftListMatch is the typed request payload for Spacecraft.ListTyped.
 type SpacecraftListMatch struct {
-	Agency *map[string]any `json:"agency,omitempty"`
-	Capability *string `json:"capability,omitempty"`
-	CrewCapacity *int `json:"crew_capacity,omitempty"`
-	Details *string `json:"details,omitempty"`
-	Diameter *float64 `json:"diameter,omitempty"`
-	Height *float64 `json:"height,omitempty"`
-	History *string `json:"history,omitempty"`
-	HumanRated *bool `json:"human_rated,omitempty"`
-	Id *int `json:"id,omitempty"`
-	ImageUrl *string `json:"image_url,omitempty"`
-	InUse *bool `json:"in_use,omitempty"`
-	MaidenFlight *string `json:"maiden_flight,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Type *map[string]any `json:"type,omitempty"`
-	Url *string `json:"url,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Search *string `json:"search,omitempty"`
+	Status *string `json:"status,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the
