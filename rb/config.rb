@@ -108,6 +108,10 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "agency",
           "op" => {
             "list" => {
@@ -154,8 +158,10 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/agencies",
-                  "parts" => [
-                    "agencies",
+                  "segments" => [
+                    {
+                      "lit" => "agencies",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -170,6 +176,9 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "agencies",
+                  ],
                 },
               ],
             },
@@ -192,9 +201,13 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/agencies/{id}",
-                  "parts" => [
-                    "agencies",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "agencies",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -205,6 +218,10 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "agencies",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -221,11 +238,13 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
             {
+              "format" => "date",
               "name" => "date_of_birth",
               "short" => "Date of birth",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date",
               "name" => "date_of_death",
               "short" => "Date of death if applicable",
               "type" => "`$STRING`",
@@ -274,6 +293,10 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "astronaut",
           "op" => {
             "list" => {
@@ -320,8 +343,10 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/astronaut",
-                  "parts" => [
-                    "astronaut",
+                  "segments" => [
+                    {
+                      "lit" => "astronaut",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -336,6 +361,9 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "astronaut",
+                  ],
                 },
               ],
             },
@@ -358,9 +386,13 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/astronaut/{id}",
-                  "parts" => [
-                    "astronaut",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "astronaut",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -371,6 +403,10 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "astronaut",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -390,11 +426,13 @@ module LaunchLibrary2Config
         "docking_event" => {
           "fields" => [
             {
+              "format" => "date-time",
               "name" => "departure",
               "short" => "Departure time",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "docking",
               "short" => "Docking time",
               "type" => "`$STRING`",
@@ -418,6 +456,10 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "docking_event",
           "op" => {
             "list" => {
@@ -458,8 +500,10 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/docking_event",
-                  "parts" => [
-                    "docking_event",
+                  "segments" => [
+                    {
+                      "lit" => "docking_event",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -473,6 +517,9 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "docking_event",
+                  ],
                 },
               ],
             },
@@ -495,9 +542,13 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/docking_event/{id}",
-                  "parts" => [
-                    "docking_event",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "docking_event",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -508,6 +559,10 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "docking_event",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -519,6 +574,7 @@ module LaunchLibrary2Config
         "event" => {
           "fields" => [
             {
+              "format" => "date-time",
               "name" => "date",
               "short" => "Event date and time",
               "type" => "`$STRING`",
@@ -568,6 +624,10 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "event",
           "op" => {
             "list" => {
@@ -602,8 +662,10 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/event",
-                  "parts" => [
-                    "event",
+                  "segments" => [
+                    {
+                      "lit" => "event",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -616,6 +678,9 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "event",
+                  ],
                 },
               ],
             },
@@ -638,9 +703,13 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/event/{id}",
-                  "parts" => [
-                    "event",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "event",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -651,6 +720,10 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.type`",
                   },
+                  "parts" => [
+                    "event",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -666,6 +739,7 @@ module LaunchLibrary2Config
               "type" => "`$ARRAY`",
             },
             {
+              "format" => "date-time",
               "name" => "end",
               "short" => "End date of the expedition",
               "type" => "`$STRING`",
@@ -685,6 +759,7 @@ module LaunchLibrary2Config
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "date-time",
               "name" => "start",
               "short" => "Start date of the expedition",
               "type" => "`$STRING`",
@@ -695,6 +770,10 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "expedition",
           "op" => {
             "list" => {
@@ -735,8 +814,10 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/expedition",
-                  "parts" => [
-                    "expedition",
+                  "segments" => [
+                    {
+                      "lit" => "expedition",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -750,6 +831,9 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "expedition",
+                  ],
                 },
               ],
             },
@@ -772,9 +856,13 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/expedition/{id}",
-                  "parts" => [
-                    "expedition",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "expedition",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -785,6 +873,10 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "expedition",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -865,6 +957,7 @@ module LaunchLibrary2Config
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date",
               "name" => "maiden_flight",
               "short" => "Date of maiden flight",
               "type" => "`$STRING`",
@@ -929,6 +1022,10 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "first_stage",
           "op" => {
             "list" => {
@@ -969,8 +1066,10 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/firststage",
-                  "parts" => [
-                    "firststage",
+                  "segments" => [
+                    {
+                      "lit" => "firststage",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -984,6 +1083,9 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "firststage",
+                  ],
                 },
               ],
             },
@@ -1006,9 +1108,13 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/firststage/{id}",
-                  "parts" => [
-                    "firststage",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "firststage",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1019,6 +1125,10 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.launcher_config`",
                   },
+                  "parts" => [
+                    "firststage",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -1053,6 +1163,7 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "net",
               "short" => "Net Earliest Time (NET) for launch",
               "type" => "`$STRING`",
@@ -1085,16 +1196,22 @@ module LaunchLibrary2Config
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date-time",
               "name" => "window_end",
               "short" => "End of launch window",
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "window_start",
               "short" => "Start of launch window",
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "launch",
           "op" => {
             "list" => {
@@ -1159,8 +1276,10 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/launch",
-                  "parts" => [
-                    "launch",
+                  "segments" => [
+                    {
+                      "lit" => "launch",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1178,6 +1297,9 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "launch",
+                  ],
                 },
               ],
             },
@@ -1200,9 +1322,13 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/launch/{id}",
-                  "parts" => [
-                    "launch",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "launch",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1213,6 +1339,10 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "launch",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -1284,6 +1414,7 @@ module LaunchLibrary2Config
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date",
               "name" => "maiden_flight",
               "short" => "Date of maiden flight",
               "type" => "`$STRING`",
@@ -1333,6 +1464,10 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "launch_vehicle",
           "op" => {
             "list" => {
@@ -1379,9 +1514,13 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/config/launcher",
-                  "parts" => [
-                    "config",
-                    "launcher",
+                  "segments" => [
+                    {
+                      "lit" => "config",
+                    },
+                    {
+                      "lit" => "launcher",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1396,6 +1535,10 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "config",
+                    "launcher",
+                  ],
                 },
               ],
             },
@@ -1457,6 +1600,10 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "launcher",
           "op" => {
             "load" => {
@@ -1478,10 +1625,16 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/config/launcher/{id}",
-                  "parts" => [
-                    "config",
-                    "launcher",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "config",
+                    },
+                    {
+                      "lit" => "launcher",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1492,6 +1645,11 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.manufacturer`",
                   },
+                  "parts" => [
+                    "config",
+                    "launcher",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -1538,6 +1696,10 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "location",
           "op" => {
             "list" => {
@@ -1578,8 +1740,10 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/location",
-                  "parts" => [
-                    "location",
+                  "segments" => [
+                    {
+                      "lit" => "location",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1593,6 +1757,9 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "location",
+                  ],
                 },
               ],
             },
@@ -1615,9 +1782,13 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/location/{id}",
-                  "parts" => [
-                    "location",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "location",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1628,6 +1799,10 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "location",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -1708,6 +1883,10 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "pad",
           "op" => {
             "list" => {
@@ -1748,8 +1927,10 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/pad",
-                  "parts" => [
-                    "pad",
+                  "segments" => [
+                    {
+                      "lit" => "pad",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1763,6 +1944,9 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "pad",
+                  ],
                 },
               ],
             },
@@ -1785,9 +1969,13 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/pad/{id}",
-                  "parts" => [
-                    "pad",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "pad",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1798,6 +1986,10 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.location`",
                   },
+                  "parts" => [
+                    "pad",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -1817,6 +2009,7 @@ module LaunchLibrary2Config
         "space_station" => {
           "fields" => [
             {
+              "format" => "date",
               "name" => "deorbited",
               "short" => "Date the space station was deorbited",
               "type" => "`$STRING`",
@@ -1827,6 +2020,7 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
             {
+              "format" => "date",
               "name" => "founded",
               "short" => "Date the space station was founded",
               "type" => "`$STRING`",
@@ -1869,6 +2063,10 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "space_station",
           "op" => {
             "list" => {
@@ -1915,8 +2113,10 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/spacestation",
-                  "parts" => [
-                    "spacestation",
+                  "segments" => [
+                    {
+                      "lit" => "spacestation",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1931,6 +2131,9 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "spacestation",
+                  ],
                 },
               ],
             },
@@ -1953,9 +2156,13 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/spacestation/{id}",
-                  "parts" => [
-                    "spacestation",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "spacestation",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -1966,6 +2173,10 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "spacestation",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -2031,6 +2242,7 @@ module LaunchLibrary2Config
               "type" => "`$BOOLEAN`",
             },
             {
+              "format" => "date",
               "name" => "maiden_flight",
               "short" => "Date of maiden flight",
               "type" => "`$STRING`",
@@ -2050,6 +2262,10 @@ module LaunchLibrary2Config
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "spacecraft",
           "op" => {
             "list" => {
@@ -2090,9 +2306,13 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/config/spacecraft",
-                  "parts" => [
-                    "config",
-                    "spacecraft",
+                  "segments" => [
+                    {
+                      "lit" => "config",
+                    },
+                    {
+                      "lit" => "spacecraft",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -2106,6 +2326,10 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body.results`",
                   },
+                  "parts" => [
+                    "config",
+                    "spacecraft",
+                  ],
                 },
               ],
             },
@@ -2128,10 +2352,16 @@ module LaunchLibrary2Config
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/config/spacecraft/{id}",
-                  "parts" => [
-                    "config",
-                    "spacecraft",
-                    "{id}",
+                  "segments" => [
+                    {
+                      "lit" => "config",
+                    },
+                    {
+                      "lit" => "spacecraft",
+                    },
+                    {
+                      "var" => "id",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -2142,6 +2372,11 @@ module LaunchLibrary2Config
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "config",
+                    "spacecraft",
+                    "{id}",
+                  ],
                 },
               ],
             },

@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -159,6 +170,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "agency",
       "op": {
         "list": {
@@ -205,8 +220,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/agencies",
-              "parts": [
-                "agencies"
+              "segments": [
+                {
+                  "lit": "agencies"
+                }
               ],
               "select": {
                 "exist": [
@@ -220,7 +237,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "agencies"
+              ]
             }
           ]
         },
@@ -243,9 +263,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/agencies/{id}",
-              "parts": [
-                "agencies",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "agencies"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -255,7 +279,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "agencies",
+                "{id}"
+              ]
             }
           ]
         }
@@ -272,11 +300,13 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date",
           "name": "date_of_birth",
           "short": "Date of birth",
           "type": "`$STRING`"
         },
         {
+          "format": "date",
           "name": "date_of_death",
           "short": "Date of death if applicable",
           "type": "`$STRING`"
@@ -325,6 +355,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "astronaut",
       "op": {
         "list": {
@@ -371,8 +405,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/astronaut",
-              "parts": [
-                "astronaut"
+              "segments": [
+                {
+                  "lit": "astronaut"
+                }
               ],
               "select": {
                 "exist": [
@@ -386,7 +422,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "astronaut"
+              ]
             }
           ]
         },
@@ -409,9 +448,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/astronaut/{id}",
-              "parts": [
-                "astronaut",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "astronaut"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -421,7 +464,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "astronaut",
+                "{id}"
+              ]
             }
           ]
         }
@@ -441,11 +488,13 @@ class Config {
     "docking_event": {
       "fields": [
         {
+          "format": "date-time",
           "name": "departure",
           "short": "Departure time",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "docking",
           "short": "Docking time",
           "type": "`$STRING`"
@@ -469,6 +518,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "docking_event",
       "op": {
         "list": {
@@ -509,8 +562,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/docking_event",
-              "parts": [
-                "docking_event"
+              "segments": [
+                {
+                  "lit": "docking_event"
+                }
               ],
               "select": {
                 "exist": [
@@ -523,7 +578,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "docking_event"
+              ]
             }
           ]
         },
@@ -546,9 +604,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/docking_event/{id}",
-              "parts": [
-                "docking_event",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "docking_event"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -558,7 +620,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "docking_event",
+                "{id}"
+              ]
             }
           ]
         }
@@ -570,6 +636,7 @@ class Config {
     "event": {
       "fields": [
         {
+          "format": "date-time",
           "name": "date",
           "short": "Event date and time",
           "type": "`$STRING`"
@@ -619,6 +686,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "event",
       "op": {
         "list": {
@@ -653,8 +724,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/event",
-              "parts": [
-                "event"
+              "segments": [
+                {
+                  "lit": "event"
+                }
               ],
               "select": {
                 "exist": [
@@ -666,7 +739,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "event"
+              ]
             }
           ]
         },
@@ -689,9 +765,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/event/{id}",
-              "parts": [
-                "event",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "event"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -701,7 +781,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.type`"
-              }
+              },
+              "parts": [
+                "event",
+                "{id}"
+              ]
             }
           ]
         }
@@ -717,6 +801,7 @@ class Config {
           "type": "`$ARRAY`"
         },
         {
+          "format": "date-time",
           "name": "end",
           "short": "End date of the expedition",
           "type": "`$STRING`"
@@ -736,6 +821,7 @@ class Config {
           "type": "`$OBJECT`"
         },
         {
+          "format": "date-time",
           "name": "start",
           "short": "Start date of the expedition",
           "type": "`$STRING`"
@@ -746,6 +832,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "expedition",
       "op": {
         "list": {
@@ -786,8 +876,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/expedition",
-              "parts": [
-                "expedition"
+              "segments": [
+                {
+                  "lit": "expedition"
+                }
               ],
               "select": {
                 "exist": [
@@ -800,7 +892,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "expedition"
+              ]
             }
           ]
         },
@@ -823,9 +918,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/expedition/{id}",
-              "parts": [
-                "expedition",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "expedition"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -835,7 +934,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "expedition",
+                "{id}"
+              ]
             }
           ]
         }
@@ -916,6 +1019,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "date",
           "name": "maiden_flight",
           "short": "Date of maiden flight",
           "type": "`$STRING`"
@@ -980,6 +1084,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "first_stage",
       "op": {
         "list": {
@@ -1020,8 +1128,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/firststage",
-              "parts": [
-                "firststage"
+              "segments": [
+                {
+                  "lit": "firststage"
+                }
               ],
               "select": {
                 "exist": [
@@ -1034,7 +1144,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "firststage"
+              ]
             }
           ]
         },
@@ -1057,9 +1170,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/firststage/{id}",
-              "parts": [
-                "firststage",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "firststage"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -1069,7 +1186,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.launcher_config`"
-              }
+              },
+              "parts": [
+                "firststage",
+                "{id}"
+              ]
             }
           ]
         }
@@ -1104,6 +1225,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "net",
           "short": "Net Earliest Time (NET) for launch",
           "type": "`$STRING`"
@@ -1136,16 +1258,22 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date-time",
           "name": "window_end",
           "short": "End of launch window",
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "window_start",
           "short": "Start of launch window",
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "launch",
       "op": {
         "list": {
@@ -1210,8 +1338,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/launch",
-              "parts": [
-                "launch"
+              "segments": [
+                {
+                  "lit": "launch"
+                }
               ],
               "select": {
                 "exist": [
@@ -1228,7 +1358,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "launch"
+              ]
             }
           ]
         },
@@ -1251,9 +1384,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/launch/{id}",
-              "parts": [
-                "launch",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "launch"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -1263,7 +1400,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "launch",
+                "{id}"
+              ]
             }
           ]
         }
@@ -1335,6 +1476,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "date",
           "name": "maiden_flight",
           "short": "Date of maiden flight",
           "type": "`$STRING`"
@@ -1384,6 +1526,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "launch_vehicle",
       "op": {
         "list": {
@@ -1430,9 +1576,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/config/launcher",
-              "parts": [
-                "config",
-                "launcher"
+              "segments": [
+                {
+                  "lit": "config"
+                },
+                {
+                  "lit": "launcher"
+                }
               ],
               "select": {
                 "exist": [
@@ -1446,7 +1596,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "config",
+                "launcher"
+              ]
             }
           ]
         }
@@ -1508,6 +1662,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "launcher",
       "op": {
         "load": {
@@ -1529,10 +1687,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/config/launcher/{id}",
-              "parts": [
-                "config",
-                "launcher",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "config"
+                },
+                {
+                  "lit": "launcher"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -1542,7 +1706,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.manufacturer`"
-              }
+              },
+              "parts": [
+                "config",
+                "launcher",
+                "{id}"
+              ]
             }
           ]
         }
@@ -1589,6 +1758,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "location",
       "op": {
         "list": {
@@ -1629,8 +1802,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/location",
-              "parts": [
-                "location"
+              "segments": [
+                {
+                  "lit": "location"
+                }
               ],
               "select": {
                 "exist": [
@@ -1643,7 +1818,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "location"
+              ]
             }
           ]
         },
@@ -1666,9 +1844,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/location/{id}",
-              "parts": [
-                "location",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "location"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -1678,7 +1860,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "location",
+                "{id}"
+              ]
             }
           ]
         }
@@ -1759,6 +1945,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "pad",
       "op": {
         "list": {
@@ -1799,8 +1989,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/pad",
-              "parts": [
-                "pad"
+              "segments": [
+                {
+                  "lit": "pad"
+                }
               ],
               "select": {
                 "exist": [
@@ -1813,7 +2005,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "pad"
+              ]
             }
           ]
         },
@@ -1836,9 +2031,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/pad/{id}",
-              "parts": [
-                "pad",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "pad"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -1848,7 +2047,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.location`"
-              }
+              },
+              "parts": [
+                "pad",
+                "{id}"
+              ]
             }
           ]
         }
@@ -1868,6 +2071,7 @@ class Config {
     "space_station": {
       "fields": [
         {
+          "format": "date",
           "name": "deorbited",
           "short": "Date the space station was deorbited",
           "type": "`$STRING`"
@@ -1878,6 +2082,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date",
           "name": "founded",
           "short": "Date the space station was founded",
           "type": "`$STRING`"
@@ -1920,6 +2125,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "space_station",
       "op": {
         "list": {
@@ -1966,8 +2175,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/spacestation",
-              "parts": [
-                "spacestation"
+              "segments": [
+                {
+                  "lit": "spacestation"
+                }
               ],
               "select": {
                 "exist": [
@@ -1981,7 +2192,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "spacestation"
+              ]
             }
           ]
         },
@@ -2004,9 +2218,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/spacestation/{id}",
-              "parts": [
-                "spacestation",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "spacestation"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -2016,7 +2234,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "spacestation",
+                "{id}"
+              ]
             }
           ]
         }
@@ -2082,6 +2304,7 @@ class Config {
           "type": "`$BOOLEAN`"
         },
         {
+          "format": "date",
           "name": "maiden_flight",
           "short": "Date of maiden flight",
           "type": "`$STRING`"
@@ -2101,6 +2324,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "spacecraft",
       "op": {
         "list": {
@@ -2141,9 +2368,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/config/spacecraft",
-              "parts": [
-                "config",
-                "spacecraft"
+              "segments": [
+                {
+                  "lit": "config"
+                },
+                {
+                  "lit": "spacecraft"
+                }
               ],
               "select": {
                 "exist": [
@@ -2156,7 +2387,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.results`"
-              }
+              },
+              "parts": [
+                "config",
+                "spacecraft"
+              ]
             }
           ]
         },
@@ -2179,10 +2414,16 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/config/spacecraft/{id}",
-              "parts": [
-                "config",
-                "spacecraft",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "config"
+                },
+                {
+                  "lit": "spacecraft"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -2192,7 +2433,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "config",
+                "spacecraft",
+                "{id}"
+              ]
             }
           ]
         }
@@ -2208,6 +2454,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

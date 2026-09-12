@@ -96,6 +96,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "agency",
         ["op"] = {
           ["list"] = {
@@ -142,8 +146,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/agencies",
-                ["parts"] = {
-                  "agencies",
+                ["segments"] = {
+                  {
+                    ["lit"] = "agencies",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -157,6 +163,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "agencies",
                 },
               },
             },
@@ -180,9 +189,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/agencies/{id}",
-                ["parts"] = {
-                  "agencies",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "agencies",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -192,6 +205,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "agencies",
+                  "{id}",
                 },
               },
             },
@@ -209,11 +226,13 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date",
             ["name"] = "date_of_birth",
             ["short"] = "Date of birth",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date",
             ["name"] = "date_of_death",
             ["short"] = "Date of death if applicable",
             ["type"] = "`$STRING`",
@@ -262,6 +281,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "astronaut",
         ["op"] = {
           ["list"] = {
@@ -308,8 +331,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/astronaut",
-                ["parts"] = {
-                  "astronaut",
+                ["segments"] = {
+                  {
+                    ["lit"] = "astronaut",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -323,6 +348,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "astronaut",
                 },
               },
             },
@@ -346,9 +374,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/astronaut/{id}",
-                ["parts"] = {
-                  "astronaut",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "astronaut",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -358,6 +390,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "astronaut",
+                  "{id}",
                 },
               },
             },
@@ -378,11 +414,13 @@ local function make_config()
       ["docking_event"] = {
         ["fields"] = {
           {
+            ["format"] = "date-time",
             ["name"] = "departure",
             ["short"] = "Departure time",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "docking",
             ["short"] = "Docking time",
             ["type"] = "`$STRING`",
@@ -405,6 +443,10 @@ local function make_config()
             ["short"] = "API URL for this docking event",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "docking_event",
         ["op"] = {
@@ -446,8 +488,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/docking_event",
-                ["parts"] = {
-                  "docking_event",
+                ["segments"] = {
+                  {
+                    ["lit"] = "docking_event",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -460,6 +504,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "docking_event",
                 },
               },
             },
@@ -483,9 +530,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/docking_event/{id}",
-                ["parts"] = {
-                  "docking_event",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "docking_event",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -495,6 +546,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "docking_event",
+                  "{id}",
                 },
               },
             },
@@ -507,6 +562,7 @@ local function make_config()
       ["event"] = {
         ["fields"] = {
           {
+            ["format"] = "date-time",
             ["name"] = "date",
             ["short"] = "Event date and time",
             ["type"] = "`$STRING`",
@@ -556,6 +612,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "event",
         ["op"] = {
           ["list"] = {
@@ -590,8 +650,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/event",
-                ["parts"] = {
-                  "event",
+                ["segments"] = {
+                  {
+                    ["lit"] = "event",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -603,6 +665,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "event",
                 },
               },
             },
@@ -626,9 +691,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/event/{id}",
-                ["parts"] = {
-                  "event",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "event",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -638,6 +707,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.type`",
+                },
+                ["parts"] = {
+                  "event",
+                  "{id}",
                 },
               },
             },
@@ -654,6 +727,7 @@ local function make_config()
             ["type"] = "`$ARRAY`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "end",
             ["short"] = "End date of the expedition",
             ["type"] = "`$STRING`",
@@ -673,6 +747,7 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "start",
             ["short"] = "Start date of the expedition",
             ["type"] = "`$STRING`",
@@ -682,6 +757,10 @@ local function make_config()
             ["short"] = "API URL for this expedition",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "expedition",
         ["op"] = {
@@ -723,8 +802,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/expedition",
-                ["parts"] = {
-                  "expedition",
+                ["segments"] = {
+                  {
+                    ["lit"] = "expedition",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -737,6 +818,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "expedition",
                 },
               },
             },
@@ -760,9 +844,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/expedition/{id}",
-                ["parts"] = {
-                  "expedition",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "expedition",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -772,6 +860,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "expedition",
+                  "{id}",
                 },
               },
             },
@@ -853,6 +945,7 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date",
             ["name"] = "maiden_flight",
             ["short"] = "Date of maiden flight",
             ["type"] = "`$STRING`",
@@ -917,6 +1010,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "first_stage",
         ["op"] = {
           ["list"] = {
@@ -957,8 +1054,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/firststage",
-                ["parts"] = {
-                  "firststage",
+                ["segments"] = {
+                  {
+                    ["lit"] = "firststage",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -971,6 +1070,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "firststage",
                 },
               },
             },
@@ -994,9 +1096,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/firststage/{id}",
-                ["parts"] = {
-                  "firststage",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "firststage",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1006,6 +1112,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.launcher_config`",
+                },
+                ["parts"] = {
+                  "firststage",
+                  "{id}",
                 },
               },
             },
@@ -1041,6 +1151,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "net",
             ["short"] = "Net Earliest Time (NET) for launch",
             ["type"] = "`$STRING`",
@@ -1073,15 +1184,21 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "window_end",
             ["short"] = "End of launch window",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "window_start",
             ["short"] = "Start of launch window",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "launch",
         ["op"] = {
@@ -1147,8 +1264,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/launch",
-                ["parts"] = {
-                  "launch",
+                ["segments"] = {
+                  {
+                    ["lit"] = "launch",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1165,6 +1284,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "launch",
                 },
               },
             },
@@ -1188,9 +1310,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/launch/{id}",
-                ["parts"] = {
-                  "launch",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "launch",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1200,6 +1326,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "launch",
+                  "{id}",
                 },
               },
             },
@@ -1272,6 +1402,7 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date",
             ["name"] = "maiden_flight",
             ["short"] = "Date of maiden flight",
             ["type"] = "`$STRING`",
@@ -1321,6 +1452,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "launch_vehicle",
         ["op"] = {
           ["list"] = {
@@ -1367,9 +1502,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/config/launcher",
-                ["parts"] = {
-                  "config",
-                  "launcher",
+                ["segments"] = {
+                  {
+                    ["lit"] = "config",
+                  },
+                  {
+                    ["lit"] = "launcher",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1383,6 +1522,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "config",
+                  "launcher",
                 },
               },
             },
@@ -1445,6 +1588,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "launcher",
         ["op"] = {
           ["load"] = {
@@ -1466,10 +1613,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/config/launcher/{id}",
-                ["parts"] = {
-                  "config",
-                  "launcher",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "config",
+                  },
+                  {
+                    ["lit"] = "launcher",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1479,6 +1632,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.manufacturer`",
+                },
+                ["parts"] = {
+                  "config",
+                  "launcher",
+                  "{id}",
                 },
               },
             },
@@ -1526,6 +1684,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "location",
         ["op"] = {
           ["list"] = {
@@ -1566,8 +1728,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/location",
-                ["parts"] = {
-                  "location",
+                ["segments"] = {
+                  {
+                    ["lit"] = "location",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1580,6 +1744,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "location",
                 },
               },
             },
@@ -1603,9 +1770,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/location/{id}",
-                ["parts"] = {
-                  "location",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "location",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1615,6 +1786,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "location",
+                  "{id}",
                 },
               },
             },
@@ -1696,6 +1871,10 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "pad",
         ["op"] = {
           ["list"] = {
@@ -1736,8 +1915,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/pad",
-                ["parts"] = {
-                  "pad",
+                ["segments"] = {
+                  {
+                    ["lit"] = "pad",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1750,6 +1931,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "pad",
                 },
               },
             },
@@ -1773,9 +1957,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/pad/{id}",
-                ["parts"] = {
-                  "pad",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "pad",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1785,6 +1973,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.location`",
+                },
+                ["parts"] = {
+                  "pad",
+                  "{id}",
                 },
               },
             },
@@ -1805,6 +1997,7 @@ local function make_config()
       ["space_station"] = {
         ["fields"] = {
           {
+            ["format"] = "date",
             ["name"] = "deorbited",
             ["short"] = "Date the space station was deorbited",
             ["type"] = "`$STRING`",
@@ -1815,6 +2008,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date",
             ["name"] = "founded",
             ["short"] = "Date the space station was founded",
             ["type"] = "`$STRING`",
@@ -1856,6 +2050,10 @@ local function make_config()
             ["short"] = "API URL for this space station",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "space_station",
         ["op"] = {
@@ -1903,8 +2101,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/spacestation",
-                ["parts"] = {
-                  "spacestation",
+                ["segments"] = {
+                  {
+                    ["lit"] = "spacestation",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1918,6 +2118,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "spacestation",
                 },
               },
             },
@@ -1941,9 +2144,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/spacestation/{id}",
-                ["parts"] = {
-                  "spacestation",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "spacestation",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -1953,6 +2160,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "spacestation",
+                  "{id}",
                 },
               },
             },
@@ -2019,6 +2230,7 @@ local function make_config()
             ["type"] = "`$BOOLEAN`",
           },
           {
+            ["format"] = "date",
             ["name"] = "maiden_flight",
             ["short"] = "Date of maiden flight",
             ["type"] = "`$STRING`",
@@ -2037,6 +2249,10 @@ local function make_config()
             ["short"] = "API URL for this configuration",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "spacecraft",
         ["op"] = {
@@ -2078,9 +2294,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/config/spacecraft",
-                ["parts"] = {
-                  "config",
-                  "spacecraft",
+                ["segments"] = {
+                  {
+                    ["lit"] = "config",
+                  },
+                  {
+                    ["lit"] = "spacecraft",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -2093,6 +2313,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.results`",
+                },
+                ["parts"] = {
+                  "config",
+                  "spacecraft",
                 },
               },
             },
@@ -2116,10 +2340,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/config/spacecraft/{id}",
-                ["parts"] = {
-                  "config",
-                  "spacecraft",
-                  "{id}",
+                ["segments"] = {
+                  {
+                    ["lit"] = "config",
+                  },
+                  {
+                    ["lit"] = "spacecraft",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -2129,6 +2359,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "config",
+                  "spacecraft",
+                  "{id}",
                 },
               },
             },

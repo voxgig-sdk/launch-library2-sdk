@@ -121,8 +121,10 @@ main: kit: entity: agency: {
           }
           method: "GET"
           orig: "/agencies"
-          parts: [
-            "agencies"
+          segments: [
+            {
+              lit: "agencies"
+            }
           ]
           select: {
             exist: [
@@ -157,9 +159,13 @@ main: kit: entity: agency: {
           }
           method: "GET"
           orig: "/agencies/{id}"
-          parts: [
-            "agencies"
-            "{id}"
+          segments: [
+            {
+              lit: "agencies"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

@@ -6,6 +6,7 @@ main: kit: entity: space_station: {
 
   fields: [
     {
+      format: "date"
       name: "deorbited"
       req: false
       short: "Date the space station was deorbited"
@@ -18,6 +19,7 @@ main: kit: entity: space_station: {
       type: "`$STRING`"
     }
     {
+      format: "date"
       name: "founded"
       req: false
       short: "Date the space station was founded"
@@ -124,8 +126,10 @@ main: kit: entity: space_station: {
           }
           method: "GET"
           orig: "/spacestation"
-          parts: [
-            "spacestation"
+          segments: [
+            {
+              lit: "spacestation"
+            }
           ]
           select: {
             exist: [
@@ -160,9 +164,13 @@ main: kit: entity: space_station: {
           }
           method: "GET"
           orig: "/spacestation/{id}"
-          parts: [
-            "spacestation"
-            "{id}"
+          segments: [
+            {
+              lit: "spacestation"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

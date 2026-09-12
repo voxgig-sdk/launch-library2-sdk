@@ -34,6 +34,7 @@ main: kit: entity: launch: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "net"
       req: false
       short: "Net Earliest Time (NET) for launch"
@@ -73,12 +74,14 @@ main: kit: entity: launch: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "date-time"
       name: "window_end"
       req: false
       short: "End of launch window"
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "window_start"
       req: false
       short: "Start of launch window"
@@ -161,8 +164,10 @@ main: kit: entity: launch: {
           }
           method: "GET"
           orig: "/launch"
-          parts: [
-            "launch"
+          segments: [
+            {
+              lit: "launch"
+            }
           ]
           select: {
             exist: [
@@ -200,9 +205,13 @@ main: kit: entity: launch: {
           }
           method: "GET"
           orig: "/launch/{id}"
-          parts: [
-            "launch"
-            "{id}"
+          segments: [
+            {
+              lit: "launch"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

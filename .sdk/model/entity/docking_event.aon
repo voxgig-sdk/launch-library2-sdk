@@ -6,12 +6,14 @@ main: kit: entity: docking_event: {
 
   fields: [
     {
+      format: "date-time"
       name: "departure"
       req: false
       short: "Departure time"
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "docking"
       req: false
       short: "Docking time"
@@ -88,8 +90,10 @@ main: kit: entity: docking_event: {
           }
           method: "GET"
           orig: "/docking_event"
-          parts: [
-            "docking_event"
+          segments: [
+            {
+              lit: "docking_event"
+            }
           ]
           select: {
             exist: [
@@ -123,9 +127,13 @@ main: kit: entity: docking_event: {
           }
           method: "GET"
           orig: "/docking_event/{id}"
-          parts: [
-            "docking_event"
-            "{id}"
+          segments: [
+            {
+              lit: "docking_event"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

@@ -164,8 +164,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/agencies",
-                  "parts": [
-                    "agencies"
+                  "segments": [
+                    {
+                      "lit": "agencies"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -204,9 +206,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/agencies/{id}",
-                  "parts": [
-                    "agencies",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "agencies"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -240,6 +246,7 @@
             },
             {
               "active": true,
+              "format": "date",
               "name": "date_of_birth",
               "req": false,
               "short": "Date of birth",
@@ -247,6 +254,7 @@
             },
             {
               "active": true,
+              "format": "date",
               "name": "date_of_death",
               "req": false,
               "short": "Date of death if applicable",
@@ -375,8 +383,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/astronaut",
-                  "parts": [
-                    "astronaut"
+                  "segments": [
+                    {
+                      "lit": "astronaut"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -415,9 +425,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/astronaut/{id}",
-                  "parts": [
-                    "astronaut",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "astronaut"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -456,6 +470,7 @@
           "fields": [
             {
               "active": true,
+              "format": "date-time",
               "name": "departure",
               "req": false,
               "short": "Departure time",
@@ -463,6 +478,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "docking",
               "req": false,
               "short": "Docking time",
@@ -548,8 +564,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/docking_event",
-                  "parts": [
-                    "docking_event"
+                  "segments": [
+                    {
+                      "lit": "docking_event"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -587,9 +605,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/docking_event/{id}",
-                  "parts": [
-                    "docking_event",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "docking_event"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -616,6 +638,7 @@
           "fields": [
             {
               "active": true,
+              "format": "date-time",
               "name": "date",
               "req": false,
               "short": "Event date and time",
@@ -729,8 +752,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/event",
-                  "parts": [
-                    "event"
+                  "segments": [
+                    {
+                      "lit": "event"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -767,9 +792,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/event/{id}",
-                  "parts": [
-                    "event",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "event"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -802,6 +831,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "end",
               "req": false,
               "short": "End date of the expedition",
@@ -829,6 +859,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "start",
               "req": false,
               "short": "Start date of the expedition",
@@ -895,8 +926,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/expedition",
-                  "parts": [
-                    "expedition"
+                  "segments": [
+                    {
+                      "lit": "expedition"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -934,9 +967,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/expedition/{id}",
-                  "parts": [
-                    "expedition",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "expedition"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1060,6 +1097,7 @@
             },
             {
               "active": true,
+              "format": "date",
               "name": "maiden_flight",
               "req": false,
               "short": "Date of maiden flight",
@@ -1202,8 +1240,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/firststage",
-                  "parts": [
-                    "firststage"
+                  "segments": [
+                    {
+                      "lit": "firststage"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1241,9 +1281,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/firststage/{id}",
-                  "parts": [
-                    "firststage",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "firststage"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1303,6 +1347,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "net",
               "req": false,
               "short": "Net Earliest Time (NET) for launch",
@@ -1349,6 +1394,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "window_end",
               "req": false,
               "short": "End of launch window",
@@ -1356,6 +1402,7 @@
             },
             {
               "active": true,
+              "format": "date-time",
               "name": "window_start",
               "req": false,
               "short": "Start of launch window",
@@ -1447,8 +1494,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/launch",
-                  "parts": [
-                    "launch"
+                  "segments": [
+                    {
+                      "lit": "launch"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1490,9 +1539,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/launch/{id}",
-                  "parts": [
-                    "launch",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "launch"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1603,6 +1656,7 @@
             },
             {
               "active": true,
+              "format": "date",
               "name": "maiden_flight",
               "req": false,
               "short": "Date of maiden flight",
@@ -1732,9 +1786,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/config/launcher",
-                  "parts": [
-                    "config",
-                    "launcher"
+                  "segments": [
+                    {
+                      "lit": "config"
+                    },
+                    {
+                      "lit": "launcher"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1861,10 +1919,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/config/launcher/{id}",
-                  "parts": [
-                    "config",
-                    "launcher",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "config"
+                    },
+                    {
+                      "lit": "launcher"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1992,8 +2056,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/location",
-                  "parts": [
-                    "location"
+                  "segments": [
+                    {
+                      "lit": "location"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -2031,9 +2097,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/location/{id}",
-                  "parts": [
-                    "location",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "location"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -2209,8 +2279,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/pad",
-                  "parts": [
-                    "pad"
+                  "segments": [
+                    {
+                      "lit": "pad"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -2248,9 +2320,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/pad/{id}",
-                  "parts": [
-                    "pad",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "pad"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -2289,6 +2365,7 @@
           "fields": [
             {
               "active": true,
+              "format": "date",
               "name": "deorbited",
               "req": false,
               "short": "Date the space station was deorbited",
@@ -2303,6 +2380,7 @@
             },
             {
               "active": true,
+              "format": "date",
               "name": "founded",
               "req": false,
               "short": "Date the space station was founded",
@@ -2423,8 +2501,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/spacestation",
-                  "parts": [
-                    "spacestation"
+                  "segments": [
+                    {
+                      "lit": "spacestation"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -2463,9 +2543,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/spacestation/{id}",
-                  "parts": [
-                    "spacestation",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "spacestation"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -2568,6 +2652,7 @@
             },
             {
               "active": true,
+              "format": "date",
               "name": "maiden_flight",
               "req": false,
               "short": "Date of maiden flight",
@@ -2647,9 +2732,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/config/spacecraft",
-                  "parts": [
-                    "config",
-                    "spacecraft"
+                  "segments": [
+                    {
+                      "lit": "config"
+                    },
+                    {
+                      "lit": "spacecraft"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -2687,10 +2776,16 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/config/spacecraft/{id}",
-                  "parts": [
-                    "config",
-                    "spacecraft",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "config"
+                    },
+                    {
+                      "lit": "spacecraft"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -2774,8 +2869,11 @@
             }
           },
           "name": "test",
+          "needs": {},
           "origname": "",
           "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
           "target": {
             "go": {
               "deps": {}
@@ -3472,6 +3570,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3497,6 +3598,10 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/runner_test.go",
+            "test/struct_runner_test.go"
+          ],
           "title": "Golang"
         },
         "go-cli": {
@@ -3548,6 +3653,7 @@
               "active": false
             }
           },
+          "provides": {},
           "publish": {
             "registry": {
               "active": false,
@@ -3572,6 +3678,7 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [],
           "title": "Go CLI"
         },
         "go-mcp": {
@@ -3623,6 +3730,7 @@
               "active": false
             }
           },
+          "provides": {},
           "publish": {
             "registry": {
               "active": false,
@@ -3647,6 +3755,7 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [],
           "title": "Go MCP server"
         },
         "lua": {
@@ -3687,6 +3796,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3712,6 +3824,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.lua"
+          ],
           "title": "Lua"
         },
         "php": {
@@ -3746,6 +3861,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3771,6 +3889,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/StructRunner.php"
+          ],
           "title": "PHP"
         },
         "py": {
@@ -3811,6 +3932,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3836,6 +3960,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.py"
+          ],
           "title": "Python"
         },
         "rb": {
@@ -3881,6 +4008,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3906,6 +4036,9 @@
             "version": "0.0.1"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.rb"
+          ],
           "title": "Ruby"
         },
         "ts": {
@@ -3923,11 +4056,6 @@
               "active": true,
               "kind": "dev",
               "version": "^25.6.0"
-            },
-            "dotenv": {
-              "active": true,
-              "kind": "dev",
-              "version": "^17.4.2"
             },
             "typescript": {
               "active": true,
@@ -3956,6 +4084,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3980,6 +4111,14 @@
             },
             "version": "0.0.1"
           },
+          "superseded": [
+            "test/runner.ts",
+            "test/vendor/omni/compat.ts",
+            "src/feature/secrets/sekreto/Providers.ts",
+            "src/feature/secrets/sekreto/Sigv4.ts",
+            "src/feature/secrets/sekreto/provider/Registry.ts",
+            "src/feature/secrets/sekreto/provider/http.ts"
+          ],
           "title": "TypeScript"
         }
       },

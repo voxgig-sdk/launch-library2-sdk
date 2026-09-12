@@ -98,7 +98,7 @@ func TestLaunchVehicleEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		launchVehicleRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.launch_vehicle", setup.data)))
+		launchVehicleRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.launch_vehicle")))
 		var launchVehicleRef01Data map[string]any
 		if len(launchVehicleRef01DataRaw) > 0 {
 			launchVehicleRef01Data = core.ToMapAny(launchVehicleRef01DataRaw[0][1])
@@ -147,7 +147,7 @@ func launch_vehicleBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"launch_vehicle01", "launch_vehicle02", "launch_vehicle03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -175,10 +175,22 @@ func launch_vehicleBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["LAUNCH_LIBRARY2_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewLaunchLibrary2SDK(core.ToMapAny(mergedOpts))
 	}

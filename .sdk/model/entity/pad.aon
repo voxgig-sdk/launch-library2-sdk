@@ -137,8 +137,10 @@ main: kit: entity: pad: {
           }
           method: "GET"
           orig: "/pad"
-          parts: [
-            "pad"
+          segments: [
+            {
+              lit: "pad"
+            }
           ]
           select: {
             exist: [
@@ -172,9 +174,13 @@ main: kit: entity: pad: {
           }
           method: "GET"
           orig: "/pad/{id}"
-          parts: [
-            "pad"
-            "{id}"
+          segments: [
+            {
+              lit: "pad"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

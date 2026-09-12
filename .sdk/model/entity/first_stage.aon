@@ -89,6 +89,7 @@ main: kit: entity: first_stage: {
       type: "`$INTEGER`"
     }
     {
+      format: "date"
       name: "maiden_flight"
       req: false
       short: "Date of maiden flight"
@@ -214,8 +215,10 @@ main: kit: entity: first_stage: {
           }
           method: "GET"
           orig: "/firststage"
-          parts: [
-            "firststage"
+          segments: [
+            {
+              lit: "firststage"
+            }
           ]
           select: {
             exist: [
@@ -249,9 +252,13 @@ main: kit: entity: first_stage: {
           }
           method: "GET"
           orig: "/firststage/{id}"
-          parts: [
-            "firststage"
-            "{id}"
+          segments: [
+            {
+              lit: "firststage"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

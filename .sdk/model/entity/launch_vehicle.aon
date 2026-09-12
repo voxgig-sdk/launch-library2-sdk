@@ -78,6 +78,7 @@ main: kit: entity: launch_vehicle: {
       type: "`$INTEGER`"
     }
     {
+      format: "date"
       name: "maiden_flight"
       req: false
       short: "Date of maiden flight"
@@ -192,9 +193,13 @@ main: kit: entity: launch_vehicle: {
           }
           method: "GET"
           orig: "/config/launcher"
-          parts: [
-            "config"
-            "launcher"
+          segments: [
+            {
+              lit: "config"
+            }
+            {
+              lit: "launcher"
+            }
           ]
           select: {
             exist: [

@@ -11,6 +11,7 @@ main: kit: entity: expedition: {
       type: "`$ARRAY`"
     }
     {
+      format: "date-time"
       name: "end"
       req: false
       short: "End date of the expedition"
@@ -34,6 +35,7 @@ main: kit: entity: expedition: {
       type: "`$OBJECT`"
     }
     {
+      format: "date-time"
       name: "start"
       req: false
       short: "Start date of the expedition"
@@ -94,8 +96,10 @@ main: kit: entity: expedition: {
           }
           method: "GET"
           orig: "/expedition"
-          parts: [
-            "expedition"
+          segments: [
+            {
+              lit: "expedition"
+            }
           ]
           select: {
             exist: [
@@ -129,9 +133,13 @@ main: kit: entity: expedition: {
           }
           method: "GET"
           orig: "/expedition/{id}"
-          parts: [
-            "expedition"
-            "{id}"
+          segments: [
+            {
+              lit: "expedition"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

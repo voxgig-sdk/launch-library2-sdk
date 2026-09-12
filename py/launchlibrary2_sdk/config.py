@@ -1,6 +1,14 @@
 # LaunchLibrary2 SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -117,6 +125,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "agency",
         "op": {
           "list": {
@@ -163,8 +175,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/agencies",
-                "parts": [
-                  "agencies",
+                "segments": [
+                  {
+                    "lit": "agencies",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -179,6 +193,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "agencies",
+                ],
               },
             ],
           },
@@ -201,9 +218,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/agencies/{id}",
-                "parts": [
-                  "agencies",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "agencies",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -214,6 +235,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "agencies",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -230,11 +255,13 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date",
             "name": "date_of_birth",
             "short": "Date of birth",
             "type": "`$STRING`",
           },
           {
+            "format": "date",
             "name": "date_of_death",
             "short": "Date of death if applicable",
             "type": "`$STRING`",
@@ -283,6 +310,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "astronaut",
         "op": {
           "list": {
@@ -329,8 +360,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/astronaut",
-                "parts": [
-                  "astronaut",
+                "segments": [
+                  {
+                    "lit": "astronaut",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -345,6 +378,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "astronaut",
+                ],
               },
             ],
           },
@@ -367,9 +403,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/astronaut/{id}",
-                "parts": [
-                  "astronaut",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "astronaut",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -380,6 +420,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "astronaut",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -399,11 +443,13 @@ def make_config():
       "docking_event": {
         "fields": [
           {
+            "format": "date-time",
             "name": "departure",
             "short": "Departure time",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "docking",
             "short": "Docking time",
             "type": "`$STRING`",
@@ -427,6 +473,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "docking_event",
         "op": {
           "list": {
@@ -467,8 +517,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/docking_event",
-                "parts": [
-                  "docking_event",
+                "segments": [
+                  {
+                    "lit": "docking_event",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -482,6 +534,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "docking_event",
+                ],
               },
             ],
           },
@@ -504,9 +559,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/docking_event/{id}",
-                "parts": [
-                  "docking_event",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "docking_event",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -517,6 +576,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "docking_event",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -528,6 +591,7 @@ def make_config():
       "event": {
         "fields": [
           {
+            "format": "date-time",
             "name": "date",
             "short": "Event date and time",
             "type": "`$STRING`",
@@ -577,6 +641,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "event",
         "op": {
           "list": {
@@ -611,8 +679,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/event",
-                "parts": [
-                  "event",
+                "segments": [
+                  {
+                    "lit": "event",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -625,6 +695,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "event",
+                ],
               },
             ],
           },
@@ -647,9 +720,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/event/{id}",
-                "parts": [
-                  "event",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "event",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -660,6 +737,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.type`",
                 },
+                "parts": [
+                  "event",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -675,6 +756,7 @@ def make_config():
             "type": "`$ARRAY`",
           },
           {
+            "format": "date-time",
             "name": "end",
             "short": "End date of the expedition",
             "type": "`$STRING`",
@@ -694,6 +776,7 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "date-time",
             "name": "start",
             "short": "Start date of the expedition",
             "type": "`$STRING`",
@@ -704,6 +787,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "expedition",
         "op": {
           "list": {
@@ -744,8 +831,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/expedition",
-                "parts": [
-                  "expedition",
+                "segments": [
+                  {
+                    "lit": "expedition",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -759,6 +848,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "expedition",
+                ],
               },
             ],
           },
@@ -781,9 +873,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/expedition/{id}",
-                "parts": [
-                  "expedition",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "expedition",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -794,6 +890,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "expedition",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -874,6 +974,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "date",
             "name": "maiden_flight",
             "short": "Date of maiden flight",
             "type": "`$STRING`",
@@ -938,6 +1039,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "first_stage",
         "op": {
           "list": {
@@ -978,8 +1083,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/firststage",
-                "parts": [
-                  "firststage",
+                "segments": [
+                  {
+                    "lit": "firststage",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -993,6 +1100,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "firststage",
+                ],
               },
             ],
           },
@@ -1015,9 +1125,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/firststage/{id}",
-                "parts": [
-                  "firststage",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "firststage",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1028,6 +1142,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.launcher_config`",
                 },
+                "parts": [
+                  "firststage",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1062,6 +1180,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "net",
             "short": "Net Earliest Time (NET) for launch",
             "type": "`$STRING`",
@@ -1094,16 +1213,22 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date-time",
             "name": "window_end",
             "short": "End of launch window",
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "window_start",
             "short": "Start of launch window",
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "launch",
         "op": {
           "list": {
@@ -1168,8 +1293,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/launch",
-                "parts": [
-                  "launch",
+                "segments": [
+                  {
+                    "lit": "launch",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1187,6 +1314,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "launch",
+                ],
               },
             ],
           },
@@ -1209,9 +1339,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/launch/{id}",
-                "parts": [
-                  "launch",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "launch",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1222,6 +1356,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "launch",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1293,6 +1431,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "date",
             "name": "maiden_flight",
             "short": "Date of maiden flight",
             "type": "`$STRING`",
@@ -1342,6 +1481,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "launch_vehicle",
         "op": {
           "list": {
@@ -1388,9 +1531,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/config/launcher",
-                "parts": [
-                  "config",
-                  "launcher",
+                "segments": [
+                  {
+                    "lit": "config",
+                  },
+                  {
+                    "lit": "launcher",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1405,6 +1552,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "config",
+                  "launcher",
+                ],
               },
             ],
           },
@@ -1466,6 +1617,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "launcher",
         "op": {
           "load": {
@@ -1487,10 +1642,16 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/config/launcher/{id}",
-                "parts": [
-                  "config",
-                  "launcher",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "config",
+                  },
+                  {
+                    "lit": "launcher",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1501,6 +1662,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.manufacturer`",
                 },
+                "parts": [
+                  "config",
+                  "launcher",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1547,6 +1713,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "location",
         "op": {
           "list": {
@@ -1587,8 +1757,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/location",
-                "parts": [
-                  "location",
+                "segments": [
+                  {
+                    "lit": "location",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1602,6 +1774,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "location",
+                ],
               },
             ],
           },
@@ -1624,9 +1799,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/location/{id}",
-                "parts": [
-                  "location",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "location",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1637,6 +1816,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "location",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1717,6 +1900,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "pad",
         "op": {
           "list": {
@@ -1757,8 +1944,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/pad",
-                "parts": [
-                  "pad",
+                "segments": [
+                  {
+                    "lit": "pad",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1772,6 +1961,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "pad",
+                ],
               },
             ],
           },
@@ -1794,9 +1986,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/pad/{id}",
-                "parts": [
-                  "pad",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "pad",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1807,6 +2003,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.location`",
                 },
+                "parts": [
+                  "pad",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1826,6 +2026,7 @@ def make_config():
       "space_station": {
         "fields": [
           {
+            "format": "date",
             "name": "deorbited",
             "short": "Date the space station was deorbited",
             "type": "`$STRING`",
@@ -1836,6 +2037,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date",
             "name": "founded",
             "short": "Date the space station was founded",
             "type": "`$STRING`",
@@ -1878,6 +2080,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "space_station",
         "op": {
           "list": {
@@ -1924,8 +2130,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/spacestation",
-                "parts": [
-                  "spacestation",
+                "segments": [
+                  {
+                    "lit": "spacestation",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1940,6 +2148,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "spacestation",
+                ],
               },
             ],
           },
@@ -1962,9 +2173,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/spacestation/{id}",
-                "parts": [
-                  "spacestation",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "spacestation",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1975,6 +2190,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "spacestation",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -2040,6 +2259,7 @@ def make_config():
             "type": "`$BOOLEAN`",
           },
           {
+            "format": "date",
             "name": "maiden_flight",
             "short": "Date of maiden flight",
             "type": "`$STRING`",
@@ -2059,6 +2279,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "spacecraft",
         "op": {
           "list": {
@@ -2099,9 +2323,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/config/spacecraft",
-                "parts": [
-                  "config",
-                  "spacecraft",
+                "segments": [
+                  {
+                    "lit": "config",
+                  },
+                  {
+                    "lit": "spacecraft",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -2115,6 +2343,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.results`",
                 },
+                "parts": [
+                  "config",
+                  "spacecraft",
+                ],
               },
             ],
           },
@@ -2137,10 +2369,16 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/config/spacecraft/{id}",
-                "parts": [
-                  "config",
-                  "spacecraft",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "config",
+                  },
+                  {
+                    "lit": "spacecraft",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -2151,6 +2389,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "config",
+                  "spacecraft",
+                  "{id}",
+                ],
               },
             ],
           },

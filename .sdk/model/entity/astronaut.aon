@@ -12,12 +12,14 @@ main: kit: entity: astronaut: {
       type: "`$STRING`"
     }
     {
+      format: "date"
       name: "date_of_birth"
       req: false
       short: "Date of birth"
       type: "`$STRING`"
     }
     {
+      format: "date"
       name: "date_of_death"
       req: false
       short: "Date of death if applicable"
@@ -131,8 +133,10 @@ main: kit: entity: astronaut: {
           }
           method: "GET"
           orig: "/astronaut"
-          parts: [
-            "astronaut"
+          segments: [
+            {
+              lit: "astronaut"
+            }
           ]
           select: {
             exist: [
@@ -167,9 +171,13 @@ main: kit: entity: astronaut: {
           }
           method: "GET"
           orig: "/astronaut/{id}"
-          parts: [
-            "astronaut"
-            "{id}"
+          segments: [
+            {
+              lit: "astronaut"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

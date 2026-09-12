@@ -71,6 +71,7 @@ main: kit: entity: spacecraft: {
       type: "`$BOOLEAN`"
     }
     {
+      format: "date"
       name: "maiden_flight"
       req: false
       short: "Date of maiden flight"
@@ -142,9 +143,13 @@ main: kit: entity: spacecraft: {
           }
           method: "GET"
           orig: "/config/spacecraft"
-          parts: [
-            "config"
-            "spacecraft"
+          segments: [
+            {
+              lit: "config"
+            }
+            {
+              lit: "spacecraft"
+            }
           ]
           select: {
             exist: [
@@ -178,10 +183,16 @@ main: kit: entity: spacecraft: {
           }
           method: "GET"
           orig: "/config/spacecraft/{id}"
-          parts: [
-            "config"
-            "spacecraft"
-            "{id}"
+          segments: [
+            {
+              lit: "config"
+            }
+            {
+              lit: "spacecraft"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

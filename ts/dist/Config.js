@@ -1,0 +1,2401 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FEATURE_PLUGINS = exports.config = void 0;
+const TestFeature_1 = require("./feature/test/TestFeature");
+const FEATURE_CLASS = {
+    test: TestFeature_1.TestFeature,
+};
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS = {};
+exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
+class Config {
+    makeFeature(fn) {
+        const fc = FEATURE_CLASS[fn];
+        const fi = new fc();
+        // TODO: errors etc
+        return fi;
+    }
+    // False for a feature added at runtime via options.extend (station's
+    // adopt path) - the constructor uses this to skip makeFeature for names
+    // no generated class backs.
+    hasFeature(fn) {
+        return null != FEATURE_CLASS[fn];
+    }
+    main = {
+        name: 'LaunchLibrary2',
+        slug: "launch-library2",
+        version: "0.0.1",
+        target: "ts",
+    };
+    feature = {
+        test: {
+            "options": {
+                "active": false
+            },
+            "transport": "base"
+        },
+    };
+    options = {
+        base: "https://ll.thespacedevs.com/2.2.0",
+        headers: {
+            "content-type": "application/json"
+        },
+        entity: {
+            agency: {},
+            astronaut: {},
+            docking: {},
+            docking_event: {},
+            event: {},
+            expedition: {},
+            first_stage: {},
+            launch: {},
+            launch_vehicle: {},
+            launcher: {},
+            location: {},
+            pad: {},
+            reusable_first_stage: {},
+            space_station: {},
+            spacecraft: {},
+        }
+    };
+    entity = {
+        "agency": {
+            "fields": [
+                {
+                    "name": "abbrev",
+                    "short": "Agency abbreviation",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "administrator",
+                    "short": "Agency administrator",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "country_code",
+                    "short": "ISO country code",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "description",
+                    "short": "Agency description",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "founding_year",
+                    "short": "Year agency was founded",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "id",
+                    "short": "Agency ID",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "logo_url",
+                    "short": "URL to agency logo",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "name",
+                    "short": "Name of the agency",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "type",
+                    "short": "Type of agency",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this agency",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "agency",
+            "op": {
+                "list": {
+                    "input": "data",
+                    "name": "list",
+                    "points": [
+                        {
+                            "args": {
+                                "query": [
+                                    {
+                                        "kind": "query",
+                                        "name": "agency_type",
+                                        "orig": "agency_type",
+                                        "type": "`$STRING`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "country_code",
+                                        "orig": "country_code",
+                                        "type": "`$STRING`"
+                                    },
+                                    {
+                                        "example": 10,
+                                        "kind": "query",
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "example": 0,
+                                        "kind": "query",
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "search",
+                                        "orig": "search",
+                                        "type": "`$STRING`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/agencies",
+                            "segments": [
+                                {
+                                    "lit": "agencies"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "agency_type",
+                                    "country_code",
+                                    "limit",
+                                    "offset",
+                                    "search"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.results`"
+                            },
+                            "parts": [
+                                "agencies"
+                            ]
+                        }
+                    ]
+                },
+                "load": {
+                    "input": "data",
+                    "name": "load",
+                    "points": [
+                        {
+                            "args": {
+                                "params": [
+                                    {
+                                        "kind": "param",
+                                        "name": "id",
+                                        "orig": "id",
+                                        "reqd": true,
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/agencies/{id}",
+                            "segments": [
+                                {
+                                    "lit": "agencies"
+                                },
+                                {
+                                    "var": "id"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "parts": [
+                                "agencies",
+                                "{id}"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "astronaut": {
+            "fields": [
+                {
+                    "name": "bio",
+                    "short": "Biographical information",
+                    "type": "`$STRING`"
+                },
+                {
+                    "format": "date",
+                    "name": "date_of_birth",
+                    "short": "Date of birth",
+                    "type": "`$STRING`"
+                },
+                {
+                    "format": "date",
+                    "name": "date_of_death",
+                    "short": "Date of death if applicable",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "flights_count",
+                    "short": "Number of flights",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "id",
+                    "short": "Astronaut ID",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "name",
+                    "short": "Name of the astronaut",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "nationality",
+                    "short": "Astronaut nationality",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "profile_image",
+                    "short": "URL to profile image",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "spacewalks_count",
+                    "short": "Number of spacewalks",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "status",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "type",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this astronaut",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "astronaut",
+            "op": {
+                "list": {
+                    "input": "data",
+                    "name": "list",
+                    "points": [
+                        {
+                            "args": {
+                                "query": [
+                                    {
+                                        "example": 10,
+                                        "kind": "query",
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "nationality",
+                                        "orig": "nationality",
+                                        "type": "`$STRING`"
+                                    },
+                                    {
+                                        "example": 0,
+                                        "kind": "query",
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "search",
+                                        "orig": "search",
+                                        "type": "`$STRING`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "status",
+                                        "orig": "status",
+                                        "type": "`$STRING`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/astronaut",
+                            "segments": [
+                                {
+                                    "lit": "astronaut"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "limit",
+                                    "nationality",
+                                    "offset",
+                                    "search",
+                                    "status"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.results`"
+                            },
+                            "parts": [
+                                "astronaut"
+                            ]
+                        }
+                    ]
+                },
+                "load": {
+                    "input": "data",
+                    "name": "load",
+                    "points": [
+                        {
+                            "args": {
+                                "params": [
+                                    {
+                                        "kind": "param",
+                                        "name": "id",
+                                        "orig": "id",
+                                        "reqd": true,
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/astronaut/{id}",
+                            "segments": [
+                                {
+                                    "lit": "astronaut"
+                                },
+                                {
+                                    "var": "id"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "parts": [
+                                "astronaut",
+                                "{id}"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "docking": {
+            "fields": [],
+            "name": "docking",
+            "op": {},
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "docking_event": {
+            "fields": [
+                {
+                    "format": "date-time",
+                    "name": "departure",
+                    "short": "Departure time",
+                    "type": "`$STRING`"
+                },
+                {
+                    "format": "date-time",
+                    "name": "docking",
+                    "short": "Docking time",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "docking_location",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "flight_vehicle",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "id",
+                    "short": "Docking event ID",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this docking event",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "docking_event",
+            "op": {
+                "list": {
+                    "input": "data",
+                    "name": "list",
+                    "points": [
+                        {
+                            "args": {
+                                "query": [
+                                    {
+                                        "kind": "query",
+                                        "name": "docking_location",
+                                        "orig": "docking_location",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "example": 10,
+                                        "kind": "query",
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "example": 0,
+                                        "kind": "query",
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "spacestation",
+                                        "orig": "spacestation",
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/docking_event",
+                            "segments": [
+                                {
+                                    "lit": "docking_event"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "docking_location",
+                                    "limit",
+                                    "offset",
+                                    "spacestation"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.results`"
+                            },
+                            "parts": [
+                                "docking_event"
+                            ]
+                        }
+                    ]
+                },
+                "load": {
+                    "input": "data",
+                    "name": "load",
+                    "points": [
+                        {
+                            "args": {
+                                "params": [
+                                    {
+                                        "kind": "param",
+                                        "name": "id",
+                                        "orig": "id",
+                                        "reqd": true,
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/docking_event/{id}",
+                            "segments": [
+                                {
+                                    "lit": "docking_event"
+                                },
+                                {
+                                    "var": "id"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "parts": [
+                                "docking_event",
+                                "{id}"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "event": {
+            "fields": [
+                {
+                    "format": "date-time",
+                    "name": "date",
+                    "short": "Event date and time",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "description",
+                    "short": "Description of the event",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "feature_image",
+                    "short": "URL to feature image",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "id",
+                    "short": "Event ID",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "location",
+                    "short": "Event location",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "name",
+                    "short": "Name of the event",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "news_url",
+                    "short": "URL to news article",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "type",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this event",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "video_url",
+                    "short": "URL to video",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "event",
+            "op": {
+                "list": {
+                    "input": "data",
+                    "name": "list",
+                    "points": [
+                        {
+                            "args": {
+                                "query": [
+                                    {
+                                        "example": 10,
+                                        "kind": "query",
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "example": 0,
+                                        "kind": "query",
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "search",
+                                        "orig": "search",
+                                        "type": "`$STRING`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/event",
+                            "segments": [
+                                {
+                                    "lit": "event"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "limit",
+                                    "offset",
+                                    "search"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.results`"
+                            },
+                            "parts": [
+                                "event"
+                            ]
+                        }
+                    ]
+                },
+                "load": {
+                    "input": "data",
+                    "name": "load",
+                    "points": [
+                        {
+                            "args": {
+                                "params": [
+                                    {
+                                        "kind": "param",
+                                        "name": "id",
+                                        "orig": "id",
+                                        "reqd": true,
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/event/{id}",
+                            "segments": [
+                                {
+                                    "lit": "event"
+                                },
+                                {
+                                    "var": "id"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.type`"
+                            },
+                            "parts": [
+                                "event",
+                                "{id}"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "expedition": {
+            "fields": [
+                {
+                    "name": "crew",
+                    "type": "`$ARRAY`"
+                },
+                {
+                    "format": "date-time",
+                    "name": "end",
+                    "short": "End date of the expedition",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "id",
+                    "short": "Expedition ID",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "name",
+                    "short": "Name of the expedition",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "spacestation",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "format": "date-time",
+                    "name": "start",
+                    "short": "Start date of the expedition",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this expedition",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "expedition",
+            "op": {
+                "list": {
+                    "input": "data",
+                    "name": "list",
+                    "points": [
+                        {
+                            "args": {
+                                "query": [
+                                    {
+                                        "example": 10,
+                                        "kind": "query",
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "example": 0,
+                                        "kind": "query",
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "search",
+                                        "orig": "search",
+                                        "type": "`$STRING`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "spacestation",
+                                        "orig": "spacestation",
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/expedition",
+                            "segments": [
+                                {
+                                    "lit": "expedition"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "limit",
+                                    "offset",
+                                    "search",
+                                    "spacestation"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.results`"
+                            },
+                            "parts": [
+                                "expedition"
+                            ]
+                        }
+                    ]
+                },
+                "load": {
+                    "input": "data",
+                    "name": "load",
+                    "points": [
+                        {
+                            "args": {
+                                "params": [
+                                    {
+                                        "kind": "param",
+                                        "name": "id",
+                                        "orig": "id",
+                                        "reqd": true,
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/expedition/{id}",
+                            "segments": [
+                                {
+                                    "lit": "expedition"
+                                },
+                                {
+                                    "var": "id"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "parts": [
+                                "expedition",
+                                "{id}"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "first_stage": {
+            "fields": [
+                {
+                    "name": "apogee",
+                    "short": "Apogee in km",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "consecutive_successful_launches",
+                    "short": "Number of consecutive successful launches",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "description",
+                    "short": "Description of the launcher",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "diameter",
+                    "short": "Diameter in meters",
+                    "type": "`$NUMBER`"
+                },
+                {
+                    "name": "failed_launches",
+                    "short": "Number of failed launches",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "family",
+                    "short": "Launcher family",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "flights",
+                    "short": "Number of flights",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "full_name",
+                    "short": "Full name of the launcher",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "gto_capacity",
+                    "short": "GTO capacity in kg",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "id",
+                    "short": "Configuration ID",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "launch_mass",
+                    "short": "Launch mass in kg",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "launcher_config",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "length",
+                    "short": "Length in meters",
+                    "type": "`$NUMBER`"
+                },
+                {
+                    "name": "leo_capacity",
+                    "short": "LEO capacity in kg",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "format": "date",
+                    "name": "maiden_flight",
+                    "short": "Date of maiden flight",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "manufacturer",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "max_stage",
+                    "short": "Maximum number of stages",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "min_stage",
+                    "short": "Minimum number of stages",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "name",
+                    "short": "Name of the launcher configuration",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "pending_launches",
+                    "short": "Number of pending launches",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "serial_number",
+                    "short": "Serial number of the first stage",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "status",
+                    "short": "Current status",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "successful_launches",
+                    "short": "Number of successful launches",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "to_thrust",
+                    "short": "Takeoff thrust in kN",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "type",
+                    "short": "Type of first stage",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this configuration",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "variant",
+                    "short": "Variant of the launcher",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "first_stage",
+            "op": {
+                "list": {
+                    "input": "data",
+                    "name": "list",
+                    "points": [
+                        {
+                            "args": {
+                                "query": [
+                                    {
+                                        "kind": "query",
+                                        "name": "flight_number",
+                                        "orig": "flight_number",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "example": 10,
+                                        "kind": "query",
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "example": 0,
+                                        "kind": "query",
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "serial_number",
+                                        "orig": "serial_number",
+                                        "type": "`$STRING`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/firststage",
+                            "segments": [
+                                {
+                                    "lit": "firststage"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "flight_number",
+                                    "limit",
+                                    "offset",
+                                    "serial_number"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.results`"
+                            },
+                            "parts": [
+                                "firststage"
+                            ]
+                        }
+                    ]
+                },
+                "load": {
+                    "input": "data",
+                    "name": "load",
+                    "points": [
+                        {
+                            "args": {
+                                "params": [
+                                    {
+                                        "kind": "param",
+                                        "name": "id",
+                                        "orig": "id",
+                                        "reqd": true,
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/firststage/{id}",
+                            "segments": [
+                                {
+                                    "lit": "firststage"
+                                },
+                                {
+                                    "var": "id"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.launcher_config`"
+                            },
+                            "parts": [
+                                "firststage",
+                                "{id}"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "launch": {
+            "fields": [
+                {
+                    "name": "id",
+                    "short": "UUID of the launch",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "image",
+                    "short": "URL to launch image",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "launch_service_provider",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "mission",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "name",
+                    "short": "Name of the launch",
+                    "type": "`$STRING`"
+                },
+                {
+                    "format": "date-time",
+                    "name": "net",
+                    "short": "Net Earliest Time (NET) for launch",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "pad",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "probability",
+                    "short": "Launch probability percentage",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "rocket",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "status",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this launch",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "webcast_live",
+                    "short": "Whether the webcast is currently live",
+                    "type": "`$BOOLEAN`"
+                },
+                {
+                    "format": "date-time",
+                    "name": "window_end",
+                    "short": "End of launch window",
+                    "type": "`$STRING`"
+                },
+                {
+                    "format": "date-time",
+                    "name": "window_start",
+                    "short": "Start of launch window",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "launch",
+            "op": {
+                "list": {
+                    "input": "data",
+                    "name": "list",
+                    "points": [
+                        {
+                            "args": {
+                                "query": [
+                                    {
+                                        "example": 10,
+                                        "kind": "query",
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "lsp_id",
+                                        "orig": "lsp_id",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "lsp_name",
+                                        "orig": "lsp_name",
+                                        "type": "`$STRING`"
+                                    },
+                                    {
+                                        "example": 0,
+                                        "kind": "query",
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "rocket_configuration_id",
+                                        "orig": "rocket_configuration_id",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "search",
+                                        "orig": "search",
+                                        "type": "`$STRING`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "spacecraft_id",
+                                        "orig": "spacecraft_id",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "status",
+                                        "orig": "status",
+                                        "type": "`$STRING`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/launch",
+                            "segments": [
+                                {
+                                    "lit": "launch"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "limit",
+                                    "lsp_id",
+                                    "lsp_name",
+                                    "offset",
+                                    "rocket_configuration_id",
+                                    "search",
+                                    "spacecraft_id",
+                                    "status"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.results`"
+                            },
+                            "parts": [
+                                "launch"
+                            ]
+                        }
+                    ]
+                },
+                "load": {
+                    "input": "data",
+                    "name": "load",
+                    "points": [
+                        {
+                            "args": {
+                                "params": [
+                                    {
+                                        "kind": "param",
+                                        "name": "id",
+                                        "orig": "id",
+                                        "reqd": true,
+                                        "type": "`$STRING`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/launch/{id}",
+                            "segments": [
+                                {
+                                    "lit": "launch"
+                                },
+                                {
+                                    "var": "id"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "parts": [
+                                "launch",
+                                "{id}"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "launch_vehicle": {
+            "fields": [
+                {
+                    "name": "apogee",
+                    "short": "Apogee in km",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "consecutive_successful_launches",
+                    "short": "Number of consecutive successful launches",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "description",
+                    "short": "Description of the launcher",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "diameter",
+                    "short": "Diameter in meters",
+                    "type": "`$NUMBER`"
+                },
+                {
+                    "name": "failed_launches",
+                    "short": "Number of failed launches",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "family",
+                    "short": "Launcher family",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "full_name",
+                    "short": "Full name of the launcher",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "gto_capacity",
+                    "short": "GTO capacity in kg",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "id",
+                    "short": "Configuration ID",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "launch_mass",
+                    "short": "Launch mass in kg",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "length",
+                    "short": "Length in meters",
+                    "type": "`$NUMBER`"
+                },
+                {
+                    "name": "leo_capacity",
+                    "short": "LEO capacity in kg",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "format": "date",
+                    "name": "maiden_flight",
+                    "short": "Date of maiden flight",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "manufacturer",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "max_stage",
+                    "short": "Maximum number of stages",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "min_stage",
+                    "short": "Minimum number of stages",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "name",
+                    "short": "Name of the launcher configuration",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "pending_launches",
+                    "short": "Number of pending launches",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "successful_launches",
+                    "short": "Number of successful launches",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "to_thrust",
+                    "short": "Takeoff thrust in kN",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this configuration",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "variant",
+                    "short": "Variant of the launcher",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "launch_vehicle",
+            "op": {
+                "list": {
+                    "input": "data",
+                    "name": "list",
+                    "points": [
+                        {
+                            "args": {
+                                "query": [
+                                    {
+                                        "kind": "query",
+                                        "name": "family",
+                                        "orig": "family",
+                                        "type": "`$STRING`"
+                                    },
+                                    {
+                                        "example": 10,
+                                        "kind": "query",
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "manufacturer",
+                                        "orig": "manufacturer",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "example": 0,
+                                        "kind": "query",
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "search",
+                                        "orig": "search",
+                                        "type": "`$STRING`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/config/launcher",
+                            "segments": [
+                                {
+                                    "lit": "config"
+                                },
+                                {
+                                    "lit": "launcher"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "family",
+                                    "limit",
+                                    "manufacturer",
+                                    "offset",
+                                    "search"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.results`"
+                            },
+                            "parts": [
+                                "config",
+                                "launcher"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "launcher": {
+            "fields": [
+                {
+                    "name": "abbrev",
+                    "short": "Agency abbreviation",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "administrator",
+                    "short": "Agency administrator",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "country_code",
+                    "short": "ISO country code",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "description",
+                    "short": "Agency description",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "founding_year",
+                    "short": "Year agency was founded",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "id",
+                    "short": "Agency ID",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "logo_url",
+                    "short": "URL to agency logo",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "name",
+                    "short": "Name of the agency",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "type",
+                    "short": "Type of agency",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this agency",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "launcher",
+            "op": {
+                "load": {
+                    "input": "data",
+                    "name": "load",
+                    "points": [
+                        {
+                            "args": {
+                                "params": [
+                                    {
+                                        "kind": "param",
+                                        "name": "id",
+                                        "orig": "id",
+                                        "reqd": true,
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/config/launcher/{id}",
+                            "segments": [
+                                {
+                                    "lit": "config"
+                                },
+                                {
+                                    "lit": "launcher"
+                                },
+                                {
+                                    "var": "id"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.manufacturer`"
+                            },
+                            "parts": [
+                                "config",
+                                "launcher",
+                                "{id}"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "location": {
+            "fields": [
+                {
+                    "name": "country_code",
+                    "short": "ISO country code",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "id",
+                    "short": "Location ID",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "map_image",
+                    "short": "URL to map image",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "name",
+                    "short": "Name of the location",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "total_landing_count",
+                    "short": "Total number of landings at this location",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "total_launch_count",
+                    "short": "Total number of launches from this location",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this location",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "location",
+            "op": {
+                "list": {
+                    "input": "data",
+                    "name": "list",
+                    "points": [
+                        {
+                            "args": {
+                                "query": [
+                                    {
+                                        "kind": "query",
+                                        "name": "country_code",
+                                        "orig": "country_code",
+                                        "type": "`$STRING`"
+                                    },
+                                    {
+                                        "example": 10,
+                                        "kind": "query",
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "example": 0,
+                                        "kind": "query",
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "search",
+                                        "orig": "search",
+                                        "type": "`$STRING`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/location",
+                            "segments": [
+                                {
+                                    "lit": "location"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "country_code",
+                                    "limit",
+                                    "offset",
+                                    "search"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.results`"
+                            },
+                            "parts": [
+                                "location"
+                            ]
+                        }
+                    ]
+                },
+                "load": {
+                    "input": "data",
+                    "name": "load",
+                    "points": [
+                        {
+                            "args": {
+                                "params": [
+                                    {
+                                        "kind": "param",
+                                        "name": "id",
+                                        "orig": "id",
+                                        "reqd": true,
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/location/{id}",
+                            "segments": [
+                                {
+                                    "lit": "location"
+                                },
+                                {
+                                    "var": "id"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "parts": [
+                                "location",
+                                "{id}"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "pad": {
+            "fields": [
+                {
+                    "name": "agency_id",
+                    "short": "ID of the agency that operates this pad",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "country_code",
+                    "short": "ISO country code",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "id",
+                    "short": "Location ID",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "info_url",
+                    "short": "URL to more information",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "latitude",
+                    "short": "Latitude coordinate",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "location",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "longitude",
+                    "short": "Longitude coordinate",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "map_image",
+                    "short": "URL to map image",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "map_url",
+                    "short": "URL to map",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "name",
+                    "short": "Name of the location",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "total_landing_count",
+                    "short": "Total number of landings at this location",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "total_launch_count",
+                    "short": "Total number of launches from this location",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this location",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "wiki_url",
+                    "short": "Wikipedia URL",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "pad",
+            "op": {
+                "list": {
+                    "input": "data",
+                    "name": "list",
+                    "points": [
+                        {
+                            "args": {
+                                "query": [
+                                    {
+                                        "example": 10,
+                                        "kind": "query",
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "location",
+                                        "orig": "location",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "example": 0,
+                                        "kind": "query",
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "search",
+                                        "orig": "search",
+                                        "type": "`$STRING`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/pad",
+                            "segments": [
+                                {
+                                    "lit": "pad"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "limit",
+                                    "location",
+                                    "offset",
+                                    "search"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.results`"
+                            },
+                            "parts": [
+                                "pad"
+                            ]
+                        }
+                    ]
+                },
+                "load": {
+                    "input": "data",
+                    "name": "load",
+                    "points": [
+                        {
+                            "args": {
+                                "params": [
+                                    {
+                                        "kind": "param",
+                                        "name": "id",
+                                        "orig": "id",
+                                        "reqd": true,
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/pad/{id}",
+                            "segments": [
+                                {
+                                    "lit": "pad"
+                                },
+                                {
+                                    "var": "id"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.location`"
+                            },
+                            "parts": [
+                                "pad",
+                                "{id}"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "reusable_first_stage": {
+            "fields": [],
+            "name": "reusable_first_stage",
+            "op": {},
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "space_station": {
+            "fields": [
+                {
+                    "format": "date",
+                    "name": "deorbited",
+                    "short": "Date the space station was deorbited",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "description",
+                    "short": "Description of the space station",
+                    "type": "`$STRING`"
+                },
+                {
+                    "format": "date",
+                    "name": "founded",
+                    "short": "Date the space station was founded",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "id",
+                    "short": "Space station ID",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "image_url",
+                    "short": "URL to space station image",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "name",
+                    "short": "Name of the space station",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "orbit",
+                    "short": "Orbital information",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "owners",
+                    "type": "`$ARRAY`"
+                },
+                {
+                    "name": "status",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "type",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this space station",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "space_station",
+            "op": {
+                "list": {
+                    "input": "data",
+                    "name": "list",
+                    "points": [
+                        {
+                            "args": {
+                                "query": [
+                                    {
+                                        "example": 10,
+                                        "kind": "query",
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "example": 0,
+                                        "kind": "query",
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "owner",
+                                        "orig": "owner",
+                                        "type": "`$STRING`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "search",
+                                        "orig": "search",
+                                        "type": "`$STRING`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "status",
+                                        "orig": "status",
+                                        "type": "`$STRING`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/spacestation",
+                            "segments": [
+                                {
+                                    "lit": "spacestation"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "limit",
+                                    "offset",
+                                    "owner",
+                                    "search",
+                                    "status"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.results`"
+                            },
+                            "parts": [
+                                "spacestation"
+                            ]
+                        }
+                    ]
+                },
+                "load": {
+                    "input": "data",
+                    "name": "load",
+                    "points": [
+                        {
+                            "args": {
+                                "params": [
+                                    {
+                                        "kind": "param",
+                                        "name": "id",
+                                        "orig": "id",
+                                        "reqd": true,
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/spacestation/{id}",
+                            "segments": [
+                                {
+                                    "lit": "spacestation"
+                                },
+                                {
+                                    "var": "id"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "parts": [
+                                "spacestation",
+                                "{id}"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        },
+        "spacecraft": {
+            "fields": [
+                {
+                    "name": "agency",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "capability",
+                    "short": "Spacecraft capability",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "crew_capacity",
+                    "short": "Crew capacity",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "details",
+                    "short": "Detailed information",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "diameter",
+                    "short": "Diameter in meters",
+                    "type": "`$NUMBER`"
+                },
+                {
+                    "name": "height",
+                    "short": "Height in meters",
+                    "type": "`$NUMBER`"
+                },
+                {
+                    "name": "history",
+                    "short": "Historical information",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "human_rated",
+                    "short": "Whether the spacecraft is human-rated",
+                    "type": "`$BOOLEAN`"
+                },
+                {
+                    "name": "id",
+                    "short": "Spacecraft configuration ID",
+                    "type": "`$INTEGER`"
+                },
+                {
+                    "name": "image_url",
+                    "short": "URL to spacecraft image",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "in_use",
+                    "short": "Whether the spacecraft is currently in use",
+                    "type": "`$BOOLEAN`"
+                },
+                {
+                    "format": "date",
+                    "name": "maiden_flight",
+                    "short": "Date of maiden flight",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "name",
+                    "short": "Name of the spacecraft",
+                    "type": "`$STRING`"
+                },
+                {
+                    "name": "type",
+                    "type": "`$OBJECT`"
+                },
+                {
+                    "name": "url",
+                    "short": "API URL for this configuration",
+                    "type": "`$STRING`"
+                }
+            ],
+            "id": {
+                "field": "id",
+                "name": "id"
+            },
+            "name": "spacecraft",
+            "op": {
+                "list": {
+                    "input": "data",
+                    "name": "list",
+                    "points": [
+                        {
+                            "args": {
+                                "query": [
+                                    {
+                                        "example": 10,
+                                        "kind": "query",
+                                        "name": "limit",
+                                        "orig": "limit",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "example": 0,
+                                        "kind": "query",
+                                        "name": "offset",
+                                        "orig": "offset",
+                                        "type": "`$INTEGER`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "search",
+                                        "orig": "search",
+                                        "type": "`$STRING`"
+                                    },
+                                    {
+                                        "kind": "query",
+                                        "name": "status",
+                                        "orig": "status",
+                                        "type": "`$STRING`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/config/spacecraft",
+                            "segments": [
+                                {
+                                    "lit": "config"
+                                },
+                                {
+                                    "lit": "spacecraft"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "limit",
+                                    "offset",
+                                    "search",
+                                    "status"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.results`"
+                            },
+                            "parts": [
+                                "config",
+                                "spacecraft"
+                            ]
+                        }
+                    ]
+                },
+                "load": {
+                    "input": "data",
+                    "name": "load",
+                    "points": [
+                        {
+                            "args": {
+                                "params": [
+                                    {
+                                        "kind": "param",
+                                        "name": "id",
+                                        "orig": "id",
+                                        "reqd": true,
+                                        "type": "`$INTEGER`"
+                                    }
+                                ]
+                            },
+                            "kind": "http",
+                            "method": "GET",
+                            "orig": "/config/spacecraft/{id}",
+                            "segments": [
+                                {
+                                    "lit": "config"
+                                },
+                                {
+                                    "lit": "spacecraft"
+                                },
+                                {
+                                    "var": "id"
+                                }
+                            ],
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            },
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "parts": [
+                                "config",
+                                "spacecraft",
+                                "{id}"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "relations": {
+                "ancestors": []
+            }
+        }
+    };
+}
+const config = new Config();
+exports.config = config;
+//# sourceMappingURL=Config.js.map

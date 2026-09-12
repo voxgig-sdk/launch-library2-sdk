@@ -91,10 +91,16 @@ main: kit: entity: launcher: {
           }
           method: "GET"
           orig: "/config/launcher/{id}"
-          parts: [
-            "config"
-            "launcher"
-            "{id}"
+          segments: [
+            {
+              lit: "config"
+            }
+            {
+              lit: "launcher"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [
