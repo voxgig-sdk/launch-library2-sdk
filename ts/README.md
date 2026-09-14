@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { LaunchLibrary2SDK } from '@voxgig-sdk/launch-library2'
+import { LaunchLibrary2SDK } from '@voxgig-sdk/launch-library2-sdk'
 
 const client = new LaunchLibrary2SDK()
 ```
@@ -1237,7 +1237,7 @@ launch-library2/
 Import the SDK from the package root:
 
 ```ts
-import { LaunchLibrary2SDK } from '@voxgig-sdk/launch-library2'
+import { LaunchLibrary2SDK } from '@voxgig-sdk/launch-library2-sdk'
 ```
 
 ### Entity state

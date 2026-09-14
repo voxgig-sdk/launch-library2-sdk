@@ -4091,7 +4091,7 @@
             "registry": {
               "active": false,
               "name": "npm",
-              "package": "",
+              "package": "@voxgig-sdk/launch-library2-sdk",
               "state": "pending",
               "url": "https://registry.npmjs.org",
               "vault": {
