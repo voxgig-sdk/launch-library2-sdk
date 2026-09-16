@@ -37,5 +37,437 @@
         "url": "sf5"
       }
     }
+  },
+  "requests": {
+    "GET /docking_event": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getDockingEvents",
+        "parameters": [
+          {
+            "description": "Number of results to return per page",
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "default": 10,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The initial index from which to return the results",
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "default": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter by space station",
+            "in": "query",
+            "name": "spacestation",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter by docking location",
+            "in": "query",
+            "name": "docking_location",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "previous": {
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "results": {
+                      "items": {
+                        "properties": {
+                          "departure": {
+                            "description": "Departure time",
+                            "format": "date-time",
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "docking": {
+                            "description": "Docking time",
+                            "format": "date-time",
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "docking_location": {
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "spacestation": {
+                                "properties": {
+                                  "deorbited": {
+                                    "description": "Date the space station was deorbited",
+                                    "format": "date",
+                                    "nullable": true,
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "description": "Description of the space station",
+                                    "type": "string"
+                                  },
+                                  "founded": {
+                                    "description": "Date the space station was founded",
+                                    "format": "date",
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "description": "Space station ID",
+                                    "type": "integer"
+                                  },
+                                  "image_url": {
+                                    "description": "URL to space station image",
+                                    "nullable": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the space station",
+                                    "type": "string"
+                                  },
+                                  "orbit": {
+                                    "description": "Orbital information",
+                                    "type": "string"
+                                  },
+                                  "owners": {
+                                    "items": {
+                                      "properties": {
+                                        "abbrev": {
+                                          "description": "Agency abbreviation",
+                                          "type": "string"
+                                        },
+                                        "administrator": {
+                                          "description": "Agency administrator",
+                                          "nullable": true,
+                                          "type": "string"
+                                        },
+                                        "country_code": {
+                                          "description": "ISO country code",
+                                          "type": "string"
+                                        },
+                                        "description": {
+                                          "description": "Agency description",
+                                          "nullable": true,
+                                          "type": "string"
+                                        },
+                                        "founding_year": {
+                                          "description": "Year agency was founded",
+                                          "nullable": true,
+                                          "type": "string"
+                                        },
+                                        "id": {
+                                          "description": "Agency ID",
+                                          "type": "integer"
+                                        },
+                                        "logo_url": {
+                                          "description": "URL to agency logo",
+                                          "nullable": true,
+                                          "type": "string"
+                                        },
+                                        "name": {
+                                          "description": "Name of the agency",
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "description": "Type of agency",
+                                          "type": "string"
+                                        },
+                                        "url": {
+                                          "description": "API URL for this agency",
+                                          "type": "string"
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    "type": "array"
+                                  },
+                                  "status": {
+                                    "properties": {
+                                      "id": {
+                                        "type": "integer"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "type": {
+                                    "properties": {
+                                      "id": {
+                                        "type": "integer"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  },
+                                  "url": {
+                                    "description": "API URL for this space station",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "flight_vehicle": {
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "spacecraft": {
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "Docking event ID",
+                            "type": "integer"
+                          },
+                          "url": {
+                            "description": "API URL for this docking event",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /docking_event/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getDockingEventById",
+        "parameters": [
+          {
+            "description": "ID of the docking event",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "departure": {
+                      "description": "Departure time",
+                      "format": "date-time",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "docking": {
+                      "description": "Docking time",
+                      "format": "date-time",
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "docking_location": {
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "spacestation": {
+                          "properties": {
+                            "deorbited": {
+                              "description": "Date the space station was deorbited",
+                              "format": "date",
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "description": {
+                              "description": "Description of the space station",
+                              "type": "string"
+                            },
+                            "founded": {
+                              "description": "Date the space station was founded",
+                              "format": "date",
+                              "type": "string"
+                            },
+                            "id": {
+                              "description": "Space station ID",
+                              "type": "integer"
+                            },
+                            "image_url": {
+                              "description": "URL to space station image",
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the space station",
+                              "type": "string"
+                            },
+                            "orbit": {
+                              "description": "Orbital information",
+                              "type": "string"
+                            },
+                            "owners": {
+                              "items": {
+                                "properties": {
+                                  "abbrev": {
+                                    "description": "Agency abbreviation",
+                                    "type": "string"
+                                  },
+                                  "administrator": {
+                                    "description": "Agency administrator",
+                                    "nullable": true,
+                                    "type": "string"
+                                  },
+                                  "country_code": {
+                                    "description": "ISO country code",
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "description": "Agency description",
+                                    "nullable": true,
+                                    "type": "string"
+                                  },
+                                  "founding_year": {
+                                    "description": "Year agency was founded",
+                                    "nullable": true,
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "description": "Agency ID",
+                                    "type": "integer"
+                                  },
+                                  "logo_url": {
+                                    "description": "URL to agency logo",
+                                    "nullable": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the agency",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "description": "Type of agency",
+                                    "type": "string"
+                                  },
+                                  "url": {
+                                    "description": "API URL for this agency",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "type": "array"
+                            },
+                            "status": {
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": {
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "url": {
+                              "description": "API URL for this space station",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "flight_vehicle": {
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "spacecraft": {
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "id": {
+                      "description": "Docking event ID",
+                      "type": "integer"
+                    },
+                    "url": {
+                      "description": "API URL for this docking event",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "404": {
+            "description": "Docking event not found"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

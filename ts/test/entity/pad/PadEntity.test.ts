@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { LaunchLibrary2SDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('PadEntity', async () => {
 
     const live = 'TRUE' === process.env.LAUNCH_LIBRARY2_TEST_LIVE
     for (const op of ['list', 'load']) {
-      if (maybeSkipControl(t, 'entityOp', 'pad.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'pad.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set LAUNCH_LIBRARY2_TEST_PAD_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"agency_id","req":false,"short":"ID of the agency that operates this pad","type":"`$INTEGER`","index$":0},{"active":true,"name":"country_code","req":false,"short":"ISO country code","type":"`$STRING`","index$":1},{"active":true,"name":"id","req":false,"short":"Location ID","type":"`$INTEGER`","index$":2},{"active":true,"name":"info_url","req":false,"short":"URL to more information","type":"`$STRING`","index$":3},{"active":true,"name":"latitude","req":false,"short":"Latitude coordinate","type":"`$STRING`","index$":4},{"active":true,"name":"location","req":false,"type":"`$OBJECT`","index$":5},{"active":true,"name":"longitude","req":false,"short":"Longitude coordinate","type":"`$STRING`","index$":6},{"active":true,"name":"map_image","req":false,"short":"URL to map image","type":"`$STRING`","index$":7},{"active":true,"name":"map_url","req":false,"short":"URL to map","type":"`$STRING`","index$":8},{"active":true,"name":"name","req":false,"short":"Name of the location","type":"`$STRING`","index$":9},{"active":true,"name":"total_landing_count","req":false,"short":"Total number of landings at this location","type":"`$INTEGER`","index$":10},{"active":true,"name":"total_launch_count","req":false,"short":"Total number of launches from this location","type":"`$INTEGER`","index$":11},{"active":true,"name":"url","req":false,"short":"API URL for this location","type":"`$STRING`","index$":12},{"active":true,"name":"wiki_url","req":false,"short":"Wikipedia URL","type":"`$STRING`","index$":13}],"id":{"field":"id","name":"id"},"name":"pad","op":{"list":{"input":"data","name":"list","points":[{"active":true,"args":{"query":[{"active":true,"example":10,"kind":"query","name":"limit","orig":"limit","reqd":false,"type":"`$INTEGER`","index$":0},{"active":true,"kind":"query","name":"location","orig":"location","reqd":false,"type":"`$INTEGER`","index$":1},{"active":true,"example":0,"kind":"query","name":"offset","orig":"offset","reqd":false,"type":"`$INTEGER`","index$":2},{"active":true,"kind":"query","name":"search","orig":"search","reqd":false,"type":"`$STRING`","index$":3}]},"contract":{"id":"GET /pad","json":"{\"operationId\":\"getPads\",\"parameters\":[{\"description\":\"Number of results to return per page\",\"in\":\"query\",\"name\":\"limit\",\"schema\":{\"default\":10,\"type\":\"integer\"}},{\"description\":\"The initial index from which to return the results\",\"in\":\"query\",\"name\":\"offset\",\"schema\":{\"default\":0,\"type\":\"integer\"}},{\"description\":\"Search by pad name\",\"in\":\"query\",\"name\":\"search\",\"schema\":{\"type\":\"string\"}},{\"description\":\"Filter by location ID\",\"in\":\"query\",\"name\":\"location\",\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"count\":{\"type\":\"integer\"},\"next\":{\"nullable\":true,\"type\":\"string\"},\"previous\":{\"nullable\":true,\"type\":\"string\"},\"results\":{\"items\":{\"properties\":{\"agency_id\":{\"description\":\"ID of the agency that operates this pad\",\"nullable\":true,\"type\":\"integer\"},\"id\":{\"description\":\"Pad ID\",\"type\":\"integer\"},\"info_url\":{\"description\":\"URL to more information\",\"nullable\":true,\"type\":\"string\"},\"latitude\":{\"description\":\"Latitude coordinate\",\"type\":\"string\"},\"location\":{\"properties\":{\"country_code\":{\"description\":\"ISO country code\",\"type\":\"string\"},\"id\":{\"description\":\"Location ID\",\"type\":\"integer\"},\"map_image\":{\"description\":\"URL to map image\",\"nullable\":true,\"type\":\"string\"},\"name\":{\"description\":\"Name of the location\",\"type\":\"string\"},\"total_landing_count\":{\"description\":\"Total number of landings at this location\",\"type\":\"integer\"},\"total_launch_count\":{\"description\":\"Total number of launches from this location\",\"type\":\"integer\"},\"url\":{\"description\":\"API URL for this location\",\"type\":\"string\"}},\"type\":\"object\"},\"longitude\":{\"description\":\"Longitude coordinate\",\"type\":\"string\"},\"map_image\":{\"description\":\"URL to map image\",\"nullable\":true,\"type\":\"string\"},\"map_url\":{\"description\":\"URL to map\",\"nullable\":true,\"type\":\"string\"},\"name\":{\"description\":\"Name of the pad\",\"type\":\"string\"},\"total_launch_count\":{\"description\":\"Total number of launches from this pad\",\"type\":\"integer\"},\"url\":{\"description\":\"API URL for this pad\",\"type\":\"string\"},\"wiki_url\":{\"description\":\"Wikipedia URL\",\"nullable\":true,\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"429\":{\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/pad","segments":[{"lit":"pad"}],"select":{"exist":["limit","location","offset","search"]},"transform":{"req":"`reqdata`","res":"`body.results`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"active":true,"args":{"params":[{"active":true,"kind":"param","name":"id","orig":"id","reqd":true,"type":"`$INTEGER`","index$":0}]},"contract":{"id":"GET /pad/{id}","json":"{\"operationId\":\"getPadById\",\"parameters\":[{\"description\":\"ID of the pad\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"agency_id\":{\"description\":\"ID of the agency that operates this pad\",\"nullable\":true,\"type\":\"integer\"},\"id\":{\"description\":\"Pad ID\",\"type\":\"integer\"},\"info_url\":{\"description\":\"URL to more information\",\"nullable\":true,\"type\":\"string\"},\"latitude\":{\"description\":\"Latitude coordinate\",\"type\":\"string\"},\"location\":{\"properties\":{\"country_code\":{\"description\":\"ISO country code\",\"type\":\"string\"},\"id\":{\"description\":\"Location ID\",\"type\":\"integer\"},\"map_image\":{\"description\":\"URL to map image\",\"nullable\":true,\"type\":\"string\"},\"name\":{\"description\":\"Name of the location\",\"type\":\"string\"},\"total_landing_count\":{\"description\":\"Total number of landings at this location\",\"type\":\"integer\"},\"total_launch_count\":{\"description\":\"Total number of launches from this location\",\"type\":\"integer\"},\"url\":{\"description\":\"API URL for this location\",\"type\":\"string\"}},\"type\":\"object\"},\"longitude\":{\"description\":\"Longitude coordinate\",\"type\":\"string\"},\"map_image\":{\"description\":\"URL to map image\",\"nullable\":true,\"type\":\"string\"},\"map_url\":{\"description\":\"URL to map\",\"nullable\":true,\"type\":\"string\"},\"name\":{\"description\":\"Name of the pad\",\"type\":\"string\"},\"total_launch_count\":{\"description\":\"Total number of launches from this pad\",\"type\":\"integer\"},\"url\":{\"description\":\"API URL for this pad\",\"type\":\"string\"},\"wiki_url\":{\"description\":\"Wikipedia URL\",\"nullable\":true,\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Pad not found\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/pad/{id}","segments":[{"lit":"pad"},{"var":"id"}],"select":{"exist":["id"]},"transform":{"req":"`reqdata`","res":"`body.location`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"pad","name__orig":"pad","Name":"Pad","name_":"pad","name-":"pad","NAME":"PAD","index$":11}, {"active":true,"entity":"pad","key$":"BasicPadFlow","kind":"basic","name":"BasicPadFlow","param":{},"step":[{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"pad_ref01"}}],"index$":0},{"active":true,"data":{},"input":{"ref":"pad_ref01","srcdatavar":"pad_ref01_data","suffix":"_dt0"},"match":{"id":"pad01"},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-pad_ref01"}}],"index$":1}]}, 'Pad')
     }
     const client = setup.client
     const struct = setup.struct
@@ -116,13 +115,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['LAUNCH_LIBRARY2_TEST_PAD_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'LAUNCH_LIBRARY2_TEST_PAD_ENTID': idmap,
     'LAUNCH_LIBRARY2_TEST_LIVE': 'FALSE',
@@ -133,7 +125,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.LAUNCH_LIBRARY2_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['LAUNCH_LIBRARY2_TEST_PAD_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new LaunchLibrary2SDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -145,7 +143,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -158,7 +157,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.LAUNCH_LIBRARY2_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

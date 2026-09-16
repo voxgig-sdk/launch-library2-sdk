@@ -131,6 +131,12 @@ main: kit: entity: astronaut: {
               }
             ]
           }
+          contract: {
+            id: "GET /astronaut"
+            json: "{\"operationId\":\"getAstronauts\",\"parameters\":[{\"description\":\"Number of results to return per page\",\"in\":\"query\",\"name\":\"limit\",\"schema\":{\"default\":10,\"type\":\"integer\"}},{\"description\":\"The initial index from which to return the results\",\"in\":\"query\",\"name\":\"offset\",\"schema\":{\"default\":0,\"type\":\"integer\"}},{\"description\":\"Search by astronaut name\",\"in\":\"query\",\"name\":\"search\",\"schema\":{\"type\":\"string\"}},{\"description\":\"Filter by astronaut status\",\"in\":\"query\",\"name\":\"status\",\"schema\":{\"type\":\"string\"}},{\"description\":\"Filter by nationality\",\"in\":\"query\",\"name\":\"nationality\",\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"count\":{\"type\":\"integer\"},\"next\":{\"nullable\":true,\"type\":\"string\"},\"previous\":{\"nullable\":true,\"type\":\"string\"},\"results\":{\"items\":{\"properties\":{\"bio\":{\"description\":\"Biographical information\",\"type\":\"string\"},\"date_of_birth\":{\"description\":\"Date of birth\",\"format\":\"date\",\"type\":\"string\"},\"date_of_death\":{\"description\":\"Date of death if applicable\",\"format\":\"date\",\"nullable\":true,\"type\":\"string\"},\"flights_count\":{\"description\":\"Number of flights\",\"type\":\"integer\"},\"id\":{\"description\":\"Astronaut ID\",\"type\":\"integer\"},\"name\":{\"description\":\"Name of the astronaut\",\"type\":\"string\"},\"nationality\":{\"description\":\"Astronaut nationality\",\"type\":\"string\"},\"profile_image\":{\"description\":\"URL to profile image\",\"nullable\":true,\"type\":\"string\"},\"spacewalks_count\":{\"description\":\"Number of spacewalks\",\"type\":\"integer\"},\"status\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"url\":{\"description\":\"API URL for this astronaut\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"429\":{\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/astronaut"
           segments: [
@@ -168,6 +174,12 @@ main: kit: entity: astronaut: {
                 type: "`$INTEGER`"
               }
             ]
+          }
+          contract: {
+            id: "GET /astronaut/{id}"
+            json: "{\"operationId\":\"getAstronautById\",\"parameters\":[{\"description\":\"ID of the astronaut\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"bio\":{\"description\":\"Biographical information\",\"type\":\"string\"},\"date_of_birth\":{\"description\":\"Date of birth\",\"format\":\"date\",\"type\":\"string\"},\"date_of_death\":{\"description\":\"Date of death if applicable\",\"format\":\"date\",\"nullable\":true,\"type\":\"string\"},\"flights_count\":{\"description\":\"Number of flights\",\"type\":\"integer\"},\"id\":{\"description\":\"Astronaut ID\",\"type\":\"integer\"},\"name\":{\"description\":\"Name of the astronaut\",\"type\":\"string\"},\"nationality\":{\"description\":\"Astronaut nationality\",\"type\":\"string\"},\"profile_image\":{\"description\":\"URL to profile image\",\"nullable\":true,\"type\":\"string\"},\"spacewalks_count\":{\"description\":\"Number of spacewalks\",\"type\":\"integer\"},\"status\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"url\":{\"description\":\"API URL for this astronaut\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Astronaut not found\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/astronaut/{id}"

@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.LAUNCH_LIBRARY2_TEST_LIVE;
         for (const op of ['list', 'load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'spacecraft.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'spacecraft.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set LAUNCH_LIBRARY2_TEST_SPACECRAFT_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "name": "agency", "req": false, "type": "`$OBJECT`", "index$": 0 }, { "active": true, "name": "capability", "req": false, "short": "Spacecraft capability", "type": "`$STRING`", "index$": 1 }, { "active": true, "name": "crew_capacity", "req": false, "short": "Crew capacity", "type": "`$INTEGER`", "index$": 2 }, { "active": true, "name": "details", "req": false, "short": "Detailed information", "type": "`$STRING`", "index$": 3 }, { "active": true, "name": "diameter", "req": false, "short": "Diameter in meters", "type": "`$NUMBER`", "index$": 4 }, { "active": true, "name": "height", "req": false, "short": "Height in meters", "type": "`$NUMBER`", "index$": 5 }, { "active": true, "name": "history", "req": false, "short": "Historical information", "type": "`$STRING`", "index$": 6 }, { "active": true, "name": "human_rated", "req": false, "short": "Whether the spacecraft is human-rated", "type": "`$BOOLEAN`", "index$": 7 }, { "active": true, "name": "id", "req": false, "short": "Spacecraft configuration ID", "type": "`$INTEGER`", "index$": 8 }, { "active": true, "name": "image_url", "req": false, "short": "URL to spacecraft image", "type": "`$STRING`", "index$": 9 }, { "active": true, "name": "in_use", "req": false, "short": "Whether the spacecraft is currently in use", "type": "`$BOOLEAN`", "index$": 10 }, { "active": true, "format": "date", "name": "maiden_flight", "req": false, "short": "Date of maiden flight", "type": "`$STRING`", "index$": 11 }, { "active": true, "name": "name", "req": false, "short": "Name of the spacecraft", "type": "`$STRING`", "index$": 12 }, { "active": true, "name": "type", "req": false, "type": "`$OBJECT`", "index$": 13 }, { "active": true, "name": "url", "req": false, "short": "API URL for this configuration", "type": "`$STRING`", "index$": 14 }], "id": { "field": "id", "name": "id" }, "name": "spacecraft", "op": { "list": { "input": "data", "name": "list", "points": [{ "active": true, "args": { "query": [{ "active": true, "example": 10, "kind": "query", "name": "limit", "orig": "limit", "reqd": false, "type": "`$INTEGER`", "index$": 0 }, { "active": true, "example": 0, "kind": "query", "name": "offset", "orig": "offset", "reqd": false, "type": "`$INTEGER`", "index$": 1 }, { "active": true, "kind": "query", "name": "search", "orig": "search", "reqd": false, "type": "`$STRING`", "index$": 2 }, { "active": true, "kind": "query", "name": "status", "orig": "status", "reqd": false, "type": "`$STRING`", "index$": 3 }] }, "contract": { "id": "GET /config/spacecraft", "json": "{\"operationId\":\"getSpacecraftConfigs\",\"parameters\":[{\"description\":\"Number of results to return per page\",\"in\":\"query\",\"name\":\"limit\",\"schema\":{\"default\":10,\"type\":\"integer\"}},{\"description\":\"The initial index from which to return the results\",\"in\":\"query\",\"name\":\"offset\",\"schema\":{\"default\":0,\"type\":\"integer\"}},{\"description\":\"Search by spacecraft name\",\"in\":\"query\",\"name\":\"search\",\"schema\":{\"type\":\"string\"}},{\"description\":\"Filter by status\",\"in\":\"query\",\"name\":\"status\",\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"count\":{\"type\":\"integer\"},\"next\":{\"nullable\":true,\"type\":\"string\"},\"previous\":{\"nullable\":true,\"type\":\"string\"},\"results\":{\"items\":{\"properties\":{\"agency\":{\"properties\":{\"abbrev\":{\"description\":\"Agency abbreviation\",\"type\":\"string\"},\"administrator\":{\"description\":\"Agency administrator\",\"nullable\":true,\"type\":\"string\"},\"country_code\":{\"description\":\"ISO country code\",\"type\":\"string\"},\"description\":{\"description\":\"Agency description\",\"nullable\":true,\"type\":\"string\"},\"founding_year\":{\"description\":\"Year agency was founded\",\"nullable\":true,\"type\":\"string\"},\"id\":{\"description\":\"Agency ID\",\"type\":\"integer\"},\"logo_url\":{\"description\":\"URL to agency logo\",\"nullable\":true,\"type\":\"string\"},\"name\":{\"description\":\"Name of the agency\",\"type\":\"string\"},\"type\":{\"description\":\"Type of agency\",\"type\":\"string\"},\"url\":{\"description\":\"API URL for this agency\",\"type\":\"string\"}},\"type\":\"object\"},\"capability\":{\"description\":\"Spacecraft capability\",\"type\":\"string\"},\"crew_capacity\":{\"description\":\"Crew capacity\",\"nullable\":true,\"type\":\"integer\"},\"details\":{\"description\":\"Detailed information\",\"type\":\"string\"},\"diameter\":{\"description\":\"Diameter in meters\",\"nullable\":true,\"type\":\"number\"},\"height\":{\"description\":\"Height in meters\",\"nullable\":true,\"type\":\"number\"},\"history\":{\"description\":\"Historical information\",\"type\":\"string\"},\"human_rated\":{\"description\":\"Whether the spacecraft is human-rated\",\"type\":\"boolean\"},\"id\":{\"description\":\"Spacecraft configuration ID\",\"type\":\"integer\"},\"image_url\":{\"description\":\"URL to spacecraft image\",\"nullable\":true,\"type\":\"string\"},\"in_use\":{\"description\":\"Whether the spacecraft is currently in use\",\"type\":\"boolean\"},\"maiden_flight\":{\"description\":\"Date of maiden flight\",\"format\":\"date\",\"nullable\":true,\"type\":\"string\"},\"name\":{\"description\":\"Name of the spacecraft\",\"type\":\"string\"},\"type\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"url\":{\"description\":\"API URL for this configuration\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"429\":{\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/config/spacecraft", "segments": [{ "lit": "config" }, { "lit": "spacecraft" }], "select": { "exist": ["limit", "offset", "search", "status"] }, "transform": { "req": "`reqdata`", "res": "`body.results`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": { "params": [{ "active": true, "kind": "param", "name": "id", "orig": "id", "reqd": true, "type": "`$INTEGER`", "index$": 0 }] }, "contract": { "id": "GET /config/spacecraft/{id}", "json": "{\"operationId\":\"getSpacecraftConfigById\",\"parameters\":[{\"description\":\"ID of the spacecraft configuration\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"agency\":{\"properties\":{\"abbrev\":{\"description\":\"Agency abbreviation\",\"type\":\"string\"},\"administrator\":{\"description\":\"Agency administrator\",\"nullable\":true,\"type\":\"string\"},\"country_code\":{\"description\":\"ISO country code\",\"type\":\"string\"},\"description\":{\"description\":\"Agency description\",\"nullable\":true,\"type\":\"string\"},\"founding_year\":{\"description\":\"Year agency was founded\",\"nullable\":true,\"type\":\"string\"},\"id\":{\"description\":\"Agency ID\",\"type\":\"integer\"},\"logo_url\":{\"description\":\"URL to agency logo\",\"nullable\":true,\"type\":\"string\"},\"name\":{\"description\":\"Name of the agency\",\"type\":\"string\"},\"type\":{\"description\":\"Type of agency\",\"type\":\"string\"},\"url\":{\"description\":\"API URL for this agency\",\"type\":\"string\"}},\"type\":\"object\"},\"capability\":{\"description\":\"Spacecraft capability\",\"type\":\"string\"},\"crew_capacity\":{\"description\":\"Crew capacity\",\"nullable\":true,\"type\":\"integer\"},\"details\":{\"description\":\"Detailed information\",\"type\":\"string\"},\"diameter\":{\"description\":\"Diameter in meters\",\"nullable\":true,\"type\":\"number\"},\"height\":{\"description\":\"Height in meters\",\"nullable\":true,\"type\":\"number\"},\"history\":{\"description\":\"Historical information\",\"type\":\"string\"},\"human_rated\":{\"description\":\"Whether the spacecraft is human-rated\",\"type\":\"boolean\"},\"id\":{\"description\":\"Spacecraft configuration ID\",\"type\":\"integer\"},\"image_url\":{\"description\":\"URL to spacecraft image\",\"nullable\":true,\"type\":\"string\"},\"in_use\":{\"description\":\"Whether the spacecraft is currently in use\",\"type\":\"boolean\"},\"maiden_flight\":{\"description\":\"Date of maiden flight\",\"format\":\"date\",\"nullable\":true,\"type\":\"string\"},\"name\":{\"description\":\"Name of the spacecraft\",\"type\":\"string\"},\"type\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"url\":{\"description\":\"API URL for this configuration\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Spacecraft configuration not found\"}},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/config/spacecraft/{id}", "segments": [{ "lit": "config" }, { "lit": "spacecraft" }, { "var": "id" }], "select": { "exist": ["id"] }, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "spacecraft", "name__orig": "spacecraft", "Name": "Spacecraft", "name_": "spacecraft", "name-": "spacecraft", "NAME": "SPACECRAFT", "index$": 14 }, { "active": true, "entity": "spacecraft", "key$": "BasicSpacecraftFlow", "kind": "basic", "name": "BasicSpacecraftFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": {}, "match": {}, "op": "list", "spec": [], "valid": [{ "apply": "ItemExists", "def": { "ref": "spacecraft_ref01" } }], "index$": 0 }, { "active": true, "data": {}, "input": { "ref": "spacecraft_ref01", "srcdatavar": "spacecraft_ref01_data", "suffix": "_dt0" }, "match": { "id": "spacecraft01" }, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-spacecraft_ref01" } }], "index$": 1 }] }, 'Spacecraft');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -106,12 +104,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['LAUNCH_LIBRARY2_TEST_SPACECRAFT_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'LAUNCH_LIBRARY2_TEST_SPACECRAFT_ENTID': idmap,
         'LAUNCH_LIBRARY2_TEST_LIVE': 'FALSE',
@@ -119,7 +111,13 @@ function basicSetup(extra) {
     });
     idmap = env['LAUNCH_LIBRARY2_TEST_SPACECRAFT_ENTID'];
     const live = 'TRUE' === env.LAUNCH_LIBRARY2_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['LAUNCH_LIBRARY2_TEST_SPACECRAFT_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.LaunchLibrary2SDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -130,7 +128,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -142,7 +141,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.LAUNCH_LIBRARY2_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

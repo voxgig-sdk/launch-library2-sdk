@@ -105,6 +105,12 @@ main: kit: entity: event: {
               }
             ]
           }
+          contract: {
+            id: "GET /event"
+            json: "{\"operationId\":\"getEvents\",\"parameters\":[{\"description\":\"Number of results to return per page\",\"in\":\"query\",\"name\":\"limit\",\"schema\":{\"default\":10,\"type\":\"integer\"}},{\"description\":\"The initial index from which to return the results\",\"in\":\"query\",\"name\":\"offset\",\"schema\":{\"default\":0,\"type\":\"integer\"}},{\"description\":\"Search term to filter events\",\"in\":\"query\",\"name\":\"search\",\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"count\":{\"type\":\"integer\"},\"next\":{\"nullable\":true,\"type\":\"string\"},\"previous\":{\"nullable\":true,\"type\":\"string\"},\"results\":{\"items\":{\"properties\":{\"date\":{\"description\":\"Event date and time\",\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"description\":\"Description of the event\",\"type\":\"string\"},\"feature_image\":{\"description\":\"URL to feature image\",\"nullable\":true,\"type\":\"string\"},\"id\":{\"description\":\"Event ID\",\"type\":\"integer\"},\"location\":{\"description\":\"Event location\",\"nullable\":true,\"type\":\"string\"},\"name\":{\"description\":\"Name of the event\",\"type\":\"string\"},\"news_url\":{\"description\":\"URL to news article\",\"nullable\":true,\"type\":\"string\"},\"type\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"url\":{\"description\":\"API URL for this event\",\"type\":\"string\"},\"video_url\":{\"description\":\"URL to video\",\"nullable\":true,\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"429\":{\"description\":\"Rate limit exceeded\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/event"
           segments: [
@@ -140,6 +146,12 @@ main: kit: entity: event: {
                 type: "`$INTEGER`"
               }
             ]
+          }
+          contract: {
+            id: "GET /event/{id}"
+            json: "{\"operationId\":\"getEventById\",\"parameters\":[{\"description\":\"ID of the event\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"date\":{\"description\":\"Event date and time\",\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"description\":\"Description of the event\",\"type\":\"string\"},\"feature_image\":{\"description\":\"URL to feature image\",\"nullable\":true,\"type\":\"string\"},\"id\":{\"description\":\"Event ID\",\"type\":\"integer\"},\"location\":{\"description\":\"Event location\",\"nullable\":true,\"type\":\"string\"},\"name\":{\"description\":\"Name of the event\",\"type\":\"string\"},\"news_url\":{\"description\":\"URL to news article\",\"nullable\":true,\"type\":\"string\"},\"type\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"url\":{\"description\":\"API URL for this event\",\"type\":\"string\"},\"video_url\":{\"description\":\"URL to video\",\"nullable\":true,\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Event not found\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/event/{id}"

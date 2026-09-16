@@ -4,7 +4,10 @@ declare(strict_types=1);
 // LaunchLibrary2 SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class LaunchLibrary2Features
@@ -14,8 +17,14 @@ class LaunchLibrary2Features
         switch ($name) {
             case "base":
                 return new LaunchLibrary2BaseFeature();
+            case "ratelimit":
+                return new LaunchLibrary2RatelimitFeature();
+            case "retry":
+                return new LaunchLibrary2RetryFeature();
             case "test":
                 return new LaunchLibrary2TestFeature();
+            case "timeout":
+                return new LaunchLibrary2TimeoutFeature();
             default:
                 return new LaunchLibrary2BaseFeature();
         }
@@ -31,7 +40,10 @@ class LaunchLibrary2Features
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

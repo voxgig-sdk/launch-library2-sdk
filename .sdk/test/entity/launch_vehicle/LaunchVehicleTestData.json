@@ -2,74 +2,74 @@
   "existing": {
     "launch_vehicle": {
       "LAUNCH_VEHICLE00": {
-        "apogee": "sdc",
-        "consecutive_successful_launches": "sdd",
+        "apogee": 220,
+        "consecutive_successful_launches": 221,
         "description": "sde",
         "diameter": 223,
-        "failed_launches": "se0",
+        "failed_launches": 224,
         "family": "se1",
         "full_name": "se2",
-        "gto_capacity": "se3",
+        "gto_capacity": 227,
         "id": "LAUNCH_VEHICLE00",
-        "launch_mass": "se5",
+        "launch_mass": 229,
         "length": 230,
-        "leo_capacity": "se7",
+        "leo_capacity": 231,
         "maiden_flight": "se8",
         "manufacturer": {},
-        "max_stage": "sea",
-        "min_stage": "seb",
+        "max_stage": 234,
+        "min_stage": 235,
         "name": "sec",
-        "pending_launches": "sed",
-        "successful_launches": "see",
-        "to_thrust": "sef",
+        "pending_launches": 237,
+        "successful_launches": 238,
+        "to_thrust": 239,
         "url": "sf0",
         "variant": "sf1"
       },
       "LAUNCH_VEHICLE01": {
-        "apogee": "s1b8",
-        "consecutive_successful_launches": "s1b9",
+        "apogee": 440,
+        "consecutive_successful_launches": 441,
         "description": "s1ba",
         "diameter": 443,
-        "failed_launches": "s1bc",
+        "failed_launches": 444,
         "family": "s1bd",
         "full_name": "s1be",
-        "gto_capacity": "s1bf",
+        "gto_capacity": 447,
         "id": "LAUNCH_VEHICLE01",
-        "launch_mass": "s1c1",
+        "launch_mass": 449,
         "length": 450,
-        "leo_capacity": "s1c3",
+        "leo_capacity": 451,
         "maiden_flight": "s1c4",
         "manufacturer": {},
-        "max_stage": "s1c6",
-        "min_stage": "s1c7",
+        "max_stage": 454,
+        "min_stage": 455,
         "name": "s1c8",
-        "pending_launches": "s1c9",
-        "successful_launches": "s1ca",
-        "to_thrust": "s1cb",
+        "pending_launches": 457,
+        "successful_launches": 458,
+        "to_thrust": 459,
         "url": "s1cc",
         "variant": "s1cd"
       },
       "LAUNCH_VEHICLE02": {
-        "apogee": "s294",
-        "consecutive_successful_launches": "s295",
+        "apogee": 660,
+        "consecutive_successful_launches": 661,
         "description": "s296",
         "diameter": 663,
-        "failed_launches": "s298",
+        "failed_launches": 664,
         "family": "s299",
         "full_name": "s29a",
-        "gto_capacity": "s29b",
+        "gto_capacity": 667,
         "id": "LAUNCH_VEHICLE02",
-        "launch_mass": "s29d",
+        "launch_mass": 669,
         "length": 670,
-        "leo_capacity": "s29f",
+        "leo_capacity": 671,
         "maiden_flight": "s2a0",
         "manufacturer": {},
-        "max_stage": "s2a2",
-        "min_stage": "s2a3",
+        "max_stage": 674,
+        "min_stage": 675,
         "name": "s2a4",
-        "pending_launches": "s2a5",
-        "successful_launches": "s2a6",
-        "to_thrust": "s2a7",
+        "pending_launches": 677,
+        "successful_launches": 678,
+        "to_thrust": 679,
         "url": "s2a8",
         "variant": "s2a9"
       }
@@ -78,27 +78,259 @@
   "new": {
     "launch_vehicle": {
       "launch_vehicle_ref01": {
-        "apogee": "s370",
-        "consecutive_successful_launches": "s371",
+        "apogee": 880,
+        "consecutive_successful_launches": 881,
         "description": "s372",
         "diameter": 883,
-        "failed_launches": "s374",
+        "failed_launches": 884,
         "family": "s375",
         "full_name": "s376",
-        "gto_capacity": "s377",
-        "launch_mass": "s379",
+        "gto_capacity": 887,
+        "launch_mass": 889,
         "length": 890,
-        "leo_capacity": "s37b",
+        "leo_capacity": 891,
         "maiden_flight": "s37c",
         "manufacturer": {},
-        "max_stage": "s37e",
-        "min_stage": "s37f",
+        "max_stage": 894,
+        "min_stage": 895,
         "name": "s380",
-        "pending_launches": "s381",
-        "successful_launches": "s382",
-        "to_thrust": "s383",
+        "pending_launches": 897,
+        "successful_launches": 898,
+        "to_thrust": 899,
         "url": "s384",
         "variant": "s385"
+      }
+    }
+  },
+  "requests": {
+    "GET /config/launcher": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getLauncherConfigs",
+        "parameters": [
+          {
+            "description": "Number of results to return per page",
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "default": 10,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The initial index from which to return the results",
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "default": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Search by launcher name",
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by launcher family",
+            "in": "query",
+            "name": "family",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by manufacturer agency ID",
+            "in": "query",
+            "name": "manufacturer",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "previous": {
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "results": {
+                      "items": {
+                        "properties": {
+                          "apogee": {
+                            "description": "Apogee in km",
+                            "nullable": true,
+                            "type": "integer"
+                          },
+                          "consecutive_successful_launches": {
+                            "description": "Number of consecutive successful launches",
+                            "type": "integer"
+                          },
+                          "description": {
+                            "description": "Description of the launcher",
+                            "type": "string"
+                          },
+                          "diameter": {
+                            "description": "Diameter in meters",
+                            "nullable": true,
+                            "type": "number"
+                          },
+                          "failed_launches": {
+                            "description": "Number of failed launches",
+                            "type": "integer"
+                          },
+                          "family": {
+                            "description": "Launcher family",
+                            "type": "string"
+                          },
+                          "full_name": {
+                            "description": "Full name of the launcher",
+                            "type": "string"
+                          },
+                          "gto_capacity": {
+                            "description": "GTO capacity in kg",
+                            "nullable": true,
+                            "type": "integer"
+                          },
+                          "id": {
+                            "description": "Configuration ID",
+                            "type": "integer"
+                          },
+                          "launch_mass": {
+                            "description": "Launch mass in kg",
+                            "nullable": true,
+                            "type": "integer"
+                          },
+                          "length": {
+                            "description": "Length in meters",
+                            "nullable": true,
+                            "type": "number"
+                          },
+                          "leo_capacity": {
+                            "description": "LEO capacity in kg",
+                            "nullable": true,
+                            "type": "integer"
+                          },
+                          "maiden_flight": {
+                            "description": "Date of maiden flight",
+                            "format": "date",
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "manufacturer": {
+                            "properties": {
+                              "abbrev": {
+                                "description": "Agency abbreviation",
+                                "type": "string"
+                              },
+                              "administrator": {
+                                "description": "Agency administrator",
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "country_code": {
+                                "description": "ISO country code",
+                                "type": "string"
+                              },
+                              "description": {
+                                "description": "Agency description",
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "founding_year": {
+                                "description": "Year agency was founded",
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "id": {
+                                "description": "Agency ID",
+                                "type": "integer"
+                              },
+                              "logo_url": {
+                                "description": "URL to agency logo",
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "Name of the agency",
+                                "type": "string"
+                              },
+                              "type": {
+                                "description": "Type of agency",
+                                "type": "string"
+                              },
+                              "url": {
+                                "description": "API URL for this agency",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "max_stage": {
+                            "description": "Maximum number of stages",
+                            "type": "integer"
+                          },
+                          "min_stage": {
+                            "description": "Minimum number of stages",
+                            "type": "integer"
+                          },
+                          "name": {
+                            "description": "Name of the launcher configuration",
+                            "type": "string"
+                          },
+                          "pending_launches": {
+                            "description": "Number of pending launches",
+                            "type": "integer"
+                          },
+                          "successful_launches": {
+                            "description": "Number of successful launches",
+                            "type": "integer"
+                          },
+                          "to_thrust": {
+                            "description": "Takeoff thrust in kN",
+                            "nullable": true,
+                            "type": "integer"
+                          },
+                          "url": {
+                            "description": "API URL for this configuration",
+                            "type": "string"
+                          },
+                          "variant": {
+                            "description": "Variant of the launcher",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }

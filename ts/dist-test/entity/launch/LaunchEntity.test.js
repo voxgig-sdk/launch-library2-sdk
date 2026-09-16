@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.LAUNCH_LIBRARY2_TEST_LIVE;
         for (const op of ['list', 'load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'launch.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'launch.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set LAUNCH_LIBRARY2_TEST_LAUNCH_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "name": "id", "req": false, "short": "UUID of the launch", "type": "`$STRING`", "index$": 0 }, { "active": true, "name": "image", "req": false, "short": "URL to launch image", "type": "`$STRING`", "index$": 1 }, { "active": true, "name": "launch_service_provider", "req": false, "type": "`$OBJECT`", "index$": 2 }, { "active": true, "name": "mission", "req": false, "type": "`$OBJECT`", "index$": 3 }, { "active": true, "name": "name", "req": false, "short": "Name of the launch", "type": "`$STRING`", "index$": 4 }, { "active": true, "format": "date-time", "name": "net", "req": false, "short": "Net Earliest Time (NET) for launch", "type": "`$STRING`", "index$": 5 }, { "active": true, "name": "pad", "req": false, "type": "`$OBJECT`", "index$": 6 }, { "active": true, "name": "probability", "req": false, "short": "Launch probability percentage", "type": "`$INTEGER`", "index$": 7 }, { "active": true, "name": "rocket", "req": false, "type": "`$OBJECT`", "index$": 8 }, { "active": true, "name": "status", "req": false, "type": "`$OBJECT`", "index$": 9 }, { "active": true, "name": "url", "req": false, "short": "API URL for this launch", "type": "`$STRING`", "index$": 10 }, { "active": true, "name": "webcast_live", "req": false, "short": "Whether the webcast is currently live", "type": "`$BOOLEAN`", "index$": 11 }, { "active": true, "format": "date-time", "name": "window_end", "req": false, "short": "End of launch window", "type": "`$STRING`", "index$": 12 }, { "active": true, "format": "date-time", "name": "window_start", "req": false, "short": "Start of launch window", "type": "`$STRING`", "index$": 13 }], "id": { "field": "id", "name": "id" }, "name": "launch", "op": { "list": { "input": "data", "name": "list", "points": [{ "active": true, "args": { "query": [{ "active": true, "example": 10, "kind": "query", "name": "limit", "orig": "limit", "reqd": false, "type": "`$INTEGER`", "index$": 0 }, { "active": true, "kind": "query", "name": "lsp_id", "orig": "lsp_id", "reqd": false, "type": "`$INTEGER`", "index$": 1 }, { "active": true, "kind": "query", "name": "lsp_name", "orig": "lsp_name", "reqd": false, "type": "`$STRING`", "index$": 2 }, { "active": true, "example": 0, "kind": "query", "name": "offset", "orig": "offset", "reqd": false, "type": "`$INTEGER`", "index$": 3 }, { "active": true, "kind": "query", "name": "rocket_configuration_id", "orig": "rocket_configuration_id", "reqd": false, "type": "`$INTEGER`", "index$": 4 }, { "active": true, "kind": "query", "name": "search", "orig": "search", "reqd": false, "type": "`$STRING`", "index$": 5 }, { "active": true, "kind": "query", "name": "spacecraft_id", "orig": "spacecraft_id", "reqd": false, "type": "`$INTEGER`", "index$": 6 }, { "active": true, "kind": "query", "name": "status", "orig": "status", "reqd": false, "type": "`$STRING`", "index$": 7 }] }, "contract": { "id": "GET /launch", "json": "{\"operationId\":\"getLaunches\",\"parameters\":[{\"description\":\"Number of results to return per page\",\"in\":\"query\",\"name\":\"limit\",\"schema\":{\"default\":10,\"type\":\"integer\"}},{\"description\":\"The initial index from which to return the results\",\"in\":\"query\",\"name\":\"offset\",\"schema\":{\"default\":0,\"type\":\"integer\"}},{\"description\":\"Search term to filter launches\",\"in\":\"query\",\"name\":\"search\",\"schema\":{\"type\":\"string\"}},{\"description\":\"Filter by Launch Service Provider ID\",\"in\":\"query\",\"name\":\"lsp__id\",\"schema\":{\"type\":\"integer\"}},{\"description\":\"Filter by Launch Service Provider name\",\"in\":\"query\",\"name\":\"lsp__name\",\"schema\":{\"type\":\"string\"}},{\"description\":\"Filter by Launcher Configuration ID\",\"in\":\"query\",\"name\":\"rocket__configuration__id\",\"schema\":{\"type\":\"integer\"}},{\"description\":\"Filter by Spacecraft ID\",\"in\":\"query\",\"name\":\"spacecraft__id\",\"schema\":{\"type\":\"integer\"}},{\"description\":\"Filter by launch status\",\"in\":\"query\",\"name\":\"status\",\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"count\":{\"description\":\"Total number of launches\",\"type\":\"integer\"},\"next\":{\"description\":\"URL to next page of results\",\"nullable\":true,\"type\":\"string\"},\"previous\":{\"description\":\"URL to previous page of results\",\"nullable\":true,\"type\":\"string\"},\"results\":{\"items\":{\"properties\":{\"id\":{\"description\":\"UUID of the launch\",\"type\":\"string\"},\"image\":{\"description\":\"URL to launch image\",\"nullable\":true,\"type\":\"string\"},\"launch_service_provider\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}},\"type\":\"object\"},\"mission\":{\"nullable\":true,\"properties\":{\"description\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"orbit\":{\"nullable\":true,\"type\":\"object\"},\"type\":{\"type\":\"string\"}},\"type\":\"object\"},\"name\":{\"description\":\"Name of the launch\",\"type\":\"string\"},\"net\":{\"description\":\"Net Earliest Time (NET) for launch\",\"format\":\"date-time\",\"type\":\"string\"},\"pad\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"location\":{\"type\":\"object\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"probability\":{\"description\":\"Launch probability percentage\",\"nullable\":true,\"type\":\"integer\"},\"rocket\":{\"properties\":{\"configuration\":{\"type\":\"object\"},\"id\":{\"type\":\"integer\"}},\"type\":\"object\"},\"status\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"url\":{\"description\":\"API URL for this launch\",\"type\":\"string\"},\"webcast_live\":{\"description\":\"Whether the webcast is currently live\",\"type\":\"boolean\"},\"window_end\":{\"description\":\"End of launch window\",\"format\":\"date-time\",\"type\":\"string\"},\"window_start\":{\"description\":\"Start of launch window\",\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"429\":{\"description\":\"Rate limit exceeded (15 requests per hour for free tier)\"}},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/launch", "segments": [{ "lit": "launch" }], "select": { "exist": ["limit", "lsp_id", "lsp_name", "offset", "rocket_configuration_id", "search", "spacecraft_id", "status"] }, "transform": { "req": "`reqdata`", "res": "`body.results`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": { "params": [{ "active": true, "kind": "param", "name": "id", "orig": "id", "reqd": true, "type": "`$STRING`", "index$": 0 }] }, "contract": { "id": "GET /launch/{id}", "json": "{\"operationId\":\"getLaunchById\",\"parameters\":[{\"description\":\"UUID of the launch\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"id\":{\"description\":\"UUID of the launch\",\"type\":\"string\"},\"image\":{\"description\":\"URL to launch image\",\"nullable\":true,\"type\":\"string\"},\"launch_service_provider\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}},\"type\":\"object\"},\"mission\":{\"nullable\":true,\"properties\":{\"description\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"orbit\":{\"nullable\":true,\"type\":\"object\"},\"type\":{\"type\":\"string\"}},\"type\":\"object\"},\"name\":{\"description\":\"Name of the launch\",\"type\":\"string\"},\"net\":{\"description\":\"Net Earliest Time (NET) for launch\",\"format\":\"date-time\",\"type\":\"string\"},\"pad\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"location\":{\"type\":\"object\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"probability\":{\"description\":\"Launch probability percentage\",\"nullable\":true,\"type\":\"integer\"},\"rocket\":{\"properties\":{\"configuration\":{\"type\":\"object\"},\"id\":{\"type\":\"integer\"}},\"type\":\"object\"},\"status\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"url\":{\"description\":\"API URL for this launch\",\"type\":\"string\"},\"webcast_live\":{\"description\":\"Whether the webcast is currently live\",\"type\":\"boolean\"},\"window_end\":{\"description\":\"End of launch window\",\"format\":\"date-time\",\"type\":\"string\"},\"window_start\":{\"description\":\"Start of launch window\",\"format\":\"date-time\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response\"},\"404\":{\"description\":\"Launch not found\"}},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/launch/{id}", "segments": [{ "lit": "launch" }, { "var": "id" }], "select": { "exist": ["id"] }, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "launch", "name__orig": "launch", "Name": "Launch", "name_": "launch", "name-": "launch", "NAME": "LAUNCH", "index$": 7 }, { "active": true, "entity": "launch", "key$": "BasicLaunchFlow", "kind": "basic", "name": "BasicLaunchFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": {}, "match": {}, "op": "list", "spec": [], "valid": [{ "apply": "ItemExists", "def": { "ref": "launch_ref01" } }], "index$": 0 }, { "active": true, "data": {}, "input": { "ref": "launch_ref01", "srcdatavar": "launch_ref01_data", "suffix": "_dt0" }, "match": { "id": "launch01" }, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-launch_ref01" } }], "index$": 1 }] }, 'Launch');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -106,12 +104,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['LAUNCH_LIBRARY2_TEST_LAUNCH_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'LAUNCH_LIBRARY2_TEST_LAUNCH_ENTID': idmap,
         'LAUNCH_LIBRARY2_TEST_LIVE': 'FALSE',
@@ -119,7 +111,13 @@ function basicSetup(extra) {
     });
     idmap = env['LAUNCH_LIBRARY2_TEST_LAUNCH_ENTID'];
     const live = 'TRUE' === env.LAUNCH_LIBRARY2_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['LAUNCH_LIBRARY2_TEST_LAUNCH_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.LaunchLibrary2SDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -130,7 +128,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -142,7 +141,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.LAUNCH_LIBRARY2_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

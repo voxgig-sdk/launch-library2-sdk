@@ -2,88 +2,88 @@
   "existing": {
     "first_stage": {
       "FIRST_STAGE00": {
-        "apogee": "s10e",
-        "consecutive_successful_launches": "s10f",
+        "apogee": 270,
+        "consecutive_successful_launches": 271,
         "description": "s110",
         "diameter": 273,
-        "failed_launches": "s112",
+        "failed_launches": 274,
         "family": "s113",
-        "flights": "s114",
+        "flights": 276,
         "full_name": "s115",
-        "gto_capacity": "s116",
+        "gto_capacity": 278,
         "id": "FIRST_STAGE00",
-        "launch_mass": "s118",
+        "launch_mass": 280,
         "launcher_config": {},
         "length": 282,
-        "leo_capacity": "s11b",
+        "leo_capacity": 283,
         "maiden_flight": "s11c",
         "manufacturer": {},
-        "max_stage": "s11e",
-        "min_stage": "s11f",
+        "max_stage": 286,
+        "min_stage": 287,
         "name": "s120",
-        "pending_launches": "s121",
+        "pending_launches": 289,
         "serial_number": "s122",
         "status": "s123",
-        "successful_launches": "s124",
-        "to_thrust": "s125",
+        "successful_launches": 292,
+        "to_thrust": 293,
         "type": "s126",
         "url": "s127",
         "variant": "s128"
       },
       "FIRST_STAGE01": {
-        "apogee": "s21c",
-        "consecutive_successful_launches": "s21d",
+        "apogee": 540,
+        "consecutive_successful_launches": 541,
         "description": "s21e",
         "diameter": 543,
-        "failed_launches": "s220",
+        "failed_launches": 544,
         "family": "s221",
-        "flights": "s222",
+        "flights": 546,
         "full_name": "s223",
-        "gto_capacity": "s224",
+        "gto_capacity": 548,
         "id": "FIRST_STAGE01",
-        "launch_mass": "s226",
+        "launch_mass": 550,
         "launcher_config": {},
         "length": 552,
-        "leo_capacity": "s229",
+        "leo_capacity": 553,
         "maiden_flight": "s22a",
         "manufacturer": {},
-        "max_stage": "s22c",
-        "min_stage": "s22d",
+        "max_stage": 556,
+        "min_stage": 557,
         "name": "s22e",
-        "pending_launches": "s22f",
+        "pending_launches": 559,
         "serial_number": "s230",
         "status": "s231",
-        "successful_launches": "s232",
-        "to_thrust": "s233",
+        "successful_launches": 562,
+        "to_thrust": 563,
         "type": "s234",
         "url": "s235",
         "variant": "s236"
       },
       "FIRST_STAGE02": {
-        "apogee": "s32a",
-        "consecutive_successful_launches": "s32b",
+        "apogee": 810,
+        "consecutive_successful_launches": 811,
         "description": "s32c",
         "diameter": 813,
-        "failed_launches": "s32e",
+        "failed_launches": 814,
         "family": "s32f",
-        "flights": "s330",
+        "flights": 816,
         "full_name": "s331",
-        "gto_capacity": "s332",
+        "gto_capacity": 818,
         "id": "FIRST_STAGE02",
-        "launch_mass": "s334",
+        "launch_mass": 820,
         "launcher_config": {},
         "length": 822,
-        "leo_capacity": "s337",
+        "leo_capacity": 823,
         "maiden_flight": "s338",
         "manufacturer": {},
-        "max_stage": "s33a",
-        "min_stage": "s33b",
+        "max_stage": 826,
+        "min_stage": 827,
         "name": "s33c",
-        "pending_launches": "s33d",
+        "pending_launches": 829,
         "serial_number": "s33e",
         "status": "s33f",
-        "successful_launches": "s340",
-        "to_thrust": "s341",
+        "successful_launches": 832,
+        "to_thrust": 833,
         "type": "s342",
         "url": "s343",
         "variant": "s344"
@@ -93,32 +93,492 @@
   "new": {
     "first_stage": {
       "first_stage_ref01": {
-        "apogee": "s438",
-        "consecutive_successful_launches": "s439",
+        "apogee": 1080,
+        "consecutive_successful_launches": 1081,
         "description": "s43a",
         "diameter": 1083,
-        "failed_launches": "s43c",
+        "failed_launches": 1084,
         "family": "s43d",
-        "flights": "s43e",
+        "flights": 1086,
         "full_name": "s43f",
-        "gto_capacity": "s440",
-        "launch_mass": "s442",
+        "gto_capacity": 1088,
+        "launch_mass": 1090,
         "launcher_config": {},
         "length": 1092,
-        "leo_capacity": "s445",
+        "leo_capacity": 1093,
         "maiden_flight": "s446",
         "manufacturer": {},
-        "max_stage": "s448",
-        "min_stage": "s449",
+        "max_stage": 1096,
+        "min_stage": 1097,
         "name": "s44a",
-        "pending_launches": "s44b",
+        "pending_launches": 1099,
         "serial_number": "s44c",
         "status": "s44d",
-        "successful_launches": "s44e",
-        "to_thrust": "s44f",
+        "successful_launches": 1102,
+        "to_thrust": 1103,
         "type": "s450",
         "url": "s451",
         "variant": "s452"
+      }
+    }
+  },
+  "requests": {
+    "GET /firststage": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getFirstStages",
+        "parameters": [
+          {
+            "description": "Number of results to return per page",
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "default": 10,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The initial index from which to return the results",
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "default": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter by serial number",
+            "in": "query",
+            "name": "serial_number",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by flight number",
+            "in": "query",
+            "name": "flight_number",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "next": {
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "previous": {
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "results": {
+                      "items": {
+                        "properties": {
+                          "flights": {
+                            "description": "Number of flights",
+                            "type": "integer"
+                          },
+                          "id": {
+                            "description": "First stage ID",
+                            "type": "integer"
+                          },
+                          "launcher_config": {
+                            "properties": {
+                              "apogee": {
+                                "description": "Apogee in km",
+                                "nullable": true,
+                                "type": "integer"
+                              },
+                              "consecutive_successful_launches": {
+                                "description": "Number of consecutive successful launches",
+                                "type": "integer"
+                              },
+                              "description": {
+                                "description": "Description of the launcher",
+                                "type": "string"
+                              },
+                              "diameter": {
+                                "description": "Diameter in meters",
+                                "nullable": true,
+                                "type": "number"
+                              },
+                              "failed_launches": {
+                                "description": "Number of failed launches",
+                                "type": "integer"
+                              },
+                              "family": {
+                                "description": "Launcher family",
+                                "type": "string"
+                              },
+                              "full_name": {
+                                "description": "Full name of the launcher",
+                                "type": "string"
+                              },
+                              "gto_capacity": {
+                                "description": "GTO capacity in kg",
+                                "nullable": true,
+                                "type": "integer"
+                              },
+                              "id": {
+                                "description": "Configuration ID",
+                                "type": "integer"
+                              },
+                              "launch_mass": {
+                                "description": "Launch mass in kg",
+                                "nullable": true,
+                                "type": "integer"
+                              },
+                              "length": {
+                                "description": "Length in meters",
+                                "nullable": true,
+                                "type": "number"
+                              },
+                              "leo_capacity": {
+                                "description": "LEO capacity in kg",
+                                "nullable": true,
+                                "type": "integer"
+                              },
+                              "maiden_flight": {
+                                "description": "Date of maiden flight",
+                                "format": "date",
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "manufacturer": {
+                                "properties": {
+                                  "abbrev": {
+                                    "description": "Agency abbreviation",
+                                    "type": "string"
+                                  },
+                                  "administrator": {
+                                    "description": "Agency administrator",
+                                    "nullable": true,
+                                    "type": "string"
+                                  },
+                                  "country_code": {
+                                    "description": "ISO country code",
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "description": "Agency description",
+                                    "nullable": true,
+                                    "type": "string"
+                                  },
+                                  "founding_year": {
+                                    "description": "Year agency was founded",
+                                    "nullable": true,
+                                    "type": "string"
+                                  },
+                                  "id": {
+                                    "description": "Agency ID",
+                                    "type": "integer"
+                                  },
+                                  "logo_url": {
+                                    "description": "URL to agency logo",
+                                    "nullable": true,
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "description": "Name of the agency",
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "description": "Type of agency",
+                                    "type": "string"
+                                  },
+                                  "url": {
+                                    "description": "API URL for this agency",
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "max_stage": {
+                                "description": "Maximum number of stages",
+                                "type": "integer"
+                              },
+                              "min_stage": {
+                                "description": "Minimum number of stages",
+                                "type": "integer"
+                              },
+                              "name": {
+                                "description": "Name of the launcher configuration",
+                                "type": "string"
+                              },
+                              "pending_launches": {
+                                "description": "Number of pending launches",
+                                "type": "integer"
+                              },
+                              "successful_launches": {
+                                "description": "Number of successful launches",
+                                "type": "integer"
+                              },
+                              "to_thrust": {
+                                "description": "Takeoff thrust in kN",
+                                "nullable": true,
+                                "type": "integer"
+                              },
+                              "url": {
+                                "description": "API URL for this configuration",
+                                "type": "string"
+                              },
+                              "variant": {
+                                "description": "Variant of the launcher",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "serial_number": {
+                            "description": "Serial number of the first stage",
+                            "type": "string"
+                          },
+                          "status": {
+                            "description": "Current status",
+                            "type": "string"
+                          },
+                          "type": {
+                            "description": "Type of first stage",
+                            "type": "string"
+                          },
+                          "url": {
+                            "description": "API URL for this first stage",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    },
+    "GET /firststage/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getFirstStageById",
+        "parameters": [
+          {
+            "description": "ID of the first stage",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "flights": {
+                      "description": "Number of flights",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "First stage ID",
+                      "type": "integer"
+                    },
+                    "launcher_config": {
+                      "properties": {
+                        "apogee": {
+                          "description": "Apogee in km",
+                          "nullable": true,
+                          "type": "integer"
+                        },
+                        "consecutive_successful_launches": {
+                          "description": "Number of consecutive successful launches",
+                          "type": "integer"
+                        },
+                        "description": {
+                          "description": "Description of the launcher",
+                          "type": "string"
+                        },
+                        "diameter": {
+                          "description": "Diameter in meters",
+                          "nullable": true,
+                          "type": "number"
+                        },
+                        "failed_launches": {
+                          "description": "Number of failed launches",
+                          "type": "integer"
+                        },
+                        "family": {
+                          "description": "Launcher family",
+                          "type": "string"
+                        },
+                        "full_name": {
+                          "description": "Full name of the launcher",
+                          "type": "string"
+                        },
+                        "gto_capacity": {
+                          "description": "GTO capacity in kg",
+                          "nullable": true,
+                          "type": "integer"
+                        },
+                        "id": {
+                          "description": "Configuration ID",
+                          "type": "integer"
+                        },
+                        "launch_mass": {
+                          "description": "Launch mass in kg",
+                          "nullable": true,
+                          "type": "integer"
+                        },
+                        "length": {
+                          "description": "Length in meters",
+                          "nullable": true,
+                          "type": "number"
+                        },
+                        "leo_capacity": {
+                          "description": "LEO capacity in kg",
+                          "nullable": true,
+                          "type": "integer"
+                        },
+                        "maiden_flight": {
+                          "description": "Date of maiden flight",
+                          "format": "date",
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "manufacturer": {
+                          "properties": {
+                            "abbrev": {
+                              "description": "Agency abbreviation",
+                              "type": "string"
+                            },
+                            "administrator": {
+                              "description": "Agency administrator",
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "country_code": {
+                              "description": "ISO country code",
+                              "type": "string"
+                            },
+                            "description": {
+                              "description": "Agency description",
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "founding_year": {
+                              "description": "Year agency was founded",
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "id": {
+                              "description": "Agency ID",
+                              "type": "integer"
+                            },
+                            "logo_url": {
+                              "description": "URL to agency logo",
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "name": {
+                              "description": "Name of the agency",
+                              "type": "string"
+                            },
+                            "type": {
+                              "description": "Type of agency",
+                              "type": "string"
+                            },
+                            "url": {
+                              "description": "API URL for this agency",
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "max_stage": {
+                          "description": "Maximum number of stages",
+                          "type": "integer"
+                        },
+                        "min_stage": {
+                          "description": "Minimum number of stages",
+                          "type": "integer"
+                        },
+                        "name": {
+                          "description": "Name of the launcher configuration",
+                          "type": "string"
+                        },
+                        "pending_launches": {
+                          "description": "Number of pending launches",
+                          "type": "integer"
+                        },
+                        "successful_launches": {
+                          "description": "Number of successful launches",
+                          "type": "integer"
+                        },
+                        "to_thrust": {
+                          "description": "Takeoff thrust in kN",
+                          "nullable": true,
+                          "type": "integer"
+                        },
+                        "url": {
+                          "description": "API URL for this configuration",
+                          "type": "string"
+                        },
+                        "variant": {
+                          "description": "Variant of the launcher",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "serial_number": {
+                      "description": "Serial number of the first stage",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "Current status",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Type of first stage",
+                      "type": "string"
+                    },
+                    "url": {
+                      "description": "API URL for this first stage",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response"
+          },
+          "404": {
+            "description": "First stage not found"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }

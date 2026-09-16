@@ -10,5 +10,6 @@
     "reusable_first_stage": {
       "reusable_first_stage_ref01": {}
     }
-  }
+  },
+  "requests": {}
 }
