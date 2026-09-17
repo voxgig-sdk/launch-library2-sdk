@@ -127,51 +127,51 @@ class Config {
 
     entity: {
       
-      agency: {
-      },
-
-      astronaut: {
-      },
-
-      docking: {
-      },
-
-      docking_event: {
-      },
-
-      event: {
-      },
-
-      expedition: {
-      },
-
-      first_stage: {
-      },
-
-      launch: {
-      },
-
-      launch_vehicle: {
-      },
-
-      launcher: {
-      },
-
-      location: {
-      },
-
-      pad: {
-      },
-
-      reusable_first_stage: {
-      },
-
-      space_station: {
-      },
-
-      spacecraft: {
-      },
-
+        agency: {
+        },
+  
+        astronaut: {
+        },
+  
+        docking: {
+        },
+  
+        docking_event: {
+        },
+  
+        event: {
+        },
+  
+        expedition: {
+        },
+  
+        first_stage: {
+        },
+  
+        launch: {
+        },
+  
+        launch_vehicle: {
+        },
+  
+        launcher: {
+        },
+  
+        location: {
+        },
+  
+        pad: {
+        },
+  
+        reusable_first_stage: {
+        },
+  
+        space_station: {
+        },
+  
+        spacecraft: {
+        },
+  
     }
   }
 
