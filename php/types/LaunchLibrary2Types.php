@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 // Typed models for the LaunchLibrary2 SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 //
@@ -74,11 +74,6 @@ class AstronautListMatch
     public ?int $offset = null;
     public ?string $search = null;
     public ?string $status = null;
-}
-
-/** Docking entity data model. */
-class Docking
-{
 }
 
 /** DockingEvent entity data model. */
@@ -365,11 +360,6 @@ class PadListMatch
     public ?int $location = null;
     public ?int $offset = null;
     public ?string $search = null;
-}
-
-/** ReusableFirstStage entity data model. */
-class ReusableFirstStage
-{
 }
 
 /** SpaceStation entity data model. */

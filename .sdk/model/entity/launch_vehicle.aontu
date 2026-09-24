@@ -1,0 +1,251 @@
+# Entity: launch_vehicle
+
+main: kit: entity: launch_vehicle: {
+
+  alias: field: {}
+
+  fields: {
+    apogee: {
+      h: "Apogee"
+      n: "apogee"
+      r: false
+      sh: "Apogee in km"
+      t: "`$INTEGER`"
+    }
+    consecutive_successful_launches: {
+      h: "Consecutive Successful Launches"
+      n: "consecutive_successful_launches"
+      r: false
+      sh: "Number of consecutive successful launches"
+      t: "`$INTEGER`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      sh: "Description of the launcher"
+      t: "`$STRING`"
+    }
+    diameter: {
+      h: "Diameter"
+      n: "diameter"
+      r: false
+      sh: "Diameter in meters"
+      t: "`$NUMBER`"
+    }
+    failed_launches: {
+      h: "Failed Launches"
+      n: "failed_launches"
+      r: false
+      sh: "Number of failed launches"
+      t: "`$INTEGER`"
+    }
+    family: {
+      h: "Family"
+      n: "family"
+      r: false
+      sh: "Launcher family"
+      t: "`$STRING`"
+    }
+    full_name: {
+      h: "Full Name"
+      n: "full_name"
+      r: false
+      sh: "Full name of the launcher"
+      t: "`$STRING`"
+    }
+    gto_capacity: {
+      h: "Gto Capacity"
+      n: "gto_capacity"
+      r: false
+      sh: "GTO capacity in kg"
+      t: "`$INTEGER`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Configuration ID"
+      t: "`$INTEGER`"
+    }
+    launch_mass: {
+      h: "Launch Mass"
+      n: "launch_mass"
+      r: false
+      sh: "Launch mass in kg"
+      t: "`$INTEGER`"
+    }
+    length: {
+      h: "Length"
+      n: "length"
+      r: false
+      sh: "Length in meters"
+      t: "`$NUMBER`"
+    }
+    leo_capacity: {
+      h: "Leo Capacity"
+      n: "leo_capacity"
+      r: false
+      sh: "LEO capacity in kg"
+      t: "`$INTEGER`"
+    }
+    maiden_flight: {
+      fo: "date"
+      h: "Maiden Flight"
+      n: "maiden_flight"
+      r: false
+      sh: "Date of maiden flight"
+      t: "`$STRING`"
+    }
+    manufacturer: {
+      h: "Manufacturer"
+      n: "manufacturer"
+      r: false
+      t: "`$OBJECT`"
+    }
+    max_stage: {
+      h: "Max Stage"
+      n: "max_stage"
+      r: false
+      sh: "Maximum number of stages"
+      t: "`$INTEGER`"
+    }
+    min_stage: {
+      h: "Min Stage"
+      n: "min_stage"
+      r: false
+      sh: "Minimum number of stages"
+      t: "`$INTEGER`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Name of the launcher configuration"
+      t: "`$STRING`"
+    }
+    pending_launches: {
+      h: "Pending Launches"
+      n: "pending_launches"
+      r: false
+      sh: "Number of pending launches"
+      t: "`$INTEGER`"
+    }
+    successful_launches: {
+      h: "Successful Launches"
+      n: "successful_launches"
+      r: false
+      sh: "Number of successful launches"
+      t: "`$INTEGER`"
+    }
+    to_thrust: {
+      h: "To Thrust"
+      n: "to_thrust"
+      r: false
+      sh: "Takeoff thrust in kN"
+      t: "`$INTEGER`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      sh: "API URL for this configuration"
+      t: "`$STRING`"
+    }
+    variant: {
+      h: "Variant"
+      n: "variant"
+      r: false
+      sh: "Variant of the launcher"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "launch_vehicle"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /config/launcher"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "family"
+                or: "family"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "manufacturer"
+                or: "manufacturer"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/config/launcher"
+          q: {
+            exist: [
+              "family"
+              "limit"
+              "manufacturer"
+              "offset"
+              "search"
+            ]
+          }
+          s: [
+            {
+              lit: "config"
+            }
+            {
+              lit: "launcher"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -45,7 +45,6 @@ class ReadmeExamplesTest < Minitest::Test
   ENTITIES = {
     "Agency" => "agency",
     "Astronaut" => "astronaut",
-    "Docking" => "docking",
     "DockingEvent" => "docking_event",
     "Event" => "event",
     "Expedition" => "expedition",
@@ -55,7 +54,6 @@ class ReadmeExamplesTest < Minitest::Test
     "Launcher" => "launcher",
     "Location" => "location",
     "Pad" => "pad",
-    "ReusableFirstStage" => "reusable_first_stage",
     "SpaceStation" => "space_station",
     "Spacecraft" => "spacecraft",
   }

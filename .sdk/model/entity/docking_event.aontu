@@ -1,0 +1,170 @@
+# Entity: docking_event
+
+main: kit: entity: docking_event: {
+
+  alias: field: {}
+
+  fields: {
+    departure: {
+      fo: "date-time"
+      h: "Departure"
+      n: "departure"
+      r: false
+      sh: "Departure time"
+      t: "`$STRING`"
+    }
+    docking: {
+      fo: "date-time"
+      h: "Docking"
+      n: "docking"
+      r: false
+      sh: "Docking time"
+      t: "`$STRING`"
+    }
+    docking_location: {
+      h: "Docking Location"
+      n: "docking_location"
+      r: false
+      t: "`$OBJECT`"
+    }
+    flight_vehicle: {
+      h: "Flight Vehicle"
+      n: "flight_vehicle"
+      r: false
+      t: "`$OBJECT`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Docking event ID"
+      t: "`$INTEGER`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      sh: "API URL for this docking event"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "docking_event"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /docking_event"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "docking_location"
+                or: "docking_location"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "spacestation"
+                or: "spacestation"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/docking_event"
+          q: {
+            exist: [
+              "docking_location"
+              "limit"
+              "offset"
+              "spacestation"
+            ]
+          }
+          s: [
+            {
+              lit: "docking_event"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /docking_event/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/docking_event/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "docking_event"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

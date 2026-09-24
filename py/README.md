@@ -217,7 +217,6 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
 | `Agency` | `(data) -> AgencyEntity` | Create an Agency entity instance. |
 | `Astronaut` | `(data) -> AstronautEntity` | Create an Astronaut entity instance. |
-| `Docking` | `(data) -> DockingEntity` | Create a Docking entity instance. |
 | `DockingEvent` | `(data) -> DockingEventEntity` | Create a DockingEvent entity instance. |
 | `Event` | `(data) -> EventEntity` | Create an Event entity instance. |
 | `Expedition` | `(data) -> ExpeditionEntity` | Create an Expedition entity instance. |
@@ -227,7 +226,6 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `Launcher` | `(data) -> LauncherEntity` | Create a Launcher entity instance. |
 | `Location` | `(data) -> LocationEntity` | Create a Location entity instance. |
 | `Pad` | `(data) -> PadEntity` | Create a Pad entity instance. |
-| `ReusableFirstStage` | `(data) -> ReusableFirstStageEntity` | Create a ReusableFirstStage entity instance. |
 | `SpaceStation` | `(data) -> SpaceStationEntity` | Create a SpaceStation entity instance. |
 | `Spacecraft` | `(data) -> SpacecraftEntity` | Create a Spacecraft entity instance. |
 
@@ -305,15 +303,6 @@ API path: `/agencies`
 Operations: List, Load.
 
 API path: `/astronaut`
-
-#### Docking
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 #### DockingEvent
 
@@ -513,15 +502,6 @@ Operations: List, Load.
 
 API path: `/pad`
 
-#### ReusableFirstStage
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
-
 #### SpaceStation
 
 | Field | Description |
@@ -649,11 +629,6 @@ astronaut = client.Astronaut().load({"id": 1})
 ```python
 astronauts = client.Astronaut().list()
 ```
-
-
-### Docking
-
-Create an instance: `docking = client.Docking()`
 
 
 ### DockingEvent
@@ -1018,11 +993,6 @@ pad = client.Pad().load({"id": 1})
 ```python
 pads = client.Pad().list()
 ```
-
-
-### ReusableFirstStage
-
-Create an instance: `reusable_first_stage = client.ReusableFirstStage()`
 
 
 ### SpaceStation

@@ -49,10 +49,6 @@ Create a new `AgencyEntity` instance. Pass `null` for no initial data.
 
 Create a new `AstronautEntity` instance. Pass `null` for no initial data.
 
-#### `Docking($data = null)`
-
-Create a new `DockingEntity` instance. Pass `null` for no initial data.
-
 #### `DockingEvent($data = null)`
 
 Create a new `DockingEventEntity` instance. Pass `null` for no initial data.
@@ -88,10 +84,6 @@ Create a new `LocationEntity` instance. Pass `null` for no initial data.
 #### `Pad($data = null)`
 
 Create a new `PadEntity` instance. Pass `null` for no initial data.
-
-#### `ReusableFirstStage($data = null)`
-
-Create a new `ReusableFirstStageEntity` instance. Pass `null` for no initial data.
 
 #### `SpaceStation($data = null)`
 
@@ -269,42 +261,6 @@ Set the entity match criteria.
 #### `make(): AstronautEntity`
 
 Create a new `AstronautEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## DockingEntity
-
-```php
-$docking = $client->Docking();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): DockingEntity`
-
-Create a new `DockingEntity` instance with the same client and
 options.
 
 #### `get_name(): string`
@@ -937,42 +893,6 @@ Set the entity match criteria.
 #### `make(): PadEntity`
 
 Create a new `PadEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## ReusableFirstStageEntity
-
-```php
-$reusable_first_stage = $client->ReusableFirstStage();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): ReusableFirstStageEntity`
-
-Create a new `ReusableFirstStageEntity` instance with the same client and
 options.
 
 #### `get_name(): string`

@@ -1,0 +1,238 @@
+# Entity: spacecraft
+
+main: kit: entity: spacecraft: {
+
+  alias: field: {}
+
+  fields: {
+    agency: {
+      h: "Agency"
+      n: "agency"
+      r: false
+      t: "`$OBJECT`"
+    }
+    capability: {
+      h: "Capability"
+      n: "capability"
+      r: false
+      sh: "Spacecraft capability"
+      t: "`$STRING`"
+    }
+    crew_capacity: {
+      h: "Crew Capacity"
+      n: "crew_capacity"
+      r: false
+      sh: "Crew capacity"
+      t: "`$INTEGER`"
+    }
+    details: {
+      h: "Details"
+      n: "details"
+      r: false
+      sh: "Detailed information"
+      t: "`$STRING`"
+    }
+    diameter: {
+      h: "Diameter"
+      n: "diameter"
+      r: false
+      sh: "Diameter in meters"
+      t: "`$NUMBER`"
+    }
+    height: {
+      h: "Height"
+      n: "height"
+      r: false
+      sh: "Height in meters"
+      t: "`$NUMBER`"
+    }
+    history: {
+      h: "History"
+      n: "history"
+      r: false
+      sh: "Historical information"
+      t: "`$STRING`"
+    }
+    human_rated: {
+      h: "Human Rated"
+      n: "human_rated"
+      r: false
+      sh: "Whether the spacecraft is human-rated"
+      t: "`$BOOLEAN`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Spacecraft configuration ID"
+      t: "`$INTEGER`"
+    }
+    image_url: {
+      h: "Image Url"
+      n: "image_url"
+      r: false
+      sh: "URL to spacecraft image"
+      t: "`$STRING`"
+    }
+    in_use: {
+      h: "In Use"
+      n: "in_use"
+      r: false
+      sh: "Whether the spacecraft is currently in use"
+      t: "`$BOOLEAN`"
+    }
+    maiden_flight: {
+      fo: "date"
+      h: "Maiden Flight"
+      n: "maiden_flight"
+      r: false
+      sh: "Date of maiden flight"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Name of the spacecraft"
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      t: "`$OBJECT`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      sh: "API URL for this configuration"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "spacecraft"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /config/spacecraft"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/config/spacecraft"
+          q: {
+            exist: [
+              "limit"
+              "offset"
+              "search"
+              "status"
+            ]
+          }
+          s: [
+            {
+              lit: "config"
+            }
+            {
+              lit: "spacecraft"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /config/spacecraft/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/config/spacecraft/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "config"
+            }
+            {
+              lit: "spacecraft"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

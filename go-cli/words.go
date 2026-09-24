@@ -9,18 +9,6 @@ import (
 	sdk "github.com/voxgig-sdk/launch-library2-sdk/go"
 )
 
-// registerSDKWords installs three native boru words bound to the SDK:
-// list / load / update. Each is declared with two overloads matching
-// the signature  [query?:(Node or Scalar) entity:atom]:
-//
-//   [entity:Atom]            — no query (e.g. `list book`)
-//   [query:Any entity:Atom]  — query is any Node or Scalar (e.g.
-//                              `load {id:1} book`, `load 1 book`)
-//
-// The entity slot is /q-quoted so a bareword `book` parses as the
-// Atom "book" rather than dispatching as an undefined word. Both
-// overloads are all-forward (BarrierAllForward), so args are collected
-// from the tokens following the word.
 func registerSDKWords(r *eng.Registry, client *sdk.LaunchLibrary2SDK) {
 	for _, op := range []string{"list", "load", "update"} {
 		op := op
@@ -93,8 +81,6 @@ func entityFor(client *sdk.LaunchLibrary2SDK, name string) (sdk.LaunchLibrary2En
 		return client.Agency(nil), nil
 	case "astronaut":
 		return client.Astronaut(nil), nil
-	case "docking":
-		return client.Docking(nil), nil
 	case "docking_event":
 		return client.DockingEvent(nil), nil
 	case "event":
@@ -113,8 +99,6 @@ func entityFor(client *sdk.LaunchLibrary2SDK, name string) (sdk.LaunchLibrary2En
 		return client.Location(nil), nil
 	case "pad":
 		return client.Pad(nil), nil
-	case "reusable_first_stage":
-		return client.ReusableFirstStage(nil), nil
 	case "space_station":
 		return client.SpaceStation(nil), nil
 	case "spacecraft":

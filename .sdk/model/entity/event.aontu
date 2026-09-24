@@ -1,0 +1,190 @@
+# Entity: event
+
+main: kit: entity: event: {
+
+  alias: field: {}
+
+  fields: {
+    date: {
+      fo: "date-time"
+      h: "Date"
+      n: "date"
+      r: false
+      sh: "Event date and time"
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      sh: "Description of the event"
+      t: "`$STRING`"
+    }
+    feature_image: {
+      h: "Feature Image"
+      n: "feature_image"
+      r: false
+      sh: "URL to feature image"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Event ID"
+      t: "`$INTEGER`"
+    }
+    location: {
+      h: "Location"
+      n: "location"
+      r: false
+      sh: "Event location"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Name of the event"
+      t: "`$STRING`"
+    }
+    news_url: {
+      h: "News Url"
+      n: "news_url"
+      r: false
+      sh: "URL to news article"
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      t: "`$OBJECT`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      sh: "API URL for this event"
+      t: "`$STRING`"
+    }
+    video_url: {
+      h: "Video Url"
+      n: "video_url"
+      r: false
+      sh: "URL to video"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "event"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /event"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/event"
+          q: {
+            exist: [
+              "limit"
+              "offset"
+              "search"
+            ]
+          }
+          s: [
+            {
+              lit: "event"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /event/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/event/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "event"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.type`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

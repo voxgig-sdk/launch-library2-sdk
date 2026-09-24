@@ -78,7 +78,6 @@ _CLIENT_VARS = ("client", "sdk")
 _ENTITIES = {
     "Agency": "agency",
     "Astronaut": "astronaut",
-    "Docking": "docking",
     "DockingEvent": "docking_event",
     "Event": "event",
     "Expedition": "expedition",
@@ -88,7 +87,6 @@ _ENTITIES = {
     "Launcher": "launcher",
     "Location": "location",
     "Pad": "pad",
-    "ReusableFirstStage": "reusable_first_stage",
     "SpaceStation": "space_station",
     "Spacecraft": "spacecraft",
 }

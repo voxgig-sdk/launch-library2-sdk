@@ -93,7 +93,6 @@ module LaunchLibrary2Config
         "entity" => {
           "agency" => {},
           "astronaut" => {},
-          "docking" => {},
           "docking_event" => {},
           "event" => {},
           "expedition" => {},
@@ -103,7 +102,6 @@ module LaunchLibrary2Config
           "launcher" => {},
           "location" => {},
           "pad" => {},
-          "reusable_first_stage" => {},
           "space_station" => {},
           "spacecraft" => {},
         },
@@ -113,53 +111,63 @@ module LaunchLibrary2Config
           "fields" => [
             {
               "name" => "abbrev",
-              "short" => "Agency abbreviation",
+              "title" => "Abbrev",
               "type" => "`$STRING`",
+              "short" => "Agency abbreviation",
             },
             {
               "name" => "administrator",
-              "short" => "Agency administrator",
+              "title" => "Administrator",
               "type" => "`$STRING`",
+              "short" => "Agency administrator",
             },
             {
               "name" => "country_code",
-              "short" => "ISO country code",
+              "title" => "Country Code",
               "type" => "`$STRING`",
+              "short" => "ISO country code",
             },
             {
               "name" => "description",
-              "short" => "Agency description",
+              "title" => "Description",
               "type" => "`$STRING`",
+              "short" => "Agency description",
             },
             {
               "name" => "founding_year",
-              "short" => "Year agency was founded",
+              "title" => "Founding Year",
               "type" => "`$STRING`",
+              "short" => "Year agency was founded",
             },
             {
               "name" => "id",
-              "short" => "Agency ID",
+              "title" => "Id",
               "type" => "`$INTEGER`",
+              "short" => "Agency ID",
             },
             {
               "name" => "logo_url",
-              "short" => "URL to agency logo",
+              "title" => "Logo Url",
               "type" => "`$STRING`",
+              "short" => "URL to agency logo",
             },
             {
               "name" => "name",
-              "short" => "Name of the agency",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Name of the agency",
             },
             {
               "name" => "type",
-              "short" => "Type of agency",
+              "title" => "Type",
               "type" => "`$STRING`",
+              "short" => "Type of agency",
             },
             {
               "name" => "url",
-              "short" => "API URL for this agency",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this agency",
             },
           ],
           "id" => {
@@ -173,42 +181,6 @@ module LaunchLibrary2Config
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "kind" => "query",
-                        "name" => "agency_type",
-                        "orig" => "agency_type",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "country_code",
-                        "orig" => "country_code",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "example" => 10,
-                        "kind" => "query",
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "example" => 0,
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "search",
-                        "orig" => "search",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/agencies",
@@ -217,6 +189,50 @@ module LaunchLibrary2Config
                       "lit" => "agencies",
                     },
                   ],
+                  "parts" => [
+                    "agencies",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.results`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "agency_type",
+                        "orig" => "agency_type",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "country_code",
+                        "orig" => "country_code",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 10,
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "search",
+                        "orig" => "search",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "agency_type",
@@ -226,13 +242,6 @@ module LaunchLibrary2Config
                       "search",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.results`",
-                  },
-                  "parts" => [
-                    "agencies",
-                  ],
                 },
               ],
             },
@@ -241,17 +250,6 @@ module LaunchLibrary2Config
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/agencies/{id}",
@@ -263,19 +261,31 @@ module LaunchLibrary2Config
                       "var" => "id",
                     },
                   ],
+                  "parts" => [
+                    "agencies",
+                    "{id}",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "id",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "parts" => [
-                    "agencies",
-                    "{id}",
-                  ],
                 },
               ],
             },
@@ -288,63 +298,75 @@ module LaunchLibrary2Config
           "fields" => [
             {
               "name" => "bio",
+              "title" => "Bio",
+              "type" => "`$STRING`",
               "short" => "Biographical information",
-              "type" => "`$STRING`",
             },
             {
-              "format" => "date",
               "name" => "date_of_birth",
-              "short" => "Date of birth",
+              "title" => "Date Of Birth",
               "type" => "`$STRING`",
+              "short" => "Date of birth",
+              "format" => "date",
             },
             {
-              "format" => "date",
               "name" => "date_of_death",
-              "short" => "Date of death if applicable",
+              "title" => "Date Of Death",
               "type" => "`$STRING`",
+              "short" => "Date of death if applicable",
+              "format" => "date",
             },
             {
               "name" => "flights_count",
-              "short" => "Number of flights",
+              "title" => "Flights Count",
               "type" => "`$INTEGER`",
+              "short" => "Number of flights",
             },
             {
               "name" => "id",
-              "short" => "Astronaut ID",
+              "title" => "Id",
               "type" => "`$INTEGER`",
+              "short" => "Astronaut ID",
             },
             {
               "name" => "name",
-              "short" => "Name of the astronaut",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Name of the astronaut",
             },
             {
               "name" => "nationality",
-              "short" => "Astronaut nationality",
+              "title" => "Nationality",
               "type" => "`$STRING`",
+              "short" => "Astronaut nationality",
             },
             {
               "name" => "profile_image",
-              "short" => "URL to profile image",
+              "title" => "Profile Image",
               "type" => "`$STRING`",
+              "short" => "URL to profile image",
             },
             {
               "name" => "spacewalks_count",
-              "short" => "Number of spacewalks",
+              "title" => "Spacewalks Count",
               "type" => "`$INTEGER`",
+              "short" => "Number of spacewalks",
             },
             {
               "name" => "status",
+              "title" => "Status",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "type",
+              "title" => "Type",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "url",
-              "short" => "API URL for this astronaut",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this astronaut",
             },
           ],
           "id" => {
@@ -358,42 +380,6 @@ module LaunchLibrary2Config
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "example" => 10,
-                        "kind" => "query",
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "nationality",
-                        "orig" => "nationality",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "example" => 0,
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "search",
-                        "orig" => "search",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "status",
-                        "orig" => "status",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/astronaut",
@@ -402,6 +388,50 @@ module LaunchLibrary2Config
                       "lit" => "astronaut",
                     },
                   ],
+                  "parts" => [
+                    "astronaut",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.results`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 10,
+                      },
+                      {
+                        "name" => "nationality",
+                        "orig" => "nationality",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "search",
+                        "orig" => "search",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "status",
+                        "orig" => "status",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "limit",
@@ -411,13 +441,6 @@ module LaunchLibrary2Config
                       "status",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.results`",
-                  },
-                  "parts" => [
-                    "astronaut",
-                  ],
                 },
               ],
             },
@@ -426,17 +449,6 @@ module LaunchLibrary2Config
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/astronaut/{id}",
@@ -448,19 +460,31 @@ module LaunchLibrary2Config
                       "var" => "id",
                     },
                   ],
+                  "parts" => [
+                    "astronaut",
+                    "{id}",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "id",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "parts" => [
-                    "astronaut",
-                    "{id}",
-                  ],
                 },
               ],
             },
@@ -469,45 +493,43 @@ module LaunchLibrary2Config
             "ancestors" => [],
           },
         },
-        "docking" => {
-          "fields" => [],
-          "name" => "docking",
-          "op" => {},
-          "relations" => {
-            "ancestors" => [],
-          },
-        },
         "docking_event" => {
           "fields" => [
             {
-              "format" => "date-time",
               "name" => "departure",
-              "short" => "Departure time",
+              "title" => "Departure",
               "type" => "`$STRING`",
+              "short" => "Departure time",
+              "format" => "date-time",
             },
             {
-              "format" => "date-time",
               "name" => "docking",
-              "short" => "Docking time",
+              "title" => "Docking",
               "type" => "`$STRING`",
+              "short" => "Docking time",
+              "format" => "date-time",
             },
             {
               "name" => "docking_location",
+              "title" => "Docking Location",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "flight_vehicle",
+              "title" => "Flight Vehicle",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "id",
-              "short" => "Docking event ID",
+              "title" => "Id",
               "type" => "`$INTEGER`",
+              "short" => "Docking event ID",
             },
             {
               "name" => "url",
-              "short" => "API URL for this docking event",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this docking event",
             },
           ],
           "id" => {
@@ -521,36 +543,6 @@ module LaunchLibrary2Config
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "kind" => "query",
-                        "name" => "docking_location",
-                        "orig" => "docking_location",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "example" => 10,
-                        "kind" => "query",
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "example" => 0,
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "spacestation",
-                        "orig" => "spacestation",
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/docking_event",
@@ -559,6 +551,44 @@ module LaunchLibrary2Config
                       "lit" => "docking_event",
                     },
                   ],
+                  "parts" => [
+                    "docking_event",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.results`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "docking_location",
+                        "orig" => "docking_location",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 10,
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "spacestation",
+                        "orig" => "spacestation",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "docking_location",
@@ -567,13 +597,6 @@ module LaunchLibrary2Config
                       "spacestation",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.results`",
-                  },
-                  "parts" => [
-                    "docking_event",
-                  ],
                 },
               ],
             },
@@ -582,17 +605,6 @@ module LaunchLibrary2Config
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/docking_event/{id}",
@@ -604,19 +616,31 @@ module LaunchLibrary2Config
                       "var" => "id",
                     },
                   ],
+                  "parts" => [
+                    "docking_event",
+                    "{id}",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "id",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "parts" => [
-                    "docking_event",
-                    "{id}",
-                  ],
                 },
               ],
             },
@@ -628,54 +652,64 @@ module LaunchLibrary2Config
         "event" => {
           "fields" => [
             {
-              "format" => "date-time",
               "name" => "date",
-              "short" => "Event date and time",
+              "title" => "Date",
               "type" => "`$STRING`",
+              "short" => "Event date and time",
+              "format" => "date-time",
             },
             {
               "name" => "description",
-              "short" => "Description of the event",
+              "title" => "Description",
               "type" => "`$STRING`",
+              "short" => "Description of the event",
             },
             {
               "name" => "feature_image",
-              "short" => "URL to feature image",
+              "title" => "Feature Image",
               "type" => "`$STRING`",
+              "short" => "URL to feature image",
             },
             {
               "name" => "id",
-              "short" => "Event ID",
+              "title" => "Id",
               "type" => "`$INTEGER`",
+              "short" => "Event ID",
             },
             {
               "name" => "location",
-              "short" => "Event location",
+              "title" => "Location",
               "type" => "`$STRING`",
+              "short" => "Event location",
             },
             {
               "name" => "name",
-              "short" => "Name of the event",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Name of the event",
             },
             {
               "name" => "news_url",
-              "short" => "URL to news article",
+              "title" => "News Url",
               "type" => "`$STRING`",
+              "short" => "URL to news article",
             },
             {
               "name" => "type",
+              "title" => "Type",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "url",
-              "short" => "API URL for this event",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this event",
             },
             {
               "name" => "video_url",
-              "short" => "URL to video",
+              "title" => "Video Url",
               "type" => "`$STRING`",
+              "short" => "URL to video",
             },
           ],
           "id" => {
@@ -689,30 +723,6 @@ module LaunchLibrary2Config
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "example" => 10,
-                        "kind" => "query",
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "example" => 0,
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "search",
-                        "orig" => "search",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/event",
@@ -721,6 +731,38 @@ module LaunchLibrary2Config
                       "lit" => "event",
                     },
                   ],
+                  "parts" => [
+                    "event",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.results`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 10,
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "search",
+                        "orig" => "search",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "limit",
@@ -728,13 +770,6 @@ module LaunchLibrary2Config
                       "search",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.results`",
-                  },
-                  "parts" => [
-                    "event",
-                  ],
                 },
               ],
             },
@@ -743,17 +778,6 @@ module LaunchLibrary2Config
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/event/{id}",
@@ -765,19 +789,31 @@ module LaunchLibrary2Config
                       "var" => "id",
                     },
                   ],
+                  "parts" => [
+                    "event",
+                    "{id}",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.type`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "id",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.type`",
-                  },
-                  "parts" => [
-                    "event",
-                    "{id}",
-                  ],
                 },
               ],
             },
@@ -790,38 +826,45 @@ module LaunchLibrary2Config
           "fields" => [
             {
               "name" => "crew",
+              "title" => "Crew",
               "type" => "`$ARRAY`",
             },
             {
-              "format" => "date-time",
               "name" => "end",
-              "short" => "End date of the expedition",
+              "title" => "End",
               "type" => "`$STRING`",
+              "short" => "End date of the expedition",
+              "format" => "date-time",
             },
             {
               "name" => "id",
-              "short" => "Expedition ID",
+              "title" => "Id",
               "type" => "`$INTEGER`",
+              "short" => "Expedition ID",
             },
             {
               "name" => "name",
-              "short" => "Name of the expedition",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Name of the expedition",
             },
             {
               "name" => "spacestation",
+              "title" => "Spacestation",
               "type" => "`$OBJECT`",
             },
             {
-              "format" => "date-time",
               "name" => "start",
-              "short" => "Start date of the expedition",
+              "title" => "Start",
               "type" => "`$STRING`",
+              "short" => "Start date of the expedition",
+              "format" => "date-time",
             },
             {
               "name" => "url",
-              "short" => "API URL for this expedition",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this expedition",
             },
           ],
           "id" => {
@@ -835,36 +878,6 @@ module LaunchLibrary2Config
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "example" => 10,
-                        "kind" => "query",
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "example" => 0,
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "search",
-                        "orig" => "search",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "spacestation",
-                        "orig" => "spacestation",
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/expedition",
@@ -873,6 +886,44 @@ module LaunchLibrary2Config
                       "lit" => "expedition",
                     },
                   ],
+                  "parts" => [
+                    "expedition",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.results`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 10,
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "search",
+                        "orig" => "search",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "spacestation",
+                        "orig" => "spacestation",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "limit",
@@ -881,13 +932,6 @@ module LaunchLibrary2Config
                       "spacestation",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.results`",
-                  },
-                  "parts" => [
-                    "expedition",
-                  ],
                 },
               ],
             },
@@ -896,17 +940,6 @@ module LaunchLibrary2Config
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/expedition/{id}",
@@ -918,19 +951,31 @@ module LaunchLibrary2Config
                       "var" => "id",
                     },
                   ],
+                  "parts" => [
+                    "expedition",
+                    "{id}",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "id",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "parts" => [
-                    "expedition",
-                    "{id}",
-                  ],
                 },
               ],
             },
@@ -943,137 +988,164 @@ module LaunchLibrary2Config
           "fields" => [
             {
               "name" => "apogee",
-              "short" => "Apogee in km",
+              "title" => "Apogee",
               "type" => "`$INTEGER`",
+              "short" => "Apogee in km",
             },
             {
               "name" => "consecutive_successful_launches",
-              "short" => "Number of consecutive successful launches",
+              "title" => "Consecutive Successful Launches",
               "type" => "`$INTEGER`",
+              "short" => "Number of consecutive successful launches",
             },
             {
               "name" => "description",
-              "short" => "Description of the launcher",
+              "title" => "Description",
               "type" => "`$STRING`",
+              "short" => "Description of the launcher",
             },
             {
               "name" => "diameter",
-              "short" => "Diameter in meters",
+              "title" => "Diameter",
               "type" => "`$NUMBER`",
+              "short" => "Diameter in meters",
             },
             {
               "name" => "failed_launches",
-              "short" => "Number of failed launches",
+              "title" => "Failed Launches",
               "type" => "`$INTEGER`",
+              "short" => "Number of failed launches",
             },
             {
               "name" => "family",
-              "short" => "Launcher family",
+              "title" => "Family",
               "type" => "`$STRING`",
+              "short" => "Launcher family",
             },
             {
               "name" => "flights",
-              "short" => "Number of flights",
+              "title" => "Flights",
               "type" => "`$INTEGER`",
+              "short" => "Number of flights",
             },
             {
               "name" => "full_name",
-              "short" => "Full name of the launcher",
+              "title" => "Full Name",
               "type" => "`$STRING`",
+              "short" => "Full name of the launcher",
             },
             {
               "name" => "gto_capacity",
-              "short" => "GTO capacity in kg",
+              "title" => "Gto Capacity",
               "type" => "`$INTEGER`",
+              "short" => "GTO capacity in kg",
             },
             {
               "name" => "id",
-              "short" => "Configuration ID",
+              "title" => "Id",
               "type" => "`$INTEGER`",
+              "short" => "Configuration ID",
             },
             {
               "name" => "launch_mass",
-              "short" => "Launch mass in kg",
+              "title" => "Launch Mass",
               "type" => "`$INTEGER`",
+              "short" => "Launch mass in kg",
             },
             {
               "name" => "launcher_config",
+              "title" => "Launcher Config",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "length",
-              "short" => "Length in meters",
+              "title" => "Length",
               "type" => "`$NUMBER`",
+              "short" => "Length in meters",
             },
             {
               "name" => "leo_capacity",
-              "short" => "LEO capacity in kg",
+              "title" => "Leo Capacity",
               "type" => "`$INTEGER`",
+              "short" => "LEO capacity in kg",
             },
             {
-              "format" => "date",
               "name" => "maiden_flight",
-              "short" => "Date of maiden flight",
+              "title" => "Maiden Flight",
               "type" => "`$STRING`",
+              "short" => "Date of maiden flight",
+              "format" => "date",
             },
             {
               "name" => "manufacturer",
+              "title" => "Manufacturer",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "max_stage",
-              "short" => "Maximum number of stages",
+              "title" => "Max Stage",
               "type" => "`$INTEGER`",
+              "short" => "Maximum number of stages",
             },
             {
               "name" => "min_stage",
-              "short" => "Minimum number of stages",
+              "title" => "Min Stage",
               "type" => "`$INTEGER`",
+              "short" => "Minimum number of stages",
             },
             {
               "name" => "name",
-              "short" => "Name of the launcher configuration",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Name of the launcher configuration",
             },
             {
               "name" => "pending_launches",
-              "short" => "Number of pending launches",
+              "title" => "Pending Launches",
               "type" => "`$INTEGER`",
+              "short" => "Number of pending launches",
             },
             {
               "name" => "serial_number",
-              "short" => "Serial number of the first stage",
+              "title" => "Serial Number",
               "type" => "`$STRING`",
+              "short" => "Serial number of the first stage",
             },
             {
               "name" => "status",
-              "short" => "Current status",
+              "title" => "Status",
               "type" => "`$STRING`",
+              "short" => "Current status",
             },
             {
               "name" => "successful_launches",
-              "short" => "Number of successful launches",
+              "title" => "Successful Launches",
               "type" => "`$INTEGER`",
+              "short" => "Number of successful launches",
             },
             {
               "name" => "to_thrust",
-              "short" => "Takeoff thrust in kN",
+              "title" => "To Thrust",
               "type" => "`$INTEGER`",
+              "short" => "Takeoff thrust in kN",
             },
             {
               "name" => "type",
-              "short" => "Type of first stage",
+              "title" => "Type",
               "type" => "`$STRING`",
+              "short" => "Type of first stage",
             },
             {
               "name" => "url",
-              "short" => "API URL for this configuration",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this configuration",
             },
             {
               "name" => "variant",
-              "short" => "Variant of the launcher",
+              "title" => "Variant",
               "type" => "`$STRING`",
+              "short" => "Variant of the launcher",
             },
           ],
           "id" => {
@@ -1087,36 +1159,6 @@ module LaunchLibrary2Config
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "kind" => "query",
-                        "name" => "flight_number",
-                        "orig" => "flight_number",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "example" => 10,
-                        "kind" => "query",
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "example" => 0,
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "serial_number",
-                        "orig" => "serial_number",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/firststage",
@@ -1125,6 +1167,44 @@ module LaunchLibrary2Config
                       "lit" => "firststage",
                     },
                   ],
+                  "parts" => [
+                    "firststage",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.results`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "flight_number",
+                        "orig" => "flight_number",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 10,
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "serial_number",
+                        "orig" => "serial_number",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "flight_number",
@@ -1133,13 +1213,6 @@ module LaunchLibrary2Config
                       "serial_number",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.results`",
-                  },
-                  "parts" => [
-                    "firststage",
-                  ],
                 },
               ],
             },
@@ -1148,17 +1221,6 @@ module LaunchLibrary2Config
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/firststage/{id}",
@@ -1170,19 +1232,31 @@ module LaunchLibrary2Config
                       "var" => "id",
                     },
                   ],
+                  "parts" => [
+                    "firststage",
+                    "{id}",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.launcher_config`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "id",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.launcher_config`",
-                  },
-                  "parts" => [
-                    "firststage",
-                    "{id}",
-                  ],
                 },
               ],
             },
@@ -1195,71 +1269,85 @@ module LaunchLibrary2Config
           "fields" => [
             {
               "name" => "id",
-              "short" => "UUID of the launch",
+              "title" => "Id",
               "type" => "`$STRING`",
+              "short" => "UUID of the launch",
             },
             {
               "name" => "image",
-              "short" => "URL to launch image",
+              "title" => "Image",
               "type" => "`$STRING`",
+              "short" => "URL to launch image",
             },
             {
               "name" => "launch_service_provider",
+              "title" => "Launch Service Provider",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "mission",
+              "title" => "Mission",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "name",
-              "short" => "Name of the launch",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Name of the launch",
             },
             {
-              "format" => "date-time",
               "name" => "net",
-              "short" => "Net Earliest Time (NET) for launch",
+              "title" => "Net",
               "type" => "`$STRING`",
+              "short" => "Net Earliest Time (NET) for launch",
+              "format" => "date-time",
             },
             {
               "name" => "pad",
+              "title" => "Pad",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "probability",
-              "short" => "Launch probability percentage",
+              "title" => "Probability",
               "type" => "`$INTEGER`",
+              "short" => "Launch probability percentage",
             },
             {
               "name" => "rocket",
+              "title" => "Rocket",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "status",
+              "title" => "Status",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "url",
-              "short" => "API URL for this launch",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this launch",
             },
             {
               "name" => "webcast_live",
-              "short" => "Whether the webcast is currently live",
+              "title" => "Webcast Live",
               "type" => "`$BOOLEAN`",
+              "short" => "Whether the webcast is currently live",
             },
             {
-              "format" => "date-time",
               "name" => "window_end",
-              "short" => "End of launch window",
+              "title" => "Window End",
               "type" => "`$STRING`",
+              "short" => "End of launch window",
+              "format" => "date-time",
             },
             {
-              "format" => "date-time",
               "name" => "window_start",
-              "short" => "Start of launch window",
+              "title" => "Window Start",
               "type" => "`$STRING`",
+              "short" => "Start of launch window",
+              "format" => "date-time",
             },
           ],
           "id" => {
@@ -1273,60 +1361,6 @@ module LaunchLibrary2Config
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "example" => 10,
-                        "kind" => "query",
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "lsp_id",
-                        "orig" => "lsp_id",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "lsp_name",
-                        "orig" => "lsp_name",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "example" => 0,
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "rocket_configuration_id",
-                        "orig" => "rocket_configuration_id",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "search",
-                        "orig" => "search",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "spacecraft_id",
-                        "orig" => "spacecraft_id",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "status",
-                        "orig" => "status",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/launch",
@@ -1335,6 +1369,68 @@ module LaunchLibrary2Config
                       "lit" => "launch",
                     },
                   ],
+                  "parts" => [
+                    "launch",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.results`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 10,
+                      },
+                      {
+                        "name" => "lsp_id",
+                        "orig" => "lsp_id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "lsp_name",
+                        "orig" => "lsp_name",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "rocket_configuration_id",
+                        "orig" => "rocket_configuration_id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "search",
+                        "orig" => "search",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "spacecraft_id",
+                        "orig" => "spacecraft_id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "status",
+                        "orig" => "status",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "limit",
@@ -1347,13 +1443,6 @@ module LaunchLibrary2Config
                       "status",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.results`",
-                  },
-                  "parts" => [
-                    "launch",
-                  ],
                 },
               ],
             },
@@ -1362,17 +1451,6 @@ module LaunchLibrary2Config
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/launch/{id}",
@@ -1384,19 +1462,31 @@ module LaunchLibrary2Config
                       "var" => "id",
                     },
                   ],
+                  "parts" => [
+                    "launch",
+                    "{id}",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$STRING`",
+                        "kind" => "param",
+                        "reqd" => true,
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "id",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "parts" => [
-                    "launch",
-                    "{id}",
-                  ],
                 },
               ],
             },
@@ -1409,113 +1499,135 @@ module LaunchLibrary2Config
           "fields" => [
             {
               "name" => "apogee",
-              "short" => "Apogee in km",
+              "title" => "Apogee",
               "type" => "`$INTEGER`",
+              "short" => "Apogee in km",
             },
             {
               "name" => "consecutive_successful_launches",
-              "short" => "Number of consecutive successful launches",
+              "title" => "Consecutive Successful Launches",
               "type" => "`$INTEGER`",
+              "short" => "Number of consecutive successful launches",
             },
             {
               "name" => "description",
-              "short" => "Description of the launcher",
+              "title" => "Description",
               "type" => "`$STRING`",
+              "short" => "Description of the launcher",
             },
             {
               "name" => "diameter",
-              "short" => "Diameter in meters",
+              "title" => "Diameter",
               "type" => "`$NUMBER`",
+              "short" => "Diameter in meters",
             },
             {
               "name" => "failed_launches",
-              "short" => "Number of failed launches",
+              "title" => "Failed Launches",
               "type" => "`$INTEGER`",
+              "short" => "Number of failed launches",
             },
             {
               "name" => "family",
-              "short" => "Launcher family",
+              "title" => "Family",
               "type" => "`$STRING`",
+              "short" => "Launcher family",
             },
             {
               "name" => "full_name",
-              "short" => "Full name of the launcher",
+              "title" => "Full Name",
               "type" => "`$STRING`",
+              "short" => "Full name of the launcher",
             },
             {
               "name" => "gto_capacity",
-              "short" => "GTO capacity in kg",
+              "title" => "Gto Capacity",
               "type" => "`$INTEGER`",
+              "short" => "GTO capacity in kg",
             },
             {
               "name" => "id",
-              "short" => "Configuration ID",
+              "title" => "Id",
               "type" => "`$INTEGER`",
+              "short" => "Configuration ID",
             },
             {
               "name" => "launch_mass",
-              "short" => "Launch mass in kg",
+              "title" => "Launch Mass",
               "type" => "`$INTEGER`",
+              "short" => "Launch mass in kg",
             },
             {
               "name" => "length",
-              "short" => "Length in meters",
+              "title" => "Length",
               "type" => "`$NUMBER`",
+              "short" => "Length in meters",
             },
             {
               "name" => "leo_capacity",
-              "short" => "LEO capacity in kg",
+              "title" => "Leo Capacity",
               "type" => "`$INTEGER`",
+              "short" => "LEO capacity in kg",
             },
             {
-              "format" => "date",
               "name" => "maiden_flight",
-              "short" => "Date of maiden flight",
+              "title" => "Maiden Flight",
               "type" => "`$STRING`",
+              "short" => "Date of maiden flight",
+              "format" => "date",
             },
             {
               "name" => "manufacturer",
+              "title" => "Manufacturer",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "max_stage",
-              "short" => "Maximum number of stages",
+              "title" => "Max Stage",
               "type" => "`$INTEGER`",
+              "short" => "Maximum number of stages",
             },
             {
               "name" => "min_stage",
-              "short" => "Minimum number of stages",
+              "title" => "Min Stage",
               "type" => "`$INTEGER`",
+              "short" => "Minimum number of stages",
             },
             {
               "name" => "name",
-              "short" => "Name of the launcher configuration",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Name of the launcher configuration",
             },
             {
               "name" => "pending_launches",
-              "short" => "Number of pending launches",
+              "title" => "Pending Launches",
               "type" => "`$INTEGER`",
+              "short" => "Number of pending launches",
             },
             {
               "name" => "successful_launches",
-              "short" => "Number of successful launches",
+              "title" => "Successful Launches",
               "type" => "`$INTEGER`",
+              "short" => "Number of successful launches",
             },
             {
               "name" => "to_thrust",
-              "short" => "Takeoff thrust in kN",
+              "title" => "To Thrust",
               "type" => "`$INTEGER`",
+              "short" => "Takeoff thrust in kN",
             },
             {
               "name" => "url",
-              "short" => "API URL for this configuration",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this configuration",
             },
             {
               "name" => "variant",
-              "short" => "Variant of the launcher",
+              "title" => "Variant",
               "type" => "`$STRING`",
+              "short" => "Variant of the launcher",
             },
           ],
           "id" => {
@@ -1529,42 +1641,6 @@ module LaunchLibrary2Config
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "kind" => "query",
-                        "name" => "family",
-                        "orig" => "family",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "example" => 10,
-                        "kind" => "query",
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "manufacturer",
-                        "orig" => "manufacturer",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "example" => 0,
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "search",
-                        "orig" => "search",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/config/launcher",
@@ -1576,6 +1652,51 @@ module LaunchLibrary2Config
                       "lit" => "launcher",
                     },
                   ],
+                  "parts" => [
+                    "config",
+                    "launcher",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.results`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "family",
+                        "orig" => "family",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 10,
+                      },
+                      {
+                        "name" => "manufacturer",
+                        "orig" => "manufacturer",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "search",
+                        "orig" => "search",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "family",
@@ -1585,14 +1706,6 @@ module LaunchLibrary2Config
                       "search",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.results`",
-                  },
-                  "parts" => [
-                    "config",
-                    "launcher",
-                  ],
                 },
               ],
             },
@@ -1605,53 +1718,63 @@ module LaunchLibrary2Config
           "fields" => [
             {
               "name" => "abbrev",
-              "short" => "Agency abbreviation",
+              "title" => "Abbrev",
               "type" => "`$STRING`",
+              "short" => "Agency abbreviation",
             },
             {
               "name" => "administrator",
-              "short" => "Agency administrator",
+              "title" => "Administrator",
               "type" => "`$STRING`",
+              "short" => "Agency administrator",
             },
             {
               "name" => "country_code",
-              "short" => "ISO country code",
+              "title" => "Country Code",
               "type" => "`$STRING`",
+              "short" => "ISO country code",
             },
             {
               "name" => "description",
-              "short" => "Agency description",
+              "title" => "Description",
               "type" => "`$STRING`",
+              "short" => "Agency description",
             },
             {
               "name" => "founding_year",
-              "short" => "Year agency was founded",
+              "title" => "Founding Year",
               "type" => "`$STRING`",
+              "short" => "Year agency was founded",
             },
             {
               "name" => "id",
-              "short" => "Agency ID",
+              "title" => "Id",
               "type" => "`$INTEGER`",
+              "short" => "Agency ID",
             },
             {
               "name" => "logo_url",
-              "short" => "URL to agency logo",
+              "title" => "Logo Url",
               "type" => "`$STRING`",
+              "short" => "URL to agency logo",
             },
             {
               "name" => "name",
-              "short" => "Name of the agency",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Name of the agency",
             },
             {
               "name" => "type",
-              "short" => "Type of agency",
+              "title" => "Type",
               "type" => "`$STRING`",
+              "short" => "Type of agency",
             },
             {
               "name" => "url",
-              "short" => "API URL for this agency",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this agency",
             },
           ],
           "id" => {
@@ -1665,17 +1788,6 @@ module LaunchLibrary2Config
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/config/launcher/{id}",
@@ -1690,20 +1802,32 @@ module LaunchLibrary2Config
                       "var" => "id",
                     },
                   ],
-                  "select" => {
-                    "exist" => [
-                      "id",
-                    ],
-                  },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.manufacturer`",
-                  },
                   "parts" => [
                     "config",
                     "launcher",
                     "{id}",
                   ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.manufacturer`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                      },
+                    ],
+                  },
+                  "select" => {
+                    "exist" => [
+                      "id",
+                    ],
+                  },
                 },
               ],
             },
@@ -1716,38 +1840,45 @@ module LaunchLibrary2Config
           "fields" => [
             {
               "name" => "country_code",
-              "short" => "ISO country code",
+              "title" => "Country Code",
               "type" => "`$STRING`",
+              "short" => "ISO country code",
             },
             {
               "name" => "id",
-              "short" => "Location ID",
+              "title" => "Id",
               "type" => "`$INTEGER`",
+              "short" => "Location ID",
             },
             {
               "name" => "map_image",
-              "short" => "URL to map image",
+              "title" => "Map Image",
               "type" => "`$STRING`",
+              "short" => "URL to map image",
             },
             {
               "name" => "name",
-              "short" => "Name of the location",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Name of the location",
             },
             {
               "name" => "total_landing_count",
-              "short" => "Total number of landings at this location",
+              "title" => "Total Landing Count",
               "type" => "`$INTEGER`",
+              "short" => "Total number of landings at this location",
             },
             {
               "name" => "total_launch_count",
-              "short" => "Total number of launches from this location",
+              "title" => "Total Launch Count",
               "type" => "`$INTEGER`",
+              "short" => "Total number of launches from this location",
             },
             {
               "name" => "url",
-              "short" => "API URL for this location",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this location",
             },
           ],
           "id" => {
@@ -1761,36 +1892,6 @@ module LaunchLibrary2Config
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "kind" => "query",
-                        "name" => "country_code",
-                        "orig" => "country_code",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "example" => 10,
-                        "kind" => "query",
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "example" => 0,
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "search",
-                        "orig" => "search",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/location",
@@ -1799,6 +1900,44 @@ module LaunchLibrary2Config
                       "lit" => "location",
                     },
                   ],
+                  "parts" => [
+                    "location",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.results`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "country_code",
+                        "orig" => "country_code",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 10,
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "search",
+                        "orig" => "search",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "country_code",
@@ -1807,13 +1946,6 @@ module LaunchLibrary2Config
                       "search",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.results`",
-                  },
-                  "parts" => [
-                    "location",
-                  ],
                 },
               ],
             },
@@ -1822,17 +1954,6 @@ module LaunchLibrary2Config
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/location/{id}",
@@ -1844,19 +1965,31 @@ module LaunchLibrary2Config
                       "var" => "id",
                     },
                   ],
+                  "parts" => [
+                    "location",
+                    "{id}",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "id",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "parts" => [
-                    "location",
-                    "{id}",
-                  ],
                 },
               ],
             },
@@ -1869,72 +2002,86 @@ module LaunchLibrary2Config
           "fields" => [
             {
               "name" => "agency_id",
-              "short" => "ID of the agency that operates this pad",
+              "title" => "Agency Id",
               "type" => "`$INTEGER`",
+              "short" => "ID of the agency that operates this pad",
             },
             {
               "name" => "country_code",
-              "short" => "ISO country code",
+              "title" => "Country Code",
               "type" => "`$STRING`",
+              "short" => "ISO country code",
             },
             {
               "name" => "id",
-              "short" => "Location ID",
+              "title" => "Id",
               "type" => "`$INTEGER`",
+              "short" => "Location ID",
             },
             {
               "name" => "info_url",
-              "short" => "URL to more information",
+              "title" => "Info Url",
               "type" => "`$STRING`",
+              "short" => "URL to more information",
             },
             {
               "name" => "latitude",
-              "short" => "Latitude coordinate",
+              "title" => "Latitude",
               "type" => "`$STRING`",
+              "short" => "Latitude coordinate",
             },
             {
               "name" => "location",
+              "title" => "Location",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "longitude",
-              "short" => "Longitude coordinate",
+              "title" => "Longitude",
               "type" => "`$STRING`",
+              "short" => "Longitude coordinate",
             },
             {
               "name" => "map_image",
-              "short" => "URL to map image",
+              "title" => "Map Image",
               "type" => "`$STRING`",
+              "short" => "URL to map image",
             },
             {
               "name" => "map_url",
-              "short" => "URL to map",
+              "title" => "Map Url",
               "type" => "`$STRING`",
+              "short" => "URL to map",
             },
             {
               "name" => "name",
-              "short" => "Name of the location",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Name of the location",
             },
             {
               "name" => "total_landing_count",
-              "short" => "Total number of landings at this location",
+              "title" => "Total Landing Count",
               "type" => "`$INTEGER`",
+              "short" => "Total number of landings at this location",
             },
             {
               "name" => "total_launch_count",
-              "short" => "Total number of launches from this location",
+              "title" => "Total Launch Count",
               "type" => "`$INTEGER`",
+              "short" => "Total number of launches from this location",
             },
             {
               "name" => "url",
-              "short" => "API URL for this location",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this location",
             },
             {
               "name" => "wiki_url",
-              "short" => "Wikipedia URL",
+              "title" => "Wiki Url",
               "type" => "`$STRING`",
+              "short" => "Wikipedia URL",
             },
           ],
           "id" => {
@@ -1948,36 +2095,6 @@ module LaunchLibrary2Config
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "example" => 10,
-                        "kind" => "query",
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "location",
-                        "orig" => "location",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "example" => 0,
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "search",
-                        "orig" => "search",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/pad",
@@ -1986,6 +2103,44 @@ module LaunchLibrary2Config
                       "lit" => "pad",
                     },
                   ],
+                  "parts" => [
+                    "pad",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.results`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 10,
+                      },
+                      {
+                        "name" => "location",
+                        "orig" => "location",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "search",
+                        "orig" => "search",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "limit",
@@ -1994,13 +2149,6 @@ module LaunchLibrary2Config
                       "search",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.results`",
-                  },
-                  "parts" => [
-                    "pad",
-                  ],
                 },
               ],
             },
@@ -2009,17 +2157,6 @@ module LaunchLibrary2Config
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/pad/{id}",
@@ -2031,19 +2168,31 @@ module LaunchLibrary2Config
                       "var" => "id",
                     },
                   ],
+                  "parts" => [
+                    "pad",
+                    "{id}",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.location`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "id",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.location`",
-                  },
-                  "parts" => [
-                    "pad",
-                    "{id}",
-                  ],
                 },
               ],
             },
@@ -2052,69 +2201,72 @@ module LaunchLibrary2Config
             "ancestors" => [],
           },
         },
-        "reusable_first_stage" => {
-          "fields" => [],
-          "name" => "reusable_first_stage",
-          "op" => {},
-          "relations" => {
-            "ancestors" => [],
-          },
-        },
         "space_station" => {
           "fields" => [
             {
-              "format" => "date",
               "name" => "deorbited",
-              "short" => "Date the space station was deorbited",
+              "title" => "Deorbited",
               "type" => "`$STRING`",
+              "short" => "Date the space station was deorbited",
+              "format" => "date",
             },
             {
               "name" => "description",
-              "short" => "Description of the space station",
+              "title" => "Description",
               "type" => "`$STRING`",
+              "short" => "Description of the space station",
             },
             {
-              "format" => "date",
               "name" => "founded",
-              "short" => "Date the space station was founded",
+              "title" => "Founded",
               "type" => "`$STRING`",
+              "short" => "Date the space station was founded",
+              "format" => "date",
             },
             {
               "name" => "id",
-              "short" => "Space station ID",
+              "title" => "Id",
               "type" => "`$INTEGER`",
+              "short" => "Space station ID",
             },
             {
               "name" => "image_url",
-              "short" => "URL to space station image",
+              "title" => "Image Url",
               "type" => "`$STRING`",
+              "short" => "URL to space station image",
             },
             {
               "name" => "name",
-              "short" => "Name of the space station",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Name of the space station",
             },
             {
               "name" => "orbit",
-              "short" => "Orbital information",
+              "title" => "Orbit",
               "type" => "`$STRING`",
+              "short" => "Orbital information",
             },
             {
               "name" => "owners",
+              "title" => "Owners",
               "type" => "`$ARRAY`",
             },
             {
               "name" => "status",
+              "title" => "Status",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "type",
+              "title" => "Type",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "url",
-              "short" => "API URL for this space station",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this space station",
             },
           ],
           "id" => {
@@ -2128,42 +2280,6 @@ module LaunchLibrary2Config
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "example" => 10,
-                        "kind" => "query",
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "example" => 0,
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "owner",
-                        "orig" => "owner",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "search",
-                        "orig" => "search",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "status",
-                        "orig" => "status",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/spacestation",
@@ -2172,6 +2288,50 @@ module LaunchLibrary2Config
                       "lit" => "spacestation",
                     },
                   ],
+                  "parts" => [
+                    "spacestation",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.results`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 10,
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "owner",
+                        "orig" => "owner",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "search",
+                        "orig" => "search",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "status",
+                        "orig" => "status",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "limit",
@@ -2181,13 +2341,6 @@ module LaunchLibrary2Config
                       "status",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.results`",
-                  },
-                  "parts" => [
-                    "spacestation",
-                  ],
                 },
               ],
             },
@@ -2196,17 +2349,6 @@ module LaunchLibrary2Config
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/spacestation/{id}",
@@ -2218,19 +2360,31 @@ module LaunchLibrary2Config
                       "var" => "id",
                     },
                   ],
+                  "parts" => [
+                    "spacestation",
+                    "{id}",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "id",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
-                  "parts" => [
-                    "spacestation",
-                    "{id}",
-                  ],
                 },
               ],
             },
@@ -2243,77 +2397,92 @@ module LaunchLibrary2Config
           "fields" => [
             {
               "name" => "agency",
+              "title" => "Agency",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "capability",
-              "short" => "Spacecraft capability",
+              "title" => "Capability",
               "type" => "`$STRING`",
+              "short" => "Spacecraft capability",
             },
             {
               "name" => "crew_capacity",
-              "short" => "Crew capacity",
+              "title" => "Crew Capacity",
               "type" => "`$INTEGER`",
+              "short" => "Crew capacity",
             },
             {
               "name" => "details",
-              "short" => "Detailed information",
+              "title" => "Details",
               "type" => "`$STRING`",
+              "short" => "Detailed information",
             },
             {
               "name" => "diameter",
-              "short" => "Diameter in meters",
+              "title" => "Diameter",
               "type" => "`$NUMBER`",
+              "short" => "Diameter in meters",
             },
             {
               "name" => "height",
-              "short" => "Height in meters",
+              "title" => "Height",
               "type" => "`$NUMBER`",
+              "short" => "Height in meters",
             },
             {
               "name" => "history",
-              "short" => "Historical information",
+              "title" => "History",
               "type" => "`$STRING`",
+              "short" => "Historical information",
             },
             {
               "name" => "human_rated",
-              "short" => "Whether the spacecraft is human-rated",
+              "title" => "Human Rated",
               "type" => "`$BOOLEAN`",
+              "short" => "Whether the spacecraft is human-rated",
             },
             {
               "name" => "id",
-              "short" => "Spacecraft configuration ID",
+              "title" => "Id",
               "type" => "`$INTEGER`",
+              "short" => "Spacecraft configuration ID",
             },
             {
               "name" => "image_url",
-              "short" => "URL to spacecraft image",
+              "title" => "Image Url",
               "type" => "`$STRING`",
+              "short" => "URL to spacecraft image",
             },
             {
               "name" => "in_use",
-              "short" => "Whether the spacecraft is currently in use",
+              "title" => "In Use",
               "type" => "`$BOOLEAN`",
+              "short" => "Whether the spacecraft is currently in use",
             },
             {
-              "format" => "date",
               "name" => "maiden_flight",
-              "short" => "Date of maiden flight",
+              "title" => "Maiden Flight",
               "type" => "`$STRING`",
+              "short" => "Date of maiden flight",
+              "format" => "date",
             },
             {
               "name" => "name",
-              "short" => "Name of the spacecraft",
+              "title" => "Name",
               "type" => "`$STRING`",
+              "short" => "Name of the spacecraft",
             },
             {
               "name" => "type",
+              "title" => "Type",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "url",
-              "short" => "API URL for this configuration",
+              "title" => "Url",
               "type" => "`$STRING`",
+              "short" => "API URL for this configuration",
             },
           ],
           "id" => {
@@ -2327,36 +2496,6 @@ module LaunchLibrary2Config
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "example" => 10,
-                        "kind" => "query",
-                        "name" => "limit",
-                        "orig" => "limit",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "example" => 0,
-                        "kind" => "query",
-                        "name" => "offset",
-                        "orig" => "offset",
-                        "type" => "`$INTEGER`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "search",
-                        "orig" => "search",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "status",
-                        "orig" => "status",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/config/spacecraft",
@@ -2368,6 +2507,45 @@ module LaunchLibrary2Config
                       "lit" => "spacecraft",
                     },
                   ],
+                  "parts" => [
+                    "config",
+                    "spacecraft",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.results`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "limit",
+                        "orig" => "limit",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 10,
+                      },
+                      {
+                        "name" => "offset",
+                        "orig" => "offset",
+                        "type" => "`$INTEGER`",
+                        "kind" => "query",
+                        "example" => 0,
+                      },
+                      {
+                        "name" => "search",
+                        "orig" => "search",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "status",
+                        "orig" => "status",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "limit",
@@ -2376,14 +2554,6 @@ module LaunchLibrary2Config
                       "status",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.results`",
-                  },
-                  "parts" => [
-                    "config",
-                    "spacecraft",
-                  ],
                 },
               ],
             },
@@ -2392,17 +2562,6 @@ module LaunchLibrary2Config
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$INTEGER`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/config/spacecraft/{id}",
@@ -2417,20 +2576,32 @@ module LaunchLibrary2Config
                       "var" => "id",
                     },
                   ],
-                  "select" => {
-                    "exist" => [
-                      "id",
-                    ],
-                  },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
                   "parts" => [
                     "config",
                     "spacecraft",
                     "{id}",
                   ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$INTEGER`",
+                        "kind" => "param",
+                        "reqd" => true,
+                      },
+                    ],
+                  },
+                  "select" => {
+                    "exist" => [
+                      "id",
+                    ],
+                  },
                 },
               ],
             },

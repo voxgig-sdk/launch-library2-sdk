@@ -14,13 +14,13 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `ratelimit`, `retry`, `test`, `timeout` — opt-in,
+> **Features:** `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
 ## Entities, not endpoints
 
-This SDK exposes the API as **15 semantic entities** that you
+This SDK exposes the API as **13 semantic entities** that you
 call directly, instead of assembling URL paths and query strings. See the [Entities](#entities) table below for the full list. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
 support (`list`, `load`):
@@ -164,13 +164,12 @@ Then add it to your agent's MCP config (Claude Desktop, Cursor, etc.):
 
 ## Entities
 
-The API exposes 15 entities:
+The API exposes 13 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
 | **Agency** | The Agency entity (list, load). | `/agencies` |
 | **Astronaut** | The Astronaut entity (list, load). | `/astronaut` |
-| **Docking** | The Docking entity. | `` |
 | **DockingEvent** | The DockingEvent entity (list, load). | `/docking_event` |
 | **Event** | The Event entity (list, load). | `/event` |
 | **Expedition** | The Expedition entity (list, load). | `/expedition` |
@@ -180,7 +179,6 @@ The API exposes 15 entities:
 | **Launcher** | The Launcher entity (load). | `/config/launcher/{id}` |
 | **Location** | The Location entity (list, load). | `/location` |
 | **Pad** | The Pad entity (list, load). | `/pad` |
-| **ReusableFirstStage** | The ReusableFirstStage entity. | `` |
 | **SpaceStation** | The SpaceStation entity (list, load). | `/spacestation` |
 | **Spacecraft** | The Spacecraft entity (list, load). | `/config/spacecraft` |
 

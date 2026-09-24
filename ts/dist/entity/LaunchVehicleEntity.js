@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LaunchVehicleEntity = void 0;
 const LaunchLibrary2EntityBase_1 = require("../LaunchLibrary2EntityBase");
-// TODO: needs Entity superclass
 class LaunchVehicleEntity extends LaunchLibrary2EntityBase_1.LaunchLibrary2EntityBase {
     constructor(client, entopts) {
         super(client, entopts);

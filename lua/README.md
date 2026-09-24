@@ -43,7 +43,7 @@ local agencys, err = client:Agency():list()
 if err then error(err) end
 
 for _, item in ipairs(agencys) do
-  print(item["id"], item["abbrev"])
+  print(item["id"])
 end
 ```
 
@@ -201,7 +201,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
 | `Agency` | `(data) -> AgencyEntity` | Create an Agency entity instance. |
 | `Astronaut` | `(data) -> AstronautEntity` | Create an Astronaut entity instance. |
-| `Docking` | `(data) -> DockingEntity` | Create a Docking entity instance. |
 | `DockingEvent` | `(data) -> DockingEventEntity` | Create a DockingEvent entity instance. |
 | `Event` | `(data) -> EventEntity` | Create an Event entity instance. |
 | `Expedition` | `(data) -> ExpeditionEntity` | Create an Expedition entity instance. |
@@ -211,7 +210,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Launcher` | `(data) -> LauncherEntity` | Create a Launcher entity instance. |
 | `Location` | `(data) -> LocationEntity` | Create a Location entity instance. |
 | `Pad` | `(data) -> PadEntity` | Create a Pad entity instance. |
-| `ReusableFirstStage` | `(data) -> ReusableFirstStageEntity` | Create a ReusableFirstStage entity instance. |
 | `SpaceStation` | `(data) -> SpaceStationEntity` | Create a SpaceStation entity instance. |
 | `Spacecraft` | `(data) -> SpacecraftEntity` | Create a Spacecraft entity instance. |
 
@@ -290,15 +288,6 @@ API path: `/agencies`
 Operations: List, Load.
 
 API path: `/astronaut`
-
-#### Docking
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 #### DockingEvent
 
@@ -498,15 +487,6 @@ Operations: List, Load.
 
 API path: `/pad`
 
-#### ReusableFirstStage
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
-
 #### SpaceStation
 
 | Field | Description |
@@ -634,11 +614,6 @@ local astronaut, err = client:Astronaut():load({ id = 1 })
 ```lua
 local astronauts, err = client:Astronaut():list()
 ```
-
-
-### Docking
-
-Create an instance: `local docking = client:Docking(nil)`
 
 
 ### DockingEvent
@@ -1003,11 +978,6 @@ local pad, err = client:Pad():load({ id = 1 })
 ```lua
 local pads, err = client:Pad():list()
 ```
-
-
-### ReusableFirstStage
-
-Create an instance: `local reusable_first_stage = client:ReusableFirstStage(nil)`
 
 
 ### SpaceStation

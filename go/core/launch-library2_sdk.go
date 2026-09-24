@@ -264,7 +264,6 @@ func (sdk *LaunchLibrary2SDK) rawRequest(fetchargs map[string]any) (map[string]a
 		if !noBody {
 			if jf := vs.GetProp(fm, "json"); jf != nil {
 				if f, ok := jf.(func() any); ok {
-					// f() returns nil on parse error in our fetcher.
 					jsonData = f()
 				}
 			}
@@ -281,17 +280,6 @@ func (sdk *LaunchLibrary2SDK) rawRequest(fetchargs map[string]any) (map[string]a
 	return map[string]any{"ok": false, "err": ctx.MakeError("direct_invalid", "invalid response type")}, nil
 }
 
-// Raw GraphQL access: the pressure valve that makes the generated surface's
-// deliberate omissions (per-call selection sets, typed filter builders,
-// batching, subscriptions) livable — the whole schema stays reachable.
-//
-// Thin wrapper over the same prepare/fetch path Direct uses, with the one
-// thing raw Direct cannot do for GraphQL: a GraphQL failure rides HTTP 200
-// as a top-level `errors` array, so status alone would report a failed query
-// as ok.
-//
-// NOTE: like Direct, this bypasses the feature pipeline — no retry,
-// ratelimit or paging features apply.
 func (sdk *LaunchLibrary2SDK) Graphql(
 	query string, variables map[string]any, ctrl map[string]any,
 ) (map[string]any, error) {
@@ -351,14 +339,6 @@ func (sdk *LaunchLibrary2SDK) Agency(data map[string]any) LaunchLibrary2Entity {
 // client.Astronaut(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) Astronaut(data map[string]any) LaunchLibrary2Entity {
 	return NewAstronautEntityFunc(sdk, data)
-}
-
-
-// Docking returns a Docking entity bound to this client.
-// Idiomatic usage: client.Docking(nil).List(nil, nil) or
-// client.Docking(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *LaunchLibrary2SDK) Docking(data map[string]any) LaunchLibrary2Entity {
-	return NewDockingEntityFunc(sdk, data)
 }
 
 
@@ -431,14 +411,6 @@ func (sdk *LaunchLibrary2SDK) Location(data map[string]any) LaunchLibrary2Entity
 // client.Pad(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *LaunchLibrary2SDK) Pad(data map[string]any) LaunchLibrary2Entity {
 	return NewPadEntityFunc(sdk, data)
-}
-
-
-// ReusableFirstStage returns a ReusableFirstStage entity bound to this client.
-// Idiomatic usage: client.ReusableFirstStage(nil).List(nil, nil) or
-// client.ReusableFirstStage(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *LaunchLibrary2SDK) ReusableFirstStage(data map[string]any) LaunchLibrary2Entity {
-	return NewReusableFirstStageEntityFunc(sdk, data)
 }
 
 

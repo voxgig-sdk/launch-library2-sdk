@@ -1,7 +1,7 @@
 // Typed models for the LaunchLibrary2 SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
@@ -55,9 +55,6 @@ export interface AstronautListMatch {
   offset?: number
   search?: string
   status?: string
-}
-
-export interface Docking {
 }
 
 export interface DockingEvent {
@@ -294,9 +291,6 @@ export interface PadListMatch {
   location?: number
   offset?: number
   search?: string
-}
-
-export interface ReusableFirstStage {
 }
 
 export interface SpaceStation {

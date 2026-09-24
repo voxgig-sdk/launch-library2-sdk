@@ -319,12 +319,6 @@ class LaunchLibrary2SDK:
         return AstronautEntity(self, data)
 
 
-    def Docking(self, data=None) -> "DockingEntity":
-        """Entity factory: client.Docking().list() / client.Docking().load({"id": ...})."""
-        from launchlibrary2_sdk.entity.docking_entity import DockingEntity
-        return DockingEntity(self, data)
-
-
     def DockingEvent(self, data=None) -> "DockingEventEntity":
         """Entity factory: client.DockingEvent().list() / client.DockingEvent().load({"id": ...})."""
         from launchlibrary2_sdk.entity.docking_event_entity import DockingEventEntity
@@ -379,12 +373,6 @@ class LaunchLibrary2SDK:
         return PadEntity(self, data)
 
 
-    def ReusableFirstStage(self, data=None) -> "ReusableFirstStageEntity":
-        """Entity factory: client.ReusableFirstStage().list() / client.ReusableFirstStage().load({"id": ...})."""
-        from launchlibrary2_sdk.entity.reusable_first_stage_entity import ReusableFirstStageEntity
-        return ReusableFirstStageEntity(self, data)
-
-
     def SpaceStation(self, data=None) -> "SpaceStationEntity":
         """Entity factory: client.SpaceStation().list() / client.SpaceStation().load({"id": ...})."""
         from launchlibrary2_sdk.entity.space_station_entity import SpaceStationEntity
@@ -426,7 +414,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from launchlibrary2_sdk.entity.agency_entity import AgencyEntity
     from launchlibrary2_sdk.entity.astronaut_entity import AstronautEntity
-    from launchlibrary2_sdk.entity.docking_entity import DockingEntity
     from launchlibrary2_sdk.entity.docking_event_entity import DockingEventEntity
     from launchlibrary2_sdk.entity.event_entity import EventEntity
     from launchlibrary2_sdk.entity.expedition_entity import ExpeditionEntity
@@ -436,6 +423,5 @@ if TYPE_CHECKING:
     from launchlibrary2_sdk.entity.launcher_entity import LauncherEntity
     from launchlibrary2_sdk.entity.location_entity import LocationEntity
     from launchlibrary2_sdk.entity.pad_entity import PadEntity
-    from launchlibrary2_sdk.entity.reusable_first_stage_entity import ReusableFirstStageEntity
     from launchlibrary2_sdk.entity.space_station_entity import SpaceStationEntity
     from launchlibrary2_sdk.entity.spacecraft_entity import SpacecraftEntity

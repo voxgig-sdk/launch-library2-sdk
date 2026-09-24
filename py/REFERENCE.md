@@ -49,10 +49,6 @@ Create a new `AgencyEntity` instance. Pass `None` for no initial data.
 
 Create a new `AstronautEntity` instance. Pass `None` for no initial data.
 
-#### `Docking(data=None)`
-
-Create a new `DockingEntity` instance. Pass `None` for no initial data.
-
 #### `DockingEvent(data=None)`
 
 Create a new `DockingEventEntity` instance. Pass `None` for no initial data.
@@ -88,10 +84,6 @@ Create a new `LocationEntity` instance. Pass `None` for no initial data.
 #### `Pad(data=None)`
 
 Create a new `PadEntity` instance. Pass `None` for no initial data.
-
-#### `ReusableFirstStage(data=None)`
-
-Create a new `ReusableFirstStageEntity` instance. Pass `None` for no initial data.
 
 #### `SpaceStation(data=None)`
 
@@ -267,41 +259,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `AstronautEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## DockingEntity
-
-```python
-docking = client.Docking()
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `DockingEntity` instance with the same options.
 
 #### `get_name() -> str`
 
@@ -941,41 +898,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `PadEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## ReusableFirstStageEntity
-
-```python
-reusable_first_stage = client.ReusableFirstStage()
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ReusableFirstStageEntity` instance with the same options.
 
 #### `get_name() -> str`
 

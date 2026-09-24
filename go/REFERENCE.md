@@ -55,10 +55,6 @@ Create a new `Agency` entity instance. Pass `nil` for no initial data.
 
 Create a new `Astronaut` entity instance. Pass `nil` for no initial data.
 
-#### `Docking(data map[string]any) LaunchLibrary2Entity`
-
-Create a new `Docking` entity instance. Pass `nil` for no initial data.
-
 #### `DockingEvent(data map[string]any) LaunchLibrary2Entity`
 
 Create a new `DockingEvent` entity instance. Pass `nil` for no initial data.
@@ -94,10 +90,6 @@ Create a new `Location` entity instance. Pass `nil` for no initial data.
 #### `Pad(data map[string]any) LaunchLibrary2Entity`
 
 Create a new `Pad` entity instance. Pass `nil` for no initial data.
-
-#### `ReusableFirstStage(data map[string]any) LaunchLibrary2Entity`
-
-Create a new `ReusableFirstStage` entity instance. Pass `nil` for no initial data.
 
 #### `SpaceStation(data map[string]any) LaunchLibrary2Entity`
 
@@ -280,37 +272,6 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `AstronautEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## DockingEntity
-
-```go
-docking := client.Docking(nil)
-fmt.Println(docking.GetName()) // "docking"
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `DockingEntity` instance with the same client and
 options.
 
 #### `GetName() string`
@@ -962,37 +923,6 @@ Get or set the entity match criteria. Works the same as `Data()`.
 #### `Make() Entity`
 
 Create a new `PadEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## ReusableFirstStageEntity
-
-```go
-reusableFirstStage := client.ReusableFirstStage(nil)
-fmt.Println(reusableFirstStage.GetName()) // "reusable_first_stage"
-```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `ReusableFirstStageEntity` instance with the same client and
 options.
 
 #### `GetName() string`

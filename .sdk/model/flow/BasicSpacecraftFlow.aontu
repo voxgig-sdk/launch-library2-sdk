@@ -1,0 +1,44 @@
+# BasicSpacecraftFlow
+
+main: kit: flow: BasicSpacecraftFlow:
+{
+  entity: "spacecraft",
+  kind: "basic",
+  name: "BasicSpacecraftFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "spacecraft_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "spacecraft_ref01",
+        srcdatavar: "spacecraft_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "spacecraft01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-spacecraft_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSpacecraftFlow"
+}

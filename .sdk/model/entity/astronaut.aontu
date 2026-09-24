@@ -1,0 +1,220 @@
+# Entity: astronaut
+
+main: kit: entity: astronaut: {
+
+  alias: field: {}
+
+  fields: {
+    bio: {
+      h: "Bio"
+      n: "bio"
+      r: false
+      sh: "Biographical information"
+      t: "`$STRING`"
+    }
+    date_of_birth: {
+      fo: "date"
+      h: "Date Of Birth"
+      n: "date_of_birth"
+      r: false
+      sh: "Date of birth"
+      t: "`$STRING`"
+    }
+    date_of_death: {
+      fo: "date"
+      h: "Date Of Death"
+      n: "date_of_death"
+      r: false
+      sh: "Date of death if applicable"
+      t: "`$STRING`"
+    }
+    flights_count: {
+      h: "Flights Count"
+      n: "flights_count"
+      r: false
+      sh: "Number of flights"
+      t: "`$INTEGER`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Astronaut ID"
+      t: "`$INTEGER`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Name of the astronaut"
+      t: "`$STRING`"
+    }
+    nationality: {
+      h: "Nationality"
+      n: "nationality"
+      r: false
+      sh: "Astronaut nationality"
+      t: "`$STRING`"
+    }
+    profile_image: {
+      h: "Profile Image"
+      n: "profile_image"
+      r: false
+      sh: "URL to profile image"
+      t: "`$STRING`"
+    }
+    spacewalks_count: {
+      h: "Spacewalks Count"
+      n: "spacewalks_count"
+      r: false
+      sh: "Number of spacewalks"
+      t: "`$INTEGER`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      t: "`$OBJECT`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      t: "`$OBJECT`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      sh: "API URL for this astronaut"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "astronaut"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /astronaut"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "nationality"
+                or: "nationality"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/astronaut"
+          q: {
+            exist: [
+              "limit"
+              "nationality"
+              "offset"
+              "search"
+              "status"
+            ]
+          }
+          s: [
+            {
+              lit: "astronaut"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /astronaut/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/astronaut/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "astronaut"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

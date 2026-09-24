@@ -1,0 +1,44 @@
+# BasicAgencyFlow
+
+main: kit: flow: BasicAgencyFlow:
+{
+  entity: "agency",
+  kind: "basic",
+  name: "BasicAgencyFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "agency_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "agency_ref01",
+        srcdatavar: "agency_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "agency01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-agency_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAgencyFlow"
+}

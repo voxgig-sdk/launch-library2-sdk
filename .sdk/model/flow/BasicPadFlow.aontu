@@ -1,0 +1,44 @@
+# BasicPadFlow
+
+main: kit: flow: BasicPadFlow:
+{
+  entity: "pad",
+  kind: "basic",
+  name: "BasicPadFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "pad_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "pad_ref01",
+        srcdatavar: "pad_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "pad01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-pad_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPadFlow"
+}

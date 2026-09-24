@@ -48,10 +48,6 @@ Create a new `Agency` entity instance. Pass `nil` for no initial data.
 
 Create a new `Astronaut` entity instance. Pass `nil` for no initial data.
 
-#### `Docking(data)`
-
-Create a new `Docking` entity instance. Pass `nil` for no initial data.
-
 #### `DockingEvent(data)`
 
 Create a new `DockingEvent` entity instance. Pass `nil` for no initial data.
@@ -87,10 +83,6 @@ Create a new `Location` entity instance. Pass `nil` for no initial data.
 #### `Pad(data)`
 
 Create a new `Pad` entity instance. Pass `nil` for no initial data.
-
-#### `ReusableFirstStage(data)`
-
-Create a new `ReusableFirstStage` entity instance. Pass `nil` for no initial data.
 
 #### `SpaceStation(data)`
 
@@ -267,42 +259,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `AstronautEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## DockingEntity
-
-```lua
-local docking = client:Docking(nil)
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `DockingEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`
@@ -935,42 +891,6 @@ Set the entity match criteria.
 #### `make() -> Entity`
 
 Create a new `PadEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## ReusableFirstStageEntity
-
-```lua
-local reusable_first_stage = client:ReusableFirstStage(nil)
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `ReusableFirstStageEntity` instance with the same client and
 options.
 
 #### `get_name() -> string`

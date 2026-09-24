@@ -303,13 +303,6 @@ class LaunchLibrary2SDK
   end
 
 
-  # Canonical facade: client.Docking.list / client.Docking.load({ "id" => ... })
-  def Docking(data = nil)
-    require_relative 'entity/docking_entity'
-    DockingEntity.new(self, data)
-  end
-
-
   # Canonical facade: client.DockingEvent.list / client.DockingEvent.load({ "id" => ... })
   def DockingEvent(data = nil)
     require_relative 'entity/docking_event_entity'
@@ -370,13 +363,6 @@ class LaunchLibrary2SDK
   def Pad(data = nil)
     require_relative 'entity/pad_entity'
     PadEntity.new(self, data)
-  end
-
-
-  # Canonical facade: client.ReusableFirstStage.list / client.ReusableFirstStage.load({ "id" => ... })
-  def ReusableFirstStage(data = nil)
-    require_relative 'entity/reusable_first_stage_entity'
-    ReusableFirstStageEntity.new(self, data)
   end
 
 

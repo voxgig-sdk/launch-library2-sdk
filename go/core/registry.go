@@ -16,8 +16,6 @@ var NewAgencyEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) 
 
 var NewAstronautEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) LaunchLibrary2Entity
 
-var NewDockingEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) LaunchLibrary2Entity
-
 var NewDockingEventEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) LaunchLibrary2Entity
 
 var NewEventEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) LaunchLibrary2Entity
@@ -35,8 +33,6 @@ var NewLauncherEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any
 var NewLocationEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) LaunchLibrary2Entity
 
 var NewPadEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) LaunchLibrary2Entity
-
-var NewReusableFirstStageEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) LaunchLibrary2Entity
 
 var NewSpaceStationEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) LaunchLibrary2Entity
 

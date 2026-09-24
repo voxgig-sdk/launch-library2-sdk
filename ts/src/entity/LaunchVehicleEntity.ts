@@ -19,7 +19,6 @@ import type {
   LaunchVehicleListMatch,
 } from '../LaunchLibrary2Types'
 
-// TODO: needs Entity superclass
 class LaunchVehicleEntity extends LaunchLibrary2EntityBase<LaunchVehicle> {
 
   constructor(client: LaunchLibrary2SDK, entopts: any) {

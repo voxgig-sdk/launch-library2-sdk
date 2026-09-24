@@ -229,7 +229,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
 | `Agency` | `(data map[string]any) LaunchLibrary2Entity` | Create an Agency entity instance. |
 | `Astronaut` | `(data map[string]any) LaunchLibrary2Entity` | Create an Astronaut entity instance. |
-| `Docking` | `(data map[string]any) LaunchLibrary2Entity` | Create a Docking entity instance. |
 | `DockingEvent` | `(data map[string]any) LaunchLibrary2Entity` | Create a DockingEvent entity instance. |
 | `Event` | `(data map[string]any) LaunchLibrary2Entity` | Create an Event entity instance. |
 | `Expedition` | `(data map[string]any) LaunchLibrary2Entity` | Create an Expedition entity instance. |
@@ -239,7 +238,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Launcher` | `(data map[string]any) LaunchLibrary2Entity` | Create a Launcher entity instance. |
 | `Location` | `(data map[string]any) LaunchLibrary2Entity` | Create a Location entity instance. |
 | `Pad` | `(data map[string]any) LaunchLibrary2Entity` | Create a Pad entity instance. |
-| `ReusableFirstStage` | `(data map[string]any) LaunchLibrary2Entity` | Create a ReusableFirstStage entity instance. |
 | `SpaceStation` | `(data map[string]any) LaunchLibrary2Entity` | Create a SpaceStation entity instance. |
 | `Spacecraft` | `(data map[string]any) LaunchLibrary2Entity` | Create a Spacecraft entity instance. |
 
@@ -318,15 +316,6 @@ API path: `/agencies`
 Operations: List, Load.
 
 API path: `/astronaut`
-
-#### Docking
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 #### DockingEvent
 
@@ -526,15 +515,6 @@ Operations: List, Load.
 
 API path: `/pad`
 
-#### ReusableFirstStage
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
-
 #### SpaceStation
 
 | Field | Description |
@@ -678,11 +658,6 @@ if err != nil {
 }
 fmt.Println(astronauts) // the array of records
 ```
-
-
-### Docking
-
-Create an instance: `docking := client.Docking(nil)`
 
 
 ### DockingEvent
@@ -1111,11 +1086,6 @@ if err != nil {
 }
 fmt.Println(pads) // the array of records
 ```
-
-
-### ReusableFirstStage
-
-Create an instance: `reusableFirstStage := client.ReusableFirstStage(nil)`
 
 
 ### SpaceStation

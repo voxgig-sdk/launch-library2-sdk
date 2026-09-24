@@ -1,0 +1,177 @@
+# Entity: expedition
+
+main: kit: entity: expedition: {
+
+  alias: field: {}
+
+  fields: {
+    crew: {
+      h: "Crew"
+      n: "crew"
+      r: false
+      t: "`$ARRAY`"
+    }
+    end: {
+      fo: "date-time"
+      h: "End"
+      n: "end"
+      r: false
+      sh: "End date of the expedition"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Expedition ID"
+      t: "`$INTEGER`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Name of the expedition"
+      t: "`$STRING`"
+    }
+    spacestation: {
+      h: "Spacestation"
+      n: "spacestation"
+      r: false
+      t: "`$OBJECT`"
+    }
+    start: {
+      fo: "date-time"
+      h: "Start"
+      n: "start"
+      r: false
+      sh: "Start date of the expedition"
+      t: "`$STRING`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      sh: "API URL for this expedition"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "expedition"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /expedition"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "spacestation"
+                or: "spacestation"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/expedition"
+          q: {
+            exist: [
+              "limit"
+              "offset"
+              "search"
+              "spacestation"
+            ]
+          }
+          s: [
+            {
+              lit: "expedition"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /expedition/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/expedition/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "expedition"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

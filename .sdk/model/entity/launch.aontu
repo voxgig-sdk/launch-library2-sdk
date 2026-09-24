@@ -1,0 +1,256 @@
+# Entity: launch
+
+main: kit: entity: launch: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "UUID of the launch"
+      t: "`$STRING`"
+    }
+    image: {
+      h: "Image"
+      n: "image"
+      r: false
+      sh: "URL to launch image"
+      t: "`$STRING`"
+    }
+    launch_service_provider: {
+      h: "Launch Service Provider"
+      n: "launch_service_provider"
+      r: false
+      t: "`$OBJECT`"
+    }
+    mission: {
+      h: "Mission"
+      n: "mission"
+      r: false
+      t: "`$OBJECT`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Name of the launch"
+      t: "`$STRING`"
+    }
+    net: {
+      fo: "date-time"
+      h: "Net"
+      n: "net"
+      r: false
+      sh: "Net Earliest Time (NET) for launch"
+      t: "`$STRING`"
+    }
+    pad: {
+      h: "Pad"
+      n: "pad"
+      r: false
+      t: "`$OBJECT`"
+    }
+    probability: {
+      h: "Probability"
+      n: "probability"
+      r: false
+      sh: "Launch probability percentage"
+      t: "`$INTEGER`"
+    }
+    rocket: {
+      h: "Rocket"
+      n: "rocket"
+      r: false
+      t: "`$OBJECT`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      t: "`$OBJECT`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      sh: "API URL for this launch"
+      t: "`$STRING`"
+    }
+    webcast_live: {
+      h: "Webcast Live"
+      n: "webcast_live"
+      r: false
+      sh: "Whether the webcast is currently live"
+      t: "`$BOOLEAN`"
+    }
+    window_end: {
+      fo: "date-time"
+      h: "Window End"
+      n: "window_end"
+      r: false
+      sh: "End of launch window"
+      t: "`$STRING`"
+    }
+    window_start: {
+      fo: "date-time"
+      h: "Window Start"
+      n: "window_start"
+      r: false
+      sh: "Start of launch window"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "launch"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /launch"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "lsp_id"
+                or: "lsp_id"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "lsp_name"
+                or: "lsp_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "rocket_configuration_id"
+                or: "rocket_configuration_id"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "spacecraft_id"
+                or: "spacecraft_id"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/launch"
+          q: {
+            exist: [
+              "limit"
+              "lsp_id"
+              "lsp_name"
+              "offset"
+              "rocket_configuration_id"
+              "search"
+              "spacecraft_id"
+              "status"
+            ]
+          }
+          s: [
+            {
+              lit: "launch"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /launch/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/launch/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "launch"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

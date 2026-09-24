@@ -1,0 +1,212 @@
+# Entity: space_station
+
+main: kit: entity: space_station: {
+
+  alias: field: {}
+
+  fields: {
+    deorbited: {
+      fo: "date"
+      h: "Deorbited"
+      n: "deorbited"
+      r: false
+      sh: "Date the space station was deorbited"
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      sh: "Description of the space station"
+      t: "`$STRING`"
+    }
+    founded: {
+      fo: "date"
+      h: "Founded"
+      n: "founded"
+      r: false
+      sh: "Date the space station was founded"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Space station ID"
+      t: "`$INTEGER`"
+    }
+    image_url: {
+      h: "Image Url"
+      n: "image_url"
+      r: false
+      sh: "URL to space station image"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Name of the space station"
+      t: "`$STRING`"
+    }
+    orbit: {
+      h: "Orbit"
+      n: "orbit"
+      r: false
+      sh: "Orbital information"
+      t: "`$STRING`"
+    }
+    owners: {
+      h: "Owners"
+      n: "owners"
+      r: false
+      t: "`$ARRAY`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      t: "`$OBJECT`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      t: "`$OBJECT`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      sh: "API URL for this space station"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "space_station"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /spacestation"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "owner"
+                or: "owner"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "status"
+                or: "status"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/spacestation"
+          q: {
+            exist: [
+              "limit"
+              "offset"
+              "owner"
+              "search"
+              "status"
+            ]
+          }
+          s: [
+            {
+              lit: "spacestation"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /spacestation/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/spacestation/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "spacestation"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

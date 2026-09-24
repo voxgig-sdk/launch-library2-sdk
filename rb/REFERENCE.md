@@ -49,10 +49,6 @@ Create a new `Agency` entity instance. Pass `nil` for no initial data.
 
 Create a new `Astronaut` entity instance. Pass `nil` for no initial data.
 
-#### `Docking(data = nil)`
-
-Create a new `Docking` entity instance. Pass `nil` for no initial data.
-
 #### `DockingEvent(data = nil)`
 
 Create a new `DockingEvent` entity instance. Pass `nil` for no initial data.
@@ -88,10 +84,6 @@ Create a new `Location` entity instance. Pass `nil` for no initial data.
 #### `Pad(data = nil)`
 
 Create a new `Pad` entity instance. Pass `nil` for no initial data.
-
-#### `ReusableFirstStage(data = nil)`
-
-Create a new `ReusableFirstStage` entity instance. Pass `nil` for no initial data.
 
 #### `SpaceStation(data = nil)`
 
@@ -270,42 +262,6 @@ Set the entity match criteria.
 #### `make -> Entity`
 
 Create a new `AstronautEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## DockingEntity
-
-```ruby
-docking = client.Docking
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `DockingEntity` instance with the same client and
 options.
 
 #### `get_name -> String`
@@ -938,42 +894,6 @@ Set the entity match criteria.
 #### `make -> Entity`
 
 Create a new `PadEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## ReusableFirstStageEntity
-
-```ruby
-reusable_first_stage = client.ReusableFirstStage
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `ReusableFirstStageEntity` instance with the same client and
 options.
 
 #### `get_name -> String`

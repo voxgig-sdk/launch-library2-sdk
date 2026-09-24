@@ -1,0 +1,206 @@
+# Entity: agency
+
+main: kit: entity: agency: {
+
+  alias: field: {}
+
+  fields: {
+    abbrev: {
+      h: "Abbrev"
+      n: "abbrev"
+      r: false
+      sh: "Agency abbreviation"
+      t: "`$STRING`"
+    }
+    administrator: {
+      h: "Administrator"
+      n: "administrator"
+      r: false
+      sh: "Agency administrator"
+      t: "`$STRING`"
+    }
+    country_code: {
+      h: "Country Code"
+      n: "country_code"
+      r: false
+      sh: "ISO country code"
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      sh: "Agency description"
+      t: "`$STRING`"
+    }
+    founding_year: {
+      h: "Founding Year"
+      n: "founding_year"
+      r: false
+      sh: "Year agency was founded"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Agency ID"
+      t: "`$INTEGER`"
+    }
+    logo_url: {
+      h: "Logo Url"
+      n: "logo_url"
+      r: false
+      sh: "URL to agency logo"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Name of the agency"
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      sh: "Type of agency"
+      t: "`$STRING`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      sh: "API URL for this agency"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "agency"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /agencies"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "agency_type"
+                or: "agency_type"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "country_code"
+                or: "country_code"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/agencies"
+          q: {
+            exist: [
+              "agency_type"
+              "country_code"
+              "limit"
+              "offset"
+              "search"
+            ]
+          }
+          s: [
+            {
+              lit: "agencies"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /agencies/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/agencies/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "agencies"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -377,24 +377,6 @@ class LaunchLibrary2SDK
     }
 
 
-    private $_docking = null;
-
-    // Canonical facade: $client->Docking()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->docking()
-    // resolves here too.
-    public function Docking($data = null)
-    {
-        require_once __DIR__ . '/entity/docking_entity.php';
-        if ($data === null) {
-            if ($this->_docking === null) {
-                $this->_docking = new DockingEntity($this, null);
-            }
-            return $this->_docking;
-        }
-        return new DockingEntity($this, $data);
-    }
-
-
     private $_docking_event = null;
 
     // Canonical facade: $client->DockingEvent()->list() / ->load(["id" => ...]).
@@ -554,24 +536,6 @@ class LaunchLibrary2SDK
             return $this->_pad;
         }
         return new PadEntity($this, $data);
-    }
-
-
-    private $_reusable_first_stage = null;
-
-    // Canonical facade: $client->ReusableFirstStage()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->reusable_first_stage()
-    // resolves here too.
-    public function ReusableFirstStage($data = null)
-    {
-        require_once __DIR__ . '/entity/reusable_first_stage_entity.php';
-        if ($data === null) {
-            if ($this->_reusable_first_stage === null) {
-                $this->_reusable_first_stage = new ReusableFirstStageEntity($this, null);
-            }
-            return $this->_reusable_first_stage;
-        }
-        return new ReusableFirstStageEntity($this, $data);
     }
 
 

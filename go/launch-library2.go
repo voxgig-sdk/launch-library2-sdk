@@ -47,9 +47,6 @@ func init() {
 	core.NewAstronautEntityFunc = func(client *core.LaunchLibrary2SDK, entopts map[string]any) core.LaunchLibrary2Entity {
 		return entity.NewAstronautEntity(client, entopts)
 	}
-	core.NewDockingEntityFunc = func(client *core.LaunchLibrary2SDK, entopts map[string]any) core.LaunchLibrary2Entity {
-		return entity.NewDockingEntity(client, entopts)
-	}
 	core.NewDockingEventEntityFunc = func(client *core.LaunchLibrary2SDK, entopts map[string]any) core.LaunchLibrary2Entity {
 		return entity.NewDockingEventEntity(client, entopts)
 	}
@@ -76,9 +73,6 @@ func init() {
 	}
 	core.NewPadEntityFunc = func(client *core.LaunchLibrary2SDK, entopts map[string]any) core.LaunchLibrary2Entity {
 		return entity.NewPadEntity(client, entopts)
-	}
-	core.NewReusableFirstStageEntityFunc = func(client *core.LaunchLibrary2SDK, entopts map[string]any) core.LaunchLibrary2Entity {
-		return entity.NewReusableFirstStageEntity(client, entopts)
 	}
 	core.NewSpaceStationEntityFunc = func(client *core.LaunchLibrary2SDK, entopts map[string]any) core.LaunchLibrary2Entity {
 		return entity.NewSpaceStationEntity(client, entopts)

@@ -1,6 +1,5 @@
 import { AgencyEntity } from './entity/AgencyEntity';
 import { AstronautEntity } from './entity/AstronautEntity';
-import { DockingEntity } from './entity/DockingEntity';
 import { DockingEventEntity } from './entity/DockingEventEntity';
 import { EventEntity } from './entity/EventEntity';
 import { ExpeditionEntity } from './entity/ExpeditionEntity';
@@ -10,7 +9,6 @@ import { LaunchVehicleEntity } from './entity/LaunchVehicleEntity';
 import { LauncherEntity } from './entity/LauncherEntity';
 import { LocationEntity } from './entity/LocationEntity';
 import { PadEntity } from './entity/PadEntity';
-import { ReusableFirstStageEntity } from './entity/ReusableFirstStageEntity';
 import { SpaceStationEntity } from './entity/SpaceStationEntity';
 import { SpacecraftEntity } from './entity/SpacecraftEntity';
 export type * from './LaunchLibrary2Types';
@@ -60,7 +58,6 @@ declare class LaunchLibrary2SDK {
     graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
     Agency(entopts?: Record<string, any>): AgencyEntity;
     Astronaut(entopts?: Record<string, any>): AstronautEntity;
-    Docking(entopts?: Record<string, any>): DockingEntity;
     DockingEvent(entopts?: Record<string, any>): DockingEventEntity;
     Event(entopts?: Record<string, any>): EventEntity;
     Expedition(entopts?: Record<string, any>): ExpeditionEntity;
@@ -70,7 +67,6 @@ declare class LaunchLibrary2SDK {
     Launcher(entopts?: Record<string, any>): LauncherEntity;
     Location(entopts?: Record<string, any>): LocationEntity;
     Pad(entopts?: Record<string, any>): PadEntity;
-    ReusableFirstStage(entopts?: Record<string, any>): ReusableFirstStageEntity;
     SpaceStation(entopts?: Record<string, any>): SpaceStationEntity;
     Spacecraft(entopts?: Record<string, any>): SpacecraftEntity;
     static test(testoptsarg?: any, sdkoptsarg?: any): LaunchLibrary2SDK;

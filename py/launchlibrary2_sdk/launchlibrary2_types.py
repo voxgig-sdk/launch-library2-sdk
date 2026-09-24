@@ -1,7 +1,7 @@
 # Typed models for the LaunchLibrary2 SDK.
 #
-# GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-# params (op.<name>.points[].args.params[]). Field/param types come from the
+# GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+# params (op.<name>.points[].g.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
 #
@@ -66,10 +66,6 @@ class AstronautListMatch(TypedDict, total=False):
     offset: int
     search: str
     status: str
-
-
-class Docking(TypedDict):
-    pass
 
 
 class DockingEvent(TypedDict, total=False):
@@ -306,10 +302,6 @@ class PadListMatch(TypedDict, total=False):
     location: int
     offset: int
     search: str
-
-
-class ReusableFirstStage(TypedDict):
-    pass
 
 
 class SpaceStation(TypedDict, total=False):

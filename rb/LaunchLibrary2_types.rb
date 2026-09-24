@@ -2,8 +2,8 @@
 
 # Typed models for the LaunchLibrary2 SDK.
 #
-# GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-# params (op.<name>.points[].args.params[]). Member types come from the
+# GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+# params (op.<name>.points[].g.params[]). Member types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Ruby types are unenforced; these YARD
 # annotations document the shapes. Do not edit by hand.
@@ -173,10 +173,6 @@ AstronautListMatch = Struct.new(
   :status,
   keyword_init: true
 )
-
-# Docking entity data model.
-class Docking
-end
 
 # DockingEvent entity data model.
 #
@@ -946,10 +942,6 @@ PadListMatch = Struct.new(
   :search,
   keyword_init: true
 )
-
-# ReusableFirstStage entity data model.
-class ReusableFirstStage
-end
 
 # SpaceStation entity data model.
 #

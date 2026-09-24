@@ -72,18 +72,6 @@ Create a new `Astronaut` entity instance.
 
 **Returns:** `AstronautEntity` instance.
 
-#### `Docking(data?: object)`
-
-Create a new `Docking` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `DockingEntity` instance.
-
 #### `DockingEvent(data?: object)`
 
 Create a new `DockingEvent` entity instance.
@@ -191,18 +179,6 @@ Create a new `Pad` entity instance.
 | `data` | `object` | Initial entity data. |
 
 **Returns:** `PadEntity` instance.
-
-#### `ReusableFirstStage(data?: object)`
-
-Create a new `ReusableFirstStage` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `ReusableFirstStageEntity` instance.
 
 #### `SpaceStation(data?: object)`
 
@@ -397,40 +373,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `AstronautEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `LaunchLibrary2SDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## DockingEntity
-
-```ts
-const docking = client.Docking()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `DockingEntity` instance with the same client and
 options.
 
 #### `client()`
@@ -1045,40 +987,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `PadEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `LaunchLibrary2SDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## ReusableFirstStageEntity
-
-```ts
-const reusable_first_stage = client.ReusableFirstStage()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `ReusableFirstStageEntity` instance with the same client and
 options.
 
 #### `client()`

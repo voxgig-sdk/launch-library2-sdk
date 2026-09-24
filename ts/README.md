@@ -237,7 +237,6 @@ new LaunchLibrary2SDK(options?: {
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
 | `Agency(data?)` | `AgencyEntity` | Create an Agency entity instance. |
 | `Astronaut(data?)` | `AstronautEntity` | Create an Astronaut entity instance. |
-| `Docking(data?)` | `DockingEntity` | Create a Docking entity instance. |
 | `DockingEvent(data?)` | `DockingEventEntity` | Create a DockingEvent entity instance. |
 | `Event(data?)` | `EventEntity` | Create an Event entity instance. |
 | `Expedition(data?)` | `ExpeditionEntity` | Create an Expedition entity instance. |
@@ -247,7 +246,6 @@ new LaunchLibrary2SDK(options?: {
 | `Launcher(data?)` | `LauncherEntity` | Create a Launcher entity instance. |
 | `Location(data?)` | `LocationEntity` | Create a Location entity instance. |
 | `Pad(data?)` | `PadEntity` | Create a Pad entity instance. |
-| `ReusableFirstStage(data?)` | `ReusableFirstStageEntity` | Create a ReusableFirstStage entity instance. |
 | `SpaceStation(data?)` | `SpaceStationEntity` | Create a SpaceStation entity instance. |
 | `Spacecraft(data?)` | `SpacecraftEntity` | Create a Spacecraft entity instance. |
 | `tester(testopts?, sdkopts?)` | `LaunchLibrary2SDK` | Create a test-mode client instance. |
@@ -356,15 +354,6 @@ API path: `/agencies`
 Operations: list, load.
 
 API path: `/astronaut`
-
-#### Docking
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
 
 #### DockingEvent
 
@@ -564,15 +553,6 @@ Operations: list, load.
 
 API path: `/pad`
 
-#### ReusableFirstStage
-
-| Field | Description |
-| --- | --- |
-
-Operations: .
-
-API path: ``
-
 #### SpaceStation
 
 | Field | Description |
@@ -700,11 +680,6 @@ const astronaut = await client.Astronaut().load({ id: 1 })
 ```ts
 const astronauts = await client.Astronaut().list()
 ```
-
-
-### Docking
-
-Create an instance: `const docking = client.Docking()`
 
 
 ### DockingEvent
@@ -1069,11 +1044,6 @@ const pad = await client.Pad().load({ id: 1 })
 ```ts
 const pads = await client.Pad().list()
 ```
-
-
-### ReusableFirstStage
-
-Create an instance: `const reusable_first_stage = client.ReusableFirstStage()`
 
 
 ### SpaceStation

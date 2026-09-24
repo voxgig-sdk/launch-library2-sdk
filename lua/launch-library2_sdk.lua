@@ -377,20 +377,6 @@ function LaunchLibrary2SDK:Astronaut(data)
 end
 
 
--- Idiomatic facade: client:Docking():list() / client:Docking():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function LaunchLibrary2SDK:Docking(data)
-  local EntityMod = require("entity.docking_entity")
-  if data == nil then
-    if self._docking == nil then
-      self._docking = EntityMod.new(self, nil)
-    end
-    return self._docking
-  end
-  return EntityMod.new(self, data)
-end
-
-
 -- Idiomatic facade: client:DockingEvent():list() / client:DockingEvent():load({ id = ... })
 -- Entity access is capitalised (PascalCase) for parity with the other SDKs.
 function LaunchLibrary2SDK:DockingEvent(data)
@@ -512,20 +498,6 @@ function LaunchLibrary2SDK:Pad(data)
       self._pad = EntityMod.new(self, nil)
     end
     return self._pad
-  end
-  return EntityMod.new(self, data)
-end
-
-
--- Idiomatic facade: client:ReusableFirstStage():list() / client:ReusableFirstStage():load({ id = ... })
--- Entity access is capitalised (PascalCase) for parity with the other SDKs.
-function LaunchLibrary2SDK:ReusableFirstStage(data)
-  local EntityMod = require("entity.reusable_first_stage_entity")
-  if data == nil then
-    if self._reusable_first_stage == nil then
-      self._reusable_first_stage = EntityMod.new(self, nil)
-    end
-    return self._reusable_first_stage
   end
   return EntityMod.new(self, data)
 end

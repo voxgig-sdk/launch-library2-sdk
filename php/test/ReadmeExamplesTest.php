@@ -42,7 +42,6 @@ class ReadmeExamplesTest extends TestCase
     private const ENTITIES = [
         "Agency" => "agency",
         "Astronaut" => "astronaut",
-        "Docking" => "docking",
         "DockingEvent" => "docking_event",
         "Event" => "event",
         "Expedition" => "expedition",
@@ -52,7 +51,6 @@ class ReadmeExamplesTest extends TestCase
         "Launcher" => "launcher",
         "Location" => "location",
         "Pad" => "pad",
-        "ReusableFirstStage" => "reusable_first_stage",
         "SpaceStation" => "space_station",
         "Spacecraft" => "spacecraft",
     ];

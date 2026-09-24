@@ -1,0 +1,225 @@
+# Entity: pad
+
+main: kit: entity: pad: {
+
+  alias: field: {}
+
+  fields: {
+    agency_id: {
+      h: "Agency Id"
+      n: "agency_id"
+      r: false
+      sh: "ID of the agency that operates this pad"
+      t: "`$INTEGER`"
+    }
+    country_code: {
+      h: "Country Code"
+      n: "country_code"
+      r: false
+      sh: "ISO country code"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Location ID"
+      t: "`$INTEGER`"
+    }
+    info_url: {
+      h: "Info Url"
+      n: "info_url"
+      r: false
+      sh: "URL to more information"
+      t: "`$STRING`"
+    }
+    latitude: {
+      h: "Latitude"
+      n: "latitude"
+      r: false
+      sh: "Latitude coordinate"
+      t: "`$STRING`"
+    }
+    location: {
+      h: "Location"
+      n: "location"
+      r: false
+      t: "`$OBJECT`"
+    }
+    longitude: {
+      h: "Longitude"
+      n: "longitude"
+      r: false
+      sh: "Longitude coordinate"
+      t: "`$STRING`"
+    }
+    map_image: {
+      h: "Map Image"
+      n: "map_image"
+      r: false
+      sh: "URL to map image"
+      t: "`$STRING`"
+    }
+    map_url: {
+      h: "Map Url"
+      n: "map_url"
+      r: false
+      sh: "URL to map"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Name of the location"
+      t: "`$STRING`"
+    }
+    total_landing_count: {
+      h: "Total Landing Count"
+      n: "total_landing_count"
+      r: false
+      sh: "Total number of landings at this location"
+      t: "`$INTEGER`"
+    }
+    total_launch_count: {
+      h: "Total Launch Count"
+      n: "total_launch_count"
+      r: false
+      sh: "Total number of launches from this location"
+      t: "`$INTEGER`"
+    }
+    url: {
+      h: "Url"
+      n: "url"
+      r: false
+      sh: "API URL for this location"
+      t: "`$STRING`"
+    }
+    wiki_url: {
+      h: "Wiki Url"
+      n: "wiki_url"
+      r: false
+      sh: "Wikipedia URL"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "pad"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /pad"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 10
+                k: "query"
+                n: "limit"
+                or: "limit"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "location"
+                or: "location"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0
+                k: "query"
+                n: "offset"
+                or: "offset"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/pad"
+          q: {
+            exist: [
+              "limit"
+              "location"
+              "offset"
+              "search"
+            ]
+          }
+          s: [
+            {
+              lit: "pad"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.results`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /pad/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/pad/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "pad"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.location`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

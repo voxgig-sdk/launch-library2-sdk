@@ -44,8 +44,6 @@ export interface AstronautListMatch {
     search?: string;
     status?: string;
 }
-export interface Docking {
-}
 export interface DockingEvent {
     departure?: string;
     docking?: string;
@@ -256,8 +254,6 @@ export interface PadListMatch {
     location?: number;
     offset?: number;
     search?: string;
-}
-export interface ReusableFirstStage {
 }
 export interface SpaceStation {
     deorbited?: string;
