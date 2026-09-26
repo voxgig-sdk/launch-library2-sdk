@@ -106,11 +106,11 @@ local results, err = client:Astronaut():list()
 | Language | Package | Install |
 | --- | --- | --- |
 | TypeScript | `@voxgig-sdk/launch-library2-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
-| Python | `voxgig-sdk-launch-library2` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
-| PHP | `voxgig-sdk/launch-library2` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
+| Python | `voxgig-sdk-launch-library2-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
+| PHP | `voxgig-sdk/launch-library2-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/launch-library2-sdk/go` | `go get github.com/voxgig-sdk/launch-library2-sdk/go@latest` |
-| Ruby | `voxgig-sdk-launch-library2` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
-| Lua | `voxgig-sdk-launch-library2` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
+| Ruby | `voxgig-sdk-launch-library2-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
+| Lua | `voxgig-sdk-launch-library2-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/launch-library2-sdk/go-cli` | `go install github.com/voxgig-sdk/launch-library2-sdk/go-cli/cmd/launch-library2@latest` |
 | Go MCP server | `github.com/voxgig-sdk/launch-library2-sdk/go-mcp` | `go get github.com/voxgig-sdk/launch-library2-sdk/go-mcp@latest` |
 
@@ -367,10 +367,10 @@ forking the SDK.
 
 | Feature | Purpose |
 | --- | --- |
-| **RatelimitFeature** | Client-side rate limiting via a token bucket |
-| **RetryFeature** | Automatic retry of transient failures with exponential backoff |
-| **TestFeature** | In-memory mock transport for testing without a live server |
-| **TimeoutFeature** | Per-request timeout with transport abort |
+| **RatelimitFeature** | Rate limiting |
+| **RetryFeature** | Retry |
+| **TestFeature** | Test transport |
+| **TimeoutFeature** | Timeout |
 
 Pass custom features via the `extend` option at construction time.
 
