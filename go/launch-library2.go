@@ -62,9 +62,6 @@ func init() {
 	core.NewLaunchEntityFunc = func(client *core.LaunchLibrary2SDK, entopts map[string]any) core.LaunchLibrary2Entity {
 		return entity.NewLaunchEntity(client, entopts)
 	}
-	core.NewLaunchVehicleEntityFunc = func(client *core.LaunchLibrary2SDK, entopts map[string]any) core.LaunchLibrary2Entity {
-		return entity.NewLaunchVehicleEntity(client, entopts)
-	}
 	core.NewLauncherEntityFunc = func(client *core.LaunchLibrary2SDK, entopts map[string]any) core.LaunchLibrary2Entity {
 		return entity.NewLauncherEntity(client, entopts)
 	}

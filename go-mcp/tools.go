@@ -15,7 +15,7 @@ import (
 // reqdata map passed through to the SDK. For load, `query` should be
 // `{"id": <value>}`. For list, omit `query` or pass an empty map.
 type Args struct {
-	Entity string         `json:"entity" jsonschema:"agency | astronaut | docking_event | event | expedition | first_stage | launch | launch_vehicle | launcher | location | pad | space_station | spacecraft"`
+	Entity string         `json:"entity" jsonschema:"agency | astronaut | docking_event | event | expedition | first_stage | launch | launcher | location | pad | space_station | spacecraft"`
 	Query  map[string]any `json:"query,omitempty" jsonschema:"optional match map e.g. {\"id\":1} for load, omit for list"`
 }
 
@@ -90,8 +90,6 @@ func entityFor(client *sdk.LaunchLibrary2SDK, name string) (sdk.LaunchLibrary2En
 		return client.FirstStage(nil), nil
 	case "launch":
 		return client.Launch(nil), nil
-	case "launch_vehicle":
-		return client.LaunchVehicle(nil), nil
 	case "launcher":
 		return client.Launcher(nil), nil
 	case "location":

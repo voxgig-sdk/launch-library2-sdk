@@ -6,7 +6,7 @@ The Launch Library 2 API provides access to a comprehensive database of rocket l
 
 This guide introduces the API, the client libraries, and the companion tools in this repository. Start with the API capabilities, choose a client for your application, and use the linked reference when you need exact request and response details.
 
-The selected API surface contains 13 entities and 24 HTTP routes. There are 6 SDK targets and 2 companion tools.
+The selected API surface contains 12 entities and 24 HTTP routes. There are 6 SDK targets and 2 companion tools.
 
 An entity groups related API operations. An operation can have several routes with different inputs or authentication requirements. The SDK exposes the entity and its operations using the conventions of the selected language.
 
@@ -89,11 +89,11 @@ SDK operations: `list`, `load`.
 
 Key fields to recognise:
 
-- `apogee`: Apogee in km
-- `consecutive_successful_launches`: Number of consecutive successful launches
-- `description`: Description of the launcher
-- `diameter`: Diameter in meters
-- `failed_launches`: Number of failed launches
+- `flights`: Number of flights
+- `id`: First stage ID
+- `serial_number`: Serial number of the first stage
+- `status`: Current status
+- `type`: Type of first stage
 
 ### Launch
 
@@ -109,11 +109,11 @@ Key fields to recognise:
 - `net`: Net Earliest Time (NET) for launch
 - `probability`: Launch probability percentage
 
-### LaunchVehicle
+### Launcher
 
 Results: Successful response.
 
-SDK operations: `list`.
+SDK operations: `list`, `load`.
 
 Key fields to recognise:
 
@@ -122,20 +122,6 @@ Key fields to recognise:
 - `description`: Description of the launcher
 - `diameter`: Diameter in meters
 - `failed_launches`: Number of failed launches
-
-### Launcher
-
-Results: Successful response.
-
-SDK operations: `load`.
-
-Key fields to recognise:
-
-- `abbrev`: Agency abbreviation
-- `administrator`: Agency administrator
-- `country_code`: ISO country code
-- `description`: Description of the launcher
-- `founding_year`: Year agency was founded
 
 ### Location
 
@@ -160,10 +146,10 @@ SDK operations: `list`, `load`.
 Key fields to recognise:
 
 - `agency_id`: ID of the agency that operates this pad
-- `country_code`: ISO country code
 - `id`: Pad ID
 - `info_url`: URL to more information
 - `latitude`: Latitude coordinate
+- `longitude`: Longitude coordinate
 
 ### SpaceStation
 
@@ -213,7 +199,7 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 | FirstStage | `load` | `GET /firststage/{id}` | See reference |
 | Launch | `list` | `GET /launch` | See reference |
 | Launch | `load` | `GET /launch/{id}` | See reference |
-| LaunchVehicle | `list` | `GET /config/launcher` | See reference |
+| Launcher | `list` | `GET /config/launcher` | See reference |
 | Launcher | `load` | `GET /config/launcher/{id}` | See reference |
 | Location | `list` | `GET /location` | See reference |
 | Location | `load` | `GET /location/{id}` | See reference |
@@ -270,7 +256,7 @@ Use the MCP server to expose supported API operations to an MCP client.
 
 Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
-- `launch-library2_list`: List records for an entity. Supported entities: `agency`, `astronaut`, `docking_event`, `event`, `expedition`, `first_stage`, `launch`, `launch_vehicle`, `location`, `pad`, `space_station`, `spacecraft`.
+- `launch-library2_list`: List records for an entity. Supported entities: `agency`, `astronaut`, `docking_event`, `event`, `expedition`, `first_stage`, `launch`, `launcher`, `location`, `pad`, `space_station`, `spacecraft`.
 - `launch-library2_load`: Load one record for an entity. Supported entities: `agency`, `astronaut`, `docking_event`, `event`, `expedition`, `first_stage`, `launch`, `launcher`, `location`, `pad`, `space_station`, `spacecraft`.
 
 ## Operational features

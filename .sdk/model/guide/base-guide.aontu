@@ -4,7 +4,7 @@
 #   guide.aontu
 
 guide: {
-  metrics: count: entity: 13
+  metrics: count: entity: 12
   metrics: count: path: 24
   metrics: count: method: 24
 
@@ -45,7 +45,6 @@ guide: {
     }
     path: "/event/{id}": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.type`")|top
     }
   }
 
@@ -66,7 +65,6 @@ guide: {
     }
     path: "/firststage/{id}": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.launcher_config`")|top
     }
   }
 
@@ -80,17 +78,13 @@ guide: {
     }
   }
 
-  entity: launch_vehicle: {
+  entity: launcher: {
     path: "/config/launcher": {
       op: list: method: *GET
       op: list: transform: res: *("`body.results`")|top
     }
-  }
-
-  entity: launcher: {
     path: "/config/launcher/{id}": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.manufacturer`")|top
     }
   }
 
@@ -111,7 +105,6 @@ guide: {
     }
     path: "/pad/{id}": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.location`")|top
     }
   }
 

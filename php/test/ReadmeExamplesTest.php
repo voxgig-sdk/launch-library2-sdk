@@ -47,7 +47,6 @@ class ReadmeExamplesTest extends TestCase
         "Expedition" => "expedition",
         "FirstStage" => "first_stage",
         "Launch" => "launch",
-        "LaunchVehicle" => "launch_vehicle",
         "Launcher" => "launcher",
         "Location" => "location",
         "Pad" => "pad",

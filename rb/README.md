@@ -12,9 +12,18 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`):
+GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/launch-library2-sdk/releases)), or
+from a clone:
 
-- Releases: [https://github.com/voxgig-sdk/launch-library2-sdk/releases](https://github.com/voxgig-sdk/launch-library2-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/launch-library2-sdk
+```
+
+Then add it to your `Gemfile` by path, and run `bundle install`:
+
+```ruby
+gem "voxgig-sdk-launch-library2-sdk", path: "./launch-library2-sdk/rb"
+```
 
 
 ## Tutorial: your first API call
@@ -220,7 +229,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Expedition` | `(data) -> ExpeditionEntity` | Create an Expedition entity instance. |
 | `FirstStage` | `(data) -> FirstStageEntity` | Create a FirstStage entity instance. |
 | `Launch` | `(data) -> LaunchEntity` | Create a Launch entity instance. |
-| `LaunchVehicle` | `(data) -> LaunchVehicleEntity` | Create a LaunchVehicle entity instance. |
 | `Launcher` | `(data) -> LauncherEntity` | Create a Launcher entity instance. |
 | `Location` | `(data) -> LocationEntity` | Create a Location entity instance. |
 | `Pad` | `(data) -> PadEntity` | Create a Pad entity instance. |
@@ -355,33 +363,13 @@ API path: `/expedition`
 
 | Field | Description |
 | --- | --- |
-| `apogee` | Apogee in km |
-| `consecutive_successful_launches` | Number of consecutive successful launches |
-| `description` | Description of the launcher |
-| `diameter` | Diameter in meters |
-| `failed_launches` | Number of failed launches |
-| `family` | Launcher family |
 | `flights` | Number of flights |
-| `full_name` | Full name of the launcher |
-| `gto_capacity` | GTO capacity in kg |
-| `id` | Configuration ID |
-| `launch_mass` | Launch mass in kg |
+| `id` | First stage ID |
 | `launcher_config` |  |
-| `length` | Length in meters |
-| `leo_capacity` | LEO capacity in kg |
-| `maiden_flight` | Date of maiden flight |
-| `manufacturer` |  |
-| `max_stage` | Maximum number of stages |
-| `min_stage` | Minimum number of stages |
-| `name` | Name of the launcher configuration |
-| `pending_launches` | Number of pending launches |
 | `serial_number` | Serial number of the first stage |
 | `status` | Current status |
-| `successful_launches` | Number of successful launches |
-| `to_thrust` | Takeoff thrust in kN |
 | `type` | Type of first stage |
-| `url` | API URL for this configuration |
-| `variant` | Variant of the launcher |
+| `url` | API URL for this first stage |
 
 Operations: List, Load.
 
@@ -410,7 +398,7 @@ Operations: List, Load.
 
 API path: `/launch`
 
-#### LaunchVehicle
+#### Launcher
 
 | Field | Description |
 | --- | --- |
@@ -437,28 +425,9 @@ API path: `/launch`
 | `url` | API URL for this configuration |
 | `variant` | Variant of the launcher |
 
-Operations: List.
+Operations: List, Load.
 
 API path: `/config/launcher`
-
-#### Launcher
-
-| Field | Description |
-| --- | --- |
-| `abbrev` | Agency abbreviation |
-| `administrator` | Agency administrator |
-| `country_code` | ISO country code |
-| `description` | Agency description |
-| `founding_year` | Year agency was founded |
-| `id` | Agency ID |
-| `logo_url` | URL to agency logo |
-| `name` | Name of the agency |
-| `type` | Type of agency |
-| `url` | API URL for this agency |
-
-Operations: Load.
-
-API path: `/config/launcher/{id}`
 
 #### Location
 
@@ -481,18 +450,16 @@ API path: `/location`
 | Field | Description |
 | --- | --- |
 | `agency_id` | ID of the agency that operates this pad |
-| `country_code` | ISO country code |
-| `id` | Location ID |
+| `id` | Pad ID |
 | `info_url` | URL to more information |
 | `latitude` | Latitude coordinate |
 | `location` |  |
 | `longitude` | Longitude coordinate |
 | `map_image` | URL to map image |
 | `map_url` | URL to map |
-| `name` | Name of the location |
-| `total_landing_count` | Total number of landings at this location |
-| `total_launch_count` | Total number of launches from this location |
-| `url` | API URL for this location |
+| `name` | Name of the pad |
+| `total_launch_count` | Total number of launches from this pad |
+| `url` | API URL for this pad |
 | `wiki_url` | Wikipedia URL |
 
 Operations: List, Load.
@@ -763,33 +730,13 @@ Create an instance: `first_stage = client.FirstStage`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `apogee` | `Integer` | Apogee in km |
-| `consecutive_successful_launches` | `Integer` | Number of consecutive successful launches |
-| `description` | `String` | Description of the launcher |
-| `diameter` | `Float` | Diameter in meters |
-| `failed_launches` | `Integer` | Number of failed launches |
-| `family` | `String` | Launcher family |
 | `flights` | `Integer` | Number of flights |
-| `full_name` | `String` | Full name of the launcher |
-| `gto_capacity` | `Integer` | GTO capacity in kg |
-| `id` | `Integer` | Configuration ID |
-| `launch_mass` | `Integer` | Launch mass in kg |
+| `id` | `Integer` | First stage ID |
 | `launcher_config` | `Hash` |  |
-| `length` | `Float` | Length in meters |
-| `leo_capacity` | `Integer` | LEO capacity in kg |
-| `maiden_flight` | `String` | Date of maiden flight |
-| `manufacturer` | `Hash` |  |
-| `max_stage` | `Integer` | Maximum number of stages |
-| `min_stage` | `Integer` | Minimum number of stages |
-| `name` | `String` | Name of the launcher configuration |
-| `pending_launches` | `Integer` | Number of pending launches |
 | `serial_number` | `String` | Serial number of the first stage |
 | `status` | `String` | Current status |
-| `successful_launches` | `Integer` | Number of successful launches |
-| `to_thrust` | `Integer` | Takeoff thrust in kN |
 | `type` | `String` | Type of first stage |
-| `url` | `String` | API URL for this configuration |
-| `variant` | `String` | Variant of the launcher |
+| `url` | `String` | API URL for this first stage |
 
 #### Example: Load
 
@@ -851,15 +798,16 @@ launchs = client.Launch.list
 ```
 
 
-### LaunchVehicle
+### Launcher
 
-Create an instance: `launch_vehicle = client.LaunchVehicle`
+Create an instance: `launcher = client.Launcher`
 
 #### Operations
 
 | Method | Description |
 | --- | --- |
 | `list(match)` | List entities matching the criteria. |
+| `load(match)` | Load a single entity by match criteria. |
 
 #### Fields
 
@@ -888,44 +836,18 @@ Create an instance: `launch_vehicle = client.LaunchVehicle`
 | `url` | `String` | API URL for this configuration |
 | `variant` | `String` | Variant of the launcher |
 
-#### Example: List
-
-```ruby
-# list returns an Array of LaunchVehicle records (raises on error).
-launch_vehicles = client.LaunchVehicle.list
-```
-
-
-### Launcher
-
-Create an instance: `launcher = client.Launcher`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `load(match)` | Load a single entity by match criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `abbrev` | `String` | Agency abbreviation |
-| `administrator` | `String` | Agency administrator |
-| `country_code` | `String` | ISO country code |
-| `description` | `String` | Agency description |
-| `founding_year` | `String` | Year agency was founded |
-| `id` | `Integer` | Agency ID |
-| `logo_url` | `String` | URL to agency logo |
-| `name` | `String` | Name of the agency |
-| `type` | `String` | Type of agency |
-| `url` | `String` | API URL for this agency |
-
 #### Example: Load
 
 ```ruby
 # load returns the ENTITY — call data_get for the Launcher record (raises on error).
 launcher = client.Launcher.load({ "id" => 1 })
+```
+
+#### Example: List
+
+```ruby
+# list returns an Array of Launcher records (raises on error).
+launchers = client.Launcher.list
 ```
 
 
@@ -983,18 +905,16 @@ Create an instance: `pad = client.Pad`
 | Field | Type | Description |
 | --- | --- | --- |
 | `agency_id` | `Integer` | ID of the agency that operates this pad |
-| `country_code` | `String` | ISO country code |
-| `id` | `Integer` | Location ID |
+| `id` | `Integer` | Pad ID |
 | `info_url` | `String` | URL to more information |
 | `latitude` | `String` | Latitude coordinate |
 | `location` | `Hash` |  |
 | `longitude` | `String` | Longitude coordinate |
 | `map_image` | `String` | URL to map image |
 | `map_url` | `String` | URL to map |
-| `name` | `String` | Name of the location |
-| `total_landing_count` | `Integer` | Total number of landings at this location |
-| `total_launch_count` | `Integer` | Total number of launches from this location |
-| `url` | `String` | API URL for this location |
+| `name` | `String` | Name of the pad |
+| `total_launch_count` | `Integer` | Total number of launches from this pad |
+| `url` | `String` | API URL for this pad |
 | `wiki_url` | `String` | Wikipedia URL |
 
 #### Example: Load

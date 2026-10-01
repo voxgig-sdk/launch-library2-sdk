@@ -115,7 +115,6 @@ def make_config():
                 "expedition": {},
                 "first_stage": {},
                 "launch": {},
-                "launch_vehicle": {},
                 "launcher": {},
                 "location": {},
                 "pad": {},
@@ -813,7 +812,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.type`",
+                  "res": "`body`",
                 },
                 "args": {
                   "params": [
@@ -1004,123 +1003,21 @@ def make_config():
       "first_stage": {
         "fields": [
           {
-            "name": "apogee",
-            "title": "Apogee",
-            "type": "`$INTEGER`",
-            "short": "Apogee in km",
-          },
-          {
-            "name": "consecutive_successful_launches",
-            "title": "Consecutive Successful Launches",
-            "type": "`$INTEGER`",
-            "short": "Number of consecutive successful launches",
-          },
-          {
-            "name": "description",
-            "title": "Description",
-            "type": "`$STRING`",
-            "short": "Description of the launcher",
-          },
-          {
-            "name": "diameter",
-            "title": "Diameter",
-            "type": "`$NUMBER`",
-            "short": "Diameter in meters",
-          },
-          {
-            "name": "failed_launches",
-            "title": "Failed Launches",
-            "type": "`$INTEGER`",
-            "short": "Number of failed launches",
-          },
-          {
-            "name": "family",
-            "title": "Family",
-            "type": "`$STRING`",
-            "short": "Launcher family",
-          },
-          {
             "name": "flights",
             "title": "Flights",
             "type": "`$INTEGER`",
             "short": "Number of flights",
           },
           {
-            "name": "full_name",
-            "title": "Full Name",
-            "type": "`$STRING`",
-            "short": "Full name of the launcher",
-          },
-          {
-            "name": "gto_capacity",
-            "title": "Gto Capacity",
-            "type": "`$INTEGER`",
-            "short": "GTO capacity in kg",
-          },
-          {
             "name": "id",
             "title": "Id",
             "type": "`$INTEGER`",
-            "short": "Configuration ID",
-          },
-          {
-            "name": "launch_mass",
-            "title": "Launch Mass",
-            "type": "`$INTEGER`",
-            "short": "Launch mass in kg",
+            "short": "First stage ID",
           },
           {
             "name": "launcher_config",
             "title": "Launcher Config",
             "type": "`$OBJECT`",
-          },
-          {
-            "name": "length",
-            "title": "Length",
-            "type": "`$NUMBER`",
-            "short": "Length in meters",
-          },
-          {
-            "name": "leo_capacity",
-            "title": "Leo Capacity",
-            "type": "`$INTEGER`",
-            "short": "LEO capacity in kg",
-          },
-          {
-            "name": "maiden_flight",
-            "title": "Maiden Flight",
-            "type": "`$STRING`",
-            "short": "Date of maiden flight",
-            "format": "date",
-          },
-          {
-            "name": "manufacturer",
-            "title": "Manufacturer",
-            "type": "`$OBJECT`",
-          },
-          {
-            "name": "max_stage",
-            "title": "Max Stage",
-            "type": "`$INTEGER`",
-            "short": "Maximum number of stages",
-          },
-          {
-            "name": "min_stage",
-            "title": "Min Stage",
-            "type": "`$INTEGER`",
-            "short": "Minimum number of stages",
-          },
-          {
-            "name": "name",
-            "title": "Name",
-            "type": "`$STRING`",
-            "short": "Name of the launcher configuration",
-          },
-          {
-            "name": "pending_launches",
-            "title": "Pending Launches",
-            "type": "`$INTEGER`",
-            "short": "Number of pending launches",
           },
           {
             "name": "serial_number",
@@ -1135,18 +1032,6 @@ def make_config():
             "short": "Current status",
           },
           {
-            "name": "successful_launches",
-            "title": "Successful Launches",
-            "type": "`$INTEGER`",
-            "short": "Number of successful launches",
-          },
-          {
-            "name": "to_thrust",
-            "title": "To Thrust",
-            "type": "`$INTEGER`",
-            "short": "Takeoff thrust in kN",
-          },
-          {
             "name": "type",
             "title": "Type",
             "type": "`$STRING`",
@@ -1156,13 +1041,7 @@ def make_config():
             "name": "url",
             "title": "Url",
             "type": "`$STRING`",
-            "short": "API URL for this configuration",
-          },
-          {
-            "name": "variant",
-            "title": "Variant",
-            "type": "`$STRING`",
-            "short": "Variant of the launcher",
+            "short": "API URL for this first stage",
           },
         ],
         "id": {
@@ -1256,7 +1135,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.launcher_config`",
+                  "res": "`body`",
                 },
                 "args": {
                   "params": [
@@ -1405,13 +1284,13 @@ def make_config():
                     },
                     {
                       "name": "lsp_id",
-                      "orig": "lsp_id",
+                      "orig": "lsp__id",
                       "type": "`$INTEGER`",
                       "kind": "query",
                     },
                     {
                       "name": "lsp_name",
-                      "orig": "lsp_name",
+                      "orig": "lsp__name",
                       "type": "`$STRING`",
                       "kind": "query",
                     },
@@ -1424,7 +1303,7 @@ def make_config():
                     },
                     {
                       "name": "rocket_configuration_id",
-                      "orig": "rocket_configuration_id",
+                      "orig": "rocket__configuration__id",
                       "type": "`$INTEGER`",
                       "kind": "query",
                     },
@@ -1436,7 +1315,7 @@ def make_config():
                     },
                     {
                       "name": "spacecraft_id",
-                      "orig": "spacecraft_id",
+                      "orig": "spacecraft__id",
                       "type": "`$INTEGER`",
                       "kind": "query",
                     },
@@ -1512,7 +1391,7 @@ def make_config():
           "ancestors": [],
         },
       },
-      "launch_vehicle": {
+      "launcher": {
         "fields": [
           {
             "name": "apogee",
@@ -1651,7 +1530,7 @@ def make_config():
           "field": "id",
           "name": "id",
         },
-        "name": "launch_vehicle",
+        "name": "launcher",
         "op": {
           "list": {
             "input": "data",
@@ -1726,80 +1605,6 @@ def make_config():
               },
             ],
           },
-        },
-        "relations": {
-          "ancestors": [],
-        },
-      },
-      "launcher": {
-        "fields": [
-          {
-            "name": "abbrev",
-            "title": "Abbrev",
-            "type": "`$STRING`",
-            "short": "Agency abbreviation",
-          },
-          {
-            "name": "administrator",
-            "title": "Administrator",
-            "type": "`$STRING`",
-            "short": "Agency administrator",
-          },
-          {
-            "name": "country_code",
-            "title": "Country Code",
-            "type": "`$STRING`",
-            "short": "ISO country code",
-          },
-          {
-            "name": "description",
-            "title": "Description",
-            "type": "`$STRING`",
-            "short": "Agency description",
-          },
-          {
-            "name": "founding_year",
-            "title": "Founding Year",
-            "type": "`$STRING`",
-            "short": "Year agency was founded",
-          },
-          {
-            "name": "id",
-            "title": "Id",
-            "type": "`$INTEGER`",
-            "short": "Agency ID",
-          },
-          {
-            "name": "logo_url",
-            "title": "Logo Url",
-            "type": "`$STRING`",
-            "short": "URL to agency logo",
-          },
-          {
-            "name": "name",
-            "title": "Name",
-            "type": "`$STRING`",
-            "short": "Name of the agency",
-          },
-          {
-            "name": "type",
-            "title": "Type",
-            "type": "`$STRING`",
-            "short": "Type of agency",
-          },
-          {
-            "name": "url",
-            "title": "Url",
-            "type": "`$STRING`",
-            "short": "API URL for this agency",
-          },
-        ],
-        "id": {
-          "field": "id",
-          "name": "id",
-        },
-        "name": "launcher",
-        "op": {
           "load": {
             "input": "data",
             "name": "load",
@@ -1827,7 +1632,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.manufacturer`",
+                  "res": "`body`",
                 },
                 "args": {
                   "params": [
@@ -2024,16 +1829,10 @@ def make_config():
             "short": "ID of the agency that operates this pad",
           },
           {
-            "name": "country_code",
-            "title": "Country Code",
-            "type": "`$STRING`",
-            "short": "ISO country code",
-          },
-          {
             "name": "id",
             "title": "Id",
             "type": "`$INTEGER`",
-            "short": "Location ID",
+            "short": "Pad ID",
           },
           {
             "name": "info_url",
@@ -2074,25 +1873,19 @@ def make_config():
             "name": "name",
             "title": "Name",
             "type": "`$STRING`",
-            "short": "Name of the location",
-          },
-          {
-            "name": "total_landing_count",
-            "title": "Total Landing Count",
-            "type": "`$INTEGER`",
-            "short": "Total number of landings at this location",
+            "short": "Name of the pad",
           },
           {
             "name": "total_launch_count",
             "title": "Total Launch Count",
             "type": "`$INTEGER`",
-            "short": "Total number of launches from this location",
+            "short": "Total number of launches from this pad",
           },
           {
             "name": "url",
             "title": "Url",
             "type": "`$STRING`",
-            "short": "API URL for this location",
+            "short": "API URL for this pad",
           },
           {
             "name": "wiki_url",
@@ -2192,7 +1985,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.location`",
+                  "res": "`body`",
                 },
                 "args": {
                   "params": [
@@ -2331,7 +2124,7 @@ def make_config():
                     },
                     {
                       "name": "owner",
-                      "orig": "owner",
+                      "orig": "owners",
                       "type": "`$STRING`",
                       "kind": "query",
                     },

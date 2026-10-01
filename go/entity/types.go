@@ -136,19 +136,6 @@ type LaunchListMatch struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// LaunchVehicle is the typed data model for the launch_vehicle entity.
-type LaunchVehicle struct {
-}
-
-// LaunchVehicleListMatch is the typed request payload for LaunchVehicle.ListTyped.
-type LaunchVehicleListMatch struct {
-	Family *string `json:"family,omitempty"`
-	Limit *int `json:"limit,omitempty"`
-	Manufacturer *int `json:"manufacturer,omitempty"`
-	Offset *int `json:"offset,omitempty"`
-	Search *string `json:"search,omitempty"`
-}
-
 // Launcher is the typed data model for the launcher entity.
 type Launcher struct {
 }
@@ -156,6 +143,15 @@ type Launcher struct {
 // LauncherLoadMatch is the typed request payload for Launcher.LoadTyped.
 type LauncherLoadMatch struct {
 	Id int `json:"id"`
+}
+
+// LauncherListMatch is the typed request payload for Launcher.ListTyped.
+type LauncherListMatch struct {
+	Family *string `json:"family,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Manufacturer *int `json:"manufacturer,omitempty"`
+	Offset *int `json:"offset,omitempty"`
+	Search *string `json:"search,omitempty"`
 }
 
 // Location is the typed data model for the location entity.

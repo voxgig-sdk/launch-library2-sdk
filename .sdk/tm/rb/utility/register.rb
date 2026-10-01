@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 LaunchLibrary2Utility.registrar = ->(u) {
   u.clean = LaunchLibrary2Utilities::Clean
+  u.clean_add = LaunchLibrary2Utilities::CleanAdd
+  u.clean_explain = LaunchLibrary2Utilities::CleanExplain
   u.done = LaunchLibrary2Utilities::Done
   u.make_error = LaunchLibrary2Utilities::MakeError
   u.feature_add = LaunchLibrary2Utilities::FeatureAdd

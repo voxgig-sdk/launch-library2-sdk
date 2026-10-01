@@ -161,33 +161,13 @@ class ExpeditionListMatch
 /** FirstStage entity data model. */
 class FirstStage
 {
-    public ?int $apogee = null;
-    public ?int $consecutive_successful_launches = null;
-    public ?string $description = null;
-    public ?float $diameter = null;
-    public ?int $failed_launches = null;
-    public ?string $family = null;
     public ?int $flights = null;
-    public ?string $full_name = null;
-    public ?int $gto_capacity = null;
     public ?int $id = null;
-    public ?int $launch_mass = null;
     public ?array $launcher_config = null;
-    public ?float $length = null;
-    public ?int $leo_capacity = null;
-    public ?string $maiden_flight = null;
-    public ?array $manufacturer = null;
-    public ?int $max_stage = null;
-    public ?int $min_stage = null;
-    public ?string $name = null;
-    public ?int $pending_launches = null;
     public ?string $serial_number = null;
     public ?string $status = null;
-    public ?int $successful_launches = null;
-    public ?int $to_thrust = null;
     public ?string $type = null;
     public ?string $url = null;
-    public ?string $variant = null;
 }
 
 /** Request payload for FirstStage#load. */
@@ -243,8 +223,8 @@ class LaunchListMatch
     public ?string $status = null;
 }
 
-/** LaunchVehicle entity data model. */
-class LaunchVehicle
+/** Launcher entity data model. */
+class Launcher
 {
     public ?int $apogee = null;
     public ?int $consecutive_successful_launches = null;
@@ -270,35 +250,20 @@ class LaunchVehicle
     public ?string $variant = null;
 }
 
-/** Request payload for LaunchVehicle#list. */
-class LaunchVehicleListMatch
+/** Request payload for Launcher#load. */
+class LauncherLoadMatch
+{
+    public int $id;
+}
+
+/** Request payload for Launcher#list. */
+class LauncherListMatch
 {
     public ?string $family = null;
     public ?int $limit = null;
     public ?int $manufacturer = null;
     public ?int $offset = null;
     public ?string $search = null;
-}
-
-/** Launcher entity data model. */
-class Launcher
-{
-    public ?string $abbrev = null;
-    public ?string $administrator = null;
-    public ?string $country_code = null;
-    public ?string $description = null;
-    public ?string $founding_year = null;
-    public ?int $id = null;
-    public ?string $logo_url = null;
-    public ?string $name = null;
-    public ?string $type = null;
-    public ?string $url = null;
-}
-
-/** Request payload for Launcher#load. */
-class LauncherLoadMatch
-{
-    public int $id;
 }
 
 /** Location entity data model. */
@@ -332,7 +297,6 @@ class LocationListMatch
 class Pad
 {
     public ?int $agency_id = null;
-    public ?string $country_code = null;
     public ?int $id = null;
     public ?string $info_url = null;
     public ?string $latitude = null;
@@ -341,7 +305,6 @@ class Pad
     public ?string $map_image = null;
     public ?string $map_url = null;
     public ?string $name = null;
-    public ?int $total_landing_count = null;
     public ?int $total_launch_count = null;
     public ?string $url = null;
     public ?string $wiki_url = null;

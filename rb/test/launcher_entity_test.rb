@@ -12,11 +12,47 @@ class LauncherEntityTest < Minitest::Test
     assert !ent.nil?
   end
 
+  # Feature #4: the entity stream(action, ...) method runs the op pipeline and
+  # returns an Enumerator over result items. With the streaming feature active
+  # it yields the feature's incremental output; otherwise it falls back to the
+  # materialised list so stream always yields.
+  def test_stream
+    seed = {
+      "entity" => {
+        "launcher" => {
+          "s1" => { "id" => "s1" },
+          "s2" => { "id" => "s2" },
+          "s3" => { "id" => "s3" },
+        },
+      },
+    }
+
+    # Fallback: streaming inactive -> yields the materialised list items.
+    base = LaunchLibrary2SDK.test(seed, nil)
+    seen = base.Launcher(nil).stream("list", nil, nil).to_a
+    assert_equal 3, seen.length
+
+    # Inbound: streaming active -> yields each item from the feature.
+    cfg = LaunchLibrary2Config.shared_config
+    if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
+      sdk = LaunchLibrary2SDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
+      got = []
+      sdk.Launcher(nil).stream("list", nil, nil).each do |item|
+        if item.is_a?(Array)
+          got.concat(item)
+        else
+          got << item
+        end
+      end
+      assert_equal 3, got.length
+    end
+  end
+
   def test_basic_flow
     setup = launcher_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["load"].each do |_op|
+    ["list", "load"].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "launcher." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
@@ -39,8 +75,14 @@ class LauncherEntityTest < Minitest::Test
       launcher_ref01_data = Helpers.to_map(launcher_ref01_data_raw[0][1])
     end
 
-    # LOAD
+    # LIST
     launcher_ref01_ent = client.Launcher(nil)
+    launcher_ref01_match = {}
+
+    launcher_ref01_list_result = launcher_ref01_ent.list(launcher_ref01_match, nil)
+    assert launcher_ref01_list_result.is_a?(Array)
+
+    # LOAD
     launcher_ref01_match_dt0 = {
       "id" => launcher_ref01_data["id"],
     }

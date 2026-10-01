@@ -132,14 +132,14 @@ main: kit: entity: launch: {
               {
                 k: "query"
                 n: "lsp_id"
-                or: "lsp_id"
+                or: "lsp__id"
                 r: false
                 t: "`$INTEGER`"
               }
               {
                 k: "query"
                 n: "lsp_name"
-                or: "lsp_name"
+                or: "lsp__name"
                 r: false
                 t: "`$STRING`"
               }
@@ -154,7 +154,7 @@ main: kit: entity: launch: {
               {
                 k: "query"
                 n: "rocket_configuration_id"
-                or: "rocket_configuration_id"
+                or: "rocket__configuration__id"
                 r: false
                 t: "`$INTEGER`"
               }
@@ -168,7 +168,7 @@ main: kit: entity: launch: {
               {
                 k: "query"
                 n: "spacecraft_id"
-                or: "spacecraft_id"
+                or: "spacecraft__id"
                 r: false
                 t: "`$INTEGER`"
               }

@@ -946,7 +946,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.type`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -1156,54 +1156,6 @@
             "field": {}
           },
           "fields": {
-            "apogee": {
-              "a": true,
-              "h": "Apogee",
-              "n": "apogee",
-              "r": false,
-              "sh": "Apogee in km",
-              "t": "`$INTEGER`"
-            },
-            "consecutive_successful_launches": {
-              "a": true,
-              "h": "Consecutive Successful Launches",
-              "n": "consecutive_successful_launches",
-              "r": false,
-              "sh": "Number of consecutive successful launches",
-              "t": "`$INTEGER`"
-            },
-            "description": {
-              "a": true,
-              "h": "Description",
-              "n": "description",
-              "r": false,
-              "sh": "Description of the launcher",
-              "t": "`$STRING`"
-            },
-            "diameter": {
-              "a": true,
-              "h": "Diameter",
-              "n": "diameter",
-              "r": false,
-              "sh": "Diameter in meters",
-              "t": "`$NUMBER`"
-            },
-            "failed_launches": {
-              "a": true,
-              "h": "Failed Launches",
-              "n": "failed_launches",
-              "r": false,
-              "sh": "Number of failed launches",
-              "t": "`$INTEGER`"
-            },
-            "family": {
-              "a": true,
-              "h": "Family",
-              "n": "family",
-              "r": false,
-              "sh": "Launcher family",
-              "t": "`$STRING`"
-            },
             "flights": {
               "a": true,
               "h": "Flights",
@@ -1212,36 +1164,12 @@
               "sh": "Number of flights",
               "t": "`$INTEGER`"
             },
-            "full_name": {
-              "a": true,
-              "h": "Full Name",
-              "n": "full_name",
-              "r": false,
-              "sh": "Full name of the launcher",
-              "t": "`$STRING`"
-            },
-            "gto_capacity": {
-              "a": true,
-              "h": "Gto Capacity",
-              "n": "gto_capacity",
-              "r": false,
-              "sh": "GTO capacity in kg",
-              "t": "`$INTEGER`"
-            },
             "id": {
               "a": true,
               "h": "Id",
               "n": "id",
               "r": false,
-              "sh": "Configuration ID",
-              "t": "`$INTEGER`"
-            },
-            "launch_mass": {
-              "a": true,
-              "h": "Launch Mass",
-              "n": "launch_mass",
-              "r": false,
-              "sh": "Launch mass in kg",
+              "sh": "First stage ID",
               "t": "`$INTEGER`"
             },
             "launcher_config": {
@@ -1250,70 +1178,6 @@
               "n": "launcher_config",
               "r": false,
               "t": "`$OBJECT`"
-            },
-            "length": {
-              "a": true,
-              "h": "Length",
-              "n": "length",
-              "r": false,
-              "sh": "Length in meters",
-              "t": "`$NUMBER`"
-            },
-            "leo_capacity": {
-              "a": true,
-              "h": "Leo Capacity",
-              "n": "leo_capacity",
-              "r": false,
-              "sh": "LEO capacity in kg",
-              "t": "`$INTEGER`"
-            },
-            "maiden_flight": {
-              "a": true,
-              "fo": "date",
-              "h": "Maiden Flight",
-              "n": "maiden_flight",
-              "r": false,
-              "sh": "Date of maiden flight",
-              "t": "`$STRING`"
-            },
-            "manufacturer": {
-              "a": true,
-              "h": "Manufacturer",
-              "n": "manufacturer",
-              "r": false,
-              "t": "`$OBJECT`"
-            },
-            "max_stage": {
-              "a": true,
-              "h": "Max Stage",
-              "n": "max_stage",
-              "r": false,
-              "sh": "Maximum number of stages",
-              "t": "`$INTEGER`"
-            },
-            "min_stage": {
-              "a": true,
-              "h": "Min Stage",
-              "n": "min_stage",
-              "r": false,
-              "sh": "Minimum number of stages",
-              "t": "`$INTEGER`"
-            },
-            "name": {
-              "a": true,
-              "h": "Name",
-              "n": "name",
-              "r": false,
-              "sh": "Name of the launcher configuration",
-              "t": "`$STRING`"
-            },
-            "pending_launches": {
-              "a": true,
-              "h": "Pending Launches",
-              "n": "pending_launches",
-              "r": false,
-              "sh": "Number of pending launches",
-              "t": "`$INTEGER`"
             },
             "serial_number": {
               "a": true,
@@ -1331,22 +1195,6 @@
               "sh": "Current status",
               "t": "`$STRING`"
             },
-            "successful_launches": {
-              "a": true,
-              "h": "Successful Launches",
-              "n": "successful_launches",
-              "r": false,
-              "sh": "Number of successful launches",
-              "t": "`$INTEGER`"
-            },
-            "to_thrust": {
-              "a": true,
-              "h": "To Thrust",
-              "n": "to_thrust",
-              "r": false,
-              "sh": "Takeoff thrust in kN",
-              "t": "`$INTEGER`"
-            },
             "type": {
               "a": true,
               "h": "Type",
@@ -1360,15 +1208,7 @@
               "h": "Url",
               "n": "url",
               "r": false,
-              "sh": "API URL for this configuration",
-              "t": "`$STRING`"
-            },
-            "variant": {
-              "a": true,
-              "h": "Variant",
-              "n": "variant",
-              "r": false,
-              "sh": "Variant of the launcher",
+              "sh": "API URL for this first stage",
               "t": "`$STRING`"
             }
           },
@@ -1493,7 +1333,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.launcher_config`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -1652,7 +1492,7 @@
                         "a": true,
                         "k": "query",
                         "n": "lsp_id",
-                        "or": "lsp_id",
+                        "or": "lsp__id",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -1660,7 +1500,7 @@
                         "a": true,
                         "k": "query",
                         "n": "lsp_name",
-                        "or": "lsp_name",
+                        "or": "lsp__name",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1677,7 +1517,7 @@
                         "a": true,
                         "k": "query",
                         "n": "rocket_configuration_id",
-                        "or": "rocket_configuration_id",
+                        "or": "rocket__configuration__id",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -1693,7 +1533,7 @@
                         "a": true,
                         "k": "query",
                         "n": "spacecraft_id",
-                        "or": "spacecraft_id",
+                        "or": "spacecraft__id",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -1787,7 +1627,7 @@
             "ancestors": []
           }
         },
-        "launch_vehicle": {
+        "launcher": {
           "active": true,
           "alias": {
             "field": {}
@@ -1974,7 +1814,7 @@
             "field": "id",
             "name": "id"
           },
-          "name": "launch_vehicle",
+          "name": "launcher",
           "op": {
             "list": {
               "input": "data",
@@ -2060,105 +1900,7 @@
                   }
                 }
               ]
-            }
-          },
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "launcher": {
-          "active": true,
-          "alias": {
-            "field": {}
-          },
-          "fields": {
-            "abbrev": {
-              "a": true,
-              "h": "Abbrev",
-              "n": "abbrev",
-              "r": false,
-              "sh": "Agency abbreviation",
-              "t": "`$STRING`"
             },
-            "administrator": {
-              "a": true,
-              "h": "Administrator",
-              "n": "administrator",
-              "r": false,
-              "sh": "Agency administrator",
-              "t": "`$STRING`"
-            },
-            "country_code": {
-              "a": true,
-              "h": "Country Code",
-              "n": "country_code",
-              "r": false,
-              "sh": "ISO country code",
-              "t": "`$STRING`"
-            },
-            "description": {
-              "a": true,
-              "h": "Description",
-              "n": "description",
-              "r": false,
-              "sh": "Agency description",
-              "t": "`$STRING`"
-            },
-            "founding_year": {
-              "a": true,
-              "h": "Founding Year",
-              "n": "founding_year",
-              "r": false,
-              "sh": "Year agency was founded",
-              "t": "`$STRING`"
-            },
-            "id": {
-              "a": true,
-              "h": "Id",
-              "n": "id",
-              "r": false,
-              "sh": "Agency ID",
-              "t": "`$INTEGER`"
-            },
-            "logo_url": {
-              "a": true,
-              "h": "Logo Url",
-              "n": "logo_url",
-              "r": false,
-              "sh": "URL to agency logo",
-              "t": "`$STRING`"
-            },
-            "name": {
-              "a": true,
-              "h": "Name",
-              "n": "name",
-              "r": false,
-              "sh": "Name of the agency",
-              "t": "`$STRING`"
-            },
-            "type": {
-              "a": true,
-              "h": "Type",
-              "n": "type",
-              "r": false,
-              "sh": "Type of agency",
-              "t": "`$STRING`"
-            },
-            "url": {
-              "a": true,
-              "h": "Url",
-              "n": "url",
-              "r": false,
-              "sh": "API URL for this agency",
-              "t": "`$STRING`"
-            }
-          },
-          "id": {
-            "field": "id",
-            "name": "id"
-          },
-          "name": "launcher",
-          "op": {
             "load": {
               "input": "data",
               "name": "load",
@@ -2204,7 +1946,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.manufacturer`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -2422,20 +2164,12 @@
               "sh": "ID of the agency that operates this pad",
               "t": "`$INTEGER`"
             },
-            "country_code": {
-              "a": true,
-              "h": "Country Code",
-              "n": "country_code",
-              "r": false,
-              "sh": "ISO country code",
-              "t": "`$STRING`"
-            },
             "id": {
               "a": true,
               "h": "Id",
               "n": "id",
               "r": false,
-              "sh": "Location ID",
+              "sh": "Pad ID",
               "t": "`$INTEGER`"
             },
             "info_url": {
@@ -2490,23 +2224,15 @@
               "h": "Name",
               "n": "name",
               "r": false,
-              "sh": "Name of the location",
+              "sh": "Name of the pad",
               "t": "`$STRING`"
-            },
-            "total_landing_count": {
-              "a": true,
-              "h": "Total Landing Count",
-              "n": "total_landing_count",
-              "r": false,
-              "sh": "Total number of landings at this location",
-              "t": "`$INTEGER`"
             },
             "total_launch_count": {
               "a": true,
               "h": "Total Launch Count",
               "n": "total_launch_count",
               "r": false,
-              "sh": "Total number of launches from this location",
+              "sh": "Total number of launches from this pad",
               "t": "`$INTEGER`"
             },
             "url": {
@@ -2514,7 +2240,7 @@
               "h": "Url",
               "n": "url",
               "r": false,
-              "sh": "API URL for this location",
+              "sh": "API URL for this pad",
               "t": "`$STRING`"
             },
             "wiki_url": {
@@ -2647,7 +2373,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.location`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -2792,7 +2518,7 @@
                         "a": true,
                         "k": "query",
                         "n": "owner",
-                        "or": "owner",
+                        "or": "owners",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -3902,12 +3628,12 @@
             }
           ]
         },
-        "BasicLaunchVehicleFlow": {
+        "BasicLauncherFlow": {
           "active": true,
-          "entity": "launch_vehicle",
-          "key$": "BasicLaunchVehicleFlow",
+          "entity": "launcher",
+          "key$": "BasicLauncherFlow",
           "kind": "basic",
-          "name": "BasicLaunchVehicleFlow",
+          "name": "BasicLauncherFlow",
           "param": {},
           "step": [
             {
@@ -3921,21 +3647,11 @@
                 {
                   "apply": "ItemExists",
                   "def": {
-                    "ref": "launch_vehicle_ref01"
+                    "ref": "launcher_ref01"
                   }
                 }
               ]
-            }
-          ]
-        },
-        "BasicLauncherFlow": {
-          "active": true,
-          "entity": "launcher",
-          "key$": "BasicLauncherFlow",
-          "kind": "basic",
-          "name": "BasicLauncherFlow",
-          "param": {},
-          "step": [
+            },
             {
               "a": true,
               "d": {},
@@ -4187,7 +3903,12 @@
         },
         "base": "http://localhost:8000",
         "clean": {
-          "keys": "key,token,id"
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
         },
         "entity": {
           "`$CHILD`": {

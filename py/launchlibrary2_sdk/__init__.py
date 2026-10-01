@@ -14,11 +14,15 @@ from launchlibrary2_sdk.features import _has_feature, _make_feature
 
 
 class LaunchLibrary2SDK:
+    # The options hold the credential. A slot keeps them reachable as
+    # `client.options` and out of `vars(client)` and every attribute dump;
+    # the dict entry keeps the instance open for everything else.
+    __slots__ = ("_options", "__dict__")
 
     def __init__(self, options=None):
         self.mode = "live"
         self.features = []
-        self.options = None
+        self._options = None
 
         utility = LaunchLibrary2Utility()
         self._utility = utility
@@ -86,6 +90,17 @@ class LaunchLibrary2SDK:
         utility.feature_hook(self._rootctx, "PostConstruct")
 
         # #BuildFeatures
+
+    @property
+    def options(self):
+        return self._options
+
+    @options.setter
+    def options(self, value):
+        self._options = value
+
+    def __repr__(self):
+        return "LaunchLibrary2SDK(mode=" + repr(self.mode) + ")"
 
     def options_map(self):
         out = vs.clone(self.options)
@@ -207,7 +222,8 @@ class LaunchLibrary2SDK:
         except Exception as err:
             # direct() is the raw-HTTP escape hatch: it never raises, it
             # returns a result object callers branch on via result["ok"].
-            return {"ok": False, "err": err}
+            # That error never passes through make_error, so it is cleaned.
+            return {"ok": False, "err": utility.clean(self._rootctx, err)}
 
         if fetchargs is None:
             fetchargs = {}
@@ -224,7 +240,7 @@ class LaunchLibrary2SDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}
+            return {"ok": False, "err": utility.clean(ctx, fetch_err)}
 
         if fetched is None:
             return {
@@ -349,12 +365,6 @@ class LaunchLibrary2SDK:
         return LaunchEntity(self, data)
 
 
-    def LaunchVehicle(self, data=None) -> "LaunchVehicleEntity":
-        """Entity factory: client.LaunchVehicle().list() / client.LaunchVehicle().load({"id": ...})."""
-        from launchlibrary2_sdk.entity.launch_vehicle_entity import LaunchVehicleEntity
-        return LaunchVehicleEntity(self, data)
-
-
     def Launcher(self, data=None) -> "LauncherEntity":
         """Entity factory: client.Launcher().list() / client.Launcher().load({"id": ...})."""
         from launchlibrary2_sdk.entity.launcher_entity import LauncherEntity
@@ -419,7 +429,6 @@ if TYPE_CHECKING:
     from launchlibrary2_sdk.entity.expedition_entity import ExpeditionEntity
     from launchlibrary2_sdk.entity.first_stage_entity import FirstStageEntity
     from launchlibrary2_sdk.entity.launch_entity import LaunchEntity
-    from launchlibrary2_sdk.entity.launch_vehicle_entity import LaunchVehicleEntity
     from launchlibrary2_sdk.entity.launcher_entity import LauncherEntity
     from launchlibrary2_sdk.entity.location_entity import LocationEntity
     from launchlibrary2_sdk.entity.pad_entity import PadEntity

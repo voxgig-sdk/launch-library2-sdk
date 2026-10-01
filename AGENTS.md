@@ -31,7 +31,7 @@ Each feature is generated into every SDK target — as a directory
 `<lang>/src/feature/<name>/` (ts/js) or a flat file in the `<lang>/feature/`
 package (other languages). Each target's guide documents its features.
 
-**Entities** (13): `Agency`, `Astronaut`, `DockingEvent`, `Event`, `Expedition`, `FirstStage`, `Launch`, `LaunchVehicle`, `Launcher`, `Location`, `Pad`, `SpaceStation`, `Spacecraft`.
+**Entities** (12): `Agency`, `Astronaut`, `DockingEvent`, `Event`, `Expedition`, `FirstStage`, `Launch`, `Launcher`, `Location`, `Pad`, `SpaceStation`, `Spacecraft`.
 
 ## Generating and updating the SDK
 

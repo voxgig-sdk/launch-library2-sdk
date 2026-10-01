@@ -69,10 +69,6 @@ Create a new `FirstStage` entity instance. Pass `nil` for no initial data.
 
 Create a new `Launch` entity instance. Pass `nil` for no initial data.
 
-#### `LaunchVehicle(data = nil)`
-
-Create a new `LaunchVehicle` entity instance. Pass `nil` for no initial data.
-
 #### `Launcher(data = nil)`
 
 Create a new `Launcher` entity instance. Pass `nil` for no initial data.
@@ -481,33 +477,13 @@ first_stage = client.FirstStage
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `Integer` | No | Apogee in km |
-| `consecutive_successful_launches` | `Integer` | No | Number of consecutive successful launches |
-| `description` | `String` | No | Description of the launcher |
-| `diameter` | `Float` | No | Diameter in meters |
-| `failed_launches` | `Integer` | No | Number of failed launches |
-| `family` | `String` | No | Launcher family |
 | `flights` | `Integer` | No | Number of flights |
-| `full_name` | `String` | No | Full name of the launcher |
-| `gto_capacity` | `Integer` | No | GTO capacity in kg |
-| `id` | `Integer` | No | Configuration ID |
-| `launch_mass` | `Integer` | No | Launch mass in kg |
+| `id` | `Integer` | No | First stage ID |
 | `launcher_config` | `Hash` | No |  |
-| `length` | `Float` | No | Length in meters |
-| `leo_capacity` | `Integer` | No | LEO capacity in kg |
-| `maiden_flight` | `String` | No | Date of maiden flight |
-| `manufacturer` | `Hash` | No |  |
-| `max_stage` | `Integer` | No | Maximum number of stages |
-| `min_stage` | `Integer` | No | Minimum number of stages |
-| `name` | `String` | No | Name of the launcher configuration |
-| `pending_launches` | `Integer` | No | Number of pending launches |
 | `serial_number` | `String` | No | Serial number of the first stage |
 | `status` | `String` | No | Current status |
-| `successful_launches` | `Integer` | No | Number of successful launches |
-| `to_thrust` | `Integer` | No | Takeoff thrust in kN |
 | `type` | `String` | No | Type of first stage |
-| `url` | `String` | No | API URL for this configuration |
-| `variant` | `String` | No | Variant of the launcher |
+| `url` | `String` | No | API URL for this first stage |
 
 ### Operations
 
@@ -630,10 +606,10 @@ Return the entity name.
 
 ---
 
-## LaunchVehicleEntity
+## LauncherEntity
 
 ```ruby
-launch_vehicle = client.LaunchVehicle
+launcher = client.Launcher
 ```
 
 ### Fields
@@ -670,61 +646,8 @@ launch_vehicle = client.LaunchVehicle
 List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.LaunchVehicle.list
+results = client.Launcher.list
 ```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `LaunchVehicleEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## LauncherEntity
-
-```ruby
-launcher = client.Launcher
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `abbrev` | `String` | No | Agency abbreviation |
-| `administrator` | `String` | No | Agency administrator |
-| `country_code` | `String` | No | ISO country code |
-| `description` | `String` | No | Agency description |
-| `founding_year` | `String` | No | Year agency was founded |
-| `id` | `Integer` | No | Agency ID |
-| `logo_url` | `String` | No | URL to agency logo |
-| `name` | `String` | No | Name of the agency |
-| `type` | `String` | No | Type of agency |
-| `url` | `String` | No | API URL for this agency |
-
-### Operations
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
@@ -841,18 +764,16 @@ pad = client.Pad
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `agency_id` | `Integer` | No | ID of the agency that operates this pad |
-| `country_code` | `String` | No | ISO country code |
-| `id` | `Integer` | No | Location ID |
+| `id` | `Integer` | No | Pad ID |
 | `info_url` | `String` | No | URL to more information |
 | `latitude` | `String` | No | Latitude coordinate |
 | `location` | `Hash` | No |  |
 | `longitude` | `String` | No | Longitude coordinate |
 | `map_image` | `String` | No | URL to map image |
 | `map_url` | `String` | No | URL to map |
-| `name` | `String` | No | Name of the location |
-| `total_landing_count` | `Integer` | No | Total number of landings at this location |
-| `total_launch_count` | `Integer` | No | Total number of launches from this location |
-| `url` | `String` | No | API URL for this location |
+| `name` | `String` | No | Name of the pad |
+| `total_launch_count` | `Integer` | No | Total number of launches from this pad |
+| `url` | `String` | No | API URL for this pad |
 | `wiki_url` | `String` | No | Wikipedia URL |
 
 ### Operations

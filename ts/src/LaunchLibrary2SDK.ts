@@ -7,7 +7,6 @@ import { EventEntity } from './entity/EventEntity'
 import { ExpeditionEntity } from './entity/ExpeditionEntity'
 import { FirstStageEntity } from './entity/FirstStageEntity'
 import { LaunchEntity } from './entity/LaunchEntity'
-import { LaunchVehicleEntity } from './entity/LaunchVehicleEntity'
 import { LauncherEntity } from './entity/LauncherEntity'
 import { LocationEntity } from './entity/LocationEntity'
 import { PadEntity } from './entity/PadEntity'
@@ -52,6 +51,12 @@ class LaunchLibrary2SDK {
     })
 
     this._options = this._utility.makeOptions(this._rootctx)
+
+    for (const key of ['_options', '_rootctx', '_features']) {
+      Object.defineProperty(this, key, {
+        value: (this as any)[key], enumerable: false, writable: true, configurable: true
+      })
+    }
 
     const struct = this._utility.struct
     const getpath = struct.getpath
@@ -212,7 +217,7 @@ class LaunchLibrary2SDK {
         return { ok: false, err: ctx.error('direct_no_response', 'response: undefined') }
       }
       else if (fetched instanceof Error) {
-        return { ok: false, err: fetched }
+        return { ok: false, err: utility.clean(ctx, fetched) }
       }
 
       const status = fetched.status
@@ -246,7 +251,7 @@ class LaunchLibrary2SDK {
       }
     }
     catch (err: any) {
-      return { ok: false, err }
+      return { ok: false, err: utility.clean(ctx, err) }
     }
   }
 
@@ -354,15 +359,6 @@ class LaunchLibrary2SDK {
   Launch(entopts?: Record<string, any>) {
     const self = this
     return new LaunchEntity(self, entopts)
-  }
-
-
-  // Entity access: `client.LaunchVehicle().list()` / `client.LaunchVehicle().load({ id })`.
-  // The argument is the entity OPTIONS object (passed to the entity
-  // constructor as entopts), not initial entity data.
-  LaunchVehicle(entopts?: Record<string, any>) {
-    const self = this
-    return new LaunchVehicleEntity(self, entopts)
   }
 
 

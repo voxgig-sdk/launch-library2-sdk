@@ -22,7 +22,7 @@ use Voxgig\Struct\Struct;
 // (_retry, _cache, _metrics, ...); allow them explicitly (PHP 8.2+
 // deprecates implicit dynamic properties).
 #[\AllowDynamicProperties]
-class LaunchLibrary2SDK
+class LaunchLibrary2SDK implements \JsonSerializable
 {
     public string $mode;
     public array $features;
@@ -115,6 +115,19 @@ class LaunchLibrary2SDK
     {
         $out = Struct::clone($this->options);
         return is_array($out) ? $out : [];
+    }
+
+    // The options hold the credential, so the default print and json form
+    // name the client and nothing more; options_map() is the way to read
+    // them back.
+    public function jsonSerialize(): array
+    {
+        return ['name' => 'LaunchLibrary2'];
+    }
+
+    public function __debugInfo(): array
+    {
+        return $this->jsonSerialize();
     }
 
     public function get_utility()
@@ -242,7 +255,7 @@ class LaunchLibrary2SDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return ["ok" => false, "err" => $fetch_err];
+            return ["ok" => false, "err" => ($utility->clean)($ctx, $fetch_err)];
         }
 
         if ($fetched === null) {
@@ -464,24 +477,6 @@ class LaunchLibrary2SDK
             return $this->_launch;
         }
         return new LaunchEntity($this, $data);
-    }
-
-
-    private $_launch_vehicle = null;
-
-    // Canonical facade: $client->LaunchVehicle()->list() / ->load(["id" => ...]).
-    // PHP method names are case-insensitive, so lowercase $client->launch_vehicle()
-    // resolves here too.
-    public function LaunchVehicle($data = null)
-    {
-        require_once __DIR__ . '/entity/launch_vehicle_entity.php';
-        if ($data === null) {
-            if ($this->_launch_vehicle === null) {
-                $this->_launch_vehicle = new LaunchVehicleEntity($this, null);
-            }
-            return $this->_launch_vehicle;
-        }
-        return new LaunchVehicleEntity($this, $data);
     }
 
 

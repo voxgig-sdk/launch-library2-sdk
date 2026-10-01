@@ -7,6 +7,18 @@ main: kit: flow: BasicLauncherFlow:
   name: "BasicLauncherFlow",
   step: [
     {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "launcher_ref01"
+          }
+        }
+      ]
+    }
+
+    {
       i: {
         ref: "launcher_ref01",
         srcdatavar: "launcher_ref01_data",

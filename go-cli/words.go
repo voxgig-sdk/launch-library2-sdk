@@ -91,8 +91,6 @@ func entityFor(client *sdk.LaunchLibrary2SDK, name string) (sdk.LaunchLibrary2En
 		return client.FirstStage(nil), nil
 	case "launch":
 		return client.Launch(nil), nil
-	case "launch_vehicle":
-		return client.LaunchVehicle(nil), nil
 	case "launcher":
 		return client.Launcher(nil), nil
 	case "location":

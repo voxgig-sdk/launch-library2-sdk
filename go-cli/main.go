@@ -20,7 +20,7 @@ import (
 const prompt = "launch-library2"
 
 // entitiesHelp is the space-separated entity list shown by /help.
-const entitiesHelp = "agency astronaut docking_event event expedition first_stage launch launch_vehicle launcher location pad space_station spacecraft"
+const entitiesHelp = "agency astronaut docking_event event expedition first_stage launch launcher location pad space_station spacecraft"
 
 func main() {
 	os.Exit(run(os.Args[1:], os.Stdin, os.Stdout, os.Stderr))

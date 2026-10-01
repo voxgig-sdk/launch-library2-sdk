@@ -7,7 +7,6 @@
 @"./BasicExpeditionFlow.aontu"
 @"./BasicFirstStageFlow.aontu"
 @"./BasicLaunchFlow.aontu"
-@"./BasicLaunchVehicleFlow.aontu"
 @"./BasicLauncherFlow.aontu"
 @"./BasicLocationFlow.aontu"
 @"./BasicPadFlow.aontu"

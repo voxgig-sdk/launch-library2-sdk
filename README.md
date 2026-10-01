@@ -14,13 +14,13 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
+> **Features:** `ratelimit`, `retry`, `test`, `timeout` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
 ## Entities, not endpoints
 
-This SDK exposes the API as **13 semantic entities** that you
+This SDK exposes the API as **12 semantic entities** that you
 call directly, instead of assembling URL paths and query strings. See the [Entities](#entities) table below for the full list. Entities are
 **Capitalised** to mark them as the primary surface, each with the operations they
 support (`list`, `load`):
@@ -105,12 +105,12 @@ local results, err = client:Astronaut():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/launch-library2-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
-| Python | `voxgig-sdk-launch-library2-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
-| PHP | `voxgig-sdk/launch-library2-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
+| TypeScript | `@voxgig-sdk/launch-library2-sdk` | publish pending — [install from source](ts/README.md#install) |
+| Python | `voxgig-sdk-launch-library2-sdk` | publish pending — [install from source](py/README.md#install) |
+| PHP | `voxgig-sdk/launch-library2-sdk` | publish pending — [install from source](php/README.md#install) |
 | Golang | `github.com/voxgig-sdk/launch-library2-sdk/go` | `go get github.com/voxgig-sdk/launch-library2-sdk/go@latest` |
-| Ruby | `voxgig-sdk-launch-library2-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
-| Lua | `voxgig-sdk-launch-library2-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/launch-library2-sdk/tags) |
+| Ruby | `voxgig-sdk-launch-library2-sdk` | publish pending — [install from source](rb/README.md#install) |
+| Lua | `voxgig-sdk-launch-library2-sdk` | publish pending — [install from source](lua/README.md#install) |
 | Go CLI | `github.com/voxgig-sdk/launch-library2-sdk/go-cli` | `go install github.com/voxgig-sdk/launch-library2-sdk/go-cli/cmd/launch-library2@latest` |
 | Go MCP server | `github.com/voxgig-sdk/launch-library2-sdk/go-mcp` | `go get github.com/voxgig-sdk/launch-library2-sdk/go-mcp@latest` |
 
@@ -164,7 +164,7 @@ Then add it to your agent's MCP config (Claude Desktop, Cursor, etc.):
 
 ## Entities
 
-The API exposes 13 entities:
+The API exposes 12 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
@@ -175,8 +175,7 @@ The API exposes 13 entities:
 | **Expedition** | The Expedition entity (list, load). | `/expedition` |
 | **FirstStage** | The FirstStage entity (list, load). | `/firststage` |
 | **Launch** | The Launch entity (list, load). | `/launch` |
-| **LaunchVehicle** | The LaunchVehicle entity (list). | `/config/launcher` |
-| **Launcher** | The Launcher entity (load). | `/config/launcher/{id}` |
+| **Launcher** | The Launcher entity (list, load). | `/config/launcher` |
 | **Location** | The Location entity (list, load). | `/location` |
 | **Pad** | The Pad entity (list, load). | `/pad` |
 | **SpaceStation** | The SpaceStation entity (list, load). | `/spacestation` |

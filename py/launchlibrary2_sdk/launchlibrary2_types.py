@@ -133,33 +133,13 @@ class ExpeditionListMatch(TypedDict, total=False):
 
 
 class FirstStage(TypedDict, total=False):
-    apogee: int
-    consecutive_successful_launches: int
-    description: str
-    diameter: float
-    failed_launches: int
-    family: str
     flights: int
-    full_name: str
-    gto_capacity: int
     id: int
-    launch_mass: int
     launcher_config: dict
-    length: float
-    leo_capacity: int
-    maiden_flight: str
-    manufacturer: dict
-    max_stage: int
-    min_stage: int
-    name: str
-    pending_launches: int
     serial_number: str
     status: str
-    successful_launches: int
-    to_thrust: int
     type: str
     url: str
-    variant: str
 
 
 class FirstStageLoadMatch(TypedDict):
@@ -205,7 +185,7 @@ class LaunchListMatch(TypedDict, total=False):
     status: str
 
 
-class LaunchVehicle(TypedDict, total=False):
+class Launcher(TypedDict, total=False):
     apogee: int
     consecutive_successful_launches: int
     description: str
@@ -230,29 +210,16 @@ class LaunchVehicle(TypedDict, total=False):
     variant: str
 
 
-class LaunchVehicleListMatch(TypedDict, total=False):
+class LauncherLoadMatch(TypedDict):
+    id: int
+
+
+class LauncherListMatch(TypedDict, total=False):
     family: str
     limit: int
     manufacturer: int
     offset: int
     search: str
-
-
-class Launcher(TypedDict, total=False):
-    abbrev: str
-    administrator: str
-    country_code: str
-    description: str
-    founding_year: str
-    id: int
-    logo_url: str
-    name: str
-    type: str
-    url: str
-
-
-class LauncherLoadMatch(TypedDict):
-    id: int
 
 
 class Location(TypedDict, total=False):
@@ -278,7 +245,6 @@ class LocationListMatch(TypedDict, total=False):
 
 class Pad(TypedDict, total=False):
     agency_id: int
-    country_code: str
     id: int
     info_url: str
     latitude: str
@@ -287,7 +253,6 @@ class Pad(TypedDict, total=False):
     map_image: str
     map_url: str
     name: str
-    total_landing_count: int
     total_launch_count: int
     url: str
     wiki_url: str

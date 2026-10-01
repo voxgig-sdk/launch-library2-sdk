@@ -75,10 +75,6 @@ Create a new `FirstStage` entity instance. Pass `nil` for no initial data.
 
 Create a new `Launch` entity instance. Pass `nil` for no initial data.
 
-#### `LaunchVehicle(data map[string]any) LaunchLibrary2Entity`
-
-Create a new `LaunchVehicle` entity instance. Pass `nil` for no initial data.
-
 #### `Launcher(data map[string]any) LaunchLibrary2Entity`
 
 Create a new `Launcher` entity instance. Pass `nil` for no initial data.
@@ -501,33 +497,13 @@ fmt.Println(firstStage.GetName()) // "first_stage"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `int` | No | Apogee in km |
-| `consecutive_successful_launches` | `int` | No | Number of consecutive successful launches |
-| `description` | `string` | No | Description of the launcher |
-| `diameter` | `float64` | No | Diameter in meters |
-| `failed_launches` | `int` | No | Number of failed launches |
-| `family` | `string` | No | Launcher family |
 | `flights` | `int` | No | Number of flights |
-| `full_name` | `string` | No | Full name of the launcher |
-| `gto_capacity` | `int` | No | GTO capacity in kg |
-| `id` | `int` | No | Configuration ID |
-| `launch_mass` | `int` | No | Launch mass in kg |
+| `id` | `int` | No | First stage ID |
 | `launcher_config` | `map[string]any` | No |  |
-| `length` | `float64` | No | Length in meters |
-| `leo_capacity` | `int` | No | LEO capacity in kg |
-| `maiden_flight` | `string` | No | Date of maiden flight |
-| `manufacturer` | `map[string]any` | No |  |
-| `max_stage` | `int` | No | Maximum number of stages |
-| `min_stage` | `int` | No | Minimum number of stages |
-| `name` | `string` | No | Name of the launcher configuration |
-| `pending_launches` | `int` | No | Number of pending launches |
 | `serial_number` | `string` | No | Serial number of the first stage |
 | `status` | `string` | No | Current status |
-| `successful_launches` | `int` | No | Number of successful launches |
-| `to_thrust` | `int` | No | Takeoff thrust in kN |
 | `type` | `string` | No | Type of first stage |
-| `url` | `string` | No | API URL for this configuration |
-| `variant` | `string` | No | Variant of the launcher |
+| `url` | `string` | No | API URL for this first stage |
 
 ### Operations
 
@@ -655,11 +631,11 @@ Return the entity name.
 
 ---
 
-## LaunchVehicleEntity
+## LauncherEntity
 
 ```go
-launchVehicle := client.LaunchVehicle(nil)
-fmt.Println(launchVehicle.GetName()) // "launch_vehicle"
+launcher := client.Launcher(nil)
+fmt.Println(launcher.GetName()) // "launcher"
 ```
 
 ### Fields
@@ -696,60 +672,12 @@ fmt.Println(launchVehicle.GetName()) // "launch_vehicle"
 List entities matching the given criteria. Returns an array.
 
 ```go
-results, err := client.LaunchVehicle(nil).List(nil, nil)
+results, err := client.Launcher(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
 fmt.Println(results)
 ```
-
-### Common Methods
-
-#### `Data(args ...any) any`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `Match(args ...any) any`
-
-Get or set the entity match criteria. Works the same as `Data()`.
-
-#### `Make() Entity`
-
-Create a new `LaunchVehicleEntity` instance with the same client and
-options.
-
-#### `GetName() string`
-
-Return the entity name.
-
-
----
-
-## LauncherEntity
-
-```go
-launcher := client.Launcher(nil)
-fmt.Println(launcher.GetName()) // "launcher"
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `abbrev` | `string` | No | Agency abbreviation |
-| `administrator` | `string` | No | Agency administrator |
-| `country_code` | `string` | No | ISO country code |
-| `description` | `string` | No | Agency description |
-| `founding_year` | `string` | No | Year agency was founded |
-| `id` | `int` | No | Agency ID |
-| `logo_url` | `string` | No | URL to agency logo |
-| `name` | `string` | No | Name of the agency |
-| `type` | `string` | No | Type of agency |
-| `url` | `string` | No | API URL for this agency |
-
-### Operations
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
@@ -868,18 +796,16 @@ fmt.Println(pad.GetName()) // "pad"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `agency_id` | `int` | No | ID of the agency that operates this pad |
-| `country_code` | `string` | No | ISO country code |
-| `id` | `int` | No | Location ID |
+| `id` | `int` | No | Pad ID |
 | `info_url` | `string` | No | URL to more information |
 | `latitude` | `string` | No | Latitude coordinate |
 | `location` | `map[string]any` | No |  |
 | `longitude` | `string` | No | Longitude coordinate |
 | `map_image` | `string` | No | URL to map image |
 | `map_url` | `string` | No | URL to map |
-| `name` | `string` | No | Name of the location |
-| `total_landing_count` | `int` | No | Total number of landings at this location |
-| `total_launch_count` | `int` | No | Total number of launches from this location |
-| `url` | `string` | No | API URL for this location |
+| `name` | `string` | No | Name of the pad |
+| `total_launch_count` | `int` | No | Total number of launches from this pad |
+| `url` | `string` | No | API URL for this pad |
 | `wiki_url` | `string` | No | Wikipedia URL |
 
 ### Operations

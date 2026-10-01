@@ -120,7 +120,7 @@ main: kit: entity: space_station: {
               {
                 k: "query"
                 n: "owner"
-                or: "owner"
+                or: "owners"
                 r: false
                 t: "`$STRING`"
               }

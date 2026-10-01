@@ -70,7 +70,7 @@ const __1 = require("..");
 const SDK_NAME = 'LaunchLibrary2SDK';
 // A fixture for every entity, so list()/load() resolve offline with no
 // network. Snippet client construction is rewritten to seed this.
-const TEST_SEED = { "entity": { "agency": { "test01": { "id": "test01" } }, "astronaut": { "test01": { "id": "test01" } }, "docking_event": { "test01": { "id": "test01" } }, "event": { "test01": { "id": "test01" } }, "expedition": { "test01": { "id": "test01" } }, "first_stage": { "test01": { "id": "test01" } }, "launch": { "test01": { "id": "test01" } }, "launch_vehicle": { "test01": { "id": "test01" } }, "launcher": { "test01": { "id": "test01" } }, "location": { "test01": { "id": "test01" } }, "pad": { "test01": { "id": "test01" } }, "space_station": { "test01": { "id": "test01" } }, "spacecraft": { "test01": { "id": "test01" } } } };
+const TEST_SEED = { "entity": { "agency": { "test01": { "id": "test01" } }, "astronaut": { "test01": { "id": "test01" } }, "docking_event": { "test01": { "id": "test01" } }, "event": { "test01": { "id": "test01" } }, "expedition": { "test01": { "id": "test01" } }, "first_stage": { "test01": { "id": "test01" } }, "launch": { "test01": { "id": "test01" } }, "launcher": { "test01": { "id": "test01" } }, "location": { "test01": { "id": "test01" } }, "pad": { "test01": { "id": "test01" } }, "space_station": { "test01": { "id": "test01" } }, "spacecraft": { "test01": { "id": "test01" } } } };
 const SEED_ARG = JSON.stringify(TEST_SEED);
 const SEEDED_CTOR = SDK_NAME + '.test(' + SEED_ARG + ')';
 // The three docs this gate covers, resolved relative to dist-test/.

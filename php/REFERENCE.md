@@ -69,10 +69,6 @@ Create a new `FirstStageEntity` instance. Pass `null` for no initial data.
 
 Create a new `LaunchEntity` instance. Pass `null` for no initial data.
 
-#### `LaunchVehicle($data = null)`
-
-Create a new `LaunchVehicleEntity` instance. Pass `null` for no initial data.
-
 #### `Launcher($data = null)`
 
 Create a new `LauncherEntity` instance. Pass `null` for no initial data.
@@ -480,33 +476,13 @@ $first_stage = $client->FirstStage();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `int` | No | Apogee in km |
-| `consecutive_successful_launches` | `int` | No | Number of consecutive successful launches |
-| `description` | `string` | No | Description of the launcher |
-| `diameter` | `float` | No | Diameter in meters |
-| `failed_launches` | `int` | No | Number of failed launches |
-| `family` | `string` | No | Launcher family |
 | `flights` | `int` | No | Number of flights |
-| `full_name` | `string` | No | Full name of the launcher |
-| `gto_capacity` | `int` | No | GTO capacity in kg |
-| `id` | `int` | No | Configuration ID |
-| `launch_mass` | `int` | No | Launch mass in kg |
+| `id` | `int` | No | First stage ID |
 | `launcher_config` | `array` | No |  |
-| `length` | `float` | No | Length in meters |
-| `leo_capacity` | `int` | No | LEO capacity in kg |
-| `maiden_flight` | `string` | No | Date of maiden flight |
-| `manufacturer` | `array` | No |  |
-| `max_stage` | `int` | No | Maximum number of stages |
-| `min_stage` | `int` | No | Minimum number of stages |
-| `name` | `string` | No | Name of the launcher configuration |
-| `pending_launches` | `int` | No | Number of pending launches |
 | `serial_number` | `string` | No | Serial number of the first stage |
 | `status` | `string` | No | Current status |
-| `successful_launches` | `int` | No | Number of successful launches |
-| `to_thrust` | `int` | No | Takeoff thrust in kN |
 | `type` | `string` | No | Type of first stage |
-| `url` | `string` | No | API URL for this configuration |
-| `variant` | `string` | No | Variant of the launcher |
+| `url` | `string` | No | API URL for this first stage |
 
 ### Operations
 
@@ -629,10 +605,10 @@ Return the entity name.
 
 ---
 
-## LaunchVehicleEntity
+## LauncherEntity
 
 ```php
-$launch_vehicle = $client->LaunchVehicle();
+$launcher = $client->Launcher();
 ```
 
 ### Fields
@@ -669,61 +645,8 @@ $launch_vehicle = $client->LaunchVehicle();
 List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->LaunchVehicle()->list();
+$results = $client->Launcher()->list();
 ```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): LaunchVehicleEntity`
-
-Create a new `LaunchVehicleEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## LauncherEntity
-
-```php
-$launcher = $client->Launcher();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `abbrev` | `string` | No | Agency abbreviation |
-| `administrator` | `string` | No | Agency administrator |
-| `country_code` | `string` | No | ISO country code |
-| `description` | `string` | No | Agency description |
-| `founding_year` | `string` | No | Year agency was founded |
-| `id` | `int` | No | Agency ID |
-| `logo_url` | `string` | No | URL to agency logo |
-| `name` | `string` | No | Name of the agency |
-| `type` | `string` | No | Type of agency |
-| `url` | `string` | No | API URL for this agency |
-
-### Operations
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
@@ -840,18 +763,16 @@ $pad = $client->Pad();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `agency_id` | `int` | No | ID of the agency that operates this pad |
-| `country_code` | `string` | No | ISO country code |
-| `id` | `int` | No | Location ID |
+| `id` | `int` | No | Pad ID |
 | `info_url` | `string` | No | URL to more information |
 | `latitude` | `string` | No | Latitude coordinate |
 | `location` | `array` | No |  |
 | `longitude` | `string` | No | Longitude coordinate |
 | `map_image` | `string` | No | URL to map image |
 | `map_url` | `string` | No | URL to map |
-| `name` | `string` | No | Name of the location |
-| `total_landing_count` | `int` | No | Total number of landings at this location |
-| `total_launch_count` | `int` | No | Total number of launches from this location |
-| `url` | `string` | No | API URL for this location |
+| `name` | `string` | No | Name of the pad |
+| `total_launch_count` | `int` | No | Total number of launches from this pad |
+| `url` | `string` | No | API URL for this pad |
 | `wiki_url` | `string` | No | Wikipedia URL |
 
 ### Operations

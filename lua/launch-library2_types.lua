@@ -108,33 +108,13 @@
 ---@field spacestation? number
 
 ---@class FirstStage
----@field apogee? number
----@field consecutive_successful_launches? number
----@field description? string
----@field diameter? number
----@field failed_launches? number
----@field family? string
 ---@field flights? number
----@field full_name? string
----@field gto_capacity? number
 ---@field id? number
----@field launch_mass? number
 ---@field launcher_config? table
----@field length? number
----@field leo_capacity? number
----@field maiden_flight? string
----@field manufacturer? table
----@field max_stage? number
----@field min_stage? number
----@field name? string
----@field pending_launches? number
 ---@field serial_number? string
 ---@field status? string
----@field successful_launches? number
----@field to_thrust? number
 ---@field type? string
 ---@field url? string
----@field variant? string
 
 ---@class FirstStageLoadMatch
 ---@field id number
@@ -174,7 +154,7 @@
 ---@field spacecraft_id? number
 ---@field status? string
 
----@class LaunchVehicle
+---@class Launcher
 ---@field apogee? number
 ---@field consecutive_successful_launches? number
 ---@field description? string
@@ -198,27 +178,15 @@
 ---@field url? string
 ---@field variant? string
 
----@class LaunchVehicleListMatch
+---@class LauncherLoadMatch
+---@field id number
+
+---@class LauncherListMatch
 ---@field family? string
 ---@field limit? number
 ---@field manufacturer? number
 ---@field offset? number
 ---@field search? string
-
----@class Launcher
----@field abbrev? string
----@field administrator? string
----@field country_code? string
----@field description? string
----@field founding_year? string
----@field id? number
----@field logo_url? string
----@field name? string
----@field type? string
----@field url? string
-
----@class LauncherLoadMatch
----@field id number
 
 ---@class Location
 ---@field country_code? string
@@ -240,7 +208,6 @@
 
 ---@class Pad
 ---@field agency_id? number
----@field country_code? string
 ---@field id? number
 ---@field info_url? string
 ---@field latitude? string
@@ -249,7 +216,6 @@
 ---@field map_image? string
 ---@field map_url? string
 ---@field name? string
----@field total_landing_count? number
 ---@field total_launch_count? number
 ---@field url? string
 ---@field wiki_url? string

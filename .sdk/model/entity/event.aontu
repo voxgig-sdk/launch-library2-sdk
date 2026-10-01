@@ -178,7 +178,7 @@ main: kit: entity: event: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.type`"
+            res: "`body`"
           }
         }
       ]

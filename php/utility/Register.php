@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 LaunchLibrary2Utility::setRegistrar(function (LaunchLibrary2Utility $u): void {
     $u->clean = [LaunchLibrary2Clean::class, 'call'];
+    $u->clean_add = [LaunchLibrary2Clean::class, 'add'];
+    $u->clean_explain = [LaunchLibrary2Done::class, 'clean_explain'];
     $u->done = [LaunchLibrary2Done::class, 'call'];
     $u->make_error = [LaunchLibrary2MakeError::class, 'call'];
     $u->feature_add = [LaunchLibrary2FeatureAdd::class, 'call'];

@@ -12,18 +12,11 @@ main: kit: entity: pad: {
       sh: "ID of the agency that operates this pad"
       t: "`$INTEGER`"
     }
-    country_code: {
-      h: "Country Code"
-      n: "country_code"
-      r: false
-      sh: "ISO country code"
-      t: "`$STRING`"
-    }
     id: {
       h: "Id"
       n: "id"
       r: false
-      sh: "Location ID"
+      sh: "Pad ID"
       t: "`$INTEGER`"
     }
     info_url: {
@@ -71,28 +64,21 @@ main: kit: entity: pad: {
       h: "Name"
       n: "name"
       r: false
-      sh: "Name of the location"
+      sh: "Name of the pad"
       t: "`$STRING`"
-    }
-    total_landing_count: {
-      h: "Total Landing Count"
-      n: "total_landing_count"
-      r: false
-      sh: "Total number of landings at this location"
-      t: "`$INTEGER`"
     }
     total_launch_count: {
       h: "Total Launch Count"
       n: "total_launch_count"
       r: false
-      sh: "Total number of launches from this location"
+      sh: "Total number of launches from this pad"
       t: "`$INTEGER`"
     }
     url: {
       h: "Url"
       n: "url"
       r: false
-      sh: "API URL for this location"
+      sh: "API URL for this pad"
       t: "`$STRING`"
     }
     wiki_url: {
@@ -213,7 +199,7 @@ main: kit: entity: pad: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.location`"
+            res: "`body`"
           }
         }
       ]

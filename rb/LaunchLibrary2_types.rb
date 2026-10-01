@@ -369,65 +369,14 @@ ExpeditionListMatch = Struct.new(
 
 # FirstStage entity data model.
 #
-# @!attribute [rw] apogee
-#   @return [Integer, nil]
-#
-# @!attribute [rw] consecutive_successful_launches
-#   @return [Integer, nil]
-#
-# @!attribute [rw] description
-#   @return [String, nil]
-#
-# @!attribute [rw] diameter
-#   @return [Float, nil]
-#
-# @!attribute [rw] failed_launches
-#   @return [Integer, nil]
-#
-# @!attribute [rw] family
-#   @return [String, nil]
-#
 # @!attribute [rw] flights
-#   @return [Integer, nil]
-#
-# @!attribute [rw] full_name
-#   @return [String, nil]
-#
-# @!attribute [rw] gto_capacity
 #   @return [Integer, nil]
 #
 # @!attribute [rw] id
 #   @return [Integer, nil]
 #
-# @!attribute [rw] launch_mass
-#   @return [Integer, nil]
-#
 # @!attribute [rw] launcher_config
 #   @return [Hash, nil]
-#
-# @!attribute [rw] length
-#   @return [Float, nil]
-#
-# @!attribute [rw] leo_capacity
-#   @return [Integer, nil]
-#
-# @!attribute [rw] maiden_flight
-#   @return [String, nil]
-#
-# @!attribute [rw] manufacturer
-#   @return [Hash, nil]
-#
-# @!attribute [rw] max_stage
-#   @return [Integer, nil]
-#
-# @!attribute [rw] min_stage
-#   @return [Integer, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] pending_launches
-#   @return [Integer, nil]
 #
 # @!attribute [rw] serial_number
 #   @return [String, nil]
@@ -435,48 +384,19 @@ ExpeditionListMatch = Struct.new(
 # @!attribute [rw] status
 #   @return [String, nil]
 #
-# @!attribute [rw] successful_launches
-#   @return [Integer, nil]
-#
-# @!attribute [rw] to_thrust
-#   @return [Integer, nil]
-#
 # @!attribute [rw] type
 #   @return [String, nil]
 #
 # @!attribute [rw] url
 #   @return [String, nil]
-#
-# @!attribute [rw] variant
-#   @return [String, nil]
 FirstStage = Struct.new(
-  :apogee,
-  :consecutive_successful_launches,
-  :description,
-  :diameter,
-  :failed_launches,
-  :family,
   :flights,
-  :full_name,
-  :gto_capacity,
   :id,
-  :launch_mass,
   :launcher_config,
-  :length,
-  :leo_capacity,
-  :maiden_flight,
-  :manufacturer,
-  :max_stage,
-  :min_stage,
-  :name,
-  :pending_launches,
   :serial_number,
   :status,
-  :successful_launches,
-  :to_thrust,
   :type,
   :url,
-  :variant,
   keyword_init: true
 )
 
@@ -617,7 +537,7 @@ LaunchListMatch = Struct.new(
   keyword_init: true
 )
 
-# LaunchVehicle entity data model.
+# Launcher entity data model.
 #
 # @!attribute [rw] apogee
 #   @return [Integer, nil]
@@ -684,7 +604,7 @@ LaunchListMatch = Struct.new(
 #
 # @!attribute [rw] variant
 #   @return [String, nil]
-LaunchVehicle = Struct.new(
+Launcher = Struct.new(
   :apogee,
   :consecutive_successful_launches,
   :description,
@@ -710,7 +630,16 @@ LaunchVehicle = Struct.new(
   keyword_init: true
 )
 
-# Request payload for LaunchVehicle#list.
+# Request payload for Launcher#load.
+#
+# @!attribute [rw] id
+#   @return [Integer]
+LauncherLoadMatch = Struct.new(
+  :id,
+  keyword_init: true
+)
+
+# Request payload for Launcher#list.
 #
 # @!attribute [rw] family
 #   @return [String, nil]
@@ -726,66 +655,12 @@ LaunchVehicle = Struct.new(
 #
 # @!attribute [rw] search
 #   @return [String, nil]
-LaunchVehicleListMatch = Struct.new(
+LauncherListMatch = Struct.new(
   :family,
   :limit,
   :manufacturer,
   :offset,
   :search,
-  keyword_init: true
-)
-
-# Launcher entity data model.
-#
-# @!attribute [rw] abbrev
-#   @return [String, nil]
-#
-# @!attribute [rw] administrator
-#   @return [String, nil]
-#
-# @!attribute [rw] country_code
-#   @return [String, nil]
-#
-# @!attribute [rw] description
-#   @return [String, nil]
-#
-# @!attribute [rw] founding_year
-#   @return [String, nil]
-#
-# @!attribute [rw] id
-#   @return [Integer, nil]
-#
-# @!attribute [rw] logo_url
-#   @return [String, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] type
-#   @return [String, nil]
-#
-# @!attribute [rw] url
-#   @return [String, nil]
-Launcher = Struct.new(
-  :abbrev,
-  :administrator,
-  :country_code,
-  :description,
-  :founding_year,
-  :id,
-  :logo_url,
-  :name,
-  :type,
-  :url,
-  keyword_init: true
-)
-
-# Request payload for Launcher#load.
-#
-# @!attribute [rw] id
-#   @return [Integer]
-LauncherLoadMatch = Struct.new(
-  :id,
   keyword_init: true
 )
 
@@ -857,9 +732,6 @@ LocationListMatch = Struct.new(
 # @!attribute [rw] agency_id
 #   @return [Integer, nil]
 #
-# @!attribute [rw] country_code
-#   @return [String, nil]
-#
 # @!attribute [rw] id
 #   @return [Integer, nil]
 #
@@ -884,9 +756,6 @@ LocationListMatch = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] total_landing_count
-#   @return [Integer, nil]
-#
 # @!attribute [rw] total_launch_count
 #   @return [Integer, nil]
 #
@@ -897,7 +766,6 @@ LocationListMatch = Struct.new(
 #   @return [String, nil]
 Pad = Struct.new(
   :agency_id,
-  :country_code,
   :id,
   :info_url,
   :latitude,
@@ -906,7 +774,6 @@ Pad = Struct.new(
   :map_image,
   :map_url,
   :name,
-  :total_landing_count,
   :total_launch_count,
   :url,
   :wiki_url,

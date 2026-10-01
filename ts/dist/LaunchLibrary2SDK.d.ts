@@ -5,7 +5,6 @@ import { EventEntity } from './entity/EventEntity';
 import { ExpeditionEntity } from './entity/ExpeditionEntity';
 import { FirstStageEntity } from './entity/FirstStageEntity';
 import { LaunchEntity } from './entity/LaunchEntity';
-import { LaunchVehicleEntity } from './entity/LaunchVehicleEntity';
 import { LauncherEntity } from './entity/LauncherEntity';
 import { LocationEntity } from './entity/LocationEntity';
 import { PadEntity } from './entity/PadEntity';
@@ -31,29 +30,29 @@ declare class LaunchLibrary2SDK {
     prepare(fetchargs?: any): Promise<any>;
     direct(fetchargs?: any): Promise<Error | {
         ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    } | {
-        ok: boolean;
         err: any;
         status?: undefined;
         headers?: undefined;
         data?: undefined;
+    } | {
+        ok: boolean;
+        status: number;
+        headers: any;
+        data: any;
+        err?: undefined;
     }>;
     _rawRequest(fetchargs?: any): Promise<Error | {
         ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    } | {
-        ok: boolean;
         err: any;
         status?: undefined;
         headers?: undefined;
         data?: undefined;
+    } | {
+        ok: boolean;
+        status: number;
+        headers: any;
+        data: any;
+        err?: undefined;
     }>;
     graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
     Agency(entopts?: Record<string, any>): AgencyEntity;
@@ -63,7 +62,6 @@ declare class LaunchLibrary2SDK {
     Expedition(entopts?: Record<string, any>): ExpeditionEntity;
     FirstStage(entopts?: Record<string, any>): FirstStageEntity;
     Launch(entopts?: Record<string, any>): LaunchEntity;
-    LaunchVehicle(entopts?: Record<string, any>): LaunchVehicleEntity;
     Launcher(entopts?: Record<string, any>): LauncherEntity;
     Location(entopts?: Record<string, any>): LocationEntity;
     Pad(entopts?: Record<string, any>): PadEntity;

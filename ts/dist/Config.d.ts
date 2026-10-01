@@ -76,7 +76,6 @@ declare class Config {
             expedition: {};
             first_stage: {};
             launch: {};
-            launch_vehicle: {};
             launcher: {};
             location: {};
             pad: {};
@@ -583,19 +582,11 @@ declare class Config {
                 title: string;
                 type: string;
                 short: string;
-                format?: undefined;
             } | {
                 name: string;
                 title: string;
                 type: string;
                 short?: undefined;
-                format?: undefined;
-            } | {
-                name: string;
-                title: string;
-                type: string;
-                short: string;
-                format: string;
             })[];
             id: {
                 field: string;
@@ -779,7 +770,7 @@ declare class Config {
                 ancestors: never[];
             };
         };
-        launch_vehicle: {
+        launcher: {
             fields: ({
                 name: string;
                 title: string;
@@ -841,24 +832,6 @@ declare class Config {
                         };
                     }[];
                 };
-            };
-            relations: {
-                ancestors: never[];
-            };
-        };
-        launcher: {
-            fields: {
-                name: string;
-                title: string;
-                type: string;
-                short: string;
-            }[];
-            id: {
-                field: string;
-                name: string;
-            };
-            name: string;
-            op: {
                 load: {
                     input: string;
                     name: string;

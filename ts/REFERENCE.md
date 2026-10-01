@@ -132,18 +132,6 @@ Create a new `Launch` entity instance.
 
 **Returns:** `LaunchEntity` instance.
 
-#### `LaunchVehicle(data?: object)`
-
-Create a new `LaunchVehicle` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `LaunchVehicleEntity` instance.
-
 #### `Launcher(data?: object)`
 
 Create a new `Launcher` entity instance.
@@ -590,33 +578,13 @@ const first_stage = client.FirstStage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `apogee` | `number` | No | Apogee in km |
-| `consecutive_successful_launches` | `number` | No | Number of consecutive successful launches |
-| `description` | `string` | No | Description of the launcher |
-| `diameter` | `number` | No | Diameter in meters |
-| `failed_launches` | `number` | No | Number of failed launches |
-| `family` | `string` | No | Launcher family |
 | `flights` | `number` | No | Number of flights |
-| `full_name` | `string` | No | Full name of the launcher |
-| `gto_capacity` | `number` | No | GTO capacity in kg |
-| `id` | `number` | No | Configuration ID |
-| `launch_mass` | `number` | No | Launch mass in kg |
+| `id` | `number` | No | First stage ID |
 | `launcher_config` | `Record<string, any>` | No |  |
-| `length` | `number` | No | Length in meters |
-| `leo_capacity` | `number` | No | LEO capacity in kg |
-| `maiden_flight` | `string` | No | Date of maiden flight |
-| `manufacturer` | `Record<string, any>` | No |  |
-| `max_stage` | `number` | No | Maximum number of stages |
-| `min_stage` | `number` | No | Minimum number of stages |
-| `name` | `string` | No | Name of the launcher configuration |
-| `pending_launches` | `number` | No | Number of pending launches |
 | `serial_number` | `string` | No | Serial number of the first stage |
 | `status` | `string` | No | Current status |
-| `successful_launches` | `number` | No | Number of successful launches |
-| `to_thrust` | `number` | No | Takeoff thrust in kN |
 | `type` | `string` | No | Type of first stage |
-| `url` | `string` | No | API URL for this configuration |
-| `variant` | `string` | No | Variant of the launcher |
+| `url` | `string` | No | API URL for this first stage |
 
 ### Operations
 
@@ -735,10 +703,10 @@ Return a copy of the entity options.
 
 ---
 
-## LaunchVehicleEntity
+## LauncherEntity
 
 ```ts
-const launch_vehicle = client.LaunchVehicle()
+const launcher = client.Launcher()
 ```
 
 ### Fields
@@ -775,59 +743,8 @@ const launch_vehicle = client.LaunchVehicle()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.LaunchVehicle().list()
+const results = await client.Launcher().list()
 ```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `LaunchVehicleEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `LaunchLibrary2SDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## LauncherEntity
-
-```ts
-const launcher = client.Launcher()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `abbrev` | `string` | No | Agency abbreviation |
-| `administrator` | `string` | No | Agency administrator |
-| `country_code` | `string` | No | ISO country code |
-| `description` | `string` | No | Agency description |
-| `founding_year` | `string` | No | Year agency was founded |
-| `id` | `number` | No | Agency ID |
-| `logo_url` | `string` | No | URL to agency logo |
-| `name` | `string` | No | Name of the agency |
-| `type` | `string` | No | Type of agency |
-| `url` | `string` | No | API URL for this agency |
-
-### Operations
 
 #### `load(match: object, ctrl?: object)`
 
@@ -940,18 +857,16 @@ const pad = client.Pad()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `agency_id` | `number` | No | ID of the agency that operates this pad |
-| `country_code` | `string` | No | ISO country code |
-| `id` | `number` | No | Location ID |
+| `id` | `number` | No | Pad ID |
 | `info_url` | `string` | No | URL to more information |
 | `latitude` | `string` | No | Latitude coordinate |
 | `location` | `Record<string, any>` | No |  |
 | `longitude` | `string` | No | Longitude coordinate |
 | `map_image` | `string` | No | URL to map image |
 | `map_url` | `string` | No | URL to map |
-| `name` | `string` | No | Name of the location |
-| `total_landing_count` | `number` | No | Total number of landings at this location |
-| `total_launch_count` | `number` | No | Total number of launches from this location |
-| `url` | `string` | No | API URL for this location |
+| `name` | `string` | No | Name of the pad |
+| `total_launch_count` | `number` | No | Total number of launches from this pad |
+| `url` | `string` | No | API URL for this pad |
 | `wiki_url` | `string` | No | Wikipedia URL |
 
 ### Operations

@@ -118,7 +118,7 @@ make build-all   # linux/darwin/windows x amd64/arm64, under dist/<os>-<arch>/
 ### Discover the available entities
 
 `/help` in the REPL prints the full entity list, or see [Entities](#entities)
-below — this SDK exposes 13 entities.
+below — this SDK exposes 12 entities.
 
 ## Reference
 
@@ -172,9 +172,9 @@ Meta-commands use the `/` prefix (everything else on a line is evaluated as boru
 
 ### Entities
 
-The 13 entities this SDK exposes (any is valid as `<entity>`):
+The 12 entities this SDK exposes (any is valid as `<entity>`):
 
-agency astronaut docking_event event expedition first_stage launch launch_vehicle launcher location pad space_station spacecraft
+agency astronaut docking_event event expedition first_stage launch launcher location pad space_station spacecraft
 
 ## Explanation
 

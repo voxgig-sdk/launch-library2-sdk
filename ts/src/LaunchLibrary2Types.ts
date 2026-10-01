@@ -122,33 +122,13 @@ export interface ExpeditionListMatch {
 }
 
 export interface FirstStage {
-  apogee?: number
-  consecutive_successful_launches?: number
-  description?: string
-  diameter?: number
-  failed_launches?: number
-  family?: string
   flights?: number
-  full_name?: string
-  gto_capacity?: number
   id?: number
-  launch_mass?: number
   launcher_config?: Record<string, any>
-  length?: number
-  leo_capacity?: number
-  maiden_flight?: string
-  manufacturer?: Record<string, any>
-  max_stage?: number
-  min_stage?: number
-  name?: string
-  pending_launches?: number
   serial_number?: string
   status?: string
-  successful_launches?: number
-  to_thrust?: number
   type?: string
   url?: string
-  variant?: string
 }
 
 export interface FirstStageLoadMatch {
@@ -194,7 +174,7 @@ export interface LaunchListMatch {
   status?: string
 }
 
-export interface LaunchVehicle {
+export interface Launcher {
   apogee?: number
   consecutive_successful_launches?: number
   description?: string
@@ -219,29 +199,16 @@ export interface LaunchVehicle {
   variant?: string
 }
 
-export interface LaunchVehicleListMatch {
+export interface LauncherLoadMatch {
+  id: number
+}
+
+export interface LauncherListMatch {
   family?: string
   limit?: number
   manufacturer?: number
   offset?: number
   search?: string
-}
-
-export interface Launcher {
-  abbrev?: string
-  administrator?: string
-  country_code?: string
-  description?: string
-  founding_year?: string
-  id?: number
-  logo_url?: string
-  name?: string
-  type?: string
-  url?: string
-}
-
-export interface LauncherLoadMatch {
-  id: number
 }
 
 export interface Location {
@@ -267,7 +234,6 @@ export interface LocationListMatch {
 
 export interface Pad {
   agency_id?: number
-  country_code?: string
   id?: number
   info_url?: string
   latitude?: string
@@ -276,7 +242,6 @@ export interface Pad {
   map_image?: string
   map_url?: string
   name?: string
-  total_landing_count?: number
   total_launch_count?: number
   url?: string
   wiki_url?: string

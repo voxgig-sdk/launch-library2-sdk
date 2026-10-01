@@ -26,8 +26,6 @@ var NewFirstStageEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]a
 
 var NewLaunchEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) LaunchLibrary2Entity
 
-var NewLaunchVehicleEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) LaunchLibrary2Entity
-
 var NewLauncherEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) LaunchLibrary2Entity
 
 var NewLocationEntityFunc func(client *LaunchLibrary2SDK, entopts map[string]any) LaunchLibrary2Entity
