@@ -142,13 +142,9 @@ main: kit: entity: pad: {
           }
           m: "GET"
           o: "/pad"
-          q: {
-            exist: [
-              "limit"
-              "location"
-              "offset"
-              "search"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -188,6 +184,10 @@ main: kit: entity: pad: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

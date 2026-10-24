@@ -16,7 +16,7 @@ go get github.com/voxgig-sdk/launch-library2-sdk/go@latest
 ```
 
 The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
-release tag — see [Releases](https://github.com/voxgig-sdk/launch-library2-sdk/releases) for the available versions.
+release tag — see [Tags](https://github.com/voxgig-sdk/launch-library2-sdk/tags) for the available versions.
 
 To vendor from a local checkout instead, clone this repo alongside your
 project and add a `replace` directive pointing at the checked-out
@@ -35,9 +35,10 @@ loading a specific record.
 ### Quickstart
 
 A complete program: create a client, then call the entity operations.
-Each operation returns `(value, error)` — the value is the data itself
-(there is no `{ok, data}` wrapper), so check `err` and use the value
-directly.
+Each operation returns `(value, error)` — the value is the entity, and for
+`List` a `[]any` of entities, one per record (there is no `{ok, data}`
+wrapper), so check `err` and read a record through the entity's
+`Data()`.
 
 ```go
 package main
@@ -50,21 +51,21 @@ import (
 func main() {
     client := sdk.New()
 
-    // List agency records — the value is the array of records itself.
+    // List agency records — the value is a []any of entities, one per record.
     agencys, err := client.Agency(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
     for _, item := range agencys.([]any) {
-        fmt.Println(item)
+        fmt.Println(item.(sdk.Entity).Data())
     }
 
-    // Load a single agency — the value is the loaded record.
+    // Load a single agency — the value is the entity; Data() reads its record.
     agency, err := client.Agency(nil).Load(map[string]any{"id": 1}, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(agency)
+    fmt.Println(agency.(sdk.Entity).Data())
 }
 ```
 
@@ -144,13 +145,16 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-astronaut, err := client.Astronaut(nil).List(
+astronauts, err := client.Astronaut(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(astronaut) // the returned mock data
+// A []any of entities, one per mock record.
+for _, item := range astronauts.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ### Use a custom fetch function
@@ -246,8 +250,8 @@ All entities implement the `LaunchLibrary2Entity` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
-| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
+| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria, and return it. |
+| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria, one per record. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -255,21 +259,21 @@ All entities implement the `LaunchLibrary2Entity` interface.
 
 ### Result shape
 
-Entity operations return `(value, error)`. The `value` is the
-operation's data **directly** — there is no wrapper:
+Entity operations return `(value, error)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` | the entity record (`map[string]any`) |
-| `List` | a `[]any` of entity records |
+| `Load` | the entity, whose `Data()` reads its record (`map[string]any`) |
+| `List` | a `[]any` of entities, one per record |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    agency, err := client.Agency(nil).List(map[string]any{/* fields */}, nil)
+    agency, err := client.Agency(nil).List(nil, nil)
     if err != nil { /* handle */ }
-    // agency is the returned record
+    // agency is a []any of entities, one per record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -555,7 +559,7 @@ agency, err := client.Agency(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(agency) // the loaded record
+fmt.Println(agency.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -565,7 +569,10 @@ agencys, err := client.Agency(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(agencys) // the array of records
+// A []any of entities, one per record.
+for _, item := range agencys.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -604,7 +611,7 @@ astronaut, err := client.Astronaut(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(astronaut) // the loaded record
+fmt.Println(astronaut.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -614,7 +621,10 @@ astronauts, err := client.Astronaut(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(astronauts) // the array of records
+// A []any of entities, one per record.
+for _, item := range astronauts.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -647,7 +657,7 @@ dockingEvent, err := client.DockingEvent(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(dockingEvent) // the loaded record
+fmt.Println(dockingEvent.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -657,7 +667,10 @@ dockingEvents, err := client.DockingEvent(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(dockingEvents) // the array of records
+// A []any of entities, one per record.
+for _, item := range dockingEvents.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -694,7 +707,7 @@ event, err := client.Event(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(event) // the loaded record
+fmt.Println(event.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -704,7 +717,10 @@ events, err := client.Event(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(events) // the array of records
+// A []any of entities, one per record.
+for _, item := range events.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -738,7 +754,7 @@ expedition, err := client.Expedition(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(expedition) // the loaded record
+fmt.Println(expedition.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -748,7 +764,10 @@ expeditions, err := client.Expedition(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(expeditions) // the array of records
+// A []any of entities, one per record.
+for _, item := range expeditions.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -782,7 +801,7 @@ firstStage, err := client.FirstStage(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(firstStage) // the loaded record
+fmt.Println(firstStage.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -792,7 +811,10 @@ firstStages, err := client.FirstStage(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(firstStages) // the array of records
+// A []any of entities, one per record.
+for _, item := range firstStages.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -833,7 +855,7 @@ launch, err := client.Launch(nil).Load(map[string]any{"id": "launch_id"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(launch) // the loaded record
+fmt.Println(launch.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -843,7 +865,10 @@ launchs, err := client.Launch(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(launchs) // the array of records
+// A []any of entities, one per record.
+for _, item := range launchs.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -892,7 +917,7 @@ launcher, err := client.Launcher(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(launcher) // the loaded record
+fmt.Println(launcher.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -902,7 +927,10 @@ launchers, err := client.Launcher(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(launchers) // the array of records
+// A []any of entities, one per record.
+for _, item := range launchers.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -936,7 +964,7 @@ location, err := client.Location(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(location) // the loaded record
+fmt.Println(location.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -946,7 +974,10 @@ locations, err := client.Location(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(locations) // the array of records
+// A []any of entities, one per record.
+for _, item := range locations.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -985,7 +1016,7 @@ pad, err := client.Pad(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(pad) // the loaded record
+fmt.Println(pad.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -995,7 +1026,10 @@ pads, err := client.Pad(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(pads) // the array of records
+// A []any of entities, one per record.
+for _, item := range pads.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -1033,7 +1067,7 @@ spaceStation, err := client.SpaceStation(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(spaceStation) // the loaded record
+fmt.Println(spaceStation.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -1043,7 +1077,10 @@ spaceStations, err := client.SpaceStation(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(spaceStations) // the array of records
+// A []any of entities, one per record.
+for _, item := range spaceStations.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -1085,7 +1122,7 @@ spacecraft, err := client.Spacecraft(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(spacecraft) // the loaded record
+fmt.Println(spacecraft.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -1095,7 +1132,10 @@ spacecrafts, err := client.Spacecraft(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(spacecrafts) // the array of records
+// A []any of entities, one per record.
+for _, item := range spacecrafts.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ## Features
@@ -1232,7 +1272,9 @@ The Go SDK uses `map[string]any` throughout rather than typed structs.
 This mirrors the dynamic nature of the API and keeps the SDK
 flexible — no code generation is needed when the API schema changes.
 
-Use `core.ToMapAny()` to safely cast results and nested data.
+An operation returns the entity, and its `Data()` returns the record. Use
+`core.ToMapAny()` to safely cast that record, or data nested in it, to
+`map[string]any`: it returns `nil` for anything else, an entity included.
 
 ### Package structure
 

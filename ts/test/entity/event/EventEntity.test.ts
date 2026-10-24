@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { LaunchLibrary2SDK, BaseFeature, stdutil } from '../../..'
+import { LaunchLibrary2SDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('EventEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('event hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of LaunchLibrary2SDK.test(offline).Event().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of LaunchLibrary2SDK.test(offline).Event()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = LaunchLibrary2SDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Event().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of LaunchLibrary2SDK.test().Event().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new LaunchLibrary2SDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Event().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Event().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = LaunchLibrary2SDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Event().list({"limit":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.LAUNCH_LIBRARY2_TEST_LIVE
@@ -51,7 +109,7 @@ describe('EventEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"date":{"a":true,"fo":"date-time","h":"Date","n":"date","r":false,"sh":"Event date and time","t":"`$STRING`","key$":"date","index$":0},"description":{"a":true,"h":"Description","n":"description","r":false,"sh":"Description of the event","t":"`$STRING`","key$":"description","index$":1},"feature_image":{"a":true,"h":"Feature Image","n":"feature_image","r":false,"sh":"URL to feature image","t":"`$STRING`","key$":"feature_image","index$":2},"id":{"a":true,"h":"Id","n":"id","r":false,"sh":"Event ID","t":"`$INTEGER`","key$":"id","index$":3},"location":{"a":true,"h":"Location","n":"location","r":false,"sh":"Event location","t":"`$STRING`","key$":"location","index$":4},"name":{"a":true,"h":"Name","n":"name","r":false,"sh":"Name of the event","t":"`$STRING`","key$":"name","index$":5},"news_url":{"a":true,"h":"News Url","n":"news_url","r":false,"sh":"URL to news article","t":"`$STRING`","key$":"news_url","index$":6},"type":{"a":true,"h":"Type","n":"type","r":false,"t":"`$OBJECT`","key$":"type","index$":7},"url":{"a":true,"h":"Url","n":"url","r":false,"sh":"API URL for this event","t":"`$STRING`","key$":"url","index$":8},"video_url":{"a":true,"h":"Video Url","n":"video_url","r":false,"sh":"URL to video","t":"`$STRING`","key$":"video_url","index$":9}},"id":{"field":"id","name":"id"},"name":"event","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /event","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":10,"k":"query","n":"limit","or":"limit","r":false,"t":"`$INTEGER`","index$":0},{"a":true,"ex":0,"k":"query","n":"offset","or":"offset","r":false,"t":"`$INTEGER`","index$":1},{"a":true,"k":"query","n":"search","or":"search","r":false,"t":"`$STRING`","index$":2}]},"k":"http","m":"GET","o":"/event","q":{"exist":["limit","offset","search"]},"r":{},"s":[{"lit":"event"}],"t":{"req":"`reqdata`","res":"`body.results`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /event/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/event/{id}","q":{"exist":["id"]},"r":{},"s":[{"lit":"event"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"event","name__orig":"event","Name":"Event","name_":"event","name-":"event","NAME":"EVENT","index$":3}, {"active":true,"entity":"event","key$":"BasicEventFlow","kind":"basic","name":"BasicEventFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"event_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"event_ref01","srcdatavar":"event_ref01_data","suffix":"_dt0"},"m":{"id":"event01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-event_ref01"}}],"index$":1}]}, 'Event', {"GET /event":{"protocol":"http","parameters":[{"name":"limit","in":"query","description":"Number of results to return per page","schema":{"type":"integer","default":10},"index$":0},{"name":"offset","in":"query","description":"The initial index from which to return the results","schema":{"type":"integer","default":0},"index$":1},{"name":"search","in":"query","description":"Search term to filter events","schema":{"type":"string"},"index$":2}]},"GET /event/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"description":"ID of the event","schema":{"type":"integer"},"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"date":{"a":true,"fo":"date-time","h":"Date","n":"date","r":false,"sh":"Event date and time","t":"`$STRING`","key$":"date","index$":0},"description":{"a":true,"h":"Description","n":"description","r":false,"sh":"Description of the event","t":"`$STRING`","key$":"description","index$":1},"feature_image":{"a":true,"h":"Feature Image","n":"feature_image","r":false,"sh":"URL to feature image","t":"`$STRING`","key$":"feature_image","index$":2},"id":{"a":true,"h":"Id","n":"id","r":false,"sh":"Event ID","t":"`$INTEGER`","key$":"id","index$":3},"location":{"a":true,"h":"Location","n":"location","r":false,"sh":"Event location","t":"`$STRING`","key$":"location","index$":4},"name":{"a":true,"h":"Name","n":"name","r":false,"sh":"Name of the event","t":"`$STRING`","key$":"name","index$":5},"news_url":{"a":true,"h":"News Url","n":"news_url","r":false,"sh":"URL to news article","t":"`$STRING`","key$":"news_url","index$":6},"type":{"a":true,"h":"Type","n":"type","r":false,"t":"`$OBJECT`","key$":"type","index$":7},"url":{"a":true,"h":"Url","n":"url","r":false,"sh":"API URL for this event","t":"`$STRING`","key$":"url","index$":8},"video_url":{"a":true,"h":"Video Url","n":"video_url","r":false,"sh":"URL to video","t":"`$STRING`","key$":"video_url","index$":9}},"id":{"field":"id","name":"id"},"name":"event","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /event","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":10,"k":"query","n":"limit","or":"limit","r":false,"t":"`$INTEGER`","index$":0},{"a":true,"ex":0,"k":"query","n":"offset","or":"offset","r":false,"t":"`$INTEGER`","index$":1},{"a":true,"k":"query","n":"search","or":"search","r":false,"t":"`$STRING`","index$":2}]},"k":"http","m":"GET","o":"/event","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"event"}],"t":{"req":"`reqdata`","res":"`body.results`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /event/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/event/{id}","q":{"exist":["id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"event"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"event","name__orig":"event","Name":"Event","name_":"event","name-":"event","NAME":"EVENT","index$":3}, {"active":true,"entity":"event","key$":"BasicEventFlow","kind":"basic","name":"BasicEventFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"event_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"event_ref01","srcdatavar":"event_ref01_data","suffix":"_dt0"},"m":{"id":"event01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-event_ref01"}}],"index$":1}]}, 'Event', {"GET /event":{"protocol":"http","parameters":[{"name":"limit","in":"query","description":"Number of results to return per page","schema":{"type":"integer","default":10},"index$":0},{"name":"offset","in":"query","description":"The initial index from which to return the results","schema":{"type":"integer","default":0},"index$":1},{"name":"search","in":"query","description":"Search term to filter events","schema":{"type":"string"},"index$":2}]},"GET /event/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"description":"ID of the event","schema":{"type":"integer"},"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -79,6 +137,12 @@ describe('EventEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

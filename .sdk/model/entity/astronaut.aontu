@@ -150,14 +150,9 @@ main: kit: entity: astronaut: {
           }
           m: "GET"
           o: "/astronaut"
-          q: {
-            exist: [
-              "limit"
-              "nationality"
-              "offset"
-              "search"
-              "status"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -197,6 +192,10 @@ main: kit: entity: astronaut: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

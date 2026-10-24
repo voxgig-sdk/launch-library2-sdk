@@ -102,6 +102,7 @@ class Config {
       },
       "optspec": {
         "clearTimer": "`$FUNCTION`",
+        "now": "`$FUNCTION`",
         "setTimer": "`$FUNCTION`"
       },
       "strict": false,
@@ -263,7 +264,8 @@ class Config {
                     "name": "country_code",
                     "orig": "country_code",
                     "type": "`$STRING`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   },
                   {
                     "name": "limit",
@@ -287,14 +289,10 @@ class Config {
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "agency_type",
-                  "country_code",
-                  "limit",
-                  "offset",
-                  "search"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -339,6 +337,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -463,7 +465,8 @@ class Config {
                     "name": "nationality",
                     "orig": "nationality",
                     "type": "`$STRING`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   },
                   {
                     "name": "offset",
@@ -482,18 +485,15 @@ class Config {
                     "name": "status",
                     "orig": "status",
                     "type": "`$STRING`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "limit",
-                  "nationality",
-                  "offset",
-                  "search",
-                  "status"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -538,6 +538,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -619,7 +623,8 @@ class Config {
                     "name": "docking_location",
                     "orig": "docking_location",
                     "type": "`$INTEGER`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   },
                   {
                     "name": "limit",
@@ -643,13 +648,10 @@ class Config {
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "docking_location",
-                  "limit",
-                  "offset",
-                  "spacestation"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -694,6 +696,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -817,12 +823,10 @@ class Config {
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "limit",
-                  "offset",
-                  "search"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -867,6 +871,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -974,17 +982,15 @@ class Config {
                     "name": "spacestation",
                     "orig": "spacestation",
                     "type": "`$INTEGER`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "limit",
-                  "offset",
-                  "search",
-                  "spacestation"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1029,6 +1035,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1135,17 +1145,15 @@ class Config {
                     "name": "serial_number",
                     "orig": "serial_number",
                     "type": "`$STRING`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "flight_number",
-                  "limit",
-                  "offset",
-                  "serial_number"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1190,6 +1198,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1361,21 +1373,15 @@ class Config {
                     "name": "status",
                     "orig": "status",
                     "type": "`$STRING`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "limit",
-                  "lsp_id",
-                  "lsp_name",
-                  "offset",
-                  "rocket_configuration_id",
-                  "search",
-                  "spacecraft_id",
-                  "status"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1420,6 +1426,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1601,7 +1611,8 @@ class Config {
                     "name": "family",
                     "orig": "family",
                     "type": "`$STRING`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   },
                   {
                     "name": "limit",
@@ -1614,7 +1625,8 @@ class Config {
                     "name": "manufacturer",
                     "orig": "manufacturer",
                     "type": "`$INTEGER`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   },
                   {
                     "name": "offset",
@@ -1631,14 +1643,10 @@ class Config {
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "family",
-                  "limit",
-                  "manufacturer",
-                  "offset",
-                  "search"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1687,6 +1695,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1774,7 +1786,8 @@ class Config {
                     "name": "country_code",
                     "orig": "country_code",
                     "type": "`$STRING`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   },
                   {
                     "name": "limit",
@@ -1798,13 +1811,10 @@ class Config {
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "country_code",
-                  "limit",
-                  "offset",
-                  "search"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1849,6 +1859,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -1972,7 +1986,8 @@ class Config {
                     "name": "location",
                     "orig": "location",
                     "type": "`$INTEGER`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   },
                   {
                     "name": "offset",
@@ -1989,13 +2004,10 @@ class Config {
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "limit",
-                  "location",
-                  "offset",
-                  "search"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -2040,6 +2052,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -2176,18 +2192,15 @@ class Config {
                     "name": "status",
                     "orig": "status",
                     "type": "`$STRING`",
-                    "kind": "query"
+                    "kind": "query",
+                    "field": true
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "limit",
-                  "offset",
-                  "owner",
-                  "search",
-                  "status"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -2232,6 +2245,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -2394,13 +2411,10 @@ class Config {
                   }
                 ]
               },
-              "select": {
-                "exist": [
-                  "limit",
-                  "offset",
-                  "search",
-                  "status"
-                ]
+              "select": {},
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -2449,6 +2463,10 @@ class Config {
                 "exist": [
                   "id"
                 ]
+              },
+              "response": {
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]

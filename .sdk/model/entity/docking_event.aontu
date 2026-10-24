@@ -101,13 +101,9 @@ main: kit: entity: docking_event: {
           }
           m: "GET"
           o: "/docking_event"
-          q: {
-            exist: [
-              "docking_location"
-              "limit"
-              "offset"
-              "spacestation"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -147,6 +143,10 @@ main: kit: entity: docking_event: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

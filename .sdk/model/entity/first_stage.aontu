@@ -107,13 +107,9 @@ main: kit: entity: first_stage: {
           }
           m: "GET"
           o: "/firststage"
-          q: {
-            exist: [
-              "flight_number"
-              "limit"
-              "offset"
-              "serial_number"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -153,6 +149,10 @@ main: kit: entity: first_stage: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

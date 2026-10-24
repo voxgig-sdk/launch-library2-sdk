@@ -79,6 +79,7 @@ module LaunchLibrary2Config
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -209,6 +210,7 @@ module LaunchLibrary2Config
                         "orig" => "country_code",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                       {
                         "name" => "limit",
@@ -232,14 +234,10 @@ module LaunchLibrary2Config
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "agency_type",
-                      "country_code",
-                      "limit",
-                      "offset",
-                      "search",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -284,6 +282,10 @@ module LaunchLibrary2Config
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -409,6 +411,7 @@ module LaunchLibrary2Config
                         "orig" => "nationality",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                       {
                         "name" => "offset",
@@ -428,17 +431,14 @@ module LaunchLibrary2Config
                         "orig" => "status",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "limit",
-                      "nationality",
-                      "offset",
-                      "search",
-                      "status",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -483,6 +483,10 @@ module LaunchLibrary2Config
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -565,6 +569,7 @@ module LaunchLibrary2Config
                         "orig" => "docking_location",
                         "type" => "`$INTEGER`",
                         "kind" => "query",
+                        "field" => true,
                       },
                       {
                         "name" => "limit",
@@ -588,13 +593,10 @@ module LaunchLibrary2Config
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "docking_location",
-                      "limit",
-                      "offset",
-                      "spacestation",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -639,6 +641,10 @@ module LaunchLibrary2Config
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -762,12 +768,10 @@ module LaunchLibrary2Config
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "limit",
-                      "offset",
-                      "search",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -812,6 +816,10 @@ module LaunchLibrary2Config
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -920,16 +928,14 @@ module LaunchLibrary2Config
                         "orig" => "spacestation",
                         "type" => "`$INTEGER`",
                         "kind" => "query",
+                        "field" => true,
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "limit",
-                      "offset",
-                      "search",
-                      "spacestation",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -974,6 +980,10 @@ module LaunchLibrary2Config
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1081,16 +1091,14 @@ module LaunchLibrary2Config
                         "orig" => "serial_number",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "flight_number",
-                      "limit",
-                      "offset",
-                      "serial_number",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1135,6 +1143,10 @@ module LaunchLibrary2Config
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1307,20 +1319,14 @@ module LaunchLibrary2Config
                         "orig" => "status",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "limit",
-                      "lsp_id",
-                      "lsp_name",
-                      "offset",
-                      "rocket_configuration_id",
-                      "search",
-                      "spacecraft_id",
-                      "status",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1365,6 +1371,10 @@ module LaunchLibrary2Config
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1547,6 +1557,7 @@ module LaunchLibrary2Config
                         "orig" => "family",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                       {
                         "name" => "limit",
@@ -1560,6 +1571,7 @@ module LaunchLibrary2Config
                         "orig" => "manufacturer",
                         "type" => "`$INTEGER`",
                         "kind" => "query",
+                        "field" => true,
                       },
                       {
                         "name" => "offset",
@@ -1576,14 +1588,10 @@ module LaunchLibrary2Config
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "family",
-                      "limit",
-                      "manufacturer",
-                      "offset",
-                      "search",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1632,6 +1640,10 @@ module LaunchLibrary2Config
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1720,6 +1732,7 @@ module LaunchLibrary2Config
                         "orig" => "country_code",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                       {
                         "name" => "limit",
@@ -1743,13 +1756,10 @@ module LaunchLibrary2Config
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "country_code",
-                      "limit",
-                      "offset",
-                      "search",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1794,6 +1804,10 @@ module LaunchLibrary2Config
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1918,6 +1932,7 @@ module LaunchLibrary2Config
                         "orig" => "location",
                         "type" => "`$INTEGER`",
                         "kind" => "query",
+                        "field" => true,
                       },
                       {
                         "name" => "offset",
@@ -1934,13 +1949,10 @@ module LaunchLibrary2Config
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "limit",
-                      "location",
-                      "offset",
-                      "search",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -1985,6 +1997,10 @@ module LaunchLibrary2Config
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -2122,17 +2138,14 @@ module LaunchLibrary2Config
                         "orig" => "status",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "limit",
-                      "offset",
-                      "owner",
-                      "search",
-                      "status",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -2177,6 +2190,10 @@ module LaunchLibrary2Config
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -2339,13 +2356,10 @@ module LaunchLibrary2Config
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "limit",
-                      "offset",
-                      "search",
-                      "status",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -2394,6 +2408,10 @@ module LaunchLibrary2Config
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],

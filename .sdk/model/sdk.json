@@ -244,16 +244,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/agencies",
-                  "q": {
-                    "exist": [
-                      "agency_type",
-                      "country_code",
-                      "limit",
-                      "offset",
-                      "search"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "agencies"
@@ -298,6 +294,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "agencies"
@@ -487,16 +487,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/astronaut",
-                  "q": {
-                    "exist": [
-                      "limit",
-                      "nationality",
-                      "offset",
-                      "search",
-                      "status"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "astronaut"
@@ -541,6 +537,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "astronaut"
@@ -674,15 +674,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/docking_event",
-                  "q": {
-                    "exist": [
-                      "docking_location",
-                      "limit",
-                      "offset",
-                      "spacestation"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "docking_event"
@@ -727,6 +724,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "docking_event"
@@ -884,14 +885,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/event",
-                  "q": {
-                    "exist": [
-                      "limit",
-                      "offset",
-                      "search"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "event"
@@ -936,6 +935,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "event"
@@ -1077,15 +1080,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/expedition",
-                  "q": {
-                    "exist": [
-                      "limit",
-                      "offset",
-                      "search",
-                      "spacestation"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "expedition"
@@ -1130,6 +1130,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "expedition"
@@ -1270,15 +1274,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/firststage",
-                  "q": {
-                    "exist": [
-                      "flight_number",
-                      "limit",
-                      "offset",
-                      "serial_number"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "firststage"
@@ -1323,6 +1324,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "firststage"
@@ -1550,19 +1555,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/launch",
-                  "q": {
-                    "exist": [
-                      "limit",
-                      "lsp_id",
-                      "lsp_name",
-                      "offset",
-                      "rocket_configuration_id",
-                      "search",
-                      "spacecraft_id",
-                      "status"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "launch"
@@ -1607,6 +1605,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "launch"
@@ -1876,16 +1878,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/config/launcher",
-                  "q": {
-                    "exist": [
-                      "family",
-                      "limit",
-                      "manufacturer",
-                      "offset",
-                      "search"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "config"
@@ -1933,6 +1931,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "config"
@@ -2077,15 +2079,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/location",
-                  "q": {
-                    "exist": [
-                      "country_code",
-                      "limit",
-                      "offset",
-                      "search"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "location"
@@ -2130,6 +2129,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "location"
@@ -2310,15 +2313,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/pad",
-                  "q": {
-                    "exist": [
-                      "limit",
-                      "location",
-                      "offset",
-                      "search"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "pad"
@@ -2363,6 +2363,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "pad"
@@ -2543,16 +2547,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/spacestation",
-                  "q": {
-                    "exist": [
-                      "limit",
-                      "offset",
-                      "owner",
-                      "search",
-                      "status"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "spacestation"
@@ -2597,6 +2597,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "spacestation"
@@ -2801,15 +2805,12 @@
                   "k": "http",
                   "m": "GET",
                   "o": "/config/spacecraft",
-                  "q": {
-                    "exist": [
-                      "limit",
-                      "offset",
-                      "search",
-                      "status"
-                    ]
-                  },
+                  "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "config"
@@ -2857,6 +2858,10 @@
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "config"
@@ -3203,6 +3208,7 @@
             },
             "optspec": {
               "clearTimer": "`$FUNCTION`",
+              "now": "`$FUNCTION`",
               "setTimer": "`$FUNCTION`"
             },
             "strict": false
@@ -3892,7 +3898,7 @@
       "optspec": {
         "allow": {
           "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
-          "op": "create,update,load,list,remove,command,direct,graphql"
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
         },
         "apikey": "",
         "auth": {
@@ -3945,6 +3951,11 @@
         "top": {
           "active": true
         }
+      },
+      "publisher": {
+        "name": "",
+        "security": "",
+        "url": ""
       },
       "repo": {
         "host": "github.com",
@@ -4175,7 +4186,10 @@
             "version": "0.0.1"
           },
           "superseded": [],
-          "title": "Go MCP server"
+          "title": "Go MCP server",
+          "tool": {
+            "write": false
+          }
         },
         "lua": {
           "active": true,
@@ -4552,6 +4566,17 @@
           "base": "",
           "strict": true
         }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "",
+        "entity_desc": {},
+        "homepage": "",
+        "meta_source": "",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": ""
       }
     }
   },

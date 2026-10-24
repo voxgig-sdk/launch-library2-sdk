@@ -136,14 +136,9 @@ main: kit: entity: agency: {
           }
           m: "GET"
           o: "/agencies"
-          q: {
-            exist: [
-              "agency_type"
-              "country_code"
-              "limit"
-              "offset"
-              "search"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -183,6 +178,10 @@ main: kit: entity: agency: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

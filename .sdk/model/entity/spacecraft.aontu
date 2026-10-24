@@ -163,13 +163,9 @@ main: kit: entity: spacecraft: {
           }
           m: "GET"
           o: "/config/spacecraft"
-          q: {
-            exist: [
-              "limit"
-              "offset"
-              "search"
-              "status"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -212,6 +208,10 @@ main: kit: entity: spacecraft: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

@@ -108,13 +108,9 @@ main: kit: entity: location: {
           }
           m: "GET"
           o: "/location"
-          q: {
-            exist: [
-              "country_code"
-              "limit"
-              "offset"
-              "search"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -154,6 +150,10 @@ main: kit: entity: location: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

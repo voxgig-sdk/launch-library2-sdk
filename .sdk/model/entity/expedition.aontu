@@ -108,13 +108,9 @@ main: kit: entity: expedition: {
           }
           m: "GET"
           o: "/expedition"
-          q: {
-            exist: [
-              "limit"
-              "offset"
-              "search"
-              "spacestation"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -154,6 +150,10 @@ main: kit: entity: expedition: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

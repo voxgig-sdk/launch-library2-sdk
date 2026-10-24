@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Pad();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('pad hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.LaunchLibrary2SDK.test(offline).Pad().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.LaunchLibrary2SDK.test(offline).Pad()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.LaunchLibrary2SDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Pad().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.LaunchLibrary2SDK.test().Pad().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.LaunchLibrary2SDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Pad().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Pad().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.LaunchLibrary2SDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Pad().list({ "limit": "x" }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.LAUNCH_LIBRARY2_TEST_LIVE;
         for (const op of ['list', 'load']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "agency_id": { "a": true, "h": "Agency Id", "n": "agency_id", "r": false, "sh": "ID of the agency that operates this pad", "t": "`$INTEGER`", "key$": "agency_id", "index$": 0 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Pad ID", "t": "`$INTEGER`", "key$": "id", "index$": 1 }, "info_url": { "a": true, "h": "Info Url", "n": "info_url", "r": false, "sh": "URL to more information", "t": "`$STRING`", "key$": "info_url", "index$": 2 }, "latitude": { "a": true, "h": "Latitude", "n": "latitude", "r": false, "sh": "Latitude coordinate", "t": "`$STRING`", "key$": "latitude", "index$": 3 }, "location": { "a": true, "h": "Location", "n": "location", "r": false, "t": "`$OBJECT`", "key$": "location", "index$": 4 }, "longitude": { "a": true, "h": "Longitude", "n": "longitude", "r": false, "sh": "Longitude coordinate", "t": "`$STRING`", "key$": "longitude", "index$": 5 }, "map_image": { "a": true, "h": "Map Image", "n": "map_image", "r": false, "sh": "URL to map image", "t": "`$STRING`", "key$": "map_image", "index$": 6 }, "map_url": { "a": true, "h": "Map Url", "n": "map_url", "r": false, "sh": "URL to map", "t": "`$STRING`", "key$": "map_url", "index$": 7 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Name of the pad", "t": "`$STRING`", "key$": "name", "index$": 8 }, "total_launch_count": { "a": true, "h": "Total Launch Count", "n": "total_launch_count", "r": false, "sh": "Total number of launches from this pad", "t": "`$INTEGER`", "key$": "total_launch_count", "index$": 9 }, "url": { "a": true, "h": "Url", "n": "url", "r": false, "sh": "API URL for this pad", "t": "`$STRING`", "key$": "url", "index$": 10 }, "wiki_url": { "a": true, "h": "Wiki Url", "n": "wiki_url", "r": false, "sh": "Wikipedia URL", "t": "`$STRING`", "key$": "wiki_url", "index$": 11 } }, "id": { "field": "id", "name": "id" }, "name": "pad", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /pad", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "ex": 10, "k": "query", "n": "limit", "or": "limit", "r": false, "t": "`$INTEGER`", "index$": 0 }, { "a": true, "k": "query", "n": "location", "or": "location", "r": false, "t": "`$INTEGER`", "index$": 1 }, { "a": true, "ex": 0, "k": "query", "n": "offset", "or": "offset", "r": false, "t": "`$INTEGER`", "index$": 2 }, { "a": true, "k": "query", "n": "search", "or": "search", "r": false, "t": "`$STRING`", "index$": 3 }] }, "k": "http", "m": "GET", "o": "/pad", "q": { "exist": ["limit", "location", "offset", "search"] }, "r": {}, "s": [{ "lit": "pad" }], "t": { "req": "`reqdata`", "res": "`body.results`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /pad/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "id", "r": true, "t": "`$INTEGER`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/pad/{id}", "q": { "exist": ["id"] }, "r": {}, "s": [{ "lit": "pad" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "pad", "name__orig": "pad", "Name": "Pad", "name_": "pad", "name-": "pad", "NAME": "PAD", "index$": 9 }, { "active": true, "entity": "pad", "key$": "BasicPadFlow", "kind": "basic", "name": "BasicPadFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "pad_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "pad_ref01", "srcdatavar": "pad_ref01_data", "suffix": "_dt0" }, "m": { "id": "pad01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-pad_ref01" } }], "index$": 1 }] }, 'Pad', { "GET /pad": { "protocol": "http", "parameters": [{ "name": "limit", "in": "query", "description": "Number of results to return per page", "schema": { "type": "integer", "default": 10 }, "index$": 0 }, { "name": "offset", "in": "query", "description": "The initial index from which to return the results", "schema": { "type": "integer", "default": 0 }, "index$": 1 }, { "name": "search", "in": "query", "description": "Search by pad name", "schema": { "type": "string" }, "index$": 2 }, { "name": "location", "in": "query", "description": "Filter by location ID", "schema": { "type": "integer" }, "index$": 3 }] }, "GET /pad/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "required": true, "description": "ID of the pad", "schema": { "type": "integer" }, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "agency_id": { "a": true, "h": "Agency Id", "n": "agency_id", "r": false, "sh": "ID of the agency that operates this pad", "t": "`$INTEGER`", "key$": "agency_id", "index$": 0 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Pad ID", "t": "`$INTEGER`", "key$": "id", "index$": 1 }, "info_url": { "a": true, "h": "Info Url", "n": "info_url", "r": false, "sh": "URL to more information", "t": "`$STRING`", "key$": "info_url", "index$": 2 }, "latitude": { "a": true, "h": "Latitude", "n": "latitude", "r": false, "sh": "Latitude coordinate", "t": "`$STRING`", "key$": "latitude", "index$": 3 }, "location": { "a": true, "h": "Location", "n": "location", "r": false, "t": "`$OBJECT`", "key$": "location", "index$": 4 }, "longitude": { "a": true, "h": "Longitude", "n": "longitude", "r": false, "sh": "Longitude coordinate", "t": "`$STRING`", "key$": "longitude", "index$": 5 }, "map_image": { "a": true, "h": "Map Image", "n": "map_image", "r": false, "sh": "URL to map image", "t": "`$STRING`", "key$": "map_image", "index$": 6 }, "map_url": { "a": true, "h": "Map Url", "n": "map_url", "r": false, "sh": "URL to map", "t": "`$STRING`", "key$": "map_url", "index$": 7 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Name of the pad", "t": "`$STRING`", "key$": "name", "index$": 8 }, "total_launch_count": { "a": true, "h": "Total Launch Count", "n": "total_launch_count", "r": false, "sh": "Total number of launches from this pad", "t": "`$INTEGER`", "key$": "total_launch_count", "index$": 9 }, "url": { "a": true, "h": "Url", "n": "url", "r": false, "sh": "API URL for this pad", "t": "`$STRING`", "key$": "url", "index$": 10 }, "wiki_url": { "a": true, "h": "Wiki Url", "n": "wiki_url", "r": false, "sh": "Wikipedia URL", "t": "`$STRING`", "key$": "wiki_url", "index$": 11 } }, "id": { "field": "id", "name": "id" }, "name": "pad", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /pad", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "ex": 10, "k": "query", "n": "limit", "or": "limit", "r": false, "t": "`$INTEGER`", "index$": 0 }, { "a": true, "k": "query", "n": "location", "or": "location", "r": false, "t": "`$INTEGER`", "index$": 1 }, { "a": true, "ex": 0, "k": "query", "n": "offset", "or": "offset", "r": false, "t": "`$INTEGER`", "index$": 2 }, { "a": true, "k": "query", "n": "search", "or": "search", "r": false, "t": "`$STRING`", "index$": 3 }] }, "k": "http", "m": "GET", "o": "/pad", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "pad" }], "t": { "req": "`reqdata`", "res": "`body.results`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /pad/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "id", "r": true, "t": "`$INTEGER`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/pad/{id}", "q": { "exist": ["id"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "pad" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "pad", "name__orig": "pad", "Name": "Pad", "name_": "pad", "name-": "pad", "NAME": "PAD", "index$": 9 }, { "active": true, "entity": "pad", "key$": "BasicPadFlow", "kind": "basic", "name": "BasicPadFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "pad_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "pad_ref01", "srcdatavar": "pad_ref01_data", "suffix": "_dt0" }, "m": { "id": "pad01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-pad_ref01" } }], "index$": 1 }] }, 'Pad', { "GET /pad": { "protocol": "http", "parameters": [{ "name": "limit", "in": "query", "description": "Number of results to return per page", "schema": { "type": "integer", "default": 10 }, "index$": 0 }, { "name": "offset", "in": "query", "description": "The initial index from which to return the results", "schema": { "type": "integer", "default": 0 }, "index$": 1 }, { "name": "search", "in": "query", "description": "Search by pad name", "schema": { "type": "string" }, "index$": 2 }, { "name": "location", "in": "query", "description": "Filter by location ID", "schema": { "type": "integer" }, "index$": 3 }] }, "GET /pad/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "required": true, "description": "ID of the pad", "schema": { "type": "integer" }, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -80,6 +127,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(pad_ref01_data_dt0.id === pad_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

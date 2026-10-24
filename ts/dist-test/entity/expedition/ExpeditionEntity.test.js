@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Expedition();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('expedition hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.LaunchLibrary2SDK.test(offline).Expedition().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.LaunchLibrary2SDK.test(offline).Expedition()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.LaunchLibrary2SDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Expedition().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.LaunchLibrary2SDK.test().Expedition().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.LaunchLibrary2SDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Expedition().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Expedition().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.LaunchLibrary2SDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Expedition().list({ "limit": "x" }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.LAUNCH_LIBRARY2_TEST_LIVE;
         for (const op of ['list', 'load']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "crew": { "a": true, "h": "Crew", "n": "crew", "r": false, "t": "`$ARRAY`", "key$": "crew", "index$": 0 }, "end": { "a": true, "fo": "date-time", "h": "End", "n": "end", "r": false, "sh": "End date of the expedition", "t": "`$STRING`", "key$": "end", "index$": 1 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Expedition ID", "t": "`$INTEGER`", "key$": "id", "index$": 2 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Name of the expedition", "t": "`$STRING`", "key$": "name", "index$": 3 }, "spacestation": { "a": true, "h": "Spacestation", "n": "spacestation", "r": false, "t": "`$OBJECT`", "key$": "spacestation", "index$": 4 }, "start": { "a": true, "fo": "date-time", "h": "Start", "n": "start", "r": false, "sh": "Start date of the expedition", "t": "`$STRING`", "key$": "start", "index$": 5 }, "url": { "a": true, "h": "Url", "n": "url", "r": false, "sh": "API URL for this expedition", "t": "`$STRING`", "key$": "url", "index$": 6 } }, "id": { "field": "id", "name": "id" }, "name": "expedition", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /expedition", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "ex": 10, "k": "query", "n": "limit", "or": "limit", "r": false, "t": "`$INTEGER`", "index$": 0 }, { "a": true, "ex": 0, "k": "query", "n": "offset", "or": "offset", "r": false, "t": "`$INTEGER`", "index$": 1 }, { "a": true, "k": "query", "n": "search", "or": "search", "r": false, "t": "`$STRING`", "index$": 2 }, { "a": true, "k": "query", "n": "spacestation", "or": "spacestation", "r": false, "t": "`$INTEGER`", "index$": 3 }] }, "k": "http", "m": "GET", "o": "/expedition", "q": { "exist": ["limit", "offset", "search", "spacestation"] }, "r": {}, "s": [{ "lit": "expedition" }], "t": { "req": "`reqdata`", "res": "`body.results`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /expedition/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "id", "r": true, "t": "`$INTEGER`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/expedition/{id}", "q": { "exist": ["id"] }, "r": {}, "s": [{ "lit": "expedition" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "expedition", "name__orig": "expedition", "Name": "Expedition", "name_": "expedition", "name-": "expedition", "NAME": "EXPEDITION", "index$": 4 }, { "active": true, "entity": "expedition", "key$": "BasicExpeditionFlow", "kind": "basic", "name": "BasicExpeditionFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "expedition_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "expedition_ref01", "srcdatavar": "expedition_ref01_data", "suffix": "_dt0" }, "m": { "id": "expedition01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-expedition_ref01" } }], "index$": 1 }] }, 'Expedition', { "GET /expedition": { "protocol": "http", "parameters": [{ "name": "limit", "in": "query", "description": "Number of results to return per page", "schema": { "type": "integer", "default": 10 }, "index$": 0 }, { "name": "offset", "in": "query", "description": "The initial index from which to return the results", "schema": { "type": "integer", "default": 0 }, "index$": 1 }, { "name": "search", "in": "query", "description": "Search by expedition name", "schema": { "type": "string" }, "index$": 2 }, { "name": "spacestation", "in": "query", "description": "Filter by space station", "schema": { "type": "integer" }, "index$": 3 }] }, "GET /expedition/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "required": true, "description": "ID of the expedition", "schema": { "type": "integer" }, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "crew": { "a": true, "h": "Crew", "n": "crew", "r": false, "t": "`$ARRAY`", "key$": "crew", "index$": 0 }, "end": { "a": true, "fo": "date-time", "h": "End", "n": "end", "r": false, "sh": "End date of the expedition", "t": "`$STRING`", "key$": "end", "index$": 1 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Expedition ID", "t": "`$INTEGER`", "key$": "id", "index$": 2 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Name of the expedition", "t": "`$STRING`", "key$": "name", "index$": 3 }, "spacestation": { "a": true, "h": "Spacestation", "n": "spacestation", "r": false, "t": "`$OBJECT`", "key$": "spacestation", "index$": 4 }, "start": { "a": true, "fo": "date-time", "h": "Start", "n": "start", "r": false, "sh": "Start date of the expedition", "t": "`$STRING`", "key$": "start", "index$": 5 }, "url": { "a": true, "h": "Url", "n": "url", "r": false, "sh": "API URL for this expedition", "t": "`$STRING`", "key$": "url", "index$": 6 } }, "id": { "field": "id", "name": "id" }, "name": "expedition", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /expedition", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "ex": 10, "k": "query", "n": "limit", "or": "limit", "r": false, "t": "`$INTEGER`", "index$": 0 }, { "a": true, "ex": 0, "k": "query", "n": "offset", "or": "offset", "r": false, "t": "`$INTEGER`", "index$": 1 }, { "a": true, "k": "query", "n": "search", "or": "search", "r": false, "t": "`$STRING`", "index$": 2 }, { "a": true, "k": "query", "n": "spacestation", "or": "spacestation", "r": false, "t": "`$INTEGER`", "index$": 3 }] }, "k": "http", "m": "GET", "o": "/expedition", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "expedition" }], "t": { "req": "`reqdata`", "res": "`body.results`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /expedition/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "id", "r": true, "t": "`$INTEGER`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/expedition/{id}", "q": { "exist": ["id"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "expedition" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "expedition", "name__orig": "expedition", "Name": "Expedition", "name_": "expedition", "name-": "expedition", "NAME": "EXPEDITION", "index$": 4 }, { "active": true, "entity": "expedition", "key$": "BasicExpeditionFlow", "kind": "basic", "name": "BasicExpeditionFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "expedition_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "expedition_ref01", "srcdatavar": "expedition_ref01_data", "suffix": "_dt0" }, "m": { "id": "expedition01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-expedition_ref01" } }], "index$": 1 }] }, 'Expedition', { "GET /expedition": { "protocol": "http", "parameters": [{ "name": "limit", "in": "query", "description": "Number of results to return per page", "schema": { "type": "integer", "default": 10 }, "index$": 0 }, { "name": "offset", "in": "query", "description": "The initial index from which to return the results", "schema": { "type": "integer", "default": 0 }, "index$": 1 }, { "name": "search", "in": "query", "description": "Search by expedition name", "schema": { "type": "string" }, "index$": 2 }, { "name": "spacestation", "in": "query", "description": "Filter by space station", "schema": { "type": "integer" }, "index$": 3 }] }, "GET /expedition/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "required": true, "description": "ID of the expedition", "schema": { "type": "integer" }, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -80,6 +127,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(expedition_ref01_data_dt0.id === expedition_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

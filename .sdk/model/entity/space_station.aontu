@@ -142,14 +142,9 @@ main: kit: entity: space_station: {
           }
           m: "GET"
           o: "/spacestation"
-          q: {
-            exist: [
-              "limit"
-              "offset"
-              "owner"
-              "search"
-              "status"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -189,6 +184,10 @@ main: kit: entity: space_station: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

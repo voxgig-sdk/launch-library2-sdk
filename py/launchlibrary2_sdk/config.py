@@ -96,6 +96,7 @@ def make_config():
         },
         "optspec": {
           "clearTimer": "`$FUNCTION`",
+          "now": "`$FUNCTION`",
           "setTimer": "`$FUNCTION`",
         },
         "strict": False,
@@ -226,6 +227,7 @@ def make_config():
                       "orig": "country_code",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                     {
                       "name": "limit",
@@ -249,14 +251,10 @@ def make_config():
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "agency_type",
-                    "country_code",
-                    "limit",
-                    "offset",
-                    "search",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -301,6 +299,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -426,6 +428,7 @@ def make_config():
                       "orig": "nationality",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                     {
                       "name": "offset",
@@ -445,17 +448,14 @@ def make_config():
                       "orig": "status",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "limit",
-                    "nationality",
-                    "offset",
-                    "search",
-                    "status",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -500,6 +500,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -582,6 +586,7 @@ def make_config():
                       "orig": "docking_location",
                       "type": "`$INTEGER`",
                       "kind": "query",
+                      "field": True,
                     },
                     {
                       "name": "limit",
@@ -605,13 +610,10 @@ def make_config():
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "docking_location",
-                    "limit",
-                    "offset",
-                    "spacestation",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -656,6 +658,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -779,12 +785,10 @@ def make_config():
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "limit",
-                    "offset",
-                    "search",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -829,6 +833,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -937,16 +945,14 @@ def make_config():
                       "orig": "spacestation",
                       "type": "`$INTEGER`",
                       "kind": "query",
+                      "field": True,
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "limit",
-                    "offset",
-                    "search",
-                    "spacestation",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -991,6 +997,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1098,16 +1108,14 @@ def make_config():
                       "orig": "serial_number",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "flight_number",
-                    "limit",
-                    "offset",
-                    "serial_number",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1152,6 +1160,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1324,20 +1336,14 @@ def make_config():
                       "orig": "status",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "limit",
-                    "lsp_id",
-                    "lsp_name",
-                    "offset",
-                    "rocket_configuration_id",
-                    "search",
-                    "spacecraft_id",
-                    "status",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1382,6 +1388,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1564,6 +1574,7 @@ def make_config():
                       "orig": "family",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                     {
                       "name": "limit",
@@ -1577,6 +1588,7 @@ def make_config():
                       "orig": "manufacturer",
                       "type": "`$INTEGER`",
                       "kind": "query",
+                      "field": True,
                     },
                     {
                       "name": "offset",
@@ -1593,14 +1605,10 @@ def make_config():
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "family",
-                    "limit",
-                    "manufacturer",
-                    "offset",
-                    "search",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1649,6 +1657,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1737,6 +1749,7 @@ def make_config():
                       "orig": "country_code",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                     {
                       "name": "limit",
@@ -1760,13 +1773,10 @@ def make_config():
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "country_code",
-                    "limit",
-                    "offset",
-                    "search",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1811,6 +1821,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1935,6 +1949,7 @@ def make_config():
                       "orig": "location",
                       "type": "`$INTEGER`",
                       "kind": "query",
+                      "field": True,
                     },
                     {
                       "name": "offset",
@@ -1951,13 +1966,10 @@ def make_config():
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "limit",
-                    "location",
-                    "offset",
-                    "search",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -2002,6 +2014,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -2139,17 +2155,14 @@ def make_config():
                       "orig": "status",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "limit",
-                    "offset",
-                    "owner",
-                    "search",
-                    "status",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -2194,6 +2207,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -2356,13 +2373,10 @@ def make_config():
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "limit",
-                    "offset",
-                    "search",
-                    "status",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -2411,6 +2425,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],

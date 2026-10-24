@@ -71,6 +71,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -201,6 +202,7 @@ func MakeConfig() map[string]any {
 											"orig": "country_code",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 										map[string]any{
 											"name": "limit",
@@ -224,14 +226,10 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"agency_type",
-										"country_code",
-										"limit",
-										"offset",
-										"search",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -276,6 +274,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -401,6 +403,7 @@ func MakeConfig() map[string]any {
 											"orig": "nationality",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 										map[string]any{
 											"name": "offset",
@@ -420,17 +423,14 @@ func MakeConfig() map[string]any {
 											"orig": "status",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"limit",
-										"nationality",
-										"offset",
-										"search",
-										"status",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -475,6 +475,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -557,6 +561,7 @@ func MakeConfig() map[string]any {
 											"orig": "docking_location",
 											"type": "`$INTEGER`",
 											"kind": "query",
+											"field": true,
 										},
 										map[string]any{
 											"name": "limit",
@@ -580,13 +585,10 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"docking_location",
-										"limit",
-										"offset",
-										"spacestation",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -631,6 +633,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -754,12 +760,10 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"limit",
-										"offset",
-										"search",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -804,6 +808,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -912,16 +920,14 @@ func MakeConfig() map[string]any {
 											"orig": "spacestation",
 											"type": "`$INTEGER`",
 											"kind": "query",
+											"field": true,
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"limit",
-										"offset",
-										"search",
-										"spacestation",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -966,6 +972,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1073,16 +1083,14 @@ func MakeConfig() map[string]any {
 											"orig": "serial_number",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"flight_number",
-										"limit",
-										"offset",
-										"serial_number",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1127,6 +1135,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1299,20 +1311,14 @@ func MakeConfig() map[string]any {
 											"orig": "status",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"limit",
-										"lsp_id",
-										"lsp_name",
-										"offset",
-										"rocket_configuration_id",
-										"search",
-										"spacecraft_id",
-										"status",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1357,6 +1363,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1539,6 +1549,7 @@ func MakeConfig() map[string]any {
 											"orig": "family",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 										map[string]any{
 											"name": "limit",
@@ -1552,6 +1563,7 @@ func MakeConfig() map[string]any {
 											"orig": "manufacturer",
 											"type": "`$INTEGER`",
 											"kind": "query",
+											"field": true,
 										},
 										map[string]any{
 											"name": "offset",
@@ -1568,14 +1580,10 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"family",
-										"limit",
-										"manufacturer",
-										"offset",
-										"search",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1624,6 +1632,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1712,6 +1724,7 @@ func MakeConfig() map[string]any {
 											"orig": "country_code",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 										map[string]any{
 											"name": "limit",
@@ -1735,13 +1748,10 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"country_code",
-										"limit",
-										"offset",
-										"search",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1786,6 +1796,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1910,6 +1924,7 @@ func MakeConfig() map[string]any {
 											"orig": "location",
 											"type": "`$INTEGER`",
 											"kind": "query",
+											"field": true,
 										},
 										map[string]any{
 											"name": "offset",
@@ -1926,13 +1941,10 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"limit",
-										"location",
-										"offset",
-										"search",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1977,6 +1989,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -2114,17 +2130,14 @@ func MakeConfig() map[string]any {
 											"orig": "status",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"limit",
-										"offset",
-										"owner",
-										"search",
-										"status",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -2169,6 +2182,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -2331,13 +2348,10 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"limit",
-										"offset",
-										"search",
-										"status",
-									},
+								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -2386,6 +2400,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},

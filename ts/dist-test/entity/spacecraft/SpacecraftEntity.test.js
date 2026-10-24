@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Spacecraft();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('spacecraft hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.LaunchLibrary2SDK.test(offline).Spacecraft().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.LaunchLibrary2SDK.test(offline).Spacecraft()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.LaunchLibrary2SDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Spacecraft().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.LaunchLibrary2SDK.test().Spacecraft().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.LaunchLibrary2SDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Spacecraft().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Spacecraft().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.LaunchLibrary2SDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Spacecraft().list({ "limit": "x" }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.LAUNCH_LIBRARY2_TEST_LIVE;
         for (const op of ['list', 'load']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "agency": { "a": true, "h": "Agency", "n": "agency", "r": false, "t": "`$OBJECT`", "key$": "agency", "index$": 0 }, "capability": { "a": true, "h": "Capability", "n": "capability", "r": false, "sh": "Spacecraft capability", "t": "`$STRING`", "key$": "capability", "index$": 1 }, "crew_capacity": { "a": true, "h": "Crew Capacity", "n": "crew_capacity", "r": false, "sh": "Crew capacity", "t": "`$INTEGER`", "key$": "crew_capacity", "index$": 2 }, "details": { "a": true, "h": "Details", "n": "details", "r": false, "sh": "Detailed information", "t": "`$STRING`", "key$": "details", "index$": 3 }, "diameter": { "a": true, "h": "Diameter", "n": "diameter", "r": false, "sh": "Diameter in meters", "t": "`$NUMBER`", "key$": "diameter", "index$": 4 }, "height": { "a": true, "h": "Height", "n": "height", "r": false, "sh": "Height in meters", "t": "`$NUMBER`", "key$": "height", "index$": 5 }, "history": { "a": true, "h": "History", "n": "history", "r": false, "sh": "Historical information", "t": "`$STRING`", "key$": "history", "index$": 6 }, "human_rated": { "a": true, "h": "Human Rated", "n": "human_rated", "r": false, "sh": "Whether the spacecraft is human-rated", "t": "`$BOOLEAN`", "key$": "human_rated", "index$": 7 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Spacecraft configuration ID", "t": "`$INTEGER`", "key$": "id", "index$": 8 }, "image_url": { "a": true, "h": "Image Url", "n": "image_url", "r": false, "sh": "URL to spacecraft image", "t": "`$STRING`", "key$": "image_url", "index$": 9 }, "in_use": { "a": true, "h": "In Use", "n": "in_use", "r": false, "sh": "Whether the spacecraft is currently in use", "t": "`$BOOLEAN`", "key$": "in_use", "index$": 10 }, "maiden_flight": { "a": true, "fo": "date", "h": "Maiden Flight", "n": "maiden_flight", "r": false, "sh": "Date of maiden flight", "t": "`$STRING`", "key$": "maiden_flight", "index$": 11 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Name of the spacecraft", "t": "`$STRING`", "key$": "name", "index$": 12 }, "type": { "a": true, "h": "Type", "n": "type", "r": false, "t": "`$OBJECT`", "key$": "type", "index$": 13 }, "url": { "a": true, "h": "Url", "n": "url", "r": false, "sh": "API URL for this configuration", "t": "`$STRING`", "key$": "url", "index$": 14 } }, "id": { "field": "id", "name": "id" }, "name": "spacecraft", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /config/spacecraft", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "ex": 10, "k": "query", "n": "limit", "or": "limit", "r": false, "t": "`$INTEGER`", "index$": 0 }, { "a": true, "ex": 0, "k": "query", "n": "offset", "or": "offset", "r": false, "t": "`$INTEGER`", "index$": 1 }, { "a": true, "k": "query", "n": "search", "or": "search", "r": false, "t": "`$STRING`", "index$": 2 }, { "a": true, "k": "query", "n": "status", "or": "status", "r": false, "t": "`$STRING`", "index$": 3 }] }, "k": "http", "m": "GET", "o": "/config/spacecraft", "q": { "exist": ["limit", "offset", "search", "status"] }, "r": {}, "s": [{ "lit": "config" }, { "lit": "spacecraft" }], "t": { "req": "`reqdata`", "res": "`body.results`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /config/spacecraft/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "id", "r": true, "t": "`$INTEGER`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/config/spacecraft/{id}", "q": { "exist": ["id"] }, "r": {}, "s": [{ "lit": "config" }, { "lit": "spacecraft" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "spacecraft", "name__orig": "spacecraft", "Name": "Spacecraft", "name_": "spacecraft", "name-": "spacecraft", "NAME": "SPACECRAFT", "index$": 11 }, { "active": true, "entity": "spacecraft", "key$": "BasicSpacecraftFlow", "kind": "basic", "name": "BasicSpacecraftFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "spacecraft_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "spacecraft_ref01", "srcdatavar": "spacecraft_ref01_data", "suffix": "_dt0" }, "m": { "id": "spacecraft01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-spacecraft_ref01" } }], "index$": 1 }] }, 'Spacecraft', { "GET /config/spacecraft": { "protocol": "http", "parameters": [{ "name": "limit", "in": "query", "description": "Number of results to return per page", "schema": { "type": "integer", "default": 10 }, "index$": 0 }, { "name": "offset", "in": "query", "description": "The initial index from which to return the results", "schema": { "type": "integer", "default": 0 }, "index$": 1 }, { "name": "search", "in": "query", "description": "Search by spacecraft name", "schema": { "type": "string" }, "index$": 2 }, { "name": "status", "in": "query", "description": "Filter by status", "schema": { "type": "string" }, "index$": 3 }] }, "GET /config/spacecraft/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "required": true, "description": "ID of the spacecraft configuration", "schema": { "type": "integer" }, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "agency": { "a": true, "h": "Agency", "n": "agency", "r": false, "t": "`$OBJECT`", "key$": "agency", "index$": 0 }, "capability": { "a": true, "h": "Capability", "n": "capability", "r": false, "sh": "Spacecraft capability", "t": "`$STRING`", "key$": "capability", "index$": 1 }, "crew_capacity": { "a": true, "h": "Crew Capacity", "n": "crew_capacity", "r": false, "sh": "Crew capacity", "t": "`$INTEGER`", "key$": "crew_capacity", "index$": 2 }, "details": { "a": true, "h": "Details", "n": "details", "r": false, "sh": "Detailed information", "t": "`$STRING`", "key$": "details", "index$": 3 }, "diameter": { "a": true, "h": "Diameter", "n": "diameter", "r": false, "sh": "Diameter in meters", "t": "`$NUMBER`", "key$": "diameter", "index$": 4 }, "height": { "a": true, "h": "Height", "n": "height", "r": false, "sh": "Height in meters", "t": "`$NUMBER`", "key$": "height", "index$": 5 }, "history": { "a": true, "h": "History", "n": "history", "r": false, "sh": "Historical information", "t": "`$STRING`", "key$": "history", "index$": 6 }, "human_rated": { "a": true, "h": "Human Rated", "n": "human_rated", "r": false, "sh": "Whether the spacecraft is human-rated", "t": "`$BOOLEAN`", "key$": "human_rated", "index$": 7 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Spacecraft configuration ID", "t": "`$INTEGER`", "key$": "id", "index$": 8 }, "image_url": { "a": true, "h": "Image Url", "n": "image_url", "r": false, "sh": "URL to spacecraft image", "t": "`$STRING`", "key$": "image_url", "index$": 9 }, "in_use": { "a": true, "h": "In Use", "n": "in_use", "r": false, "sh": "Whether the spacecraft is currently in use", "t": "`$BOOLEAN`", "key$": "in_use", "index$": 10 }, "maiden_flight": { "a": true, "fo": "date", "h": "Maiden Flight", "n": "maiden_flight", "r": false, "sh": "Date of maiden flight", "t": "`$STRING`", "key$": "maiden_flight", "index$": 11 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Name of the spacecraft", "t": "`$STRING`", "key$": "name", "index$": 12 }, "type": { "a": true, "h": "Type", "n": "type", "r": false, "t": "`$OBJECT`", "key$": "type", "index$": 13 }, "url": { "a": true, "h": "Url", "n": "url", "r": false, "sh": "API URL for this configuration", "t": "`$STRING`", "key$": "url", "index$": 14 } }, "id": { "field": "id", "name": "id" }, "name": "spacecraft", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /config/spacecraft", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "ex": 10, "k": "query", "n": "limit", "or": "limit", "r": false, "t": "`$INTEGER`", "index$": 0 }, { "a": true, "ex": 0, "k": "query", "n": "offset", "or": "offset", "r": false, "t": "`$INTEGER`", "index$": 1 }, { "a": true, "k": "query", "n": "search", "or": "search", "r": false, "t": "`$STRING`", "index$": 2 }, { "a": true, "k": "query", "n": "status", "or": "status", "r": false, "t": "`$STRING`", "index$": 3 }] }, "k": "http", "m": "GET", "o": "/config/spacecraft", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "config" }, { "lit": "spacecraft" }], "t": { "req": "`reqdata`", "res": "`body.results`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /config/spacecraft/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "id", "r": true, "t": "`$INTEGER`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/config/spacecraft/{id}", "q": { "exist": ["id"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "config" }, { "lit": "spacecraft" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "spacecraft", "name__orig": "spacecraft", "Name": "Spacecraft", "name_": "spacecraft", "name-": "spacecraft", "NAME": "SPACECRAFT", "index$": 11 }, { "active": true, "entity": "spacecraft", "key$": "BasicSpacecraftFlow", "kind": "basic", "name": "BasicSpacecraftFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "spacecraft_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "spacecraft_ref01", "srcdatavar": "spacecraft_ref01_data", "suffix": "_dt0" }, "m": { "id": "spacecraft01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-spacecraft_ref01" } }], "index$": 1 }] }, 'Spacecraft', { "GET /config/spacecraft": { "protocol": "http", "parameters": [{ "name": "limit", "in": "query", "description": "Number of results to return per page", "schema": { "type": "integer", "default": 10 }, "index$": 0 }, { "name": "offset", "in": "query", "description": "The initial index from which to return the results", "schema": { "type": "integer", "default": 0 }, "index$": 1 }, { "name": "search", "in": "query", "description": "Search by spacecraft name", "schema": { "type": "string" }, "index$": 2 }, { "name": "status", "in": "query", "description": "Filter by status", "schema": { "type": "string" }, "index$": 3 }] }, "GET /config/spacecraft/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "required": true, "description": "ID of the spacecraft configuration", "schema": { "type": "integer" }, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -80,6 +127,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(spacecraft_ref01_data_dt0.id === spacecraft_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

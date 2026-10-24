@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { LaunchLibrary2SDK, BaseFeature, stdutil } from '../../..'
+import { LaunchLibrary2SDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('FirstStageEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('first_stage hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of LaunchLibrary2SDK.test(offline).FirstStage().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of LaunchLibrary2SDK.test(offline).FirstStage()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = LaunchLibrary2SDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.FirstStage().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of LaunchLibrary2SDK.test().FirstStage().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new LaunchLibrary2SDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.FirstStage().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.FirstStage().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = LaunchLibrary2SDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.FirstStage().list({"flight_number":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.LAUNCH_LIBRARY2_TEST_LIVE
@@ -51,7 +109,7 @@ describe('FirstStageEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"flights":{"a":true,"h":"Flights","n":"flights","r":false,"sh":"Number of flights","t":"`$INTEGER`","key$":"flights","index$":0},"id":{"a":true,"h":"Id","n":"id","r":false,"sh":"First stage ID","t":"`$INTEGER`","key$":"id","index$":1},"launcher_config":{"a":true,"h":"Launcher Config","n":"launcher_config","r":false,"t":"`$OBJECT`","key$":"launcher_config","index$":2},"serial_number":{"a":true,"h":"Serial Number","n":"serial_number","r":false,"sh":"Serial number of the first stage","t":"`$STRING`","key$":"serial_number","index$":3},"status":{"a":true,"h":"Status","n":"status","r":false,"sh":"Current status","t":"`$STRING`","key$":"status","index$":4},"type":{"a":true,"h":"Type","n":"type","r":false,"sh":"Type of first stage","t":"`$STRING`","key$":"type","index$":5},"url":{"a":true,"h":"Url","n":"url","r":false,"sh":"API URL for this first stage","t":"`$STRING`","key$":"url","index$":6}},"id":{"field":"id","name":"id"},"name":"first_stage","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /firststage","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"flight_number","or":"flight_number","r":false,"t":"`$INTEGER`","index$":0},{"a":true,"ex":10,"k":"query","n":"limit","or":"limit","r":false,"t":"`$INTEGER`","index$":1},{"a":true,"ex":0,"k":"query","n":"offset","or":"offset","r":false,"t":"`$INTEGER`","index$":2},{"a":true,"k":"query","n":"serial_number","or":"serial_number","r":false,"t":"`$STRING`","index$":3}]},"k":"http","m":"GET","o":"/firststage","q":{"exist":["flight_number","limit","offset","serial_number"]},"r":{},"s":[{"lit":"firststage"}],"t":{"req":"`reqdata`","res":"`body.results`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /firststage/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/firststage/{id}","q":{"exist":["id"]},"r":{},"s":[{"lit":"firststage"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"first_stage","name__orig":"first_stage","Name":"FirstStage","name_":"first_stage","name-":"first-stage","NAME":"FIRST_STAGE","index$":5}, {"active":true,"entity":"first_stage","key$":"BasicFirstStageFlow","kind":"basic","name":"BasicFirstStageFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"first_stage_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"first_stage_ref01","srcdatavar":"first_stage_ref01_data","suffix":"_dt0"},"m":{"id":"first_stage01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-first_stage_ref01"}}],"index$":1}]}, 'FirstStage', {"GET /firststage":{"protocol":"http","parameters":[{"name":"limit","in":"query","description":"Number of results to return per page","schema":{"type":"integer","default":10},"index$":0},{"name":"offset","in":"query","description":"The initial index from which to return the results","schema":{"type":"integer","default":0},"index$":1},{"name":"serial_number","in":"query","description":"Filter by serial number","schema":{"type":"string"},"index$":2},{"name":"flight_number","in":"query","description":"Filter by flight number","schema":{"type":"integer"},"index$":3}]},"GET /firststage/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"description":"ID of the first stage","schema":{"type":"integer"},"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"flights":{"a":true,"h":"Flights","n":"flights","r":false,"sh":"Number of flights","t":"`$INTEGER`","key$":"flights","index$":0},"id":{"a":true,"h":"Id","n":"id","r":false,"sh":"First stage ID","t":"`$INTEGER`","key$":"id","index$":1},"launcher_config":{"a":true,"h":"Launcher Config","n":"launcher_config","r":false,"t":"`$OBJECT`","key$":"launcher_config","index$":2},"serial_number":{"a":true,"h":"Serial Number","n":"serial_number","r":false,"sh":"Serial number of the first stage","t":"`$STRING`","key$":"serial_number","index$":3},"status":{"a":true,"h":"Status","n":"status","r":false,"sh":"Current status","t":"`$STRING`","key$":"status","index$":4},"type":{"a":true,"h":"Type","n":"type","r":false,"sh":"Type of first stage","t":"`$STRING`","key$":"type","index$":5},"url":{"a":true,"h":"Url","n":"url","r":false,"sh":"API URL for this first stage","t":"`$STRING`","key$":"url","index$":6}},"id":{"field":"id","name":"id"},"name":"first_stage","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /firststage","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"flight_number","or":"flight_number","r":false,"t":"`$INTEGER`","index$":0},{"a":true,"ex":10,"k":"query","n":"limit","or":"limit","r":false,"t":"`$INTEGER`","index$":1},{"a":true,"ex":0,"k":"query","n":"offset","or":"offset","r":false,"t":"`$INTEGER`","index$":2},{"a":true,"k":"query","n":"serial_number","or":"serial_number","r":false,"t":"`$STRING`","index$":3}]},"k":"http","m":"GET","o":"/firststage","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"firststage"}],"t":{"req":"`reqdata`","res":"`body.results`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /firststage/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/firststage/{id}","q":{"exist":["id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"firststage"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"first_stage","name__orig":"first_stage","Name":"FirstStage","name_":"first_stage","name-":"first-stage","NAME":"FIRST_STAGE","index$":5}, {"active":true,"entity":"first_stage","key$":"BasicFirstStageFlow","kind":"basic","name":"BasicFirstStageFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"first_stage_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"first_stage_ref01","srcdatavar":"first_stage_ref01_data","suffix":"_dt0"},"m":{"id":"first_stage01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-first_stage_ref01"}}],"index$":1}]}, 'FirstStage', {"GET /firststage":{"protocol":"http","parameters":[{"name":"limit","in":"query","description":"Number of results to return per page","schema":{"type":"integer","default":10},"index$":0},{"name":"offset","in":"query","description":"The initial index from which to return the results","schema":{"type":"integer","default":0},"index$":1},{"name":"serial_number","in":"query","description":"Filter by serial number","schema":{"type":"string"},"index$":2},{"name":"flight_number","in":"query","description":"Filter by flight number","schema":{"type":"integer"},"index$":3}]},"GET /firststage/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"description":"ID of the first stage","schema":{"type":"integer"},"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -79,6 +137,12 @@ describe('FirstStageEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

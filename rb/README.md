@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/launch-library2-sdk/releases)), or
+GitHub release tag (`rb/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/launch-library2-sdk/tags)), or
 from a clone:
 
 ```bash
@@ -43,10 +43,11 @@ client = LaunchLibrary2SDK.new
 
 ```ruby
 begin
-  # list returns an Array of Agency records — iterate directly.
+  # list returns an Array of Agency entities, one per record; data_get reads the record.
   agencys = client.Agency.list
   agencys.each do |item|
-    puts "#{item["id"]} #{item["abbrev"]}"
+    record = item.data_get
+    puts "#{record["id"]} #{record["abbrev"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -59,7 +60,7 @@ end
 begin
   # load returns the ENTITY — call data_get for the Agency record (raises on error).
   agency = client.Agency.load({ "id" => 1 })
-  puts agency
+  puts agency.data_get
 rescue => err
   warn "load failed: #{err}"
 end
@@ -143,10 +144,10 @@ client = LaunchLibrary2SDK.test({
   "entity" => { "astronaut" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the ENTITY (raises on error);
-# call data_get for the mock record.
-astronaut = client.Astronaut.list()
-puts astronaut
+# list returns an Array of Astronaut entities, one per mock record (raises on
+# error); data_get reads each record.
+astronauts = client.Astronaut.list()
+astronauts.each { |item| puts item.data_get }
 ```
 
 ### Use a custom fetch function
@@ -241,8 +242,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all), one per record. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -252,9 +253,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the result data directly. On failure they
-raise a `LaunchLibrary2Error` (a `StandardError` subclass), so wrap
-calls in `begin`/`rescue` where you need to handle errors.
+Entity operations return the entity, and `list` an `Array` of entities, one
+per record; an entity's `data_get` reads its record. On failure they raise a
+`LaunchLibrary2Error` (a `StandardError` subclass), so wrap calls in
+`begin`/`rescue` where you need to handle errors.
 
 The `direct` escape hatch is the exception: it never raises and instead
 returns a result `Hash` with these keys:
@@ -551,8 +553,9 @@ agency = client.Agency.load({ "id" => 1 })
 #### Example: List
 
 ```ruby
-# list returns an Array of Agency records (raises on error).
+# list returns an Array of Agency entities, one per record (raises on error).
 agencys = client.Agency.list
+agencys.each { |item| puts item.data_get }
 ```
 
 
@@ -594,8 +597,9 @@ astronaut = client.Astronaut.load({ "id" => 1 })
 #### Example: List
 
 ```ruby
-# list returns an Array of Astronaut records (raises on error).
+# list returns an Array of Astronaut entities, one per record (raises on error).
 astronauts = client.Astronaut.list
+astronauts.each { |item| puts item.data_get }
 ```
 
 
@@ -631,8 +635,9 @@ docking_event = client.DockingEvent.load({ "id" => 1 })
 #### Example: List
 
 ```ruby
-# list returns an Array of DockingEvent records (raises on error).
+# list returns an Array of DockingEvent entities, one per record (raises on error).
 docking_events = client.DockingEvent.list
+docking_events.each { |item| puts item.data_get }
 ```
 
 
@@ -672,8 +677,9 @@ event = client.Event.load({ "id" => 1 })
 #### Example: List
 
 ```ruby
-# list returns an Array of Event records (raises on error).
+# list returns an Array of Event entities, one per record (raises on error).
 events = client.Event.list
+events.each { |item| puts item.data_get }
 ```
 
 
@@ -710,8 +716,9 @@ expedition = client.Expedition.load({ "id" => 1 })
 #### Example: List
 
 ```ruby
-# list returns an Array of Expedition records (raises on error).
+# list returns an Array of Expedition entities, one per record (raises on error).
 expeditions = client.Expedition.list
+expeditions.each { |item| puts item.data_get }
 ```
 
 
@@ -748,8 +755,9 @@ first_stage = client.FirstStage.load({ "id" => 1 })
 #### Example: List
 
 ```ruby
-# list returns an Array of FirstStage records (raises on error).
+# list returns an Array of FirstStage entities, one per record (raises on error).
 first_stages = client.FirstStage.list
+first_stages.each { |item| puts item.data_get }
 ```
 
 
@@ -793,8 +801,9 @@ launch = client.Launch.load({ "id" => "launch_id" })
 #### Example: List
 
 ```ruby
-# list returns an Array of Launch records (raises on error).
+# list returns an Array of Launch entities, one per record (raises on error).
 launchs = client.Launch.list
+launchs.each { |item| puts item.data_get }
 ```
 
 
@@ -846,8 +855,9 @@ launcher = client.Launcher.load({ "id" => 1 })
 #### Example: List
 
 ```ruby
-# list returns an Array of Launcher records (raises on error).
+# list returns an Array of Launcher entities, one per record (raises on error).
 launchers = client.Launcher.list
+launchers.each { |item| puts item.data_get }
 ```
 
 
@@ -884,8 +894,9 @@ location = client.Location.load({ "id" => 1 })
 #### Example: List
 
 ```ruby
-# list returns an Array of Location records (raises on error).
+# list returns an Array of Location entities, one per record (raises on error).
 locations = client.Location.list
+locations.each { |item| puts item.data_get }
 ```
 
 
@@ -927,8 +938,9 @@ pad = client.Pad.load({ "id" => 1 })
 #### Example: List
 
 ```ruby
-# list returns an Array of Pad records (raises on error).
+# list returns an Array of Pad entities, one per record (raises on error).
 pads = client.Pad.list
+pads.each { |item| puts item.data_get }
 ```
 
 
@@ -969,8 +981,9 @@ space_station = client.SpaceStation.load({ "id" => 1 })
 #### Example: List
 
 ```ruby
-# list returns an Array of SpaceStation records (raises on error).
+# list returns an Array of SpaceStation entities, one per record (raises on error).
 space_stations = client.SpaceStation.list
+space_stations.each { |item| puts item.data_get }
 ```
 
 
@@ -1015,8 +1028,9 @@ spacecraft = client.Spacecraft.load({ "id" => 1 })
 #### Example: List
 
 ```ruby
-# list returns an Array of Spacecraft records (raises on error).
+# list returns an Array of Spacecraft entities, one per record (raises on error).
 spacecrafts = client.Spacecraft.list
+spacecrafts.each { |item| puts item.data_get }
 ```
 
 ## Features

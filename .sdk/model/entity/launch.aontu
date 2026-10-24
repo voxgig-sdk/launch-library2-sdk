@@ -183,17 +183,9 @@ main: kit: entity: launch: {
           }
           m: "GET"
           o: "/launch"
-          q: {
-            exist: [
-              "limit"
-              "lsp_id"
-              "lsp_name"
-              "offset"
-              "rocket_configuration_id"
-              "search"
-              "spacecraft_id"
-              "status"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -233,6 +225,10 @@ main: kit: entity: launch: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

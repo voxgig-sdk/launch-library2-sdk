@@ -220,14 +220,9 @@ main: kit: entity: launcher: {
           }
           m: "GET"
           o: "/config/launcher"
-          q: {
-            exist: [
-              "family"
-              "limit"
-              "manufacturer"
-              "offset"
-              "search"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -270,6 +265,10 @@ main: kit: entity: launcher: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
